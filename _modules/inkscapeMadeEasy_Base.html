@@ -1,0 +1,673 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>inkscapeMadeEasy_Base &mdash; inkscapeMadeEasy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="inkscapeMadeEasy 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for inkscapeMadeEasy_Base</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1">#</span>
+<span class="c1">#    inkscapeMadeEasy: - Helper module that extends Aaron Spike&#39;s inkex.py module,</span>
+<span class="c1">#                        focusing productivity in inkscape extension development</span>
+<span class="c1">#</span>
+<span class="c1">#    Copyright (C) 2016 by Fernando Moura</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#    (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#    GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#    You should have received a copy of the GNU General Public License</span>
+<span class="c1">#    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c1">#</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">inkex</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Base helper module that extends Aaron Spike&#39;s inkex.py module, adding basic manipulation functions</span>
+
+<span class="sd">This module requires the following modules: inkex, re, lxml, numpy and os.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy">[docs]</a><span class="k">class</span> <span class="nc">inkscapeMadeEasy</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for extensions.</span>
+
+<span class="sd">    This class extends the inkex.Effect class by adding several basic functions to help manipulating inkscape elements. All extensions should inherit this class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c1"># coordinates o the origin of the grid. unfortunately the grid does not fit</span>
+    <span class="c1"># x0=0</span>
+    <span class="c1"># y0=-7.637817382813</span>
+
+<div class="viewcode-block" id="inkscapeMadeEasy.getBasicLatexPackagesFile"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getBasicLatexPackagesFile">[docs]</a>    <span class="k">def</span> <span class="nf">getBasicLatexPackagesFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the full path  of the ``basicLatexPackages.tex`` file with commonly used Latex packages </span>
+
+<span class="sd">        The default packages are::</span>
+
+<span class="sd">        \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}</span>
+<span class="sd">        \usepackage[per=slash]{siunitx}</span>
+<span class="sd">        \usepackage{steinmetz}</span>
+
+<span class="sd">        You can add other packages to the file ``basicLatexPackages.tex``, located in the extension directory.</span>
+
+<span class="sd">        :returns:  Full path  of the file with commonly used Latex packages </span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">directory</span> <span class="o">+</span> <span class="s1">&#39;/textextLib/basicLatexPackages.tex&#39;</span></div>
+
+<div class="viewcode-block" id="inkscapeMadeEasy.Dump"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.Dump">[docs]</a>    <span class="k">def</span> <span class="nf">Dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;./dump_file.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to easily output the result of ``str(obj)`` to a file</span>
+
+<span class="sd">        This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function ``str()`` in a text file.</span>
+
+
+<span class="sd">        :param obj: object to sent to a file. Any type that can be used in ``str()``</span>
+<span class="sd">        :param file: file path. Default: ``./dump_file.txt``</span>
+<span class="sd">        :param mode: writing mode of the file Default: ``w`` (write)</span>
+<span class="sd">        :type obj: any, as long as ``str(obj)`` is implemented (see ``__str__()`` metaclass definition )</span>
+<span class="sd">        :type arg2: string</span>
+<span class="sd">        :type mode: string</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; from inkscapeMadeEasy_Base import inkscapeMadeEasy </span>
+<span class="sd">        &gt;&gt;&gt; x=inkscapeMadeEasy</span>
+<span class="sd">        &gt;&gt;&gt; vector1=[1,2,3,4,5,6]</span>
+<span class="sd">        &gt;&gt;&gt; x.Dump(vector,file=&#39;~/temporary.txt&#39;,mode=&#39;w&#39;)   % writes the list to a file</span>
+<span class="sd">        &gt;&gt;&gt; vector2=[7,8,9,10]</span>
+<span class="sd">        &gt;&gt;&gt; x.Dump(vector2,file=&#39;~/temporary.txt&#39;,mode=&#39;a&#39;)   % append the list to a file</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    <span class="c1">#</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.uniqueIdNumber"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber">[docs]</a>    <span class="k">def</span> <span class="nf">uniqueIdNumber</span><span class="p">(</span><span class="n">prefix_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Generates a unique ID with a given prefix ID by adding a numeric suffix</span>
+
+<span class="sd">        This function is used to generate a valid unique ID by concatenating a given prefix with a numeric suffix. The overall format is ``prefix-%05d``.</span>
+
+<span class="sd">        This function makes sure the ID is unique by checking in ``doc_ids`` member. This function is specially useful for creating an unique ID for markers and other elements in defs.</span>
+
+
+<span class="sd">        :param prefix_id: prefix of the ID</span>
+<span class="sd">        :type prefix_id: string</span>
+<span class="sd">        :returns: the unique ID</span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        .. note:: This function has been adapted from Aaron Spike&#39;s inkex.py  https://github.com/hacktoon/ink2canvas/blob/master/ink2canvas/lib/inkex.py</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; from inkscapeMadeEasy_Base import inkscapeMadeEasy </span>
+<span class="sd">        &gt;&gt;&gt; x=inkscapeMadeEasy</span>
+<span class="sd">        &gt;&gt;&gt; a=x.uniqueIdNumber(&#39;myName&#39;)   % a=myName-00001</span>
+<span class="sd">        &gt;&gt;&gt; b=x.uniqueIdNumber(&#39;myName&#39;)   % b=myName-00002</span>
+<span class="sd">        &gt;&gt;&gt; c=x.uniqueIdNumber(&#39;myName&#39;)   % c=myName-00003</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">numberID</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">new_id</span> <span class="o">=</span> <span class="n">prefix_id</span> <span class="o">+</span> <span class="s1">&#39;-</span><span class="si">%05d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">numberID</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">new_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_ids</span><span class="p">:</span>
+            <span class="n">numberID</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">new_id</span> <span class="o">=</span> <span class="n">prefix_id</span> <span class="o">+</span> <span class="s1">&#39;-</span><span class="si">%05d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">numberID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc_ids</span><span class="p">[</span><span class="n">new_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">new_id</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.getDefinitions"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefinitions">[docs]</a>    <span class="k">def</span> <span class="nf">getDefinitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; retrieves the Defs (xpath) element of the svg file.</span>
+
+
+<span class="sd">        This function returns the element Defs of the current svg file. This elements stores the definition (e.g. marker definition)</span>
+
+<span class="sd">        if no Defs can be found, a new empty Defs is created</span>
+
+<span class="sd">        :returns: the defs element</span>
+<span class="sd">        :rtype: xpath</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">defs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpathSingle</span><span class="p">(</span><span class="s1">&#39;/svg:svg//svg:defs&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">defs</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">defs</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">(),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">defs</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.createGroup"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.createGroup">[docs]</a>    <span class="k">def</span> <span class="nf">createGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new empty group of elements.</span>
+
+<span class="sd">        This function creates a new empty group of elements. In order to create new elements inside this groups you must create them informing the group as the parent element.</span>
+
+
+<span class="sd">        :param parent: parent object of the group. It can be another group or the root element</span>
+<span class="sd">        :param label: label of the group. Default: &#39;none&#39;</span>
+<span class="sd">        :type parent: element object</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :returns: the group object</span>
+<span class="sd">        :rtype: group element</span>
+
+
+<span class="sd">        .. note:: The label does not have to be unique</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                              # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; groupA = self.createGroup(rootLayer,label=&#39;temp&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; groupB = self.createGroup(groupA,label=&#39;child&#39;)                  # creates a group inside groupA</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[10,0]],[0,0])       # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; line2 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[20,0]],[0,0])       # creates a line in groupB</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="n">g_attribs</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;inkscape&#39;</span><span class="p">):</span> <span class="n">label</span><span class="p">}</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">g_attribs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">group</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.getTransformMatrix"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getTransformMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">getTransformMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the transformation attribute of the given element and the resulting transformation matrix (numpy Array)</span>
+
+<span class="sd">        This function is used to extract the transformation operator of a given element.</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :returns: [transfAttrib, transfMatrix]</span>
+
+<span class="sd">          - transfAttrib: string containing all transformations as it is in the file</span>
+<span class="sd">          - transfMatrix: numpy array with the resulting transformation matrix</span>
+<span class="sd">        :rtype: tuple</span>
+
+<span class="sd">        If the element does not have any transformation attribute, this function returns:</span>
+<span class="sd">           - transfAttrib=&#39;&#39;</span>
+<span class="sd">           - transfMatrix=identity matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">transfAttrib</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;transform&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+            <span class="n">transfAttrib</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">transfAttrib</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">transfAttrib</span><span class="p">,</span> <span class="n">transfMatrix</span>
+
+        <span class="c1"># split operation into several strings</span>
+        <span class="n">listOperations</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">transfAttrib</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">e</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">listOperations</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;translate&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;translate\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;scale&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;scale\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">scalex</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">scaley</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">scaley</span> <span class="o">=</span> <span class="n">scalex</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="n">scalex</span><span class="p">,</span> <span class="n">scaley</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;rotate&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;rotate\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">angleRad</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>  <span class="c1"># negative angle because inkscape is upside down =(</span>
+                <span class="n">matRot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># must translate before and after rotation</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="n">matBefore</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>  <span class="c1"># translation before rotation</span>
+                    <span class="n">matAfter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>  <span class="c1"># translation after rotation</span>
+                    <span class="n">matRot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matBefore</span><span class="p">,</span> <span class="n">matRot</span><span class="p">)</span>
+                    <span class="n">matRot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matRot</span><span class="p">,</span> <span class="n">matAfter</span><span class="p">)</span>
+
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">matRot</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;skewX&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;skewX\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">angleRad</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;skewY&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;skewY\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">angleRad</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angleRad</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;matrix&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;matrix\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">e</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">],</span> <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+                <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">transfAttrib</span><span class="p">,</span> <span class="n">transfMatrix</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.rotateElement"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.rotateElement">[docs]</a>    <span class="k">def</span> <span class="nf">rotateElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">angleDeg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Rotates the element using the transformation attribute.</span>
+
+<span class="sd">        It is possible to rotate elements isolated or entire groups.</span>
+
+<span class="sd">        :param element: element object to be rotated</span>
+<span class="sd">        :param center: tuple with center point of rotation</span>
+<span class="sd">        :param angleDeg: angle of rotation in degrees, counter-clockwise direction</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :type center: tuple</span>
+<span class="sd">        :type angleDeg: float</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                              # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; groupA = self.createGroup(rootLayer,label=&#39;temp&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[5,0]],[0,0])       # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; line2 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0]],[0,0])    # creates a line in rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; self.rotateElement(line2,[0,0],120)                              # rotates line2 120 degrees around center x=0,y=0</span>
+<span class="sd">        &gt;&gt;&gt; self.rotateElement(groupA,[1,1],-90)                             # rotates groupA -90 degrees around center x=1,y=1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transfString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">angleDeg</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="s1">&#39;transform&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+            <span class="n">transfString</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span>
+
+        <span class="c1"># if transform attribute is present, we must add the new rotation</span>
+        <span class="k">if</span> <span class="n">transfString</span><span class="p">:</span>
+            <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;rotate(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">) </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="n">angleDeg</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">transfString</span><span class="p">)</span>  <span class="c1"># negative angle bc inkscape is upside down</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># if no transform attribute was found</span>
+            <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;rotate(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="n">angleDeg</span><span class="p">,</span> <span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># negative angle bc inkscape is upside down</span>
+
+        <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newTransform</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.moveElement"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.moveElement">[docs]</a>    <span class="k">def</span> <span class="nf">moveElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Moves the element using the transformation attribute.</span>
+
+<span class="sd">        It is possible to move elements isolated or entire groups.</span>
+
+<span class="sd">        :param element: element object to be rotated</span>
+<span class="sd">        :param distance: tuple with the distance to move the object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :type distance: tuple</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                              # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; groupA = self.createGroup(rootLayer,label=&#39;temp&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[5,0]],[0,0])       # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; line2 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0]],[0,0])    # creates a line in rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; self.moveElement(line2,[10,10])                                  # moves line2  DeltaX=10, DdeltaY=10</span>
+<span class="sd">        &gt;&gt;&gt; self.moveElement(groupA,[10,-10])                                # moves line2  DeltaX=10, DdeltaY=-10</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">transfString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;transform&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+            <span class="n">transfString</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span>
+
+        <span class="c1"># if transform attribute is present, we must add the new translation</span>
+        <span class="k">if</span> <span class="n">transfString</span><span class="p">:</span>
+            <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;translate(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">) </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">distance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">transfString</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># if no transform attribute was found</span>
+            <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;translate(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">distance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newTransform</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.scaleElement"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.scaleElement">[docs]</a>    <span class="k">def</span> <span class="nf">scaleElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">scaleX</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scaleY</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scales the element using the transformation attribute.</span>
+
+<span class="sd">        It is possible to scale elements isolated or entire groups.</span>
+
+<span class="sd">        :param element: element object to be rotated</span>
+<span class="sd">        :param scaleX: scaling factor in X direction. Default=1.0</span>
+<span class="sd">        :param scaleY: scaling factor in Y direction. Default=0.0</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :type scaleX: float</span>
+<span class="sd">        :type scaleX: float</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+
+<span class="sd">        .. note:: If scaleY==0, then scaleY=scaleX is assumed (default behavior)</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                              # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; groupA = self.createGroup(rootLayer,label=&#39;temp&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; circ1 = centerRadius(groupA,centerPoint=[0,0],radius=1.0)        # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; circ2 = centerRadius(rootLayer,centerPoint=[0,0],radius=1.0)     # creates a line in rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; self.scaleElement(circ1,2.0)                                     # scales x2 in both X and Y directions</span>
+<span class="sd">        &gt;&gt;&gt; self.scaleElement(circ1,2.0,3.0)                                 # scales x2 in X and x3 in Y</span>
+<span class="sd">        &gt;&gt;&gt; self.scaleElement(groupA,0.5)                                    # scales x0.5 the group in both X and Y directions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">transfString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;transform&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+            <span class="n">transfString</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span>
+
+        <span class="c1"># if transform attribute is present, we must add the new translation</span>
+        <span class="k">if</span> <span class="n">transfString</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">scaleY</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;scale(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">) </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scaleX</span><span class="p">,</span> <span class="n">scaleY</span><span class="p">,</span> <span class="n">transfString</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;scale(</span><span class="si">%f</span><span class="s1">) </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scaleX</span><span class="p">,</span> <span class="n">transfString</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># if no transform attribute was found</span>
+            <span class="k">if</span> <span class="n">scaleY</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;scale(</span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scaleX</span><span class="p">,</span> <span class="n">scaleY</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newTransform</span> <span class="o">=</span> <span class="s1">&#39;scale(</span><span class="si">%f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scaleX</span><span class="p">)</span>
+
+        <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;transform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newTransform</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.findMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.findMarker">[docs]</a>    <span class="k">def</span> <span class="nf">findMarker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">markerName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search for markerName in the document.</span>
+
+<span class="sd">        :param markerName: marker name</span>
+<span class="sd">        :type markerName: string</span>
+
+<span class="sd">        :returns: True if markerName was found</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">doc_markers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDefinitions</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">markerName</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">False</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.getPoints"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints">[docs]</a>    <span class="k">def</span> <span class="nf">getPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the list of points of the element.</span>
+
+<span class="sd">        This function works on paths, texts or groups. In the case of a group, the function will include recursively all its components</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :returns: list of points</span>
+<span class="sd">        :rtype: list of list</span>
+
+<span class="sd">        .. note:: This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                                   # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0],[0,6]],[0,0])   # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; list = self.getPoints(line1)                                          # gets list = [[0.0, 0.0], [5.0, 0.0], [5.0, 6.0]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># stores the list of coordinates</span>
+        <span class="n">listCoords</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># check if element is valid. &#39;path&#39;, &#39;text&#39; and &#39;g&#39; are valid</span>
+        <span class="n">accepted_strings</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accepted_strings</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">listCoords</span>
+
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span>  <span class="c1"># if object is path</span>
+
+
+            <span class="n">dString</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;([a-df-zA-DF-Z])+?&#39;</span><span class="p">,</span> <span class="s1">r&#39;#\1#&#39;</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  <span class="c1"># adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S</span>
+
+            <span class="n">dString</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dString</span><span class="p">]</span>  <span class="c1"># removes leading spaces from strings</span>
+            <span class="n">dString</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dString</span><span class="p">)</span>  <span class="c1"># removes empty elements</span>
+            <span class="n">Xcurrent</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">Ycurrent</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dString</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">commandType</span> <span class="o">=</span> <span class="n">dString</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">argument</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dString</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>  <span class="c1"># extracts arguments from M command and converts to float</span>
+                <span class="k">del</span> <span class="n">dString</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">dString</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;mMlLtT&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;move to&#39; M/m or &#39;line to&#39; l/L or &#39;smooth quadratic Bezier curveto&#39;t/T</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 2 parameters per segment, x is 1st</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 2 parameters per segment, y is 2nd</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;hH&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;horizontal line&#39; h/H</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">argument</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">Ycurrent</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;vV&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;vertical line&#39; v/V</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="n">argument</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">Xcurrent</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;cC&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;Bezier Curve&#39; c/C</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">4</span><span class="p">::</span><span class="mi">6</span><span class="p">]</span>  <span class="c1"># 6 parameters per segment, x is 5th</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">5</span><span class="p">::</span><span class="mi">6</span><span class="p">]</span>  <span class="c1"># 6 parameters per segment, y is 6th</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;sSqQ&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;quadratic Bezier Curve&#39; q/Q or &#39;smooth curveto&#39; s/S</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># 4 parameters per segment, x is 3rd</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">3</span><span class="p">::</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># 4 parameters per segment, y is 4th</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;aA&#39;</span><span class="p">:</span>  <span class="c1"># extracts points from command &#39;arc&#39; a/A</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">5</span><span class="p">::</span><span class="mi">7</span><span class="p">]</span>  <span class="c1"># 7 parameters per segment, x is 6th</span>
+                    <span class="n">Y</span> <span class="o">=</span> <span class="n">argument</span><span class="p">[</span><span class="mi">6</span><span class="p">::</span><span class="mi">7</span><span class="p">]</span>  <span class="c1"># 7 parameters per segment, y is 7th</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span>  <span class="c1"># if h</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>  <span class="c1"># convert to abs coordinates</span>
+                        <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>  <span class="c1"># if v</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)):</span>  <span class="c1"># convert to abs coordinates</span>
+                        <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">commandType</span> <span class="ow">in</span> <span class="s1">&#39;mltcsqa&#39;</span><span class="p">:</span>  <span class="c1"># if m or l</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>  <span class="c1"># convert to abs coordinates</span>
+                        <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                        <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">coords</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+                <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+                <span class="n">Xcurrent</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">Ycurrent</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">):</span>  <span class="c1"># if object is a text</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+            <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span>  <span class="c1"># if object is a group</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">obj</span> <span class="o">!=</span> <span class="n">element</span><span class="p">:</span>
+                    <span class="n">listPoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPoints</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                    <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">listPoints</span><span class="p">)</span>
+
+        <span class="c1"># apply transformation</span>
+        <span class="n">transfMat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTransformMatrix</span><span class="p">(</span><span class="n">element</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># creates numpy array with the points to be transformed</span>
+        <span class="n">coordsNP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="mi">1</span><span class="p">])))</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+        <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMat</span><span class="p">,</span> <span class="n">coordsNP</span><span class="p">)</span>
+        <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">coordsTransformed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># remove last line, transposes and converts to list of lists</span>
+
+        <span class="k">return</span> <span class="n">coordsTransformed</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.getBoundingBox"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getBoundingBox">[docs]</a>    <span class="k">def</span> <span class="nf">getBoundingBox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the bounding Box of the element.</span>
+
+<span class="sd">        This function works on paths, texts or groups. In the case of a group, the function will consider recursively all its components</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :returns: two lists: [xMin,yMin] and [xMax,yMax]</span>
+<span class="sd">        :rtype: list</span>
+
+<span class="sd">        .. note:: This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                                   # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0],[0,6]],[0,0])   # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; BboxMin,BboxMax = self.getBoundingBox(line1)                          # gets BboxMin = [0.0, 0.0] and BboxMax = [5.0, 6.0]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPoints</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="n">coordsNP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+        <span class="n">bboxMax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">coordsNP</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">bboxMin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">coordsNP</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bboxMin</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">bboxMax</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
+
+    <span class="c1">#---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.getCenter"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getCenter">[docs]</a>    <span class="k">def</span> <span class="nf">getCenter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieves the center coordinates of the bounding Box of the element.</span>
+
+<span class="sd">        This function works on paths, texts or groups. In the case of a group, the function will consider recursively all its components</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :returns: two lists: [xCenter,yCenter]</span>
+<span class="sd">        :rtype: list</span>
+
+<span class="sd">        .. note:: This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                                   # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0],[0,6]],[0,0])   # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; Center = self.getCenter(line1)                                        # gets Center = [2.5, 3.0]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">bboxMin</span><span class="p">,</span> <span class="n">bboxMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+        <span class="n">bboxCenter</span> <span class="o">=</span> <span class="p">[(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">bboxCenter</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, fsmMLK.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
