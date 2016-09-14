@@ -350,7 +350,7 @@ class marker():
     """
     #---------------------------------------------
     @staticmethod
-    def createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode=0, strokeColor=color.defined('black'), fillColor=color.defined('black'),lineWidth=1.0, markerTransform=None):
+    def createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode=0, strokeColor=color.defined('black'), fillColor=color.defined('black'), lineWidth=1.0, markerTransform=None):
         """Creates a custom line marker
 
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
@@ -405,8 +405,9 @@ class marker():
         >>>     strokeColor=inkDraw.color.defined('red')
         >>>     fillColor=None
         >>>     RenameMode=1
+        >>>     width=1
         >>>     markerTransform=None
-        >>>     markerID=inkDraw.marker.createMarker(self,nameID,markerPath,RenameMode,strokeColor,fillColor,markerTransform)
+        >>>     markerID=inkDraw.marker.createMarker(self,nameID,markerPath,RenameMode,strokeColor,fillColor,width,markerTransform)
         >>>     myLineStyle = inkDraw.lineStyle.set(1.0, markerEnd=markerID,lineColor=inkDraw.color.defined('black'))  # see lineStyle class for further information on this function
         >>> 
         >>>     #tries to make another marker with the same nameID, changing RenameMode
@@ -513,8 +514,9 @@ class marker():
         """
 
         markerPath = 'M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z '
+        width = 1.0
         markerTransform = 'scale(' + str(scale) + ') translate(7.4, 1)'
-        return marker.createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        return marker.createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
 
     #---------------------------------------------
     @staticmethod
@@ -560,7 +562,8 @@ class marker():
 
         markerPath = 'M -5,5 L 5,-5 M 5,5 L -5,-5'
         markerTransform = 'scale(' + str(scale) + ')'
-        return marker.createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        width = 1.0
+        return marker.createMarker(ExtensionBaseObj, nameID, markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
 
     #---------------------------------------------
     @staticmethod
@@ -684,16 +687,17 @@ class marker():
         else:
             markerTransform = 'translate(' + str(-6.0 * scale) + ', 0)'
 
+        width = 1.0
         # add small line segment
 
-        nameStart = marker.createMarker(ExtensionBaseObj, nameID + 'Start', markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        nameStart = marker.createMarker(ExtensionBaseObj, nameID + 'Start', markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
 
         if scale != 1.0:
             markerTransform = 'translate(' + str(2.0 * scale) + ', 0) scale(' + str(scale) + ')'
         else:
             markerTransform = 'translate(' + str(2.0 * scale) + ', 0)'
 
-        nameEnd = marker.createMarker(ExtensionBaseObj, nameID + 'End', markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        nameEnd = marker.createMarker(ExtensionBaseObj, nameID + 'End', markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
 
         return [nameStart, nameEnd]
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <_name>Draw-lineStyle</_name>
+  <id>iME.iME_Draw_lineStyle</id>
+  <dependency type="executable" location="extensions">iME_Draw_lineStyle_and_markers.py</dependency>
+  <dependency type="executable" location="extensions">inkscapeMadeEasy_Draw.py</dependency>
+  <dependency type="executable" location="extensions">inkscapeMadeEasy_Base.py</dependency>
+  <dependency type="executable" location="extensions">inkex.py</dependency>
+         <param name="myColorOption" type="optiongroup" appearance="minimal" _gui-text="Choose color">
+         <_option value="#FF0022">my default color</_option> 
+         <_option value="none">none</_option>
+         <_option value="black">black</_option>
+         <_option value="red">red</_option>
+         <_option value="blue">blue</_option>
+         <_option value="yellow">yellow</_option>
+         <_option value="green">green</_option>
+         <_option value="purple">purple</_option> 
+         <_option value="magen">magenta</_option>
+         <_option value="white">white</_option>
+         <_option value="Lred">Lred</_option>
+         <_option value="Lblue">Lblue</_option>
+         <_option value="Lyellow">Lyellow</_option>
+         <_option value="Lgreen">Lgreen</_option>
+         <_option value="Lmagen">Lmagenta</_option>
+         <_option value="Dred">Dred</_option>
+         <_option value="Dblue">Dblue</_option>
+         <_option value="Dyellow">Dyellow</_option>
+         <_option value="Dgreen">Dgreen</_option>
+         <_option value="Dmagen">Dmagenta</_option>
+         <_option value="picker">use color picker</_option> 
+     </param>
+     <param name="myColorPicker" type="color"></param>
+
+
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="iME Examples"/>
+        </effects-menu>
+    </effect>
+    <script>
+      <command reldir="extensions" interpreter="python">iME_Draw_lineStyle_and_markers.py</command>
+    </script>
+</inkscape-extension>

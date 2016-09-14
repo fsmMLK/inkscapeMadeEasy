@@ -65,7 +65,7 @@ from lxml import etree
 
 
 # tex file will be saved in
-TEMPDIR_TEXFILE_DEBUG='/home/yourUserNameHere/tmp'  # without last /
+TEMPDIR_TEXFILE_DEBUG='/home/yourUserNameHere/tmp'  # without the last /
 DEBUG_MODE=False   # False: Usual mode   True: debug mode, that is, temporary files are stored instead of discarted.
 
 
