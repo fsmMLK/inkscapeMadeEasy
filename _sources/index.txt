@@ -100,7 +100,7 @@ inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing
 Installation and requirements
 ==========================================
 
-These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements were installed.
+These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements are installed.
 
 The following python modules are required: inkex, re, lxml, numpy, math, simplestyle (inkex submodule), textext, sys and os.
 

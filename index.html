@@ -125,7 +125,7 @@
 </div>
 <div class="section" id="installation-and-requirements">
 <h2>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h2>
-<p>These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements were installed.</p>
+<p>These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements are installed.</p>
 <p>The following python modules are required: inkex, re, lxml, numpy, math, simplestyle (inkex submodule), textext, sys and os.</p>
 <p>In order to install inkscapeMadeEasy, your inkscape extension directory must contains the following structure</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
@@ -869,7 +869,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </tbody>
 </table>
 <p><strong>System of coordinates</strong></p>
-<p>The system of coordinate of the marker depends on the point under consideration. The following figure presents the coordinate system for all cases</p>
+<p>The system of coordinates of the marker depends on the point under consideration. The following figure presents the coordinate system for all cases</p>
 <a class="reference internal image-reference" href="_images/marker_Orientation.png"><img alt="_images/marker_Orientation.png" src="_images/marker_Orientation.png" style="width: 600px;" /></a>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
@@ -887,8 +887,9 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">strokeColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">fillColor</span><span class="o">=</span><span class="kc">None</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">RenameMode</span><span class="o">=</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">width</span><span class="o">=</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">markerTransform</span><span class="o">=</span><span class="kc">None</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">markerID</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">marker</span><span class="o">.</span><span class="n">createMarker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nameID</span><span class="p">,</span><span class="n">markerPath</span><span class="p">,</span><span class="n">RenameMode</span><span class="p">,</span><span class="n">strokeColor</span><span class="p">,</span><span class="n">fillColor</span><span class="p">,</span><span class="n">markerTransform</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">markerID</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">marker</span><span class="o">.</span><span class="n">createMarker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nameID</span><span class="p">,</span><span class="n">markerPath</span><span class="p">,</span><span class="n">RenameMode</span><span class="p">,</span><span class="n">strokeColor</span><span class="p">,</span><span class="n">fillColor</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">markerTransform</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">myLineStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">markerEnd</span><span class="o">=</span><span class="n">markerID</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>  <span class="c1"># see lineStyle class for further information on this function</span>
 <span class="gp">&gt;&gt;&gt; </span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#tries to make another marker with the same nameID, changing RenameMode</span>
