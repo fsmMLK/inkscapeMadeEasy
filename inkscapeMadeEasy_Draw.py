@@ -383,7 +383,7 @@ class marker():
 
         **System of coordinates**
 
-        The system of coordinate of the marker depends on the point under consideration. The following figure presents the coordinate system for all cases
+        The system of coordinates of the marker depends on the point under consideration. The following figure presents the coordinate system for all cases
 
         .. image:: ../imagesDocs/marker_Orientation.png
           :width: 600px
@@ -615,12 +615,13 @@ class marker():
         # translation=12.5-17.5/(scale*10)
         # linear regression from data of small medium and large
         translation = 10.17 * scale + 4.75
+        width = 1.0
 
         markerPath = 'M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z '
         markerTransform = 'scale(' + str(scale) + ') rotate(0) translate(' + str(translation) + ',0)'
-        nameStart = marker.createMarker(ExtensionBaseObj, nameID + 'Start', markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        nameStart = marker.createMarker(ExtensionBaseObj, nameID + 'Start', markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
         markerTransform = 'scale(' + str(scale) + ') rotate(180) translate(' + str(translation) + ',0)'
-        nameEnd = marker.createMarker(ExtensionBaseObj, nameID + 'End', markerPath, RenameMode, strokeColor, fillColor, markerTransform)
+        nameEnd = marker.createMarker(ExtensionBaseObj, nameID + 'End', markerPath, RenameMode, strokeColor, fillColor, width, markerTransform)
 
         return [nameStart, nameEnd]
 
