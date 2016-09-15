@@ -24,6 +24,7 @@ Enough mumbo-jumbo. Let's start! =D
 
 .. image:: ../imagesDocs/samples_01.png
           :width: 800px
+
 Contents:
 ==========================================
 
