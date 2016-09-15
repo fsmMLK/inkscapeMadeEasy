@@ -8,18 +8,19 @@ Here you will find methods and classes to deal with drawings, styles, markers, t
 
 This project is not intended to provide an end-user inkscape extension by itself but to provide easier backstage functions and classes to facilitate the development of inkscape extensions.
 
-For end-user extensions see my other projects on GitHub (they will be uploaded soon).
+For end-user extensions see my other projects on GitHub (more to come soon):
+
+-createMarkers  <https://github.com/fsmMLK/createMarkers>
 
 Historically this project started as a way to help myself while creating extensions, namely focusing on scientific/academic diagrams and graphs. Therefore these modules do not intend to provide an extensive array of functions and classes to cover all possibilities of configurations, styles and etc. The modules were born and expanded as I felt the necessity to have new functions to help my workflow. Due to this, there might be other modules with similar/better features that I didn't find before.
 
 Enough mumbo-jumbo. Let's start! =D
 
 
+# Documentation
 
-# documentation
+You can find the main documentation page here <https://fsmmlk.github.io/inkscapeMadeEasy/>. I tried to make it useful to everyone by adding as many examples as possible. Check it out! =D
 
-You can find the main documentation page here <https://fsmmlk.github.io/inkscapeMadeEasy/> . I tried to make it useful to everyone by adding examples. Check it out! =D
-
-# report issues
+# Report issues
 
 This is a work-in-progress project. Please report issues with the modules or documentation.

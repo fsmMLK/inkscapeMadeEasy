@@ -24,6 +24,7 @@ Enough mumbo-jumbo. Let's start! =D
 
 .. image:: ../imagesDocs/samples_01.png
           :width: 800px
+
 Contents:
 ==========================================
 
@@ -123,7 +124,11 @@ Usage
 
 These modules are not intended to serve as extensions by themselves. Instead you can import them into your projects to take advantage of the classes and methods developed here.
 
-For examples on how to use, please take a look at the examples provided below and also check my other extension projects on GitHub (they will be uploaded soon).
+For examples on how to use, please take a look at the examples provided below and also check my other extension projects on GitHub (more to come soon):
+
+-createMarkers  <https://github.com/fsmMLK/createMarkers>
+
+
 
 Module definitions
 ==================
