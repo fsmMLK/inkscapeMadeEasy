@@ -46,15 +46,24 @@
             
   <div class="section" id="welcome-to-inkscapemadeeasy-s-documentation">
 <h1>Welcome to inkscapeMadeEasy&#8217;s documentation!<a class="headerlink" href="#welcome-to-inkscapemadeeasy-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This set of python modules is intended to extend Aaron Spike&#8217;s inkex.py module, adding functions to help the development of new extensions for inkscape &lt;<a class="reference external" href="https://inkscape.org">https://inkscape.org</a>&gt;.</p>
+<p>This set of python modules is intended to extend Aaron Spike&#8217;s inkex.py module, adding functions to help the development of new extensions for Inkscape &lt;<a class="reference external" href="https://inkscape.org">https://inkscape.org</a>&gt;.</p>
 <p>Here you will find methods and classes to deal with drawings, styles, markers, texts, plots, etc. It is a work-in-progress project and new features will be added in the future. However there is no roadmap right now.</p>
-<p>This project is not intended to provide an end-user inkscape extension by itself but to provide easier backstage functions and classes to facilitate the development of inkscape extensions.</p>
-<p>For end-user extensions see my other projects on GitHub (they will be uploaded soon).</p>
-<p>Historically this project started as a way to help myself while creating extensions, namely focusing on scientific/academic diagrams and graphs. Therefore these modules do not intend to provide an extensive array of functions and classes to cover all possibilities of configurations, styles and etc. The modules were born and expanded as I felt the necessity to have new functions to help my workflow. Due to this, there might be other modules with similar/better features that I didn&#8217;t find before.</p>
-<p>Enough mumbo-jumbo. Let&#8217;s start! =D</p>
 <a class="reference internal image-reference" href="_images/samples_01.png"><img alt="_images/samples_01.png" src="_images/samples_01.png" style="width: 800px;" /></a>
+<p>This project is not intended to provide an end-user Inkscape extension by itself but to provide easier backstage functions and classes to facilitate the development of Inkscape extensions.</p>
+<p>For end-user extensions see my other projects on GitHub (more to come soon):</p>
+<blockquote>
+<div>-<strong>createMarkers</strong>  &lt;<a class="reference external" href="https://github.com/fsmMLK/createMarkers">https://github.com/fsmMLK/createMarkers</a>&gt;</div></blockquote>
+<div class="section" id="history-and-objectives">
+<h2>History and Objectives<a class="headerlink" href="#history-and-objectives" title="Permalink to this headline">¶</a></h2>
+<p>Historically this project started as a way to help myself while creating extensions, namely focusing on scientific/academic diagrams and graphs. In the academy, it is very common to prepare plots/diagrams to explain concepts during lectures, seminars or congresses.</p>
+<p>There are many consecrated mathematical tools that can produce them, e.g., gnuplot, octave, matlab, R, etc. They all can produce nice plots, however it might be a little complicated if we want to add other elements to these plots, like texts, comments, arrows, etc. These packages have tools to do it but they are cumbersome to use. A better approach would be using a proper graphic software.</p>
+<p>One possible approach is to export these plots as raster images and use a raster graphic software to produce the annotations, like Gimp. Personally, I prefer to have the plots in a vector graphic format to keep it aesthetically pleasing and add the annotations in a vector graphic software. For this, Inkscape is very sound.</p>
+<p>Unfortunately, exporting the plots as vector graphics is not always successful in the sense that the resulting document is quite &#8220;dirty&#8221; (unorganized groups, isolated elements, etc.). Therefore I decided to make my own plotting/diagram tools for Inkscape.</p>
+<p>In the process of creating these tools (I will upload them to GitHub in a near future) I realized that many of the low level classes and methods used to manipulate elements of the svg file could be grouped in a general purpose set of core modules that extended inkex.py module. <strong>inkscapeMadeEasy</strong> was born! The core modules I created do not intend to provide an extensive array of methods and classes to cover all possibilities of manipulations/transformations and drawing. These modules were born and expanded as I felt the necessity to have new methods to help my workflow. Nevertheless the number of methods created allows many possibilities and is still under development so new features can (will) appear in future versions.</p>
+<p><strong>Obs:</strong> Since it is not very easy to find documentation on other Inkscape modules, there might be other modules with similar/better features that I was not aware of when I was producing my extensions.</p>
+<p>Enough mumbo-jumbo. Let&#8217;s start! =D</p>
 <div class="section" id="contents">
-<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<h3>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
@@ -65,15 +74,17 @@
 <p><a class="reference internal" href="#module-definitions">Module definitions</a></p>
 </div>
 <div class="section" id="main-features">
-<h2>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="latex-support-via-textext-py-extension">
-<h3>LaTeX support via textext.py extension<a class="headerlink" href="#latex-support-via-textext-py-extension" title="Permalink to this headline">¶</a></h3>
-<p>Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to use the excellent extension &#8216;textext&#8217; from Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
-<p>Since I made a very few modifications to his module, I decided to include it in this project. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
-<p>Instalation procedure and requirements of the modified &#8216;textext.py&#8217; are exactly the same of the original. Please refer to the installation section on Pauli Virtanen&#8217;s page to get further instructions.</p>
+<h3>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="latex-support-via-textext-extension">
+<h2>LaTeX support via textext extension<a class="headerlink" href="#latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
+<p>Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension <strong>textext</strong> from Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
+<p>Since I made very few modifications to his module, I decided to include the modified files in this extension. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
+<p>Instalation procedure and requirements of the modified <strong>textext</strong> are exactly the same of the original. Please refer to the installation section on Pauli Virtanen&#8217;s page to get further instructions.</p>
 <blockquote>
 <div><p><strong>Modifications</strong></p>
-<p>Here is the full list of changes:</p>
+<p>Here is the full list of changes I made:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Changes: line  67-68: added a few variables to control debug mode</span>
 <span class="c1"># Changes: line 944: changed order of programs (It worked better in my machine)</span>
 <span class="c1"># Changes: line 665: debug option to save temporary files to an easy access directory</span>
@@ -83,11 +94,11 @@
 </div></blockquote>
 </div>
 <div class="section" id="scientific-plotting-system">
-<h3>Scientific plotting system<a class="headerlink" href="#scientific-plotting-system" title="Permalink to this headline">¶</a></h3>
-<p>inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave&#8217;s stem plot style). It was inspired by Tavmjong Bah&#8217;s (and collaborators) extension &#8216;Function Plotter&#8217; already presented in inkscape. Function Plotter extension is not required here.</p>
+<h2>Scientific plotting system<a class="headerlink" href="#scientific-plotting-system" title="Permalink to this headline">¶</a></h2>
+<p>inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave&#8217;s stem plot style). It was inspired by Tavmjong Bah&#8217;s (and collaborators) extension <strong>Function Plotter</strong> already presented in Inkscape. Function Plotter extension is not required here.</p>
 </div>
 <div class="section" id="control-over-text-styles-line-markers-and-other-drawing-features">
-<h3>Control over text styles, line markers and other drawing features<a class="headerlink" href="#control-over-text-styles-line-markers-and-other-drawing-features" title="Permalink to this headline">¶</a></h3>
+<h2>Control over text styles, line markers and other drawing features<a class="headerlink" href="#control-over-text-styles-line-markers-and-other-drawing-features" title="Permalink to this headline">¶</a></h2>
 <p>inkscapeMadeEasy_Draw module provides powerful tools to:</p>
 <blockquote>
 <div><ul class="simple">
@@ -95,7 +106,7 @@
 <li>create custom markers, including a few pre-defined often used types. All can be assigned to custom colors in both stroke and filling colors</li>
 <li>create line styles, with or without custom markers and custom line dash pattern</li>
 <li>create text styles</li>
-<li>create LaTeX contents (thanks to &#8216;textext&#8217; from Pauli Virtanen)</li>
+<li>create LaTeX contents (thanks to <strong>textext</strong> from Pauli Virtanen)</li>
 <li>direct control over text size and color of LaTeX contents</li>
 <li>draw straight polylines using absolute or relative coordinates</li>
 <li>draw arcs given the start and end points and its radius</li>
@@ -105,29 +116,27 @@
 </div></blockquote>
 </div>
 <div class="section" id="useful-backstage-functions">
-<h3>Useful backstage functions<a class="headerlink" href="#useful-backstage-functions" title="Permalink to this headline">¶</a></h3>
+<h2>Useful backstage functions<a class="headerlink" href="#useful-backstage-functions" title="Permalink to this headline">¶</a></h2>
 <p>inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Dump objects to a text file. Rationale: As of today, 2016, inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.</li>
+<li>Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.</li>
 <li>unique ID number generator (adapted from inkex.py)</li>
-<li>list defined elements (e.g. markers) in the current documentation</li>
+<li>list defined elements (e.g. markers) in the current document</li>
 <li>create groups</li>
 <li>get the resulting transformation matrix of an object, even when multiple transformations are stacked</li>
 <li>rotate, scale and move objects</li>
 <li>find markers</li>
-<li>get the list of points of an object or group. If the object is a group the method searches points recursively. All transformations are properly applied to all points</li>
+<li>get the list of points coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them</li>
 <li>get the bounding box of an object or group</li>
 <li>get the center of the bounding box of an object or group</li>
 </ul>
 </div></blockquote>
-</div>
-</div>
 <div class="section" id="installation-and-requirements">
-<h2>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h2>
-<p>These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements are installed.</p>
-<p>The following python modules are required: inkex, re, lxml, numpy, math, simplestyle (inkex submodule), textext, sys and os.</p>
-<p>In order to install inkscapeMadeEasy, your inkscape extension directory must contains the following structure</p>
+<h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
+<p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
+<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.</p>
+<p>In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Base.py
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Draw.py
@@ -139,26 +148,21 @@
 &gt;&gt;&gt;                 |-- textext.py
 </pre></div>
 </div>
-<p>You can find all the files in github</p>
+<p>You can find all the files on GitHub</p>
 </div>
 <div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <p>These modules are not intended to serve as extensions by themselves. Instead you can import them into your projects to take advantage of the classes and methods developed here.</p>
 <p>For examples on how to use, please take a look at the examples provided below and also check my other extension projects on GitHub (more to come soon):</p>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-c<var>reateMarkers</var></span></kbd></td>
-<td>&lt;<a class="reference external" href="https://github.com/fsmMLK/createMarkers">https://github.com/fsmMLK/createMarkers</a>&gt;</td></tr>
-</tbody>
-</table>
+<blockquote>
+<div>-<strong>createMarkers</strong>  &lt;<a class="reference external" href="https://github.com/fsmMLK/createMarkers">https://github.com/fsmMLK/createMarkers</a>&gt;</div></blockquote>
 </div>
 <div class="section" id="module-definitions">
-<h2>Module definitions<a class="headerlink" href="#module-definitions" title="Permalink to this headline">¶</a></h2>
+<h3>Module definitions<a class="headerlink" href="#module-definitions" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 <div class="section" id="module-inkscapeMadeEasy_Base">
-<span id="inkscapemadeeasy-base"></span><h3>inkscapeMadeEasy_Base<a class="headerlink" href="#module-inkscapeMadeEasy_Base" title="Permalink to this headline">¶</a></h3>
+<span id="inkscapemadeeasy-base"></span><h2>inkscapeMadeEasy_Base<a class="headerlink" href="#module-inkscapeMadeEasy_Base" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Base.</code><code class="descname">inkscapeMadeEasy</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy" title="Permalink to this definition">¶</a></dt>
@@ -571,7 +575,7 @@
 
 </div>
 <div class="section" id="module-inkscapeMadeEasy_Draw">
-<span id="inkscapemadeeasy-draw"></span><h3>inkscapeMadeEasy_Draw<a class="headerlink" href="#module-inkscapeMadeEasy_Draw" title="Permalink to this headline">¶</a></h3>
+<span id="inkscapemadeeasy-draw"></span><h2>inkscapeMadeEasy_Draw<a class="headerlink" href="#module-inkscapeMadeEasy_Draw" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="inkscapeMadeEasy_Draw.Dump">
 <code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.Dump" title="Permalink to this definition">¶</a></dt>
@@ -1878,7 +1882,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 
 </div>
 <div class="section" id="module-inkscapeMadeEasy_Plot">
-<span id="inkscapemadeeasy-plot"></span><h3>inkscapeMadeEasy_Plot<a class="headerlink" href="#module-inkscapeMadeEasy_Plot" title="Permalink to this headline">¶</a></h3>
+<span id="inkscapemadeeasy-plot"></span><h2>inkscapeMadeEasy_Plot<a class="headerlink" href="#module-inkscapeMadeEasy_Plot" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="inkscapeMadeEasy_Plot.Dump">
 <code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.Dump" title="Permalink to this definition">¶</a></dt>
@@ -2562,15 +2566,14 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 
 </dd></dl>
 
-</div>
-</div>
 <div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -2583,23 +2586,26 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to inkscapeMadeEasy&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#history-and-objectives">History and Objectives</a><ul>
 <li><a class="reference internal" href="#contents">Contents:</a></li>
-<li><a class="reference internal" href="#main-features">Main Features</a><ul>
-<li><a class="reference internal" href="#latex-support-via-textext-py-extension">LaTeX support via textext.py extension</a></li>
+<li><a class="reference internal" href="#main-features">Main Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#latex-support-via-textext-extension">LaTeX support via textext extension</a></li>
 <li><a class="reference internal" href="#scientific-plotting-system">Scientific plotting system</a></li>
 <li><a class="reference internal" href="#control-over-text-styles-line-markers-and-other-drawing-features">Control over text styles, line markers and other drawing features</a></li>
-<li><a class="reference internal" href="#useful-backstage-functions">Useful backstage functions</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#useful-backstage-functions">Useful backstage functions</a><ul>
 <li><a class="reference internal" href="#installation-and-requirements">Installation and requirements</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#module-definitions">Module definitions</a><ul>
-<li><a class="reference internal" href="#module-inkscapeMadeEasy_Base">inkscapeMadeEasy_Base</a></li>
-<li><a class="reference internal" href="#module-inkscapeMadeEasy_Draw">inkscapeMadeEasy_Draw</a></li>
-<li><a class="reference internal" href="#module-inkscapeMadeEasy_Plot">inkscapeMadeEasy_Plot</a></li>
+<li><a class="reference internal" href="#module-definitions">Module definitions</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-inkscapeMadeEasy_Base">inkscapeMadeEasy_Base</a></li>
+<li><a class="reference internal" href="#module-inkscapeMadeEasy_Draw">inkscapeMadeEasy_Draw</a></li>
+<li><a class="reference internal" href="#module-inkscapeMadeEasy_Plot">inkscapeMadeEasy_Plot</a><ul>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

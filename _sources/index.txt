@@ -6,24 +6,40 @@
 Welcome to inkscapeMadeEasy's documentation!
 ********************************************
 
-This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the development of new extensions for inkscape <https://inkscape.org>.
+This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the development of new extensions for Inkscape <https://inkscape.org>.
 
 Here you will find methods and classes to deal with drawings, styles, markers, texts, plots, etc. It is a work-in-progress project and new features will be added in the future. However there is no roadmap right now.
 
-This project is not intended to provide an end-user inkscape extension by itself but to provide easier backstage functions and classes to facilitate the development of inkscape extensions.
+.. image:: ../imagesDocs/samples_01.png
+          :width: 800px
 
-For end-user extensions see my other projects on GitHub (they will be uploaded soon).
+This project is not intended to provide an end-user Inkscape extension by itself but to provide easier backstage functions and classes to facilitate the development of Inkscape extensions.
 
-Historically this project started as a way to help myself while creating extensions, namely focusing on scientific/academic diagrams and graphs. Therefore these modules do not intend to provide an extensive array of functions and classes to cover all possibilities of configurations, styles and etc. The modules were born and expanded as I felt the necessity to have new functions to help my workflow. Due to this, there might be other modules with similar/better features that I didn't find before.
+For end-user extensions see my other projects on GitHub (more to come soon):
+
+  -**createMarkers**  <https://github.com/fsmMLK/createMarkers>
+
+History and Objectives
+----------------------
+
+Historically this project started as a way to help myself while creating extensions, namely focusing on scientific/academic diagrams and graphs. In the academy, it is very common to prepare plots/diagrams to explain concepts during lectures, seminars or congresses.
+
+There are many consecrated mathematical tools that can produce them, e.g., gnuplot, octave, matlab, R, etc. They all can produce nice plots, however it might be a little complicated if we want to add other elements to these plots, like texts, comments, arrows, etc. These packages have tools to do it but they are cumbersome to use. A better approach would be using a proper graphic software.
+
+One possible approach is to export these plots as raster images and use a raster graphic software to produce the annotations, like Gimp. Personally, I prefer to have the plots in a vector graphic format to keep it aesthetically pleasing and add the annotations in a vector graphic software. For this, Inkscape is very sound.
+
+Unfortunately, exporting the plots as vector graphics is not always successful in the sense that the resulting document is quite "dirty" (unorganized groups, isolated elements, etc.). Therefore I decided to make my own plotting/diagram tools for Inkscape.
+
+
+In the process of creating these tools (I will upload them to GitHub in a near future) I realized that many of the low level classes and methods used to manipulate elements of the svg file could be grouped in a general purpose set of core modules that extended inkex.py module. **inkscapeMadeEasy** was born! The core modules I created do not intend to provide an extensive array of methods and classes to cover all possibilities of manipulations/transformations and drawing. These modules were born and expanded as I felt the necessity to have new methods to help my workflow. Nevertheless the number of methods created allows many possibilities and is still under development so new features can (will) appear in future versions.
+
+**Obs:** Since it is not very easy to find documentation on other Inkscape modules, there might be other modules with similar/better features that I was not aware of when I was producing my extensions.
+
+
 
 Enough mumbo-jumbo. Let's start! =D
 
 
-
-
-
-.. image:: ../imagesDocs/samples_01.png
-          :width: 800px
 
 Contents:
 ==========================================
@@ -43,18 +59,18 @@ Contents:
 Main Features
 =============
 
-LaTeX support via textext.py extension
+LaTeX support via textext extension
 --------------------------------------
 
-Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to use the excellent extension 'textext' from Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
+Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension **textext** from Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
 
-Since I made a very few modifications to his module, I decided to include it in this project. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
+Since I made very few modifications to his module, I decided to include the modified files in this extension. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
 
-Instalation procedure and requirements of the modified 'textext.py' are exactly the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
+Instalation procedure and requirements of the modified **textext** are exactly the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
 
   **Modifications**
 
-  Here is the full list of changes::
+  Here is the full list of changes I made::
 
     # Changes: line  67-68: added a few variables to control debug mode
     # Changes: line 944: changed order of programs (It worked better in my machine)
@@ -64,7 +80,7 @@ Instalation procedure and requirements of the modified 'textext.py' are exactly 
 Scientific plotting system
 --------------------------
 
-inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave's stem plot style). It was inspired by Tavmjong Bah's (and collaborators) extension 'Function Plotter' already presented in inkscape. Function Plotter extension is not required here.
+inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave's stem plot style). It was inspired by Tavmjong Bah's (and collaborators) extension **Function Plotter** already presented in Inkscape. Function Plotter extension is not required here.
 
 Control over text styles, line markers and other drawing features
 -----------------------------------------------------------------
@@ -75,7 +91,7 @@ inkscapeMadeEasy_Draw module provides powerful tools to:
  - create custom markers, including a few pre-defined often used types. All can be assigned to custom colors in both stroke and filling colors
  - create line styles, with or without custom markers and custom line dash pattern
  - create text styles
- - create LaTeX contents (thanks to 'textext' from Pauli Virtanen)
+ - create LaTeX contents (thanks to **textext** from Pauli Virtanen)
  - direct control over text size and color of LaTeX contents
  - draw straight polylines using absolute or relative coordinates
  - draw arcs given the start and end points and its radius
@@ -87,25 +103,25 @@ Useful backstage functions
 
 inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:
 
- - Dump objects to a text file. Rationale: As of today, 2016, inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.
+ - Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.
  - unique ID number generator (adapted from inkex.py)
- - list defined elements (e.g. markers) in the current documentation
+ - list defined elements (e.g. markers) in the current document
  - create groups
  - get the resulting transformation matrix of an object, even when multiple transformations are stacked
  - rotate, scale and move objects
  - find markers
- - get the list of points of an object or group. If the object is a group the method searches points recursively. All transformations are properly applied to all points
+ - get the list of points coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them
  - get the bounding box of an object or group
  - get the center of the bounding box of an object or group
 
 Installation and requirements
 ==========================================
 
-These modules were partially developed in inkscape 0.48 and partially in 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of inkscape. Also, they should work in differente OSs too as long as all requirements are installed.
+These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.
 
-The following python modules are required: inkex, re, lxml, numpy, math, simplestyle (inkex submodule), textext, sys and os.
+The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.
 
-In order to install inkscapeMadeEasy, your inkscape extension directory must contains the following structure
+In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure
 
 >>> inkscape/extensions/
 >>>             |-- inkscapeMadeEasy_Base.py
@@ -117,7 +133,7 @@ In order to install inkscapeMadeEasy, your inkscape extension directory must con
 >>>                 |-- textext.inx
 >>>                 |-- textext.py
 
-You can find all the files in github
+You can find all the files on GitHub
 
 Usage
 ==========================================
@@ -126,7 +142,7 @@ These modules are not intended to serve as extensions by themselves. Instead you
 
 For examples on how to use, please take a look at the examples provided below and also check my other extension projects on GitHub (more to come soon):
 
--createMarkers  <https://github.com/fsmMLK/createMarkers>
+  -**createMarkers**  <https://github.com/fsmMLK/createMarkers>
 
 
 
