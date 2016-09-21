@@ -76,6 +76,7 @@
 <span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Base helper module that extends Aaron Spike&#39;s inkex.py module, adding basic manipulation functions</span>
@@ -99,6 +100,15 @@
     <span class="c1"># coordinates o the origin of the grid. unfortunately the grid does not fit</span>
     <span class="c1"># x0=0</span>
     <span class="c1"># y0=-7.637817382813</span>
+    
+<div class="viewcode-block" id="inkscapeMadeEasy.displayMsg"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.displayMsg">[docs]</a>    <span class="k">def</span> <span class="nf">displayMsg</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Displays a message to the user.</span>
+
+<span class="sd">        :returns: nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="inkscapeMadeEasy.getBasicLatexPackagesFile"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getBasicLatexPackagesFile">[docs]</a>    <span class="k">def</span> <span class="nf">getBasicLatexPackagesFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the full path  of the ``basicLatexPackages.tex`` file with commonly used Latex packages </span>

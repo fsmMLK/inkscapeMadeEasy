@@ -170,6 +170,25 @@
 <p>Base class for extensions.</p>
 <p>This class extends the inkex.Effect class by adding several basic functions to help manipulating inkscape elements. All extensions should inherit this class.</p>
 <dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.displayMsg">
+<code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.displayMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a message to the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getBasicLatexPackagesFile">
 <code class="descname">getBasicLatexPackagesFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getBasicLatexPackagesFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getBasicLatexPackagesFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the full path  of the <code class="docutils literal"><span class="pre">basicLatexPackages.tex</span></code> file with commonly used Latex packages</p>
@@ -576,6 +595,29 @@
 </div>
 <div class="section" id="module-inkscapeMadeEasy_Draw">
 <span id="inkscapemadeeasy-draw"></span><h2>inkscapeMadeEasy_Draw<a class="headerlink" href="#module-inkscapeMadeEasy_Draw" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="inkscapeMadeEasy_Draw.displayMsg">
+<code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.displayMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a message to the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Identical function has been also defined inside inkscapeMadeEasy class</p>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="inkscapeMadeEasy_Draw.Dump">
 <code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.Dump" title="Permalink to this definition">¶</a></dt>
@@ -1665,7 +1707,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </tbody>
 </table>
 <p><strong>Arc options</strong></p>
-<a class="reference internal image-reference" href="_images/arc_startEndRadius_flags.png"><img alt="_images/arc_startEndRadius_flags.png" src="_images/arc_startEndRadius_flags.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/arc_startEndRadius_flags.png"><img alt="_images/arc_startEndRadius_flags.png" src="_images/arc_startEndRadius_flags.png" style="width: 800px;" /></a>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
@@ -1740,7 +1782,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </tbody>
 </table>
 <p><strong>Arc options</strong></p>
-<a class="reference internal image-reference" href="_images/arc_centerAngStartAngEnd_flags.png"><img alt="_images/arc_centerAngStartAngEnd_flags.png" src="_images/arc_centerAngStartAngEnd_flags.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/arc_centerAngStartAngEnd_flags.png"><img alt="_images/arc_centerAngStartAngEnd_flags.png" src="_images/arc_centerAngStartAngEnd_flags.png" style="width: 700px;" /></a>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
@@ -1884,6 +1926,29 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <div class="section" id="module-inkscapeMadeEasy_Plot">
 <span id="inkscapemadeeasy-plot"></span><h2>inkscapeMadeEasy_Plot<a class="headerlink" href="#module-inkscapeMadeEasy_Plot" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
+<dt id="inkscapeMadeEasy_Plot.displayMsg">
+<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.displayMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a message to the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Identical function has been also defined inside inkscapeMadeEasy class</p>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="inkscapeMadeEasy_Plot.Dump">
 <code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.Dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to easily output the result of <code class="docutils literal"><span class="pre">str(obj)</span></code> to a file</p>
@@ -1924,8 +1989,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="inkscapeMadeEasy_Plot.generateListOfMarksLinear">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfMarksLinear</code><span class="sig-paren">(</span><em>axisLimits</em>, <em>axisOrigin</em>, <em>markStep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfMarksLinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfMarksLinear" title="Permalink to this definition">¶</a></dt>
+<dt id="inkscapeMadeEasy_Plot.generateListOfTicksLinear">
+<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfTicksLinear</code><span class="sig-paren">(</span><em>axisLimits</em>, <em>axisOrigin</em>, <em>tickStep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfTicksLinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfTicksLinear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines list of ticks to be drawn in a linear plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1934,8 +1999,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="inkscapeMadeEasy_Plot.generateListOfMarksLog10">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfMarksLog10</code><span class="sig-paren">(</span><em>axisLimits</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfMarksLog10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfMarksLog10" title="Permalink to this definition">¶</a></dt>
+<dt id="inkscapeMadeEasy_Plot.generateListOfTicksLog10">
+<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfTicksLog10</code><span class="sig-paren">(</span><em>axisLimits</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfTicksLog10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfTicksLog10" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines list of ticks to be drawn in a log10 plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1946,7 +2011,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dl class="function">
 <dt id="inkscapeMadeEasy_Plot.findOrigin">
 <code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">findOrigin</code><span class="sig-paren">(</span><em>axisLimits</em>, <em>flagLog10</em>, <em>scale</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#findOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.findOrigin" title="Permalink to this definition">¶</a></dt>
-<dd><p>retrieves the position of the origin. In case of log scale, it will be axisLimits[0]</p>
+<dd><p>retrieves the position of the origin. In case of logarithmic scale, it will be axisLimits[0]</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Internal function.</p>
@@ -1970,7 +2035,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.axis.cartesian">
-<em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xLim, yLim, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0, xScale=20, yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.cartesian" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xLim, yLim, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.cartesian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the axes for cartesian plot</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1997,27 +2062,27 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </li>
 <li><strong>xlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
-<li><strong>xMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
-<li><strong>yMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
-<li><strong>xMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
-<li><strong>yMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
-<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>xTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
+<li><strong>yTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
+<li><strong>xTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
+<li><strong>yTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
+<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then xScale is the size in svg units of each mark</li>
+<li>If axis is linear, then xScale is the size in svg units of each tick</li>
 <li>If axis is log10, the xScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then xScale is the size in svg units of each mark</li>
+<li>If axis is linear, then xScale is the size in svg units of each tick</li>
 <li>If axis is log10, the xScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>xAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Marks in both x and y. Default: &#8216;&#8217;</p>
+<li><strong>xAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
-<li><strong>yAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to the mark ticks in Y axis. Default: &#8216;&#8217;</p>
+<li><strong>yAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
@@ -2064,7 +2129,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.axis.polar">
-<em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0], rLabel='', rlog10scale=False, rMarks=True, tMarks=True, rMarkStep=1.0, tMarkStep=45.0, rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.polar" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.polar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the axes for polar plot</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2084,17 +2149,17 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <li>If rlog10scale=True, then the lower limit of rLim must be &gt;=1</li>
 </ul>
 </li>
-<li><strong>rMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the R axis if True. Default: True</li>
-<li><strong>tMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the theta axis if True. Default: True</li>
-<li><strong>rMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on R axis. (Not used if R axis is in log10 scale). Default:1.0</li>
-<li><strong>tMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on theta axis. Default:45.0</li>
-<li><strong>rScale</strong> (<em>float</em>) &#8211; <p>Distance between each rMarkStep in svg units. Default: 20</p>
+<li><strong>rTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the R axis if True. Default: True</li>
+<li><strong>tTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the theta axis if True. Default: True</li>
+<li><strong>rTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on R axis. (Not used if R axis is in log10 scale). Default:1.0</li>
+<li><strong>tTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on theta axis. Default:45.0</li>
+<li><strong>rScale</strong> (<em>float</em>) &#8211; <p>Distance between each rTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then rScale is the size in svg units of each mark</li>
+<li>If axis is linear, then rScale is the size in svg units of each tick</li>
 <li>If axis is log10, the rScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>rAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Marks in both x and y. Default: &#8216;&#8217;</p>
+<li><strong>rAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
@@ -2147,7 +2212,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.cartesian">
-<em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.cartesian" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.cartesian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cartesian Plot</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2173,41 +2238,41 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </li>
 <li><strong>xlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
-<li><strong>xMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
-<li><strong>yMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
-<li><strong>xMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
-<li><strong>yMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
-<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>xTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
+<li><strong>yTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
+<li><strong>xTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
+<li><strong>yTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
+<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then xScale is the size in svg units of each mark</li>
+<li>If axis is linear, then xScale is the size in svg units of each tick</li>
 <li>If axis is log10, the xScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then yScale is the size in svg units of each mark</li>
+<li>If axis is linear, then yScale is the size in svg units of each tick</li>
 <li>If axis is log10, the yScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Marks in both x and y. Default: &#8216;&#8217;</p>
+<li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
-<li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the mark ticks in Y axis. Default: &#8216;&#8217;</p>
+<li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
 <li><strong>xGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>yGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
-<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0</li>
+<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) &#8211; line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceXlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceXlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceXlim=None Limits will be defined by min and max of xData (Default)</li>
 <li>if forceXlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
 </li>
-<li><strong>forceYlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceYlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceYlim=None Limits will be defined by min and max of yData (Default)</li>
 <li>if forceYlim=[yMin,yMax] then these limits will be used.</li>
@@ -2276,7 +2341,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <span class="gp">&gt;&gt;&gt; </span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">inkPlot</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">cartesian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root_layer</span><span class="p">,</span><span class="n">xData</span><span class="p">,</span><span class="n">yData</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xLabel</span><span class="o">=</span><span class="s1">&#39;my $x$ data&#39;</span><span class="p">,</span><span class="n">yLabel</span><span class="o">=</span><span class="s1">&#39;$y(x)$&#39;</span><span class="p">,</span><span class="n">xlog10scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ylog10scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xMarkStep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">yMarkStep</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xTickStep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">yTickStep</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">yScale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">xExtraText</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">yExtraText</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineStylePlot</span><span class="o">=</span><span class="n">lineStyleDiscrete</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">forceXlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">forceYlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">drawAxis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2287,7 +2352,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.polar">
-<em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='', rlog10scale=False, rMarks=True, tMarks=True, rMarkStep=1.0, tMarkStep=45.0, rScale=20, rExtraText='', rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.polar" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20, rExtraText='', rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.polar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cartesian Plot</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2309,31 +2374,31 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
 </li>
 <li><strong>rlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
-<li><strong>rMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
-<li><strong>tMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
-<li><strong>rMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
-<li><strong>tMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on Y axis.</li>
-<li><strong>rScale</strong> (<em>float</em>) &#8211; <p>Distance between each rMarkStep in svg units. Default: 20</p>
+<li><strong>rTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
+<li><strong>tTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
+<li><strong>rTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
+<li><strong>tTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on Y axis.</li>
+<li><strong>rScale</strong> (<em>float</em>) &#8211; <p>Distance between each rTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then rScale is the size in svg units of each mark</li>
+<li>If axis is linear, then rScale is the size in svg units of each tick</li>
 <li>If axis is log10, the rScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>rExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Marks in both x and y. Default: &#8216;&#8217;</p>
+<li><strong>rExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
 <li><strong>rGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>tGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
-<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0</li>
+<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) &#8211; line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceRlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceRlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceRlim=None Limits will be defined by min and max of rData (Default)</li>
 <li>if forceRlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
 </li>
-<li><strong>forceTlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceTlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceTlim=None Limits will be defined by min and max of tData (Default)</li>
 <li>if forceTlim=[yMin,yMax] then these limits will be used.</li>
@@ -2403,7 +2468,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <span class="gp">&gt;&gt;&gt; </span>  
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkPlot</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root_layer</span><span class="p">,</span><span class="n">rData</span><span class="p">,</span><span class="n">tData</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>                      <span class="n">rLabel</span><span class="o">=</span><span class="s1">&#39;my $R$ data&#39;</span><span class="p">,</span><span class="n">rlog10scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">rMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rMarkStep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tMarkStep</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="n">rTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rTickStep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tTickStep</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                      <span class="n">rScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">rExtraText</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                      <span class="n">rGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineStylePlot</span><span class="o">=</span><span class="n">lineStyleDiscrete</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                      <span class="n">forceRlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">forceTlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">drawAxis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2414,7 +2479,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <span class="gp">&gt;&gt;&gt; </span>    
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkPlot</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root_layer</span><span class="p">,</span><span class="n">rData</span><span class="p">,</span><span class="n">tData</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>                        <span class="n">rLabel</span><span class="o">=</span><span class="s1">&#39;my $R$ data&#39;</span><span class="p">,</span><span class="n">rlog10scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                        <span class="n">rMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rMarkStep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tMarkStep</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                        <span class="n">rTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rTickStep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tTickStep</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                        <span class="n">rScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">rExtraText</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                        <span class="n">rGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">tGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                        <span class="n">forceRlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">forceTlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">drawAxis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2425,7 +2490,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.stem">
-<em class="property">static </em><code class="descname">stem</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.stem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.stem" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">stem</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.stem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.stem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stem plot in Cartesian axis</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2450,41 +2515,41 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
 </li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
-<li><strong>xMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
-<li><strong>yMarks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
-<li><strong>xMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
-<li><strong>yMarkStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
-<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>xTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
+<li><strong>yTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the Y axis if True. Default: True</li>
+<li><strong>xTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0</li>
+<li><strong>yTickStep</strong> (<em>float</em>) &#8211; Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0</li>
+<li><strong>xScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then xScale is the size in svg units of each mark</li>
+<li>If axis is linear, then xScale is the size in svg units of each tick</li>
 <li>If axis is log10, the xScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xMarkStep in svg units. Default: 20</p>
+<li><strong>yScale</strong> (<em>float</em>) &#8211; <p>Distance between each xTickStep in svg units. Default: 20</p>
 <ul>
-<li>If axis is linear, then xScale is the size in svg units of each mark</li>
+<li>If axis is linear, then xScale is the size in svg units of each tick</li>
 <li>If axis is log10, the xScale is the size in svg units of one decade</li>
 </ul>
 </li>
-<li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Marks in both x and y. Default: &#8216;&#8217;</p>
+<li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
-<li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the mark ticks in Y axis. Default: &#8216;&#8217;</p>
+<li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
 The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
 </li>
 <li><strong>xGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>yGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
-<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0</li>
+<li><strong>generalAspectFactorAxis</strong> (<em>float</em>) &#8211; regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) &#8211; line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceXlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceXlim</strong> (<em>list</em>) &#8211; <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceXlim=None Limits will be defined by min and max of xData (Default)</li>
 <li>if forceXlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
 </li>
-<li><strong>forceYlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for log scale</p>
+<li><strong>forceYlim</strong> (<em>list</em>) &#8211; <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don&#8217;t need this for logarithmic scale</p>
 <ul>
 <li>if forceYlim=None Limits will be defined by min and max of yData (Default)</li>
 <li>if forceYlim=[yMin,yMax] then these limits will be used.</li>
@@ -2555,7 +2620,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <span class="gp">&gt;&gt;&gt; </span>    
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">inkPlot</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root_layer</span><span class="p">,</span><span class="n">xData</span><span class="p">,</span><span class="n">yData</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xLabel</span><span class="o">=</span><span class="s1">&#39;my $x$ data&#39;</span><span class="p">,</span><span class="n">yLabel</span><span class="o">=</span><span class="s1">&#39;$y(x)$&#39;</span><span class="p">,</span><span class="n">ylog10scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yMarks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xMarkStep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">yMarkStep</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yTicks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xTickStep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">yTickStep</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">yScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">xExtraText</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">yExtraText</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">xGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">yGrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineStylePlot</span><span class="o">=</span><span class="n">lineStyleDiscrete</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                       <span class="n">forceXlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">forceYlim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">drawAxis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
