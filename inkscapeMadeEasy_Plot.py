@@ -34,7 +34,17 @@ This module requires the following modules: math, numpy, lxml and sys
 
 """
 
+def displayMsg(msg):
+    """Displays a message to the user.
 
+    :returns: nothing
+    :rtype: -
+    
+    .. note:: Identical function has been also defined inside inkscapeMadeEasy class   
+    
+    """
+    sys.stderr.write(msg + '\n')
+    
 def Dump(obj, file='./dump_file.txt', mode='w'):
     """Function to easily output the result of ``str(obj)`` to a file
 
@@ -65,40 +75,40 @@ def Dump(obj, file='./dump_file.txt', mode='w'):
     file.close()
 
 
-def generateListOfMarksLinear(axisLimits, axisOrigin, markStep):
+def generateListOfTicksLinear(axisLimits, axisOrigin, tickStep):
     """Defines list of ticks to be drawn in a linear plot
 
     .. note:: Internal function.
     """
 
-    # make the list of marks, symmetrically to the origin
-    listMarksPositive = [axisOrigin]
-    while listMarksPositive[-1] < axisLimits[1]:
-        listMarksPositive.append(listMarksPositive[-1] + markStep)
+    # make the list of ticks, symmetrically to the origin
+    listTicksPositive = [axisOrigin]
+    while listTicksPositive[-1] < axisLimits[1]:
+        listTicksPositive.append(listTicksPositive[-1] + tickStep)
 
-    listMarksNegative = [axisOrigin]
+    listTicksNegative = [axisOrigin]
 
-    while listMarksNegative[-1] > axisLimits[0]:
-        listMarksNegative.append(listMarksNegative[-1] - markStep)
+    while listTicksNegative[-1] > axisLimits[0]:
+        listTicksNegative.append(listTicksNegative[-1] - tickStep)
 
-    listMarks = listMarksPositive + listMarksNegative[1:]
-    return listMarks
+    listTicks = listTicksPositive + listTicksNegative[1:]
+    return listTicks
 
 
-def generateListOfMarksLog10(axisLimits):
+def generateListOfTicksLog10(axisLimits):
     """Defines list of ticks to be drawn in a log10 plot
 
     .. note:: Internal function."""
 
-    # make the list of marks, symmetrically to the origin
-    listMarks = [axisLimits[0]]
-    while listMarks[-1] < axisLimits[1]:
-        listMarks.append(listMarks[-1] * 10)
-    return listMarks
+    # make the list of ticks, symmetrically to the origin
+    listTicks = [axisLimits[0]]
+    while listTicks[-1] < axisLimits[1]:
+        listTicks.append(listTicks[-1] * 10)
+    return listTicks
 
 
 def findOrigin(axisLimits, flagLog10, scale):
-    """ retrieves the position of the origin. In case of log scale, it will be axisLimits[0]
+    """ retrieves the position of the origin. In case of logarithmic scale, it will be axisLimits[0]
 
     .. note:: Internal function.
     """
@@ -130,7 +140,7 @@ def getPositionAndText(value, scale, flagLog10, axisUnitFactor):
     else:
         valStr = str(round(value, 3))
 
-    # option to add extra factor to the axis marks
+    # option to add extra factor to the axis ticks
     if flagLog10:
         exponent = str(int(math.log10(value)))
         if axisUnitFactor:
@@ -161,7 +171,7 @@ class axis():
     """
     @staticmethod
     def cartesian(ExtensionBaseObj, parent, xLim, yLim, position=[0, 0],
-                  xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0,
+                  xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
                   xScale=20, yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False,
                   forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Creates the axes for cartesian plot
@@ -187,25 +197,25 @@ class axis():
 
         :param xlog10scale: sets X axis to log10 scale if True. Default: False
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
-        :param xMarks: Adds axis ticks to the X axis if True. Default: True
-        :param yMarks: Adds axis ticks to the Y axis if True. Default: True
-        :param xMarkStep: Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0
-        :param yMarkStep: Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
-        :param xScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param xTicks: Adds axis ticks to the X axis if True. Default: True
+        :param yTicks: Adds axis ticks to the Y axis if True. Default: True
+        :param xTickStep: Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0
+        :param yTickStep: Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
+        :param xScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then xScale is the size in svg units of each mark
+               - If axis is linear, then xScale is the size in svg units of each tick
                - If axis is log10, the xScale is the size in svg units of one decade
 
-        :param yScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param yScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then xScale is the size in svg units of each mark
+               - If axis is linear, then xScale is the size in svg units of each tick
                - If axis is log10, the xScale is the size in svg units of one decade
 
-        :param xAxisUnitFactor: extra text to be added to Marks in both x and y. Default: ''
+        :param xAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
-        :param yAxisUnitFactor: extra text to be added to the mark ticks in Y axis. Default: ''
+        :param yAxisUnitFactor: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
@@ -232,10 +242,10 @@ class axis():
         :type yLabel: string
         :type xlog10scale: bool
         :type ylog10scale: bool
-        :type xMarks: bool
-        :type yMarks: bool
-        :type xMarkStep: float
-        :type yMarkStep: float
+        :type xTicks: bool
+        :type yTicks: bool
+        :type xTickStep: float
+        :type yTickStep: float
         :type xScale: float
         :type yScale: float
         :type xAxisUnitFactor: string
@@ -271,12 +281,12 @@ class axis():
         if xlog10scale:
             scaleX = xScale
         else:
-            scaleX = xScale / float(xMarkStep)
+            scaleX = xScale / float(xTickStep)
 
         if ylog10scale:
             scaleY = -yScale
         else:
-            scaleY = -yScale / float(yMarkStep)  # negative bc inkscape is upside down
+            scaleY = -yScale / float(yTickStep)  # negative bc inkscape is upside down
 
         # font size and other text parameters
         if forceTextSize == 0:
@@ -284,12 +294,12 @@ class axis():
         else:
             textSize = forceTextSize
 
-        textSizeSmall = 0.8 * textSize   # font size for axis marks
+        textSizeSmall = 0.8 * textSize   # font size for axis ticks
 
         text_offset = textSize         # base space for text positioning
         ExtraSpaceArrowX = (2.0 + ExtraLenghtAxisX) * text_offset  # extra space for drawing arrow on axis
         ExtraSpaceArrowY = (3.0 + ExtraLenghtAxisY) * text_offset  # extra space for drawing arrow on axis
-        lenghtMarks = textSize / 2.0       # length of the marks
+        lenghtTicks = textSize / 2.0       # length of the ticks
 
         # create styles
         if forceLineWidth == 0:
@@ -302,7 +312,7 @@ class axis():
 
         nameMarkerArrowAxis = inkDraw.marker.createArrow1Marker(ExtensionBaseObj, 'ArrowAxis', RenameMode=1, scale=0.4)
         lineStyleAxis = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3), markerEnd=nameMarkerArrowAxis[1])
-        lineStyleMarks = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
+        lineStyleTicks = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
         lineStyleGrid = inkDraw.lineStyle.set(lineWidthGrid, lineColor=inkDraw.color.gray(0.7))
         lineStyleGridFine = inkDraw.lineStyle.set(lineWidthGridFine, lineColor=inkDraw.color.gray(0.7))
 
@@ -311,13 +321,16 @@ class axis():
 
         # check if limits are valid
         if xLim[0] >= xLim[1]:
-            return inkDraw.text.write(ExtensionBaseObj, 'Error: xLim is invalid', position, parent)
+            sys.stderr.write('Error: xLim is invalid.')
+            return 0
         if yLim[0] >= yLim[1]:
-            return inkDraw.text.write(ExtensionBaseObj, 'Error: yLim is invalid', position, parent)
-        # check if the limits are valid for logscales.
+            sys.stderr.write('Error: yLim is invalid.')
+            return 0
+        # check if the limits are valid for logarithmic scales.
         if xlog10scale:
             if xLim[0] <= 0 or xLim[1] <= 0:
-                return inkDraw.text.write(ExtensionBaseObj, 'Error: xLim is invalid for logscale', position, parent)
+                sys.stderr.write('Error: xLim is invalid in logarithmic scale')
+                return 0
             else:
                 xmin = pow(10, math.floor(math.log10(xLim[0])))
                 xmax = pow(10, math.ceil(math.log10(xLim[1])))
@@ -327,7 +340,8 @@ class axis():
 
         if ylog10scale:
             if yLim[0] <= 0 or yLim[1] <= 0:
-                return inkDraw.text.write(ExtensionBaseObj, 'Error: yLim is invalid for logscale', position, parent)
+                sys.stderr.write('Error: yLim is invalid in logarithmic scale')
+                return 0
             else:
                 ymin = pow(10, math.floor(math.log10(yLim[0])))
                 ymax = pow(10, math.ceil(math.log10(yLim[1])))
@@ -362,17 +376,17 @@ class axis():
         if not drawAxis:
             return [None, outputLimits, axisOrigin]
 
-        # axis marks
-        groupMarks = ExtensionBaseObj.createGroup(GroupPlot, 'Marks')
+        # axis ticks
+        groupTicks = ExtensionBaseObj.createGroup(GroupPlot, 'Ticks')
 
-        if xMarks or xGrid:
+        if xTicks or xGrid:
 
             if xlog10scale:
-                listMarks = generateListOfMarksLog10(xLimits)
+                listTicks = generateListOfTicksLog10(xLimits)
             else:
-                listMarks = generateListOfMarksLinear(xLimits, axisOrigin[0] / scaleX, xMarkStep)
+                listTicks = generateListOfTicksLinear(xLimits, axisOrigin[0] / scaleX, xTickStep)
 
-            for x in listMarks:
+            for x in listTicks:
 
                 if x <= xLimits[1] and x >= xLimits[0]:
 
@@ -380,37 +394,37 @@ class axis():
                     [posX, xText] = getPositionAndText(x, scaleX, xlog10scale, xAxisUnitFactor)
 
                     if xGrid and posX != axisOrigin[0]:  # grid lines. Do not draw if grid line is over the axis
-                        inkDraw.line.absCoords(groupMarks, [[posX, yLimitsPos[0]], [posX, yLimitsPos[1]]], [0, 0], lineStyle=lineStyleGrid)
+                        inkDraw.line.absCoords(groupTicks, [[posX, yLimitsPos[0]], [posX, yLimitsPos[1]]], [0, 0], lineStyle=lineStyleGrid)
 
-                    # intermediate grid lines in case of log scale
+                    # intermediate grid lines in case of logarithmic scale
                     if xGrid and xlog10scale and x < xLimits[1]:
                         for i in range(2, 10):
                             aditionalStep = math.log10(i) * scaleX
-                            inkDraw.line.absCoords(groupMarks, [[posX + aditionalStep, yLimitsPos[0]], [posX + aditionalStep, yLimitsPos[1]]], [0, 0], lineStyle=lineStyleGridFine)
+                            inkDraw.line.absCoords(groupTicks, [[posX + aditionalStep, yLimitsPos[0]], [posX + aditionalStep, yLimitsPos[1]]], [0, 0], lineStyle=lineStyleGridFine)
 
-                    # mark
-                    if xMarks:
+                    # tick
+                    if xTicks:
                         if posX != axisOrigin[0]:  # don't draw if in the origin
-                            inkDraw.line.relCoords(groupMarks, [[0, lenghtMarks]], [posX, axisOrigin[1] - lenghtMarks / 2.0], lineStyle=lineStyleMarks)
+                            inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [posX, axisOrigin[1] - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
 
                     # sets justification
-                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupMarks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupTicks,fontSize=7)
 
                     if axisOrigin[1] == yLimitsPos[0]:
                         justif = 'tc'
                         offsetX = 0
                         offsetY = text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupMarks, axisOrigin, 10, [0,0])
+                        #inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
 
                     if axisOrigin[1] != yLimitsPos[0] and axisOrigin[1] != yLimitsPos[1]:
                         justif = 'tr'
                         offsetX = -text_offset / 4.0
                         offsetY = text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupMarks, axisOrigin, 10, [0,0])
-                        # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[1]),[axisOrigin[0]+10,axisOrigin[1]+10],groupMarks,fontSize=7)
-                        # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]),[axisOrigin[0]+10,axisOrigin[1]+20],groupMarks,fontSize=7)
+                        #inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
+                        # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[1]),[axisOrigin[0]+10,axisOrigin[1]+10],groupTicks,fontSize=7)
+                        # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]),[axisOrigin[0]+10,axisOrigin[1]+20],groupTicks,fontSize=7)
                         if posX == axisOrigin[0]:
                             if posX == xLimitsPos[1]:
                                 justif = 'tr'
@@ -423,7 +437,7 @@ class axis():
                         justif = 'bc'
                         offsetX = 0
                         offsetY = -text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupMarks,axisOrigin, 10, [0,0])
+                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
                         if posX == axisOrigin[0]:
                             if posX == xLimitsPos[1]:
                                 justif = 'br'
@@ -433,17 +447,17 @@ class axis():
                                 offsetX = +text_offset / 4.0
 
                     # value
-                    if xMarks:
-                        inkDraw.text.latex(ExtensionBaseObj, groupMarks, xText, [posX + offsetX, axisOrigin[1] + offsetY], textSizeSmall, refPoint=justif)
+                    if xTicks:
+                        inkDraw.text.latex(ExtensionBaseObj, groupTicks, xText, [posX + offsetX, axisOrigin[1] + offsetY], textSizeSmall, refPoint=justif)
 
-        if yMarks or yGrid:
+        if yTicks or yGrid:
             # approximate limits to multiples of 10
             if ylog10scale:
-                listMarks = generateListOfMarksLog10(yLimits)
+                listTicks = generateListOfTicksLog10(yLimits)
             else:
-                listMarks = generateListOfMarksLinear(yLimits, axisOrigin[1] / scaleY, yMarkStep)
+                listTicks = generateListOfTicksLinear(yLimits, axisOrigin[1] / scaleY, yTickStep)
 
-            for y in listMarks:
+            for y in listTicks:
                 if y <= yLimits[1] and y >= yLimits[0]:
 
                     # get position, considering the scale and its text
@@ -451,37 +465,37 @@ class axis():
                     posY = -posY
 
                     if yGrid and posY != axisOrigin[1]:  # grid lines. Do not draw if grid line is over the axis
-                        inkDraw.line.absCoords(groupMarks, [[xLimitsPos[0], posY], [xLimitsPos[1], posY]], [0, 0], lineStyle=lineStyleGrid)
+                        inkDraw.line.absCoords(groupTicks, [[xLimitsPos[0], posY], [xLimitsPos[1], posY]], [0, 0], lineStyle=lineStyleGrid)
 
-                    # intermediate grid lines in case of log scale
+                    # intermediate grid lines in case of logarithmic scale
                     if yGrid and ylog10scale and y < yLimits[1]:
                         for i in range(2, 10):
                             aditionalStep = math.log10(i) * scaleY
-                            inkDraw.line.absCoords(groupMarks, [[xLimitsPos[0], posY + aditionalStep], [xLimitsPos[1], posY + aditionalStep]], [0, 0], lineStyle=lineStyleGridFine)
+                            inkDraw.line.absCoords(groupTicks, [[xLimitsPos[0], posY + aditionalStep], [xLimitsPos[1], posY + aditionalStep]], [0, 0], lineStyle=lineStyleGridFine)
 
-                    # mark
-                    if yMarks:
+                    # tick
+                    if yTicks:
                         if posY != axisOrigin[1]:  # don't draw if in the origin
-                            inkDraw.line.relCoords(groupMarks, [[lenghtMarks, 0]], [axisOrigin[0] - lenghtMarks / 2.0, posY], lineStyle=lineStyleMarks)
+                            inkDraw.line.relCoords(groupTicks, [[lenghtTicks, 0]], [axisOrigin[0] - lenghtTicks / 2.0, posY], lineStyle=lineStyleTicks)
 
                     # sets justification
-                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupMarks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupTicks,fontSize=7)
 
                     if axisOrigin[0] == xLimitsPos[0]:
                         justif = 'cr'
                         offsetX = -text_offset / 2.0
                         offsetY = 0
-                        #inkDraw.circle.centerRadius(groupMarks,axisOrigin, 10, [0,0],'trash')
+                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0],'trash')
 
                     if axisOrigin[0] != xLimitsPos[0] and axisOrigin[0] != xLimitsPos[1]:
                         justif = 'tr'
                         offsetX = -text_offset / 2.0
                         offsetY = text_offset / 4.0
-                        #inkDraw.circle.centerRadius(groupMarks,axisOrigin, 10, [0,0])
-                        # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[0]),[axisOrigin[0]+10,axisOrigin[1]+10],groupMarks,fontSize=7)
-                        # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]*scaleX),[axisOrigin[0]+10,axisOrigin[1]+20],groupMarks,fontSize=7)
+                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
+                        # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[0]),[axisOrigin[0]+10,axisOrigin[1]+10],groupTicks,fontSize=7)
+                        # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]*scaleX),[axisOrigin[0]+10,axisOrigin[1]+20],groupTicks,fontSize=7)
                         if posY == axisOrigin[1]:
                             if posY == yLimitsPos[1]:
                                 justif = 'tr'
@@ -494,7 +508,7 @@ class axis():
                         justif = 'cl'
                         offsetX = text_offset / 2.0
                         offsetY = 0
-                        #inkDraw.circle.centerRadius(groupMarks,axisOrigin, 10, [0,0])
+                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
                         if posY == axisOrigin[1]:
                             if posY == yLimitsPos[1]:
                                 justif = 'tl'
@@ -504,8 +518,8 @@ class axis():
                                 offsetY = -text_offset / 4.0
 
                     # value
-                    if yMarks:
-                        inkDraw.text.latex(ExtensionBaseObj, groupMarks, yText, [axisOrigin[0] + offsetX, (posY + offsetY)], textSizeSmall, refPoint=justif)
+                    if yTicks:
+                        inkDraw.text.latex(ExtensionBaseObj, groupTicks, yText, [axisOrigin[0] + offsetX, (posY + offsetY)], textSizeSmall, refPoint=justif)
 
         ExtensionBaseObj.moveElement(GroupPlot, [position[0] - axisOrigin[0], position[1] - axisOrigin[1]])
 
@@ -524,7 +538,7 @@ class axis():
 
     @staticmethod
     def polar(ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0],
-              rLabel='', rlog10scale=False, rMarks=True, tMarks=True, rMarkStep=1.0, tMarkStep=45.0,
+              rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0,
               rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0):
         """Creates the axes for polar plot
 
@@ -542,16 +556,16 @@ class axis():
 
             - If rlog10scale=True, then the lower limit of rLim must be >=1
 
-        :param rMarks: Adds axis ticks to the R axis if True. Default: True
-        :param tMarks: Adds axis ticks to the theta axis if True. Default: True
-        :param rMarkStep: Value interval between two consecutive marks on R axis. (Not used if R axis is in log10 scale). Default:1.0
-        :param tMarkStep: Value interval between two consecutive marks on theta axis. Default:45.0
-        :param rScale:  Distance between each rMarkStep in svg units. Default: 20
+        :param rTicks: Adds axis ticks to the R axis if True. Default: True
+        :param tTicks: Adds axis ticks to the theta axis if True. Default: True
+        :param rTickStep: Value interval between two consecutive ticks on R axis. (Not used if R axis is in log10 scale). Default:1.0
+        :param tTickStep: Value interval between two consecutive ticks on theta axis. Default:45.0
+        :param rScale:  Distance between each rTickStep in svg units. Default: 20
 
-               - If axis is linear, then rScale is the size in svg units of each mark
+               - If axis is linear, then rScale is the size in svg units of each tick
                - If axis is log10, the rScale is the size in svg units of one decade
 
-        :param rAxisUnitFactor: extra text to be added to Marks in both x and y. Default: ''
+        :param rAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
@@ -575,10 +589,10 @@ class axis():
         :type position: list
         :type rLabel: string
         :type rlog10scale: bool
-        :type rMarks: bool
-        :type tMarks: bool
-        :type rMarkStep: float
-        :type tMarkStep: float
+        :type rTicks: bool
+        :type tTicks: bool
+        :type rTickStep: float
+        :type tTickStep: float
         :type rScale: float
         :type rAxisUnitFactor: string
         :type rGrid: bool
@@ -612,7 +626,7 @@ class axis():
         if rlog10scale:
             scaleR = rScale
         else:
-            scaleR = rScale / float(rMarkStep)
+            scaleR = rScale / float(rTickStep)
 
         # font size and other text parameters
         if forceTextSize == 0:
@@ -620,11 +634,11 @@ class axis():
         else:
             textSize = forceTextSize
 
-        textSizeSmall = 0.8 * textSize   # font size for axis marks
+        textSizeSmall = 0.8 * textSize   # font size for axis ticks
 
         text_offset = textSize         # base space for text positioning
         ExtraSpaceArrowR = (2.0 + ExtraLenghtAxisR) * text_offset  # extra space for drawing arrow on axis
-        lenghtMarks = textSize / 2.0       # length of the marks
+        lenghtTicks = textSize / 2.0       # length of the ticks
 
         # create styles
         if forceLineWidth == 0:
@@ -635,9 +649,9 @@ class axis():
         lineWidthGrid = 0.7 * lineWidth
         lineWidthGridFine = lineWidthGrid / 2.0
 
-        #nameMarkerArrowAxis = inkDraw.marker.createArrow1Marker(ExtensionBaseObj, 'ArrowAxis', RenameMode=1, scale=0.4)
+        #nameTickerArrowAxis = inkDraw.marker.createArrow1Marker(ExtensionBaseObj, 'ArrowAxis', RenameMode=1, scale=0.4)
         lineStyleAxis = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
-        lineStyleMarks = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
+        lineStyleTicks = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
         lineStyleGrid = inkDraw.lineStyle.set(lineWidthGrid, lineColor=inkDraw.color.gray(0.7))
         lineStyleGridFine = inkDraw.lineStyle.set(lineWidthGridFine, lineColor=inkDraw.color.gray(0.7))
 
@@ -646,13 +660,16 @@ class axis():
 
         # check if limits are valid
         if rLim[0] < 0.0 or rLim[0] >= rLim[1]:
-            return inkDraw.text.write(ExtensionBaseObj, 'Error: rLim is invalid', position, parent)
+            sys.stderr.write('Error: rLim is invalid')
+            return 0
         if tLim[0] >= tLim[1]:
-            return inkDraw.text.write(ExtensionBaseObj, 'Error: tLim is invalid', position, parent)
-        # check if the limits are valid for log scales.
+            sys.stderr.write('Error: tLim is invalid')
+            return 0
+        # check if the limits are valid for logarithmic scales.
         if rlog10scale:
             if rLim[0] < 1 or rLim[1] < 1:
-                return inkDraw.text.write(ExtensionBaseObj, 'Error: rLim is invalid for logscale', position, parent)
+                sys.stderr.write('Error: rLim is invalid in logarithmic scale')
+                return 0
             else:
                 rmin = pow(10, math.floor(math.log10(rLim[0])))
                 rmax = pow(10, math.ceil(math.log10(rLim[1])))
@@ -688,17 +705,17 @@ class axis():
         if not drawAxis:
             return [None, outputLimits, axisOrigin]
 
-        # axis marks
-        groupMarks = ExtensionBaseObj.createGroup(GroupPlot, 'Marks')
+        # axis ticks
+        groupTicks = ExtensionBaseObj.createGroup(GroupPlot, 'Ticks')
 
-        if rMarks or rGrid:
+        if rTicks or rGrid:
 
             if rlog10scale:
-                listMarks = generateListOfMarksLog10(rLimits)
+                listTicks = generateListOfTicksLog10(rLimits)
             else:
-                listMarks = generateListOfMarksLinear(rLimits, axisOrigin[0] / scaleR, rMarkStep)
+                listTicks = generateListOfTicksLinear(rLimits, axisOrigin[0] / scaleR, rTickStep)
 
-            for r in listMarks:
+            for r in listTicks:
 
                 if r <= rLimits[1] and r >= rLimits[0]:
 
@@ -707,29 +724,29 @@ class axis():
 
                     if rGrid and posR > 0.0 and r > rLimits[0] and r < rLimits[1]:  # grid lines.
                         if tLimits[1] - tLimits[0] < 360:
-                            inkDraw.arc.centerAngStartAngEnd(groupMarks, axisOrigin, posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                            inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid, largeArc=largeArc)  # negative angles bc inkscape is upside down
                         else:
-                            inkDraw.circle.centerRadius(groupMarks, axisOrigin, posR, offset=[0, 0], lineStyle=lineStyleGrid)
+                            inkDraw.circle.centerRadius(groupTicks, axisOrigin, posR, offset=[0, 0], lineStyle=lineStyleGrid)
 
-                    # intermediate grid lines in case of log scale
+                    # intermediate grid lines in case of logarithmic scale
                     if rGrid and rlog10scale and r < rLimits[1]:
                         for i in range(2, 10):
                             aditionalStep = math.log10(i) * scaleR
                             if tLimits[1] - tLimits[0] < 360:
-                                inkDraw.arc.centerAngStartAngEnd(groupMarks, axisOrigin, posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                                inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine, largeArc=largeArc)  # negative angles bc inkscape is upside down
                             else:
-                                inkDraw.circle.centerRadius(groupMarks, axisOrigin, posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
+                                inkDraw.circle.centerRadius(groupTicks, axisOrigin, posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
 
-                    # mark
-                    if rMarks and posR > 0.0:
-                        inkDraw.arc.centerAngStartAngEnd(groupMarks, axisOrigin, posR, -tLimits[0] - math.degrees(lenghtMarks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtMarks / float(posR * 2)), [0, 0], lineStyle=lineStyleMarks, largeArc=False)
-                    if rMarks and posR == 0.0:
-                        inkDraw.line.relCoords(groupMarks, [[0, lenghtMarks]], [axisOrigin[0], axisOrigin[1] - lenghtMarks / 2.0], lineStyle=lineStyleMarks)
+                    # tick
+                    if rTicks and posR > 0.0:
+                        inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR, -tLimits[0] - math.degrees(lenghtTicks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtTicks / float(posR * 2)), [0, 0], lineStyle=lineStyleTicks, largeArc=False)
+                    if rTicks and posR == 0.0:
+                        inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [axisOrigin[0], axisOrigin[1] - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
 
                     # sets justification
-                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupMarks,fontSize=7)
-                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupMarks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'xlim='+str(xLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-20],groupTicks,fontSize=7)
+                    # inkDraw.text.write(ExtensionBaseObj,'ylim='+str(yLimitsPos),[axisOrigin[0]+10,axisOrigin[1]-10],groupTicks,fontSize=7)
 
                     if posR == 0:
                         justif = 'cc'
@@ -747,14 +764,14 @@ class axis():
                         posX = (posR + offsetR) * math.cos(math.radians(-tLimits[0]) + offsetT)
                         posY = (posR + offsetR) * math.sin(math.radians(-tLimits[0]) + offsetT)
                     # value
-                    #inkDraw.circle.centerRadius(groupMarks,[posX,posY], 1)
-                    if rMarks:
-                        inkDraw.text.latex(ExtensionBaseObj, groupMarks, rText, [posX, posY], textSizeSmall, refPoint=justif)
+                    #inkDraw.circle.centerRadius(groupTicks,[posX,posY], 1)
+                    if rTicks:
+                        inkDraw.text.latex(ExtensionBaseObj, groupTicks, rText, [posX, posY], textSizeSmall, refPoint=justif)
 
-        if tMarks or tGrid:
+        if tTicks or tGrid:
 
-            listMarks = generateListOfMarksLinear(tLimits, axisOrigin[1], tMarkStep)
-            for t in listMarks:
+            listTicks = generateListOfTicksLinear(tLimits, axisOrigin[1], tTickStep)
+            for t in listTicks:
                 if t <= tLimits[1] and t >= tLimits[0]:
                     c = math.cos(math.radians(-t))  # negative angles bc inkscape is upside down
                     s = math.sin(math.radians(-t))  # negative angles bc inkscape is upside down
@@ -764,18 +781,18 @@ class axis():
                     if (tGrid and t > tLimits[0] and t < tLimits[1]) or (tGrid and t == tLimits[0] and tLimits[1] - tLimits[0] >= 360):
                         if rLimitsPos[0] == 0:  # if rmin is zero, then make the lines to reach the center
                             if not rlog10scale:
-                                P1 = [(rLimitsPos[0] + scaleR * rMarkStep / 2) * c, (rLimitsPos[0] + scaleR * rMarkStep / 2) * s]
+                                P1 = [(rLimitsPos[0] + scaleR * rTickStep / 2) * c, (rLimitsPos[0] + scaleR * rTickStep / 2) * s]
                             else:
                                 P1 = [(rLimitsPos[0] + 0.3 * scaleR) * c, (rLimitsPos[0] + 0.3 * scaleR) * s]
                         else:
                             P1 = [rLimitsPos[0] * c, rLimitsPos[0] * s]
                         P2 = [rLimitsPos[1] * c, rLimitsPos[1] * s]
-                        inkDraw.line.absCoords(groupMarks, [P1, P2], axisOrigin, lineStyle=lineStyleGrid)
+                        inkDraw.line.absCoords(groupTicks, [P1, P2], axisOrigin, lineStyle=lineStyleGrid)
 
-                    # mark
-                    if (tMarks and t != tLimits[1]) or (tMarks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
-                        P1 = [(rLimitsPos[1] - lenghtMarks / 2.0) * c, (rLimitsPos[1] - lenghtMarks / 2.0) * s]
-                        inkDraw.line.relCoords(groupMarks, [[lenghtMarks * c, lenghtMarks * s]], P1, lineStyle=lineStyleMarks)
+                    # tick
+                    if (tTicks and t != tLimits[1]) or (tTicks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
+                        P1 = [(rLimitsPos[1] - lenghtTicks / 2.0) * c, (rLimitsPos[1] - lenghtTicks / 2.0) * s]
+                        inkDraw.line.relCoords(groupTicks, [[lenghtTicks * c, lenghtTicks * s]], P1, lineStyle=lineStyleTicks)
 
                     if c > 1.0e-4:
                         justif = 'cl'
@@ -789,8 +806,8 @@ class axis():
                     posX = (rLimitsPos[1] + offsetR) * c
                     posY = (rLimitsPos[1] + offsetR) * s
                     # value
-                    if (tMarks and t != tLimits[1]) or (tMarks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
-                        inkDraw.text.latex(ExtensionBaseObj, groupMarks, tText, [posX, posY], textSizeSmall, refPoint=justif)
+                    if (tTicks and t != tLimits[1]) or (tTicks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
+                        inkDraw.text.latex(ExtensionBaseObj, groupTicks, tText, [posX, posY], textSizeSmall, refPoint=justif)
 
         ExtensionBaseObj.moveElement(GroupPlot, [position[0] - axisOrigin[0], position[1] - axisOrigin[1]])
 
@@ -809,7 +826,7 @@ class axis():
             inkDraw.line.absCoords(GroupAxis, [P1, P2], [0, 0], lineStyle=lineStyleAxis)
             inkDraw.line.absCoords(GroupAxis, [P3, P4], [0, 0], lineStyle=lineStyleAxis)
         else:
-            if rMarks:
+            if rTicks:
                 inkDraw.line.absCoords(GroupAxis, [P1, P2], [0, 0], lineStyle=lineStyleAxis)
 
         if tLimits[1] - tLimits[0] < 360:
@@ -840,7 +857,7 @@ class plot():
     """
     @staticmethod
     def cartesian(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='',
-                  xlog10scale=False, ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0,
+                  xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
                   xScale=20, yScale=20, xExtraText='', yExtraText='',
                   xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
                   forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
@@ -866,40 +883,40 @@ class plot():
 
         :param xlog10scale: sets X axis to log10 scale if True. Default: False
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
-        :param xMarks: Adds axis ticks to the X axis if True. Default: True
-        :param yMarks: Adds axis ticks to the Y axis if True. Default: True
-        :param xMarkStep: Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0
-        :param yMarkStep: Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
-        :param xScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param xTicks: Adds axis ticks to the X axis if True. Default: True
+        :param yTicks: Adds axis ticks to the Y axis if True. Default: True
+        :param xTickStep: Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0
+        :param yTickStep: Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
+        :param xScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then xScale is the size in svg units of each mark
+               - If axis is linear, then xScale is the size in svg units of each tick
                - If axis is log10, the xScale is the size in svg units of one decade
 
-        :param yScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param yScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then yScale is the size in svg units of each mark
+               - If axis is linear, then yScale is the size in svg units of each tick
                - If axis is log10, the yScale is the size in svg units of one decade
 
-        :param xExtraText: extra text to be added to Marks in both x and y. Default: ''
+        :param xExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
-        :param yExtraText: extra text to be added to the mark ticks in Y axis. Default: ''
+        :param yExtraText: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
 
         :param xGrid: adds grid lines to X axis if true. Default: False
         :param yGrid: adds grid lines to Y axis if true. Default: False
-        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0
+        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceXlim=None Limits will be defined by min and max of xData (Default)
                 - if forceXlim=[xMin,xMax] then these limits will be used.
 
-        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceYlim=None Limits will be defined by min and max of yData (Default)
                 - if forceYlim=[yMin,yMax] then these limits will be used.
@@ -921,10 +938,10 @@ class plot():
         :type yLabel: string
         :type xlog10scale: bool
         :type ylog10scale: bool
-        :type xMarks: bool
-        :type yMarks: bool
-        :type xMarkStep: float
-        :type yMarkStep: float
+        :type xTicks: bool
+        :type yTicks: bool
+        :type xTickStep: float
+        :type yTickStep: float
         :type xScale: float
         :type yScale: float
         :type xExtraText: string
@@ -976,7 +993,7 @@ class plot():
         >>> 
         >>>    inkPlot.plot.cartesian(self,root_layer,xData,yData,position=[0,0],
         >>>                        xLabel='my $x$ data',yLabel='$y(x)$',xlog10scale=False,ylog10scale=False,
-        >>>                        xMarks=True,yMarks=True,xMarkStep=0.5,yMarkStep=2.0,
+        >>>                        xTicks=True,yTicks=True,xTickStep=0.5,yTickStep=2.0,
         >>>                        xScale=20,yScale=10,xExtraText='a',yExtraText='',
         >>>                        xGrid=True,yGrid=True,generalAspectFactorAxis=1.0,lineStylePlot=lineStyleDiscrete,
         >>>                        forceXlim=None,forceYlim=None,drawAxis=True)
@@ -999,7 +1016,7 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logscale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1026,7 +1043,7 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logscale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1073,21 +1090,21 @@ class plot():
 
         [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position,
                                                    xLabel=xLabel, yLabel=yLabel, xlog10scale=xlog10scale, ylog10scale=ylog10scale,
-                                                   xMarks=xMarks, yMarks=yMarks, xMarkStep=xMarkStep, yMarkStep=yMarkStep,
+                                                   xTicks=xTicks, yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep,
                                                    xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText, yAxisUnitFactor=yExtraText,
                                                    xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
                                                    ExtraLenghtAxisX=ExtraLenghtAxisX, ExtraLenghtAxisY=ExtraLenghtAxisY)
 
-        # scales data and convert to log scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
+        # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
         if xlog10scale:
             xData = [math.log10(x) * xScale - origin[0] for x in xData]
         else:
-            xData = [x * (xScale / xMarkStep) - origin[0] for x in xData]
+            xData = [x * (xScale / xTickStep) - origin[0] for x in xData]
 
         if ylog10scale:
             yData = [-math.log10(y) * yScale - origin[1] for y in yData]
         else:
-            yData = [-y * (yScale / yMarkStep) - origin[1] for y in yData]  # negative bc inkscape is upside down
+            yData = [-y * (yScale / yTickStep) - origin[1] for y in yData]  # negative bc inkscape is upside down
 
         coords = zip(xData, yData)
 
@@ -1097,7 +1114,7 @@ class plot():
 
     @staticmethod
     def polar(ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='',
-                  rlog10scale=False, rMarks=True, tMarks=True, rMarkStep=1.0, tMarkStep=45.0,rScale=20, rExtraText='',
+                  rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0,rScale=20, rExtraText='',
                   rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
                   forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0):
         """Cartesian Plot
@@ -1117,31 +1134,31 @@ class plot():
               The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
 
         :param rlog10scale: sets X axis to log10 scale if True. Default: False
-        :param rMarks: Adds axis ticks to the X axis if True. Default: True
-        :param tMarks: Adds axis ticks to the Y axis if True. Default: True
-        :param rMarkStep: Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0
-        :param tMarkStep: Value interval between two consecutive marks on Y axis.
-        :param rScale:  Distance between each rMarkStep in svg units. Default: 20
+        :param rTicks: Adds axis ticks to the X axis if True. Default: True
+        :param tTicks: Adds axis ticks to the Y axis if True. Default: True
+        :param rTickStep: Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0
+        :param tTickStep: Value interval between two consecutive ticks on Y axis.
+        :param rScale:  Distance between each rTickStep in svg units. Default: 20
 
-               - If axis is linear, then rScale is the size in svg units of each mark
+               - If axis is linear, then rScale is the size in svg units of each tick
                - If axis is log10, the rScale is the size in svg units of one decade
 
-        :param rExtraText: extra text to be added to Marks in both x and y. Default: ''
+        :param rExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
 
         :param rGrid: adds grid lines to X axis if true. Default: False
         :param tGrid: adds grid lines to Y axis if true. Default: False
-        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0
+        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceRlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceRlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceRlim=None Limits will be defined by min and max of rData (Default)
                 - if forceRlim=[xMin,xMax] then these limits will be used.
 
-        :param forceTlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceTlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceTlim=None Limits will be defined by min and max of tData (Default)
                 - if forceTlim=[yMin,yMax] then these limits will be used.
@@ -1161,10 +1178,10 @@ class plot():
         :type position: list
         :type rLabel: string
         :type rlog10scale: bool
-        :type rMarks: bool
-        :type tMarks: bool
-        :type rMarkStep: float
-        :type tMarkStep: float
+        :type rTicks: bool
+        :type tTicks: bool
+        :type rTickStep: float
+        :type tTickStep: float
         :type rScale: float
         :type rExtraText: string
         :type rGrid: bool
@@ -1214,7 +1231,7 @@ class plot():
         >>>   
         >>>     inkPlot.plot.polar(self,root_layer,rData,tData,position=[0,0],
         >>>                       rLabel='my $R$ data',rlog10scale=False,
-        >>>                       rMarks=True,tMarks=True,rMarkStep=2,tMarkStep=30,
+        >>>                       rTicks=True,tTicks=True,rTickStep=2,tTickStep=30,
         >>>                       rScale=20,rExtraText='a',
         >>>                       rGrid=True,tGrid=True,generalAspectFactorAxis=1.0,lineStylePlot=lineStyleDiscrete,
         >>>                       forceRlim=None,forceTlim=None,drawAxis=True)
@@ -1225,7 +1242,7 @@ class plot():
         >>>     
         >>>     inkPlot.plot.polar(self,root_layer,rData,tData,position=[0,0],
         >>>                         rLabel='my $R$ data',rlog10scale=False,
-        >>>                         rMarks=True,tMarks=True,rMarkStep=2,tMarkStep=30,
+        >>>                         rTicks=True,tTicks=True,rTickStep=2,tTickStep=30,
         >>>                         rScale=20,rExtraText='',
         >>>                         rGrid=True,tGrid=True,generalAspectFactorAxis=1.0,
         >>>                         forceRlim=None,forceTlim=None,drawAxis=True)
@@ -1249,7 +1266,7 @@ class plot():
                     rDataTemp.append(rData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logscale. Ignoring it...' % (rData[i], tData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (rData[i], tData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1295,11 +1312,11 @@ class plot():
         axisGroup = ExtensionBaseObj.createGroup(parent, 'PlotData')
 
         [axisObj, limits, origin] = axis.polar(ExtensionBaseObj, axisGroup, Rlimits, Tlimits, position,rLabel=rLabel, rlog10scale=rlog10scale,
-                                               rMarks=rMarks, tMarks=tMarks, rMarkStep=rMarkStep, tMarkStep=tMarkStep,rScale=rScale, rAxisUnitFactor=rExtraText,
+                                               rTicks=rTicks, tTicks=tTicks, rTickStep=rTickStep, tTickStep=tTickStep,rScale=rScale, rAxisUnitFactor=rExtraText,
                                                rGrid=rGrid, tGrid=tGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
                                                ExtraLenghtAxisR=ExtraLenghtAxisR) 
   
-        # scales data and convert to log scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
+        # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
         nPoints=min(len(rData),len(tData))
         xData=[]
         yData=[]
@@ -1309,8 +1326,8 @@ class plot():
             yData.append(math.log10(rData[i])*math.sin(math.radians(-tData[i]))* rScale   ) # negative theta bc inkscape is upside down
         else:
           for i in range(nPoints):
-            xData.append(rData[i]*math.cos(math.radians(-tData[i]))* (rScale / rMarkStep) )  # negative theta bc inkscape is upside down
-            yData.append(rData[i]*math.sin(math.radians(-tData[i]))* (rScale / rMarkStep)  ) # negative theta bc inkscape is upside down
+            xData.append(rData[i]*math.cos(math.radians(-tData[i]))* (rScale / rTickStep) )  # negative theta bc inkscape is upside down
+            yData.append(rData[i]*math.sin(math.radians(-tData[i]))* (rScale / rTickStep)  ) # negative theta bc inkscape is upside down
 
         coords = zip(xData, yData)
 
@@ -1320,7 +1337,7 @@ class plot():
       
     @staticmethod
     def stem(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='',
-             ylog10scale=False, xMarks=True, yMarks=True, xMarkStep=1.0, yMarkStep=1.0,
+             ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
              xScale=20, yScale=20, xExtraText='', yExtraText='',
              xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
              forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
@@ -1345,40 +1362,40 @@ class plot():
               The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
 
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
-        :param xMarks: Adds axis ticks to the X axis if True. Default: True
-        :param yMarks: Adds axis ticks to the Y axis if True. Default: True
-        :param xMarkStep: Value interval between two consecutive marks on X axis. (Not used if X axis is in log10 scale). Default:1.0
-        :param yMarkStep: Value interval between two consecutive marks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
-        :param xScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param xTicks: Adds axis ticks to the X axis if True. Default: True
+        :param yTicks: Adds axis ticks to the Y axis if True. Default: True
+        :param xTickStep: Value interval between two consecutive ticks on X axis. (Not used if X axis is in log10 scale). Default:1.0
+        :param yTickStep: Value interval between two consecutive ticks on Y axis. (Not used if Y axis is in log10 scale). Default:1.0
+        :param xScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then xScale is the size in svg units of each mark
+               - If axis is linear, then xScale is the size in svg units of each tick
                - If axis is log10, the xScale is the size in svg units of one decade
 
-        :param yScale:  Distance between each xMarkStep in svg units. Default: 20
+        :param yScale:  Distance between each xTickStep in svg units. Default: 20
 
-               - If axis is linear, then xScale is the size in svg units of each mark
+               - If axis is linear, then xScale is the size in svg units of each tick
                - If axis is log10, the xScale is the size in svg units of one decade
 
-        :param xExtraText: extra text to be added to Marks in both x and y. Default: ''
+        :param xExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
-        :param yExtraText: extra text to be added to the mark ticks in Y axis. Default: ''
+        :param yExtraText: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
               The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
 
         :param xGrid: adds grid lines to X axis if true. Default: False
         :param yGrid: adds grid lines to Y axis if true. Default: False
-        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Marks separations. Default: 1.0
+        :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceXlim=None Limits will be defined by min and max of xData (Default)
                 - if forceXlim=[xMin,xMax] then these limits will be used.
 
-        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for log scale, the limits are always adjusted to complete the decade. Usually you don't need this for log scale
+        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceYlim=None Limits will be defined by min and max of yData (Default)
                 - if forceYlim=[yMin,yMax] then these limits will be used.
@@ -1399,10 +1416,10 @@ class plot():
         :type xLabel: string
         :type yLabel: string
         :type ylog10scale: bool
-        :type xMarks: bool
-        :type yMarks: bool
-        :type xMarkStep: float
-        :type yMarkStep: float
+        :type xTicks: bool
+        :type yTicks: bool
+        :type xTickStep: float
+        :type yTickStep: float
         :type xScale: float
         :type yScale: float
         :type xExtraText: string
@@ -1456,7 +1473,7 @@ class plot():
         >>>     
         >>>    inkPlot.plot.stem(self,root_layer,xData,yData,position=[0,0],
         >>>                        xLabel='my $x$ data',yLabel='$y(x)$',ylog10scale=False,
-        >>>                        xMarks=True,yMarks=True,xMarkStep=0.5,yMarkStep=2.0,
+        >>>                        xTicks=True,yTicks=True,xTickStep=0.5,yTickStep=2.0,
         >>>                        xScale=20,yScale=20,xExtraText='a',yExtraText='',
         >>>                        xGrid=True,yGrid=True,generalAspectFactorAxis=1.0,lineStylePlot=lineStyleDiscrete,
         >>>                        forceXlim=None,forceYlim=None,drawAxis=True)
@@ -1497,7 +1514,7 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logscale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1544,18 +1561,18 @@ class plot():
 
         [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position,
                                                    xLabel=xLabel, yLabel=yLabel, xlog10scale=False, ylog10scale=ylog10scale,
-                                                   xMarks=xMarks, yMarks=yMarks, xMarkStep=xMarkStep, yMarkStep=yMarkStep,
+                                                   xTicks=xTicks, yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep,
                                                    xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText, yAxisUnitFactor=yExtraText,
                                                    xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
                                                    ExtraLenghtAxisX=ExtraLenghtAxisX, ExtraLenghtAxisY=ExtraLenghtAxisY)
 
-        # scales data and convert to log scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
-        xData = [x * (xScale / xMarkStep) - origin[0] for x in xData]
+        # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
+        xData = [x * (xScale / xTickStep) - origin[0] for x in xData]
 
         if ylog10scale:
             yData = [-math.log10(y) * yScale - origin[1] for y in yData]
         else:
-            yData = [-y * (yScale / yMarkStep) - origin[1] for y in yData]  # negative bc inkscape is upside down
+            yData = [-y * (yScale / yTickStep) - origin[1] for y in yData]  # negative bc inkscape is upside down
 
         stemGroup = ExtensionBaseObj.createGroup(axisGroup, 'StemGroup')
 

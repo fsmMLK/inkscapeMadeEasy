@@ -2552,19 +2552,19 @@
          id="tspan17675"
          y="52.362183"
          x="210"
-         sodipodi:role="line">xMarks=True</tspan><tspan
+         sodipodi:role="line">xTicks=True</tspan><tspan
          id="tspan17677"
          y="58.612183"
          x="210"
-         sodipodi:role="line">yMarks=True</tspan><tspan
+         sodipodi:role="line">yTicks=True</tspan><tspan
          id="tspan17679"
          y="64.862183"
          x="210"
-         sodipodi:role="line">xMarkStep=0.5</tspan><tspan
+         sodipodi:role="line">xTickStep=0.5</tspan><tspan
          id="tspan17681"
          y="71.112183"
          x="210"
-         sodipodi:role="line">yMarkStep=2.0</tspan><tspan
+         sodipodi:role="line">yTickStep=2.0</tspan><tspan
          id="tspan17683"
          y="77.362183"
          x="210"
@@ -2648,19 +2648,19 @@
          id="tspan17675-8"
          y="127.36218"
          x="210"
-         sodipodi:role="line">xMarks=True</tspan><tspan
+         sodipodi:role="line">xTicks=True</tspan><tspan
          id="tspan17677-9"
          y="133.61218"
          x="210"
-         sodipodi:role="line">yMarks=True</tspan><tspan
+         sodipodi:role="line">yTicks=True</tspan><tspan
          id="tspan17679-7"
          y="139.86218"
          x="210"
-         sodipodi:role="line">xMarkStep=0.5</tspan><tspan
+         sodipodi:role="line">xTickStep=0.5</tspan><tspan
          id="tspan17681-3"
          y="146.11218"
          x="210"
-         sodipodi:role="line">yMarkStep=2.0</tspan><tspan
+         sodipodi:role="line">yTickStep=2.0</tspan><tspan
          id="tspan17683-6"
          y="152.36218"
          x="210"
@@ -2744,19 +2744,19 @@
          id="tspan17675-8-6"
          y="202.36218"
          x="210"
-         sodipodi:role="line">xMarks=True</tspan><tspan
+         sodipodi:role="line">xTicks=True</tspan><tspan
          id="tspan17677-9-3"
          y="208.61218"
          x="210"
-         sodipodi:role="line">yMarks=True</tspan><tspan
+         sodipodi:role="line">yTicks=True</tspan><tspan
          id="tspan17679-7-2"
          y="214.86218"
          x="210"
-         sodipodi:role="line">xMarkStep=0.5</tspan><tspan
+         sodipodi:role="line">xTickStep=0.5</tspan><tspan
          id="tspan17681-3-0"
          y="221.11218"
          x="210"
-         sodipodi:role="line">yMarkStep=2.0</tspan><tspan
+         sodipodi:role="line">yTickStep=2.0</tspan><tspan
          id="tspan17683-6-6"
          y="227.36218"
          x="210"
@@ -2840,19 +2840,19 @@
          id="tspan17675-4"
          y="297.36218"
          x="210"
-         sodipodi:role="line">xMarks=True</tspan><tspan
+         sodipodi:role="line">xTicks=True</tspan><tspan
          id="tspan17677-4"
          y="303.61218"
          x="210"
-         sodipodi:role="line">yMarks=True</tspan><tspan
+         sodipodi:role="line">yTicks=True</tspan><tspan
          id="tspan17679-3"
          y="309.86218"
          x="210"
-         sodipodi:role="line">xMarkStep=0.5</tspan><tspan
+         sodipodi:role="line">xTickStep=0.5</tspan><tspan
          id="tspan17681-0"
          y="316.11218"
          x="210"
-         sodipodi:role="line">yMarkStep=2.0</tspan><tspan
+         sodipodi:role="line">yTickStep=2.0</tspan><tspan
          id="tspan17683-7"
          y="322.36218"
          x="210"

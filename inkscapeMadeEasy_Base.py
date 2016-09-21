@@ -27,6 +27,7 @@ import re
 from lxml.etree import tostring
 import numpy as np
 import os
+import sys
 
 """
 Base helper module that extends Aaron Spike's inkex.py module, adding basic manipulation functions
@@ -50,6 +51,15 @@ class inkscapeMadeEasy(inkex.Effect):
     # coordinates o the origin of the grid. unfortunately the grid does not fit
     # x0=0
     # y0=-7.637817382813
+    
+    def displayMsg(msg):
+        """Displays a message to the user.
+
+        :returns: nothing
+        :rtype: -
+
+        """
+        sys.stderr.write(msg + '\n')
 
     def getBasicLatexPackagesFile(self):
         """Returns the full path  of the ``basicLatexPackages.tex`` file with commonly used Latex packages 

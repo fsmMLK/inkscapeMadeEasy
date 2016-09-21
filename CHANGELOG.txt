@@ -1,0 +1,10 @@
+inkscapeMadeEeasy_Base.py
+  - New method inkscapeMadeEasy.displayMsg() to show messages to the user
+
+inkscapeMadeEeasy_Draw.py
+  - New method displayMsg() to show messages to the user
+  - Minor documentation changes
+
+inkscapeMadeEeasy_Plot.py
+  - New method displayMsg() to show messages to the user
+  - Changed argument names containing '__Mark__' to '__Tick__' to comply with other plotting packages. Attention: This might break your code. Rename it 

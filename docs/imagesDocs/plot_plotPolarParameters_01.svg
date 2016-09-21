@@ -3283,19 +3283,19 @@
          id="tspan25902"
          sodipodi:role="line"
          x="214.88519"
-         y="18.813171">rMarks=True</tspan><tspan
+         y="18.813171">rTicks=True</tspan><tspan
          id="tspan25904"
          sodipodi:role="line"
          x="214.88519"
-         y="25.063171">tMarks=True</tspan><tspan
+         y="25.063171">tTicks=True</tspan><tspan
          id="tspan25906"
          sodipodi:role="line"
          x="214.88519"
-         y="31.313171">rMarkStep=4</tspan><tspan
+         y="31.313171">rTickStep=4</tspan><tspan
          id="tspan25908"
          sodipodi:role="line"
          x="214.88519"
-         y="37.563171">tMarkStep=30</tspan><tspan
+         y="37.563171">tTickStep=30</tspan><tspan
          id="tspan25910"
          sodipodi:role="line"
          x="214.88519"
@@ -3359,19 +3359,19 @@
          id="tspan25902-0"
          sodipodi:role="line"
          x="214.88519"
-         y="129.86218">rMarks=True</tspan><tspan
+         y="129.86218">rTicks=True</tspan><tspan
          id="tspan25904-2"
          sodipodi:role="line"
          x="214.88519"
-         y="136.11218">tMarks=True</tspan><tspan
+         y="136.11218">tTicks=True</tspan><tspan
          id="tspan25906-3"
          sodipodi:role="line"
          x="214.88519"
-         y="142.36218">rMarkStep=4 (not used)</tspan><tspan
+         y="142.36218">rTickStep=4 (not used)</tspan><tspan
          id="tspan25908-7"
          sodipodi:role="line"
          x="214.88519"
-         y="148.61218">tMarkStep=30</tspan><tspan
+         y="148.61218">tTickStep=30</tspan><tspan
          id="tspan25910-5"
          sodipodi:role="line"
          x="214.88519"
@@ -3435,19 +3435,19 @@
          id="tspan25902-0-3"
          sodipodi:role="line"
          x="214.88519"
-         y="255.84866">rMarks=True</tspan><tspan
+         y="255.84866">rTicks=True</tspan><tspan
          id="tspan25904-2-1"
          sodipodi:role="line"
          x="214.88519"
-         y="262.09866">tMarks=True</tspan><tspan
+         y="262.09866">tTicks=True</tspan><tspan
          id="tspan25906-3-9"
          sodipodi:role="line"
          x="214.88519"
-         y="268.34866">rMarkStep=2</tspan><tspan
+         y="268.34866">rTickStep=2</tspan><tspan
          id="tspan25908-7-4"
          sodipodi:role="line"
          x="214.88519"
-         y="274.59866">tMarkStep=30</tspan><tspan
+         y="274.59866">tTickStep=30</tspan><tspan
          id="tspan25910-5-7"
          sodipodi:role="line"
          x="214.88519"

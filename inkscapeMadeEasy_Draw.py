@@ -37,7 +37,17 @@ This module requires the following modules: inkex, math, simplestyle (from inkex
 
 """
 
+def displayMsg(msg):
+    """Displays a message to the user.
 
+    :returns: nothing
+    :rtype: -
+    
+    .. note:: Identical function has been also defined inside inkscapeMadeEasy class   
+    
+    """
+    sys.stderr.write(msg + '\n')
+    
 def Dump(obj, file='./dump_file.txt', mode='w'):
     """Function to easily output the result of ``str(obj)`` to a file
 
@@ -1411,7 +1421,7 @@ class arc():
         **Arc options**
 
         .. image:: ../imagesDocs/arc_startEndRadius_flags.png
-          :width: 600px
+          :width: 800px
 
         **Example**
 
@@ -1545,7 +1555,7 @@ class arc():
         **Arc options**
 
         .. image:: ../imagesDocs/arc_centerAngStartAngEnd_flags.png
-          :width: 600px
+          :width: 700px
 
         **Example**
 
