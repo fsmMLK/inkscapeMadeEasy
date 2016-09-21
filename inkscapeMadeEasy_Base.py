@@ -55,6 +55,9 @@ class inkscapeMadeEasy(inkex.Effect):
     def displayMsg(msg):
         """Displays a message to the user.
 
+        :param msg: message
+        :type msg: string
+        
         :returns: nothing
         :rtype: -
 

@@ -10,7 +10,8 @@ This project is not intended to provide an end-user Inkscape extension by itself
 
 For end-user extensions see my other projects on GitHub (more to come soon):
 
--**createMarkers**  <https://github.com/fsmMLK/createMarkers>
+- **createMarkers**           <https://github.com/fsmMLK/inkscapeCreateMarkers>
+- **cartesianAxes2D**         <https://github.com/fsmMLK/inkscapeCartesianAxes2D>
 
 ## History and Objectives
 
