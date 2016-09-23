@@ -385,7 +385,6 @@ class axis():
                 listTicks = generateListOfTicksLog10(xLimits)
             else:
                 listTicks = generateListOfTicksLinear(xLimits, axisOrigin[0] / scaleX, xTickStep)
-
             for x in listTicks:
 
                 if x <= xLimits[1] and x >= xLimits[0]:
@@ -689,7 +688,9 @@ class axis():
 
         # finds the position of the Origin of axis
         axisOrigin = [0.0, 0.0]
-
+        axisOrigin[0] = findOrigin(rLimits, rlog10scale, scaleR)
+        axisOrigin[1] = findOrigin(tLimits, False, 1.0)
+        
         # computes the positions of the limits on svg, considering the scale
 
         if rlog10scale:  # convert limits to position in diagram, including scaling factor
@@ -703,7 +704,7 @@ class axis():
                             rLimitsPos[1] - axisOrigin[0] + position[0]])
 
         if not drawAxis:
-            return [None, outputLimits, axisOrigin]
+            return [None, outputLimits, [0,0]]
 
         # axis ticks
         groupTicks = ExtensionBaseObj.createGroup(GroupPlot, 'Ticks')
@@ -714,7 +715,6 @@ class axis():
                 listTicks = generateListOfTicksLog10(rLimits)
             else:
                 listTicks = generateListOfTicksLinear(rLimits, axisOrigin[0] / scaleR, rTickStep)
-
             for r in listTicks:
 
                 if r <= rLimits[1] and r >= rLimits[0]:
@@ -724,24 +724,24 @@ class axis():
 
                     if rGrid and posR > 0.0 and r > rLimits[0] and r < rLimits[1]:  # grid lines.
                         if tLimits[1] - tLimits[0] < 360:
-                            inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                            inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid, largeArc=largeArc)  # negative angles bc inkscape is upside down
                         else:
-                            inkDraw.circle.centerRadius(groupTicks, axisOrigin, posR, offset=[0, 0], lineStyle=lineStyleGrid)
+                            inkDraw.circle.centerRadius(groupTicks, [0,0], posR, offset=[0, 0], lineStyle=lineStyleGrid)
 
                     # intermediate grid lines in case of logarithmic scale
                     if rGrid and rlog10scale and r < rLimits[1]:
                         for i in range(2, 10):
                             aditionalStep = math.log10(i) * scaleR
                             if tLimits[1] - tLimits[0] < 360:
-                                inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                                inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine, largeArc=largeArc)  # negative angles bc inkscape is upside down
                             else:
-                                inkDraw.circle.centerRadius(groupTicks, axisOrigin, posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
+                                inkDraw.circle.centerRadius(groupTicks, [0,0], posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
 
                     # tick
                     if rTicks and posR > 0.0:
-                        inkDraw.arc.centerAngStartAngEnd(groupTicks, axisOrigin, posR, -tLimits[0] - math.degrees(lenghtTicks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtTicks / float(posR * 2)), [0, 0], lineStyle=lineStyleTicks, largeArc=False)
+                        inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR, -tLimits[0] - math.degrees(lenghtTicks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtTicks / float(posR * 2)), [0, 0], lineStyle=lineStyleTicks, largeArc=False)
                     if rTicks and posR == 0.0:
-                        inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [axisOrigin[0], axisOrigin[1] - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
+                        inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [0,  - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
 
                     # sets justification
                     # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupTicks,fontSize=7)
@@ -751,18 +751,18 @@ class axis():
                     if posR == 0:
                         justif = 'cc'
                         offsetX = 0
-                        offsetY = text_offset
+                        offsetY = text_offset*1.2
                         posX = posR * math.cos(math.radians(-tLimits[0])) + offsetX
                         posY = posR * math.sin(math.radians(-tLimits[0])) + offsetY
                     else:
-                        offsetT = 2.0 * text_offset / (posR * 2.0)
+                        offsetT = text_offset*1.2
                         if tLimits[1] - tLimits[0] > 340:
-                            offsetR = text_offset
+                            offsetR = text_offset/2.0
                         else:
                             offsetR = 0
                         justif = 'cc'
-                        posX = (posR + offsetR) * math.cos(math.radians(-tLimits[0]) + offsetT)
-                        posY = (posR + offsetR) * math.sin(math.radians(-tLimits[0]) + offsetT)
+                        posX = (posR + offsetR) * math.cos(math.radians(-tLimits[0])) + offsetT*math.sin(math.radians(tLimits[0]))
+                        posY = (posR + offsetR) * math.sin(math.radians(-tLimits[0])) + offsetT*math.cos(math.radians(-tLimits[0]))
                     # value
                     #inkDraw.circle.centerRadius(groupTicks,[posX,posY], 1)
                     if rTicks:
@@ -787,7 +787,7 @@ class axis():
                         else:
                             P1 = [rLimitsPos[0] * c, rLimitsPos[0] * s]
                         P2 = [rLimitsPos[1] * c, rLimitsPos[1] * s]
-                        inkDraw.line.absCoords(groupTicks, [P1, P2], axisOrigin, lineStyle=lineStyleGrid)
+                        inkDraw.line.absCoords(groupTicks, [P1, P2], [0,0], lineStyle=lineStyleGrid)
 
                     # tick
                     if (tTicks and t != tLimits[1]) or (tTicks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
@@ -809,7 +809,7 @@ class axis():
                     if (tTicks and t != tLimits[1]) or (tTicks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
                         inkDraw.text.latex(ExtensionBaseObj, groupTicks, tText, [posX, posY], textSizeSmall, refPoint=justif)
 
-        ExtensionBaseObj.moveElement(GroupPlot, [position[0] - axisOrigin[0], position[1] - axisOrigin[1]])
+        ExtensionBaseObj.moveElement(GroupPlot, position)
 
         # draw axis in the end so it stays on top of other objects
         GroupAxis = ExtensionBaseObj.createGroup(GroupPlot, 'Axis')
@@ -835,8 +835,8 @@ class axis():
             inkDraw.arc.startEndRadius(GroupAxis, P2, P3, rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, flagOpen=True, largeArc=largeArc)
         else:
             if rLimitsPos[0] > 0:
-                inkDraw.circle.centerRadius(GroupAxis, axisOrigin, rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis)
-            inkDraw.circle.centerRadius(GroupAxis, axisOrigin, rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis)
+                inkDraw.circle.centerRadius(GroupAxis, [0,0], rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis)
+            inkDraw.circle.centerRadius(GroupAxis, [0,0], rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis)
 
         #inkDraw.line.relCoords(GroupAxis, [ [(rLimitsPos[1] + ExtraSpaceArrowR)* math.cos(math.radians(-tLimits[0])),(rLimitsPos[1] + ExtraSpaceArrowR)* math.sin(math.radians(-tLimits[0]))] ], axisOrigin, 'Raxis',lineStyle=lineStyleAxis)
 
@@ -846,7 +846,7 @@ class axis():
             posText = [(rLimitsPos[1] + ExtraSpaceArrowR) * c0, (rLimitsPos[1] + ExtraSpaceArrowR) * s0]
             inkDraw.text.latex(ExtensionBaseObj, GroupAxis, rLabel,  posText, textSize, refPoint='cl')
 
-        return [GroupPlot, outputLimits, axisOrigin]
+        return [GroupPlot, outputLimits, [0,0]]
 
 
 class plot():
