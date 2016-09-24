@@ -21,6 +21,7 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 
   - **cartesianAxes2D**         <https://github.com/fsmMLK/inkscapeCartesianAxes2D>
 
+  - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
 History and Objectives
 ----------------------
 
