@@ -52,7 +52,7 @@ class inkscapeMadeEasy(inkex.Effect):
     # x0=0
     # y0=-7.637817382813
     
-    def displayMsg(msg):
+    def displayMsg(self,msg):
         """Displays a message to the user.
 
         :param msg: message

@@ -13,7 +13,7 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 - **createMarkers**           <https://github.com/fsmMLK/inkscapeCreateMarkers>
 - **cartesianAxes2D**         <https://github.com/fsmMLK/inkscapeCartesianAxes2D>
 - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
-
+- **CartesianPlotFunction2D** <https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D>
 
 
 ## History and Objectives

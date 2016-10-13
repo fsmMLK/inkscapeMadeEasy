@@ -1,4 +1,11 @@
 
+2016-10oct-12
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - Fix inkscapeMadeEasy.displayMsg() definition.
+
+
 2016-09sep-21
 -------------
 
