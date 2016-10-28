@@ -21,9 +21,10 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 
   - **cartesianAxes2D**         <https://github.com/fsmMLK/inkscapeCartesianAxes2D>
 
+  - **cartesianPlotFunction2D** <https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D>
+
   - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
 
-  - **CartesianPlotFunction2D** <https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D>
 
 
 
@@ -154,9 +155,9 @@ For examples on how to use, please take a look at the examples provided below an
 
   - **cartesianAxes2D**         <https://github.com/fsmMLK/inkscapeCartesianAxes2D>
 
-  - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
+  - **cartesianPlotFunction2D** <https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D>
 
-  - **CartesianPlotFunction2D** <https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D>
+  - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
 
 Module definitions
 ==================

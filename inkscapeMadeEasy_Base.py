@@ -458,7 +458,7 @@ class inkscapeMadeEasy(inkex.Effect):
         listCoords = []
 
         # check if element is valid. 'path', 'text' and 'g' are valid
-        accepted_strings = {inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', 'path'}
+        accepted_strings = set( [ inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', 'path'] )
         if element.tag not in accepted_strings:
             return listCoords
 

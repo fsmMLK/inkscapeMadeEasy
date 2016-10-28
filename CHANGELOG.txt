@@ -1,4 +1,10 @@
 
+2016-10oct-28
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - Changes in inkscapeMadeEasy.getPoints() to become compatible with Python 2.6
+
 2016-10oct-12
 -------------
 
