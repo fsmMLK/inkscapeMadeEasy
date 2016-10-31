@@ -144,29 +144,42 @@ def getPositionAndText(value, scale, flagLog10, axisUnitFactor):
     if flagLog10:
         exponent = str(int(math.log10(value)))
         if axisUnitFactor:
-            Text = '$10^{' + exponent + '}' + axisUnitFactor + '$'
+            if inkDraw.useLatex:
+                Text = '10^{' + exponent + '}' + axisUnitFactor + ''
+            else:
+                Text = '10^' + exponent + '' + axisUnitFactor + ''
         else:
-            Text = '$10^{' + exponent + '}$'
+            if inkDraw.useLatex:
+                Text = '10^{' + exponent + '}'
+            else:
+                Text = '10^' + exponent + ''
     else:
         if axisUnitFactor:
             if value == 0:
-                Text = '$0$'
+                Text = '0'
             if value == 1:
-                Text = '$' + axisUnitFactor + '$'
+                Text = axisUnitFactor
             if value == -1:
-                Text = '$-' + axisUnitFactor + '$'
+                Text = '-' + axisUnitFactor
             if value != 0 and value != 1 and value != -1:
-                Text = '$' + valStr + axisUnitFactor + '$'
+                Text = valStr + axisUnitFactor
         else:
-            Text = '$' + valStr + '$'
+            Text = valStr
 
+    if inkDraw.useLatex:
+        Text='$' + Text + '$'
+        
     return [pos, Text]
 
 
 class axis():
     """ This is a class with different methods for making plot axes.
-
+    
     This class contains only static methods so that you don't have to inherit this in your class
+
+    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
 
     """
     @staticmethod
@@ -176,6 +189,10 @@ class axis():
                   forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Creates the axes for cartesian plot
 
+        .. note:: This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+    
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
         :param xLim: limits of the X axis [x_min,x_max]. If the axis is in log10 scale, then the limits will be rounded to complete one decade.
@@ -189,11 +206,11 @@ class axis():
               - The same rule applies to y direction.
         :param xLabel: Label of the X axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param yLabel: Label of the Y axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param xlog10scale: sets X axis to log10 scale if True. Default: False
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
@@ -214,11 +231,11 @@ class axis():
         :param xAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
         :param yAxisUnitFactor: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
 
         :param xGrid: adds grid lines to X axis if true. Default: False
         :param yGrid: adds grid lines to Y axis if true. Default: False
@@ -541,6 +558,10 @@ class axis():
               rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0):
         """Creates the axes for polar plot
 
+        .. note:: This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+        
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
         :param rLim: limits of the R axis [r_min,r_max]. If the axis is in log10 scale, then the limits will be rounded to complete one decade.
@@ -549,7 +570,7 @@ class axis():
 
         :param rLabel: Label of the R axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param rlog10scale: sets R axis to log10 scale if True. Default: False
 
@@ -567,7 +588,7 @@ class axis():
         :param rAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
 
         :param rGrid: adds grid lines to R axis if true. Default: False
         :param tGrid: adds grid lines to theta axis if true. Default: False
@@ -776,7 +797,10 @@ class axis():
                     c = math.cos(math.radians(-t))  # negative angles bc inkscape is upside down
                     s = math.sin(math.radians(-t))  # negative angles bc inkscape is upside down
                     # get position, considering the scale and its text
-                    tText = '$' + str(t) + '$'
+                    if inkDraw.useLatex:
+                      tText = '$' + str(t) + '$'
+                    else:
+                      tText = str(t)
 
                     if (tGrid and t > tLimits[0] and t < tLimits[1]) or (tGrid and t == tLimits[0] and tLimits[1] - tLimits[0] >= 360):
                         if rLimitsPos[0] == 0:  # if rmin is zero, then make the lines to reach the center
@@ -854,6 +878,10 @@ class plot():
 
     This class contains only static methods so that you don't have to inherit this in your class
 
+    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+    
     """
     @staticmethod
     def cartesian(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='',
@@ -862,7 +890,11 @@ class plot():
                   xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
                   forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Cartesian Plot
+        
+        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
 
+        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+        
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
         :param xData: list of x data
@@ -875,11 +907,11 @@ class plot():
 
         :param xLabel: Label of the X axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param yLabel: Label of the Y axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param xlog10scale: sets X axis to log10 scale if True. Default: False
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
@@ -900,11 +932,11 @@ class plot():
         :param xExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
         :param yExtraText: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
 
         :param xGrid: adds grid lines to X axis if true. Default: False
         :param yGrid: adds grid lines to Y axis if true. Default: False
@@ -1117,8 +1149,12 @@ class plot():
                   rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0,rScale=20, rExtraText='',
                   rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
                   forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0):
-        """Cartesian Plot
+        """Polar Plot
 
+        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+        
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
         :param rData: list of x data
@@ -1131,7 +1167,7 @@ class plot():
 
         :param rLabel: Label of the X axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param rlog10scale: sets X axis to log10 scale if True. Default: False
         :param rTicks: Adds axis ticks to the X axis if True. Default: True
@@ -1146,7 +1182,7 @@ class plot():
         :param rExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
 
         :param rGrid: adds grid lines to X axis if true. Default: False
         :param tGrid: adds grid lines to Y axis if true. Default: False
@@ -1343,6 +1379,10 @@ class plot():
              forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Stem plot in Cartesian axis
 
+        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+
+        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+        
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
         :param xData: list of x data
@@ -1355,11 +1395,11 @@ class plot():
 
         :param xLabel: Label of the X axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param yLabel: Label of the Y axis. Default: ''
 
-              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$
+              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.
 
         :param ylog10scale: sets Y axis to log10 scale if True. Default: False
         :param xTicks: Adds axis ticks to the X axis if True. Default: True
@@ -1379,11 +1419,11 @@ class plot():
         :param xExtraText: extra text to be added to Ticks in both x and y. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
         :param yExtraText: extra text to be added to the ticks in Y axis. Default: ''
 
               This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$
+              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.
 
         :param xGrid: adds grid lines to X axis if true. Default: False
         :param yGrid: adds grid lines to Y axis if true. Default: False

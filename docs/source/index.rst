@@ -68,8 +68,9 @@ Contents:
 Main Features
 =============
 
-LaTeX support via textext extension
---------------------------------------
+
+Optional LaTeX support via textext extension
+--------------------------------------------
 
 Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension **textext** from Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
 
@@ -77,17 +78,19 @@ Since I made very few modifications to his module, I decided to include the modi
 
 Instalation procedure and requirements of the modified **textext** are exactly the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
 
-  **Modifications**
+**Modifications**
 
-  Here is the full list of changes I made::
+Here is the full list of changes I made::
 
-    # Changes: line  67-68: added a few variables to control debug mode
-    # Changes: line 944: changed order of programs (It worked better in my machine)
-    # Changes: line 665: debug option to save temporary files to an easy access directory
-    # Changes: line 696: debug option to keep the .tex file
+  # Changes: line  67-68: added a few variables to control debug mode
+  # Changes: line 944: changed order of programs (It worked better in my machine)
+  # Changes: line 665: debug option to save temporary files to an easy access directory
+  # Changes: line 696: debug option to keep the .tex file
+
 
 Scientific plotting system
 --------------------------
+
 
 inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave's stem plot style). It was inspired by Tavmjong Bah's (and collaborators) extension **Function Plotter** already presented in Inkscape. Function Plotter extension is not required here.
 
@@ -123,6 +126,8 @@ inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing
  - get the bounding box of an object or group
  - get the center of the bounding box of an object or group
 
+.. _latexSupport:
+
 Installation and requirements
 ==========================================
 
@@ -142,7 +147,27 @@ In order to install inkscapeMadeEasy, your Inkscape extension directory must con
 >>>                 |-- textext.inx
 >>>                 |-- textext.py
 
-You can find all the files on GitHub
+You can find all the files on GitHub.
+
+
+**Disabling LaTeX support**
+
+LaTeX support via textext extension requires LaTeX typesetting system in your computer (it's free and awesome! =] ), together with a few python modules (pygtk and Tkinter among others). The later might be a problem for non-Linux systems (precompiled inkscape for Windows as OS X don't come with them).
+
+Since many people don't use LaTeX and/or don't have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. **By default, LaTeX support is ENABLED.**
+
+If you don't want LaTeX support or your system does not allow it, you can still use **inkscapeMadeEasy** as long as you disable it. You can easily do it by setting a flag in ``inkscapeMadeEasy_Draw.py``:
+
+ 1- Open ``inkscapeMadeEasy_Draw.py`` in any text editor (e.g. Notepad in Windows)
+
+ 2- Search for the line containing ``#useLatex=False``. It should be somewhere at the beginning of the file.
+
+ 3- Remove the comment character ``#`` of this line, leaving just ``useLatex=False``.
+
+ 4- Save the file.
+
+.. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.
+
 
 Usage
 ==========================================
@@ -186,6 +211,7 @@ inkscapeMadeEasy_Plot
     :members:
     :undoc-members:
     :show-inheritance:
+    :exclude-members: generateListOfTicksLinear,generateListOfTicksLog10,findOrigin,getPositionAndText
 
 Indices and tables
 ==================

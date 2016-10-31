@@ -22,20 +22,34 @@
 #
 # --------------------------------------------------------------------------------------
 
+# Please uncomment (remove the # character) in the following line to disable LaTeX support via textext extension.
+#useLatex=False
+
+
+try:
+  useLatex
+except NameError:
+  useLatex=True
+else:
+  useLatex=False
+  
 import inkex
 import math
 import simplestyle
 import numpy as np
 from lxml.etree import tostring
-import textextLib.textext as textext
+if useLatex:
+  import textextLib.textext as textext
+  
 import sys
-
 """
 This module contains a set of classes and some functions to help dealing with drawings.
 
 This module requires the following modules: inkex, math, simplestyle (from inkex module), numpy, lxml and sys
 
 """
+
+
 
 def displayMsg(msg):
     """Displays a message to the user.
@@ -998,6 +1012,9 @@ class text():
 
 
     This class contains only static methods so that you don't have to inherit this in your class
+    
+    .. note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+    
     """
     @staticmethod
     def write(ExtensionBaseObj, text, coords, parent, textStyle=textStyle.setSimpleBlack(fontSize=10, justification='left'), fontSize=None, justification=None, angleDeg=0.0):
@@ -1094,18 +1111,20 @@ class text():
     def latex(ExtensionBaseObj, parent, LaTeXtext, position, fontSize=10, refPoint='cc', textColor=color.defined('black'), LatexCommands=' ', angleDeg=0, preambleFile=None):
         """Draws a text line using LaTeX. You can use any LaTeX contents here.
 
-        .. note: Employs the excellent 'textext' extension from Pauli Virtanen's <https://pav.iki.fi/software/textext/> is incorporated here. Please refer to `Main Features`_ section for further instructions
+        .. note:: Employs the excellent 'textext' extension from Pauli Virtanen's <https://pav.iki.fi/software/textext/> is incorporated here. Please refer to `Main Features`_ section for further instructions
+        
+        .. note:: LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. **It is enabled by default**. Please refer to :ref:`latexSupport` on how to disable it. If disabled, this function will still work, internally calling the method text.write().
 
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object        
-        :param LaTeXtext: text to be drawn. Can be any latex command
+        :param LaTeXtext: text to be drawn. Can contain any latex command
         :param position: position of the reference point [x,y]  
         :param fontSize: size of the font. Assume any text of ``\\normalsize`` will have this size. Default: 10 
         :param refPoint: text reference Point. See figure below for options. Default: ``cc``
         :param textColor: color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
-        :param LatexCommands: commands to be included before LaTeXtext (default: ' ')
+        :param LatexCommands: commands to be included before LaTeXtext (default: ' '). If LaTeX support is disabled, this parameter has no effect.
         :param angleDeg: angle of the text, counterclockwise, in degrees. Default: 0
-        :param preambleFile: optional preamble file to be included. Default: None
+        :param preambleFile: optional preamble file to be included. Default: None. If LaTeX support is disabled, this parameter has no effect.
 
         :type ExtensionBaseObj: inkscapeMadeEasy object (see example below)
         :type parent: element object 
@@ -1181,26 +1200,33 @@ class text():
         if not LaTeXtext:  # check whether text is empty
             return 0
 
-        Dump(r'<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Created with Inkscape (http://www.inkscape.org/) --><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="744.09448819" height="1052.3622047" id="svg19803" version="1.1" inkscape:version="0.48.3.1 r9886" sodipodi:docname="New document 45"> <defs id="defs19805" /> <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.35" inkscape:cx="375" inkscape:cy="520" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="500" inkscape:window-height="445" inkscape:window-x="932" inkscape:window-y="0" inkscape:window-maximized="0" /> <metadata id="metadata19808"> <rdf:RDF> <cc:Work rdf:about=""> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" /> <dc:title></dc:title> </cc:Work> </rdf:RDF> </metadata> <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" /></svg>', '/tmp/temp_svg_inkscapeMadeEasy_Draw.txt', 'w')
+        if sys.platform == "linux" or sys.platform == "linux2" or sys.platform == "darwin":#  linux & mac
+          tempFilePath='/tmp/temp_svg_inkscapeMadeEasy_Draw.txt'
+        elif sys.platform == "win32":  # windows
+          tempFilePath='C:/aDirname/temp_svg_inkscapeMadeEasy_Draw.txt'
+   
+        
+        if useLatex:  # set useLatex=False to replace latex by an standard text (much faster for debugging =)  )
+          
+            Dump(r'<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Created with Inkscape (http://www.inkscape.org/) --><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="744.09448819" height="1052.3622047" id="svg19803" version="1.1" inkscape:version="0.48.3.1 r9886" sodipodi:docname="New document 45"> <defs id="defs19805" /> <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.35" inkscape:cx="375" inkscape:cy="520" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="500" inkscape:window-height="445" inkscape:window-x="932" inkscape:window-y="0" inkscape:window-maximized="0" /> <metadata id="metadata19808"> <rdf:RDF> <cc:Work rdf:about=""> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" /> <dc:title></dc:title> </cc:Work> </rdf:RDF> </metadata> <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" /></svg>',tempFilePath, 'w')
 
-        # temp instance for determining font height. Draws a F letter just to find the height of the font
-        if 2 == 1:  # turning off this part of the code.
-            texTemp = textext.TexText()  # start textText (awesome extension! =] )
-            texTemp.affect([r'--text=' + 'F', '--scale-factor=1', '/tmp/temp_svg_inkscapeMadeEasy_Draw.txt'], output=False)
-            groupLatex = texTemp.current_layer.find('g')
-            BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
-            Height0 = BboxMax[1] - BboxMin[1]
+            # temp instance for determining font height. Draws a F letter just to find the height of the font
+            if 2 == 1:  # turning off this part of the code.
+                texTemp = textext.TexText()  # start textText (awesome extension! =] )
+                texTemp.affect([r'--text=' + 'F', '--scale-factor=1', tempFilePath], output=False)
+                groupLatex = texTemp.current_layer.find('g')
+                BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
+                Height0 = BboxMax[1] - BboxMin[1]
 
-        Height0 = 6.76  # running the code above, we get a 'F' with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification 'fontSize'
+            Height0 = 6.76  # running the code above, we get a 'F' with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification 'fontSize'
 
-        scale = fontSize / Height0
-
-        if 1 == 1:  # change to 2==1 to replace latex by an standard text (much faster for debugging =)  )
+            scale = fontSize / Height0
+        
             tex = textext.TexText()  # start textText (awesome extension! =] )
             if preambleFile:
-                tex.affect([r'--text=' + LatexCommands + LaTeXtext, '--scale-factor=1', '--preamble-file=' + preambleFile, '/tmp/temp_svg_inkscapeMadeEasy_Draw.txt'], output=False)
+                tex.affect([r'--text=' + LatexCommands + LaTeXtext, '--scale-factor=1', '--preamble-file=' + preambleFile, tempFilePath], output=False)
             else:
-                tex.affect([r'--text=' + LatexCommands + LaTeXtext, '--scale-factor=1', '--preamble-file=' + ExtensionBaseObj.getBasicLatexPackagesFile(), '/tmp/temp_svg_inkscapeMadeEasy_Draw.txt'], output=False)
+                tex.affect([r'--text=' + LatexCommands + LaTeXtext, '--scale-factor=1', '--preamble-file=' + ExtensionBaseObj.getBasicLatexPackagesFile(), tempFilePath], output=False)
 
             groupLatex = tex.current_layer.find('g')
 
@@ -1214,27 +1240,48 @@ class text():
 
             ExtensionBaseObj.scaleElement(groupLatex, scaleX=scale, scaleY=-scale)     # scale to fit font size
         else:
-            groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent, fontSize=6)
+            if refPoint[1] == 'l':
+                justification='left'
 
+            if refPoint[1] == 'c':
+                justification='center'
+
+            if refPoint[1] == 'r':
+                justification='right'
+                
+            groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent, fontSize=fontSize/0.76,justification=justification, angleDeg=angleDeg)
+  
+  
         BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
+        
+        if useLatex:  # set useLatex=False to replace latex by an standard text (much faster for debugging =)  )
+            if refPoint[0] == 't':
+                refPointY = BboxMin[1]     # BboxMin bc inkscape is upside down
 
-        if refPoint[0] == 't':
-            refPointY = BboxMin[1]     # BboxMin bc inkscape is upside down
+            if refPoint[0] == 'c':
+                refPointY = (BboxMax[1] + BboxMin[1]) / 2.0
 
-        if refPoint[0] == 'c':
-            refPointY = (BboxMax[1] + BboxMin[1]) / 2.0
+            if refPoint[0] == 'b':
+                refPointY = BboxMax[1]     # BboxMax bc inkscape is upside down
 
-        if refPoint[0] == 'b':
-            refPointY = BboxMax[1]     # BboxMax bc inkscape is upside down
+            if refPoint[1] == 'l':
+                refPointX = BboxMin[0]
 
-        if refPoint[1] == 'l':
+            if refPoint[1] == 'c':
+                refPointX = (BboxMax[0] + BboxMin[0]) / 2.0
+
+            if refPoint[1] == 'r':
+                refPointX = BboxMax[0]
+        else:
             refPointX = BboxMin[0]
+            if refPoint[0] == 't':
+                refPointY = BboxMin[1]-fontSize     # BboxMin bc inkscape is upside down
 
-        if refPoint[1] == 'c':
-            refPointX = (BboxMax[0] + BboxMin[0]) / 2.0
+            if refPoint[0] == 'c':
+                refPointY = BboxMin[1]-(fontSize)/2.0     # BboxMin bc inkscape is upside down
 
-        if refPoint[1] == 'r':
-            refPointX = BboxMax[0]
+            if refPoint[0] == 'b':
+                refPointY = BboxMax[1]     # BboxMax bc inkscape is upside down
 
         ExtensionBaseObj.moveElement(groupLatex, [-refPointX, -refPointY])  # move to origin
         ExtensionBaseObj.moveElement(groupLatex, [position[0], position[1]])

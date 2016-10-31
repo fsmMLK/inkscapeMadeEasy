@@ -1,4 +1,12 @@
 
+2016-10oct-31
+-------------
+
+inkscapeMadeEeasy_Draw.py
+inkscapeMadeEeasy_Plot.py
+  - LaTeX support is now optional. See documentation on how to enable/disable it.
+
+
 2016-10oct-28
 -------------
 
