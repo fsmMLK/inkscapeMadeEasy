@@ -71,20 +71,34 @@
 <span class="c1">#</span>
 <span class="c1"># --------------------------------------------------------------------------------------</span>
 
+<span class="c1"># Please uncomment (remove the # character) in the following line to disable LaTeX support via textext extension.</span>
+<span class="c1">#useLatex=False</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">useLatex</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+  <span class="n">useLatex</span><span class="o">=</span><span class="bp">True</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">useLatex</span><span class="o">=</span><span class="bp">False</span>
+  
 <span class="kn">import</span> <span class="nn">inkex</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">simplestyle</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
-<span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="kn">as</span> <span class="nn">textext</span>
+<span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>
+  <span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="kn">as</span> <span class="nn">textext</span>
+  
 <span class="kn">import</span> <span class="nn">sys</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module contains a set of classes and some functions to help dealing with drawings.</span>
 
 <span class="sd">This module requires the following modules: inkex, math, simplestyle (from inkex module), numpy, lxml and sys</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+
+
 
 <div class="viewcode-block" id="displayMsg"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.displayMsg">[docs]</a><span class="k">def</span> <span class="nf">displayMsg</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Displays a message to the user.</span>
@@ -1047,6 +1061,9 @@
 
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
+<span class="sd">    </span>
+<span class="sd">    .. note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="text.write"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">textStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">),</span> <span class="n">fontSize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
@@ -1143,18 +1160,20 @@
 <div class="viewcode-block" id="text.latex"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.latex">[docs]</a>    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refPoint</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">LatexCommands</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preambleFile</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draws a text line using LaTeX. You can use any LaTeX contents here.</span>
 
-<span class="sd">        .. note: Employs the excellent &#39;textext&#39; extension from Pauli Virtanen&#39;s &lt;https://pav.iki.fi/software/textext/&gt; is incorporated here. Please refer to `Main Features`_ section for further instructions</span>
+<span class="sd">        .. note:: Employs the excellent &#39;textext&#39; extension from Pauli Virtanen&#39;s &lt;https://pav.iki.fi/software/textext/&gt; is incorporated here. Please refer to `Main Features`_ section for further instructions</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. **It is enabled by default**. Please refer to :ref:`latexSupport` on how to disable it. If disabled, this function will still work, internally calling the method text.write().</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object        </span>
-<span class="sd">        :param LaTeXtext: text to be drawn. Can be any latex command</span>
+<span class="sd">        :param LaTeXtext: text to be drawn. Can contain any latex command</span>
 <span class="sd">        :param position: position of the reference point [x,y]  </span>
 <span class="sd">        :param fontSize: size of the font. Assume any text of ``\\normalsize`` will have this size. Default: 10 </span>
 <span class="sd">        :param refPoint: text reference Point. See figure below for options. Default: ``cc``</span>
 <span class="sd">        :param textColor: color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
-<span class="sd">        :param LatexCommands: commands to be included before LaTeXtext (default: &#39; &#39;)</span>
+<span class="sd">        :param LatexCommands: commands to be included before LaTeXtext (default: &#39; &#39;). If LaTeX support is disabled, this parameter has no effect.</span>
 <span class="sd">        :param angleDeg: angle of the text, counterclockwise, in degrees. Default: 0</span>
-<span class="sd">        :param preambleFile: optional preamble file to be included. Default: None</span>
+<span class="sd">        :param preambleFile: optional preamble file to be included. Default: None. If LaTeX support is disabled, this parameter has no effect.</span>
 
 <span class="sd">        :type ExtensionBaseObj: inkscapeMadeEasy object (see example below)</span>
 <span class="sd">        :type parent: element object </span>
@@ -1230,26 +1249,33 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">LaTeXtext</span><span class="p">:</span>  <span class="c1"># check whether text is empty</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-        <span class="n">Dump</span><span class="p">(</span><span class="s1">r&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; width=&quot;744.09448819&quot; height=&quot;1052.3622047&quot; id=&quot;svg19803&quot; version=&quot;1.1&quot; inkscape:version=&quot;0.48.3.1 r9886&quot; sodipodi:docname=&quot;New document 45&quot;&gt; &lt;defs id=&quot;defs19805&quot; /&gt; &lt;sodipodi:namedview id=&quot;base&quot; pagecolor=&quot;#ffffff&quot; bordercolor=&quot;#666666&quot; borderopacity=&quot;1.0&quot; inkscape:pageopacity=&quot;0.0&quot; inkscape:pageshadow=&quot;2&quot; inkscape:zoom=&quot;0.35&quot; inkscape:cx=&quot;375&quot; inkscape:cy=&quot;520&quot; inkscape:document-units=&quot;px&quot; inkscape:current-layer=&quot;layer1&quot; showgrid=&quot;false&quot; inkscape:window-width=&quot;500&quot; inkscape:window-height=&quot;445&quot; inkscape:window-x=&quot;932&quot; inkscape:window-y=&quot;0&quot; inkscape:window-maximized=&quot;0&quot; /&gt; &lt;metadata id=&quot;metadata19808&quot;&gt; &lt;rdf:RDF&gt; &lt;cc:Work rdf:about=&quot;&quot;&gt; &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt; &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt; &lt;dc:title&gt;&lt;/dc:title&gt; &lt;/cc:Work&gt; &lt;/rdf:RDF&gt; &lt;/metadata&gt; &lt;g inkscape:label=&quot;Layer 1&quot; inkscape:groupmode=&quot;layer&quot; id=&quot;layer1&quot; /&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;linux&quot;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;linux2&quot;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span><span class="c1">#  linux &amp; mac</span>
+          <span class="n">tempFilePath</span><span class="o">=</span><span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
+        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">:</span>  <span class="c1"># windows</span>
+          <span class="n">tempFilePath</span><span class="o">=</span><span class="s1">&#39;C:/aDirname/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
+   
+        
+        <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
+          
+            <span class="n">Dump</span><span class="p">(</span><span class="s1">r&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; width=&quot;744.09448819&quot; height=&quot;1052.3622047&quot; id=&quot;svg19803&quot; version=&quot;1.1&quot; inkscape:version=&quot;0.48.3.1 r9886&quot; sodipodi:docname=&quot;New document 45&quot;&gt; &lt;defs id=&quot;defs19805&quot; /&gt; &lt;sodipodi:namedview id=&quot;base&quot; pagecolor=&quot;#ffffff&quot; bordercolor=&quot;#666666&quot; borderopacity=&quot;1.0&quot; inkscape:pageopacity=&quot;0.0&quot; inkscape:pageshadow=&quot;2&quot; inkscape:zoom=&quot;0.35&quot; inkscape:cx=&quot;375&quot; inkscape:cy=&quot;520&quot; inkscape:document-units=&quot;px&quot; inkscape:current-layer=&quot;layer1&quot; showgrid=&quot;false&quot; inkscape:window-width=&quot;500&quot; inkscape:window-height=&quot;445&quot; inkscape:window-x=&quot;932&quot; inkscape:window-y=&quot;0&quot; inkscape:window-maximized=&quot;0&quot; /&gt; &lt;metadata id=&quot;metadata19808&quot;&gt; &lt;rdf:RDF&gt; &lt;cc:Work rdf:about=&quot;&quot;&gt; &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt; &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt; &lt;dc:title&gt;&lt;/dc:title&gt; &lt;/cc:Work&gt; &lt;/rdf:RDF&gt; &lt;/metadata&gt; &lt;g inkscape:label=&quot;Layer 1&quot; inkscape:groupmode=&quot;layer&quot; id=&quot;layer1&quot; /&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span><span class="n">tempFilePath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
-        <span class="c1"># temp instance for determining font height. Draws a F letter just to find the height of the font</span>
-        <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># turning off this part of the code.</span>
-            <span class="n">texTemp</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
-            <span class="n">texTemp</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-            <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">texTemp</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
-            <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
-            <span class="n">Height0</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># temp instance for determining font height. Draws a F letter just to find the height of the font</span>
+            <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># turning off this part of the code.</span>
+                <span class="n">texTemp</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
+                <span class="n">texTemp</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">texTemp</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+                <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
+                <span class="n">Height0</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">Height0</span> <span class="o">=</span> <span class="mf">6.76</span>  <span class="c1"># running the code above, we get a &#39;F&#39; with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification &#39;fontSize&#39;</span>
+            <span class="n">Height0</span> <span class="o">=</span> <span class="mf">6.76</span>  <span class="c1"># running the code above, we get a &#39;F&#39; with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification &#39;fontSize&#39;</span>
 
-        <span class="n">scale</span> <span class="o">=</span> <span class="n">fontSize</span> <span class="o">/</span> <span class="n">Height0</span>
-
-        <span class="k">if</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># change to 2==1 to replace latex by an standard text (much faster for debugging =)  )</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="n">fontSize</span> <span class="o">/</span> <span class="n">Height0</span>
+        
             <span class="n">tex</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
             <span class="k">if</span> <span class="n">preambleFile</span><span class="p">:</span>
-                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">preambleFile</span><span class="p">,</span> <span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">preambleFile</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBasicLatexPackagesFile</span><span class="p">(),</span> <span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBasicLatexPackagesFile</span><span class="p">(),</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
             <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">tex</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 
@@ -1263,27 +1289,48 @@
 
             <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">scaleElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="n">scaleX</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">scaleY</span><span class="o">=-</span><span class="n">scale</span><span class="p">)</span>     <span class="c1"># scale to fit font size</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span>
+                <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
 
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+                <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;right&#39;</span>
+                
+            <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="o">/</span><span class="mf">0.76</span><span class="p">,</span><span class="n">justification</span><span class="o">=</span><span class="n">justification</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="n">angleDeg</span><span class="p">)</span>
+  
+  
         <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># BboxMin bc inkscape is upside down</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
-            <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># BboxMin bc inkscape is upside down</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="p">(</span><span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
-            <span class="n">refPointY</span> <span class="o">=</span> <span class="p">(</span><span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># BboxMax bc inkscape is upside down</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
-            <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># BboxMax bc inkscape is upside down</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span>
+                <span class="n">refPointX</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">refPointX</span> <span class="o">=</span> <span class="p">(</span><span class="n">BboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+                <span class="n">refPointX</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">refPointX</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">fontSize</span>     <span class="c1"># BboxMin bc inkscape is upside down</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
-            <span class="n">refPointX</span> <span class="o">=</span> <span class="p">(</span><span class="n">BboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">fontSize</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>     <span class="c1"># BboxMin bc inkscape is upside down</span>
 
-        <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
-            <span class="n">refPointX</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">refPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+                <span class="n">refPointY</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># BboxMax bc inkscape is upside down</span>
 
         <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="n">refPointX</span><span class="p">,</span> <span class="o">-</span><span class="n">refPointY</span><span class="p">])</span>  <span class="c1"># move to origin</span>
         <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="p">[</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>

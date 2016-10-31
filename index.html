@@ -55,8 +55,8 @@
 <div><ul class="simple">
 <li><strong>createMarkers</strong>           &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCreateMarkers">https://github.com/fsmMLK/inkscapeCreateMarkers</a>&gt;</li>
 <li><strong>cartesianAxes2D</strong>         &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianAxes2D">https://github.com/fsmMLK/inkscapeCartesianAxes2D</a>&gt;</li>
+<li><strong>cartesianPlotFunction2D</strong> &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D">https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D</a>&gt;</li>
 <li><strong>polarAxes2D</strong>             &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapePolarAxes2D">https://github.com/fsmMLK/inkscapePolarAxes2D</a>&gt;</li>
-<li><strong>CartesianPlotFunction2D</strong> &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D">https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D</a>&gt;</li>
 </ul>
 </div></blockquote>
 <div class="section" id="history-and-objectives">
@@ -83,13 +83,12 @@
 <h3>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
-<div class="section" id="latex-support-via-textext-extension">
-<h2>LaTeX support via textext extension<a class="headerlink" href="#latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="optional-latex-support-via-textext-extension">
+<h2>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
 <p>Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension <strong>textext</strong> from Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
 <p>Since I made very few modifications to his module, I decided to include the modified files in this extension. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
 <p>Instalation procedure and requirements of the modified <strong>textext</strong> are exactly the same of the original. Please refer to the installation section on Pauli Virtanen&#8217;s page to get further instructions.</p>
-<blockquote>
-<div><p><strong>Modifications</strong></p>
+<p><strong>Modifications</strong></p>
 <p>Here is the full list of changes I made:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Changes: line  67-68: added a few variables to control debug mode</span>
 <span class="c1"># Changes: line 944: changed order of programs (It worked better in my machine)</span>
@@ -97,7 +96,6 @@
 <span class="c1"># Changes: line 696: debug option to keep the .tex file</span>
 </pre></div>
 </div>
-</div></blockquote>
 </div>
 <div class="section" id="scientific-plotting-system">
 <h2>Scientific plotting system<a class="headerlink" href="#scientific-plotting-system" title="Permalink to this headline">¶</a></h2>
@@ -139,7 +137,7 @@
 </ul>
 </div></blockquote>
 <div class="section" id="installation-and-requirements">
-<h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
+<span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
 <p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
 <p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.</p>
 <p>In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure</p>
@@ -154,7 +152,21 @@
 &gt;&gt;&gt;                 |-- textext.py
 </pre></div>
 </div>
-<p>You can find all the files on GitHub</p>
+<p>You can find all the files on GitHub.</p>
+<p><strong>Disabling LaTeX support</strong></p>
+<p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it&#8217;s free and awesome! =] ), together with a few python modules (pygtk and Tkinter among others). The later might be a problem for non-Linux systems (precompiled inkscape for Windows as OS X don&#8217;t come with them).</p>
+<p>Since many people don&#8217;t use LaTeX and/or don&#8217;t have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. <strong>By default, LaTeX support is ENABLED.</strong></p>
+<p>If you don&#8217;t want LaTeX support or your system does not allow it, you can still use <strong>inkscapeMadeEasy</strong> as long as you disable it. You can easily do it by setting a flag in <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.py</span></code>:</p>
+<blockquote>
+<div><p>1- Open <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.py</span></code> in any text editor (e.g. Notepad in Windows)</p>
+<p>2- Search for the line containing <code class="docutils literal"><span class="pre">#useLatex=False</span></code>. It should be somewhere at the beginning of the file.</p>
+<p>3- Remove the comment character <code class="docutils literal"><span class="pre">#</span></code> of this line, leaving just <code class="docutils literal"><span class="pre">useLatex=False</span></code>.</p>
+<p>4- Save the file.</p>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 </div>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
@@ -164,8 +176,8 @@
 <div><ul class="simple">
 <li><strong>createMarkers</strong>           &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCreateMarkers">https://github.com/fsmMLK/inkscapeCreateMarkers</a>&gt;</li>
 <li><strong>cartesianAxes2D</strong>         &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianAxes2D">https://github.com/fsmMLK/inkscapeCartesianAxes2D</a>&gt;</li>
+<li><strong>cartesianPlotFunction2D</strong> &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D">https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D</a>&gt;</li>
 <li><strong>polarAxes2D</strong>             &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapePolarAxes2D">https://github.com/fsmMLK/inkscapePolarAxes2D</a>&gt;</li>
-<li><strong>CartesianPlotFunction2D</strong> &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D">https://github.com/fsmMLK/inkscapeCartesianPlotFunction2D</a>&gt;</li>
 </ul>
 </div></blockquote>
 </div>
@@ -1417,6 +1429,10 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">text</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for writing texts. It is possible to add regular inkscape&#8217;s text elements or LaTeX text. For the later, the excellent &#8216;textext&#8217; extension from Pauli Virtanen&#8217;s &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt; is incorporated here. Please refer to <a class="reference internal" href="#main-features">Main Features</a> section for further instructions</p>
 <p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LaTeX support is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.text.write">
 <em class="property">static </em><code class="descname">write</code><span class="sig-paren">(</span><em>ExtensionBaseObj</em>, <em>text</em>, <em>coords</em>, <em>parent</em>, <em>textStyle={'font-size': '10px'</em>, <em>'fill-opacity': '1'</em>, <em>'letter-spacing': '0px'</em>, <em>'word-spacing': '0px'</em>, <em>'stroke': 'none'</em>, <em>'text-align': 'start'</em>, <em>'font-family': 'Sans'</em>, <em>'font-style': 'normal'</em>, <em>'fill': '#000000'</em>, <em>'text-anchor': 'start'</em>, <em>'font-weight': 'normal'</em>, <em>'line-height': '100%'}</em>, <em>fontSize=None</em>, <em>justification=None</em>, <em>angleDeg=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#text.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.text.write" title="Permalink to this definition">¶</a></dt>
@@ -1478,6 +1494,14 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dt id="inkscapeMadeEasy_Draw.text.latex">
 <em class="property">static </em><code class="descname">latex</code><span class="sig-paren">(</span><em>ExtensionBaseObj</em>, <em>parent</em>, <em>LaTeXtext</em>, <em>position</em>, <em>fontSize=10</em>, <em>refPoint='cc'</em>, <em>textColor='#000000'</em>, <em>LatexCommands=' '</em>, <em>angleDeg=0</em>, <em>preambleFile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#text.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.text.latex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws a text line using LaTeX. You can use any LaTeX contents here.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Employs the excellent &#8216;textext&#8217; extension from Pauli Virtanen&#8217;s &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt; is incorporated here. Please refer to <a class="reference internal" href="#main-features">Main Features</a> section for further instructions</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. <strong>It is enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it. If disabled, this function will still work, internally calling the method text.write().</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1485,14 +1509,14 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ExtensionBaseObj</strong> (<em>inkscapeMadeEasy object (see example below)</em>) &#8211; Most of the times you have to use &#8216;self&#8217; from inkscapeMadeEasy related objects</li>
 <li><strong>parent</strong> (<em>element object</em>) &#8211; parent object</li>
-<li><strong>LaTeXtext</strong> (<em>string</em>) &#8211; text to be drawn. Can be any latex command</li>
+<li><strong>LaTeXtext</strong> (<em>string</em>) &#8211; text to be drawn. Can contain any latex command</li>
 <li><strong>position</strong> (<em>list</em>) &#8211; position of the reference point [x,y]</li>
 <li><strong>fontSize</strong> (<em>float</em>) &#8211; size of the font. Assume any text of <code class="docutils literal"><span class="pre">\normalsize</span></code> will have this size. Default: 10</li>
 <li><strong>refPoint</strong> (<em>string</em>) &#8211; text reference Point. See figure below for options. Default: <code class="docutils literal"><span class="pre">cc</span></code></li>
 <li><strong>textColor</strong> (<em>string</em>) &#8211; color in the format <code class="docutils literal"><span class="pre">#RRGGBB</span></code> (hexadecimal), or <code class="docutils literal"><span class="pre">None</span></code> for no color. Default: color.defined(&#8216;black&#8217;)</li>
-<li><strong>LatexCommands</strong> (<em>string</em>) &#8211; commands to be included before LaTeXtext (default: &#8216; &#8216;)</li>
+<li><strong>LatexCommands</strong> (<em>string</em>) &#8211; commands to be included before LaTeXtext (default: &#8216; &#8216;). If LaTeX support is disabled, this parameter has no effect.</li>
 <li><strong>angleDeg</strong> (<em>float</em>) &#8211; angle of the text, counterclockwise, in degrees. Default: 0</li>
-<li><strong>preambleFile</strong> (<em>string</em>) &#8211; optional preamble file to be included. Default: None</li>
+<li><strong>preambleFile</strong> (<em>string</em>) &#8211; optional preamble file to be included. Default: None. If LaTeX support is disabled, this parameter has no effect.</li>
 </ul>
 </td>
 </tr>
@@ -2002,55 +2026,31 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="inkscapeMadeEasy_Plot.generateListOfTicksLinear">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfTicksLinear</code><span class="sig-paren">(</span><em>axisLimits</em>, <em>axisOrigin</em>, <em>tickStep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfTicksLinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfTicksLinear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines list of ticks to be drawn in a linear plot</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Internal function.</p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="inkscapeMadeEasy_Plot.generateListOfTicksLog10">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">generateListOfTicksLog10</code><span class="sig-paren">(</span><em>axisLimits</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#generateListOfTicksLog10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.generateListOfTicksLog10" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines list of ticks to be drawn in a log10 plot</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Internal function.</p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="inkscapeMadeEasy_Plot.findOrigin">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">findOrigin</code><span class="sig-paren">(</span><em>axisLimits</em>, <em>flagLog10</em>, <em>scale</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#findOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.findOrigin" title="Permalink to this definition">¶</a></dt>
-<dd><p>retrieves the position of the origin. In case of logarithmic scale, it will be axisLimits[0]</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Internal function.</p>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="inkscapeMadeEasy_Plot.getPositionAndText">
-<code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">getPositionAndText</code><span class="sig-paren">(</span><em>value</em>, <em>scale</em>, <em>flagLog10</em>, <em>axisUnitFactor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#getPositionAndText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.getPositionAndText" title="Permalink to this definition">¶</a></dt>
-<dd><p>given a value, its scale, and some flags, finds it position in the diagram and the text to be shown</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Internal function.</p>
-</div>
-</dd></dl>
-
 <dl class="class">
 <dt id="inkscapeMadeEasy_Plot.axis">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">axis</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a class with different methods for making plot axes.</p>
 <p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.axis.cartesian">
 <em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xLim, yLim, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.cartesian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the axes for cartesian plot</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2069,10 +2069,10 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </ul>
 </li>
 <li><strong>xLabel</strong> (<em>string</em>) &#8211; <p>Label of the X axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>yLabel</strong> (<em>string</em>) &#8211; <p>Label of the Y axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>xlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
@@ -2094,11 +2094,11 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </li>
 <li><strong>xAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>yAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>xGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>yGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
@@ -2145,6 +2145,14 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <dt id="inkscapeMadeEasy_Plot.axis.polar">
 <em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#axis.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.axis.polar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the axes for polar plot</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2156,7 +2164,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <li><strong>tLim</strong> (<em>list</em>) &#8211; limits of the theta axis [t_min,t_max]. Values in degrees. Default: [0,360]</li>
 <li><strong>position</strong> (<em>list</em>) &#8211; position of the center [x0,y0].</li>
 <li><strong>rLabel</strong> (<em>string</em>) &#8211; <p>Label of the R axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>rlog10scale</strong> (<em>bool</em>) &#8211; <p>sets R axis to log10 scale if True. Default: False</p>
 <ul>
@@ -2175,7 +2183,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </li>
 <li><strong>rAxisUnitFactor</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>rGrid</strong> (<em>bool</em>) &#8211; adds grid lines to R axis if true. Default: False</li>
 <li><strong>tGrid</strong> (<em>bool</em>) &#8211; adds grid lines to theta axis if true. Default: False</li>
@@ -2224,10 +2232,26 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">plot</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a class with different methods for making plots.</p>
 <p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.cartesian">
 <em class="property">static </em><code class="descname">cartesian</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.cartesian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.cartesian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cartesian Plot</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2245,10 +2269,10 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </ul>
 </li>
 <li><strong>xLabel</strong> (<em>string</em>) &#8211; <p>Label of the X axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>yLabel</strong> (<em>string</em>) &#8211; <p>Label of the Y axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>xlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
@@ -2270,11 +2294,11 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </li>
 <li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>xGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>yGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
@@ -2367,7 +2391,15 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.polar">
 <em class="property">static </em><code class="descname">polar</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20, rExtraText='', rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.polar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cartesian Plot</p>
+<dd><p>Polar Plot</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2385,7 +2417,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </ul>
 </li>
 <li><strong>rLabel</strong> (<em>string</em>) &#8211; <p>Label of the X axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>rlog10scale</strong> (<em>bool</em>) &#8211; sets X axis to log10 scale if True. Default: False</li>
 <li><strong>rTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
@@ -2400,7 +2432,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </li>
 <li><strong>rExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>rGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>tGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
@@ -2506,6 +2538,14 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <dt id="inkscapeMadeEasy_Plot.plot.stem">
 <em class="property">static </em><code class="descname">stem</code><span class="sig-paren">(</span><em>ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}, forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#plot.stem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.plot.stem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stem plot in Cartesian axis</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since disabling LaTeX support is a new feature, text positioning of <strong>inkscapeMadeEasy_Plot</strong> methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2523,10 +2563,10 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </ul>
 </li>
 <li><strong>xLabel</strong> (<em>string</em>) &#8211; <p>Label of the X axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>yLabel</strong> (<em>string</em>) &#8211; <p>Label of the Y axis. Default: &#8216;&#8217;</p>
-<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</p>
+<p>The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</p>
 </li>
 <li><strong>ylog10scale</strong> (<em>bool</em>) &#8211; sets Y axis to log10 scale if True. Default: False</li>
 <li><strong>xTicks</strong> (<em>bool</em>) &#8211; Adds axis ticks to the X axis if True. Default: True</li>
@@ -2547,11 +2587,11 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 </li>
 <li><strong>xExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to Ticks in both x and y. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>yExtraText</strong> (<em>string</em>) &#8211; <p>extra text to be added to the ticks in Y axis. Default: &#8216;&#8217;</p>
 <p>This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.
-The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</p>
+The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</p>
 </li>
 <li><strong>xGrid</strong> (<em>bool</em>) &#8211; adds grid lines to X axis if true. Default: False</li>
 <li><strong>yGrid</strong> (<em>bool</em>) &#8211; adds grid lines to Y axis if true. Default: False</li>
@@ -2670,7 +2710,7 @@ The text can be any LaTeX text. Keep in mind that this text will be included in 
 <li><a class="reference internal" href="#main-features">Main Features</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#latex-support-via-textext-extension">LaTeX support via textext extension</a></li>
+<li><a class="reference internal" href="#optional-latex-support-via-textext-extension">Optional LaTeX support via textext extension</a></li>
 <li><a class="reference internal" href="#scientific-plotting-system">Scientific plotting system</a></li>
 <li><a class="reference internal" href="#control-over-text-styles-line-markers-and-other-drawing-features">Control over text styles, line markers and other drawing features</a></li>
 <li><a class="reference internal" href="#useful-backstage-functions">Useful backstage functions</a><ul>

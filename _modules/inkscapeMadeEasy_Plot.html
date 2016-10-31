@@ -124,7 +124,7 @@
     <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="generateListOfTicksLinear"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.generateListOfTicksLinear">[docs]</a><span class="k">def</span> <span class="nf">generateListOfTicksLinear</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">,</span> <span class="n">axisOrigin</span><span class="p">,</span> <span class="n">tickStep</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">generateListOfTicksLinear</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">,</span> <span class="n">axisOrigin</span><span class="p">,</span> <span class="n">tickStep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Defines list of ticks to be drawn in a linear plot</span>
 
 <span class="sd">    .. note:: Internal function.</span>
@@ -141,10 +141,10 @@
         <span class="n">listTicksNegative</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">listTicksNegative</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tickStep</span><span class="p">)</span>
 
     <span class="n">listTicks</span> <span class="o">=</span> <span class="n">listTicksPositive</span> <span class="o">+</span> <span class="n">listTicksNegative</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="k">return</span> <span class="n">listTicks</span></div>
+    <span class="k">return</span> <span class="n">listTicks</span>
 
 
-<div class="viewcode-block" id="generateListOfTicksLog10"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.generateListOfTicksLog10">[docs]</a><span class="k">def</span> <span class="nf">generateListOfTicksLog10</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">generateListOfTicksLog10</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Defines list of ticks to be drawn in a log10 plot</span>
 
 <span class="sd">    .. note:: Internal function.&quot;&quot;&quot;</span>
@@ -153,10 +153,10 @@
     <span class="n">listTicks</span> <span class="o">=</span> <span class="p">[</span><span class="n">axisLimits</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="k">while</span> <span class="n">listTicks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">axisLimits</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
         <span class="n">listTicks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">listTicks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">listTicks</span></div>
+    <span class="k">return</span> <span class="n">listTicks</span>
 
 
-<div class="viewcode-block" id="findOrigin"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.findOrigin">[docs]</a><span class="k">def</span> <span class="nf">findOrigin</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">,</span> <span class="n">flagLog10</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">findOrigin</span><span class="p">(</span><span class="n">axisLimits</span><span class="p">,</span> <span class="n">flagLog10</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; retrieves the position of the origin. In case of logarithmic scale, it will be axisLimits[0]</span>
 
 <span class="sd">    .. note:: Internal function.</span>
@@ -172,10 +172,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">axisOrigin</span> <span class="o">=</span> <span class="n">axisLimits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span>
 
-    <span class="k">return</span> <span class="n">axisOrigin</span></div>
+    <span class="k">return</span> <span class="n">axisOrigin</span>
 
 
-<div class="viewcode-block" id="getPositionAndText"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.getPositionAndText">[docs]</a><span class="k">def</span> <span class="nf">getPositionAndText</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">flagLog10</span><span class="p">,</span> <span class="n">axisUnitFactor</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">getPositionAndText</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">flagLog10</span><span class="p">,</span> <span class="n">axisUnitFactor</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;given a value, its scale, and some flags, finds it position in the diagram and the text to be shown</span>
 
 <span class="sd">    .. note:: Internal function.&quot;&quot;&quot;</span>
@@ -193,29 +193,42 @@
     <span class="k">if</span> <span class="n">flagLog10</span><span class="p">:</span>
         <span class="n">exponent</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">axisUnitFactor</span><span class="p">:</span>
-            <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$10^{&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+            <span class="k">if</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">useLatex</span><span class="p">:</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;10^{&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;10^&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$10^{&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;}$&#39;</span>
+            <span class="k">if</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">useLatex</span><span class="p">:</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;10^{&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;10^&#39;</span> <span class="o">+</span> <span class="n">exponent</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">axisUnitFactor</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$0$&#39;</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="n">axisUnitFactor</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$-&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">axisUnitFactor</span>
             <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">valStr</span> <span class="o">+</span> <span class="n">axisUnitFactor</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+                <span class="n">Text</span> <span class="o">=</span> <span class="n">valStr</span> <span class="o">+</span> <span class="n">axisUnitFactor</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">Text</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">valStr</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+            <span class="n">Text</span> <span class="o">=</span> <span class="n">valStr</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="n">Text</span><span class="p">]</span></div>
+    <span class="k">if</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">useLatex</span><span class="p">:</span>
+        <span class="n">Text</span><span class="o">=</span><span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">Text</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+        
+    <span class="k">return</span> <span class="p">[</span><span class="n">pos</span><span class="p">,</span> <span class="n">Text</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="axis"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.axis">[docs]</a><span class="k">class</span> <span class="nc">axis</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; This is a class with different methods for making plot axes.</span>
-
+<span class="sd">    </span>
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
+
+<span class="sd">    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
@@ -225,6 +238,10 @@
                   <span class="n">forceTextSize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">forceLineWidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">drawAxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ExtraLenghtAxisX</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ExtraLenghtAxisY</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates the axes for cartesian plot</span>
 
+<span class="sd">        .. note:: This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">    </span>
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param xLim: limits of the X axis [x_min,x_max]. If the axis is in log10 scale, then the limits will be rounded to complete one decade.</span>
@@ -238,11 +255,11 @@
 <span class="sd">              - The same rule applies to y direction.</span>
 <span class="sd">        :param xLabel: Label of the X axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param yLabel: Label of the Y axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param xlog10scale: sets X axis to log10 scale if True. Default: False</span>
 <span class="sd">        :param ylog10scale: sets Y axis to log10 scale if True. Default: False</span>
@@ -263,11 +280,11 @@
 <span class="sd">        :param xAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 <span class="sd">        :param yAxisUnitFactor: extra text to be added to the ticks in Y axis. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 
 <span class="sd">        :param xGrid: adds grid lines to X axis if true. Default: False</span>
 <span class="sd">        :param yGrid: adds grid lines to Y axis if true. Default: False</span>
@@ -590,6 +607,10 @@
               <span class="n">rScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rAxisUnitFactor</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">rGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">forceTextSize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">forceLineWidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">drawAxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ExtraLenghtAxisR</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates the axes for polar plot</span>
 
+<span class="sd">        .. note:: This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">        </span>
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param rLim: limits of the R axis [r_min,r_max]. If the axis is in log10 scale, then the limits will be rounded to complete one decade.</span>
@@ -598,7 +619,7 @@
 
 <span class="sd">        :param rLabel: Label of the R axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param rlog10scale: sets R axis to log10 scale if True. Default: False</span>
 
@@ -616,7 +637,7 @@
 <span class="sd">        :param rAxisUnitFactor: extra text to be added to Ticks in both x and y. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 
 <span class="sd">        :param rGrid: adds grid lines to R axis if true. Default: False</span>
 <span class="sd">        :param tGrid: adds grid lines to theta axis if true. Default: False</span>
@@ -825,7 +846,10 @@
                     <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>  <span class="c1"># negative angles bc inkscape is upside down</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>  <span class="c1"># negative angles bc inkscape is upside down</span>
                     <span class="c1"># get position, considering the scale and its text</span>
-                    <span class="n">tText</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+                    <span class="k">if</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">useLatex</span><span class="p">:</span>
+                      <span class="n">tText</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;$&#39;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                      <span class="n">tText</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
                     <span class="k">if</span> <span class="p">(</span><span class="n">tGrid</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">tLimits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tLimits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="n">tGrid</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">==</span> <span class="n">tLimits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tLimits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tLimits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">360</span><span class="p">):</span>
                         <span class="k">if</span> <span class="n">rLimitsPos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># if rmin is zero, then make the lines to reach the center</span>
@@ -903,6 +927,10 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 
+<span class="sd">    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="plot.cartesian"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Plot.plot.cartesian">[docs]</a>    <span class="k">def</span> <span class="nf">cartesian</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">xData</span><span class="p">,</span> <span class="n">yData</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xLabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">yLabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -911,7 +939,11 @@
                   <span class="n">xGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">yGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lineStylePlot</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span>
                   <span class="n">forceXlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">forceYlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">drawAxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ExtraLenghtAxisX</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ExtraLenghtAxisY</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cartesian Plot</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
 
+<span class="sd">        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">        </span>
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param xData: list of x data</span>
@@ -924,11 +956,11 @@
 
 <span class="sd">        :param xLabel: Label of the X axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param yLabel: Label of the Y axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param xlog10scale: sets X axis to log10 scale if True. Default: False</span>
 <span class="sd">        :param ylog10scale: sets Y axis to log10 scale if True. Default: False</span>
@@ -949,11 +981,11 @@
 <span class="sd">        :param xExtraText: extra text to be added to Ticks in both x and y. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 <span class="sd">        :param yExtraText: extra text to be added to the ticks in Y axis. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 
 <span class="sd">        :param xGrid: adds grid lines to X axis if true. Default: False</span>
 <span class="sd">        :param yGrid: adds grid lines to Y axis if true. Default: False</span>
@@ -1166,8 +1198,12 @@
                   <span class="n">rlog10scale</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">rTicks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tTicks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rTickStep</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tTickStep</span><span class="o">=</span><span class="mf">45.0</span><span class="p">,</span><span class="n">rScale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rExtraText</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                   <span class="n">rGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tGrid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">generalAspectFactorAxis</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lineStylePlot</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span>
                   <span class="n">forceRlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">forceTlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">drawAxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ExtraLenghtAxisR</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cartesian Plot</span>
+        <span class="sd">&quot;&quot;&quot;Polar Plot</span>
 
+<span class="sd">        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">        </span>
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param rData: list of x data</span>
@@ -1180,7 +1216,7 @@
 
 <span class="sd">        :param rLabel: Label of the X axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param rlog10scale: sets X axis to log10 scale if True. Default: False</span>
 <span class="sd">        :param rTicks: Adds axis ticks to the X axis if True. Default: True</span>
@@ -1195,7 +1231,7 @@
 <span class="sd">        :param rExtraText: extra text to be added to Ticks in both x and y. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 
 <span class="sd">        :param rGrid: adds grid lines to X axis if true. Default: False</span>
 <span class="sd">        :param tGrid: adds grid lines to Y axis if true. Default: False</span>
@@ -1392,6 +1428,10 @@
              <span class="n">forceXlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">forceYlim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">drawAxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ExtraLenghtAxisX</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ExtraLenghtAxisY</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Stem plot in Cartesian axis</span>
 
+<span class="sd">        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
+
+<span class="sd">        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for missplacements/errors when this support is disabled. Please report any issue you find.</span>
+<span class="sd">        </span>
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param xData: list of x data</span>
@@ -1404,11 +1444,11 @@
 
 <span class="sd">        :param xLabel: Label of the X axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param yLabel: Label of the Y axis. Default: &#39;&#39;</span>
 
-<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$</span>
+<span class="sd">              The text can contain any LaTeX command. If you want to write mathematical text, you can enclose it between dollar signs $...$. If LaTeX support is disabled, do not use $.</span>
 
 <span class="sd">        :param ylog10scale: sets Y axis to log10 scale if True. Default: False</span>
 <span class="sd">        :param xTicks: Adds axis ticks to the X axis if True. Default: True</span>
@@ -1428,11 +1468,11 @@
 <span class="sd">        :param xExtraText: extra text to be added to Ticks in both x and y. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 <span class="sd">        :param yExtraText: extra text to be added to the ticks in Y axis. Default: &#39;&#39;</span>
 
 <span class="sd">              This is useful when we want to represent interval with different units. example pi, 2pi 3pi, etc.</span>
-<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be included in a mathematical environment $...$</span>
+<span class="sd">              The text can be any LaTeX text. Keep in mind that this text will be inserted within a mathematical environment $...$, therefore no $ is needed here.</span>
 
 <span class="sd">        :param xGrid: adds grid lines to X axis if true. Default: False</span>
 <span class="sd">        :param yGrid: adds grid lines to Y axis if true. Default: False</span>
