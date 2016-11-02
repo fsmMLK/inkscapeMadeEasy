@@ -72,7 +72,7 @@
 <span class="c1"># --------------------------------------------------------------------------------------</span>
 
 <span class="c1"># Please uncomment (remove the # character) in the following line to disable LaTeX support via textext extension.</span>
-<span class="c1">#useLatex=False</span>
+<span class="n">useLatex</span><span class="o">=</span><span class="bp">False</span>
 
 
 <span class="k">try</span><span class="p">:</span>
@@ -91,6 +91,7 @@
   <span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="kn">as</span> <span class="nn">textext</span>
   
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module contains a set of classes and some functions to help dealing with drawings.</span>
 
@@ -1249,11 +1250,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">LaTeXtext</span><span class="p">:</span>  <span class="c1"># check whether text is empty</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;linux&quot;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;linux2&quot;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;darwin&quot;</span><span class="p">:</span><span class="c1">#  linux &amp; mac</span>
-          <span class="n">tempFilePath</span><span class="o">=</span><span class="s1">&#39;/tmp/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">:</span>  <span class="c1"># windows</span>
-          <span class="n">tempFilePath</span><span class="o">=</span><span class="s1">&#39;C:/aDirname/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
-   
+        <span class="n">tempDir</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+        <span class="n">tempFilePath</span> <span class="o">=</span> <span class="n">tempDir</span> <span class="o">+</span> <span class="s1">&#39;/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>   
         
         <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
           
