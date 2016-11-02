@@ -42,6 +42,7 @@ if useLatex:
   import textextLib.textext as textext
   
 import sys
+import tempfile
 """
 This module contains a set of classes and some functions to help dealing with drawings.
 
@@ -1200,11 +1201,8 @@ class text():
         if not LaTeXtext:  # check whether text is empty
             return 0
 
-        if sys.platform == "linux" or sys.platform == "linux2" or sys.platform == "darwin":#  linux & mac
-          tempFilePath='/tmp/temp_svg_inkscapeMadeEasy_Draw.txt'
-        elif sys.platform == "win32":  # windows
-          tempFilePath='C:/aDirname/temp_svg_inkscapeMadeEasy_Draw.txt'
-   
+        tempDir=tempfile.gettempdir()
+        tempFilePath = tempDir + '/temp_svg_inkscapeMadeEasy_Draw.txt'   
         
         if useLatex:  # set useLatex=False to replace latex by an standard text (much faster for debugging =)  )
           

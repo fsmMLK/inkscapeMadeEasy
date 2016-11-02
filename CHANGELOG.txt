@@ -1,4 +1,10 @@
 
+2016-11nov-02
+-------------
+
+inkscapeMadeEeasy_Draw.py
+  - small modification in text.latex() method to fix incompatibility with temporary diretory under windows.
+
 2016-10oct-31
 -------------
 
