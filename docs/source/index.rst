@@ -151,6 +151,9 @@ In order to install inkscapeMadeEasy, your Inkscape extension directory must con
 
 You can find all the files on GitHub.
 
+**LaTeX package requirement**
+
+If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.
 
 **Disabling LaTeX support**
 

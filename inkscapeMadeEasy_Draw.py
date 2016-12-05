@@ -1246,8 +1246,9 @@ class text():
 
             if refPoint[1] == 'r':
                 justification='right'
-                
-            groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent, fontSize=fontSize/0.76,justification=justification, angleDeg=angleDeg)
+            
+            mytextStyle = textStyle.setSimpleColor(fontSize=fontSize/0.76, justification='left', textColor=textColor)
+            groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent,textStyle=mytextStyle, fontSize=fontSize/0.76,justification=justification, angleDeg=0.0) # attention! keep angleDeg=0.0 here bc it will be rotated below
   
   
         BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)

@@ -1,3 +1,8 @@
+2016-11nov-02
+-------------
+
+inkscapeMadeEeasy_Draw.py
+  - fix text.latex() method in case LaTeX support is disabled. There was a bug when angleDeg was different than zero.
 
 2016-11nov-02
 -------------
