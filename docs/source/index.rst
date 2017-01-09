@@ -29,6 +29,7 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 
   - **logicGates**              <https://github.com/fsmMLK/inkscapeLogicGates>
 
+  - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 
 History and Objectives
 ----------------------
@@ -192,6 +193,8 @@ For examples on how to use, please take a look at the examples provided below an
   - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
 
   - **logicGates**              <https://github.com/fsmMLK/inkscapeLogicGates>
+
+  - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 
 Module definitions
 ==================
