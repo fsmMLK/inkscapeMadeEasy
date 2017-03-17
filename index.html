@@ -88,8 +88,8 @@
 </div>
 <div class="section" id="optional-latex-support-via-textext-extension">
 <h2>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
-<p>Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension <strong>textext</strong> from Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
-<p>Since I made very few modifications to his module, I decided to include the modified files in this extension. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
+<p>Many of the functions implemented in this project use LaTeX to generate text. To this end I decided to employ the excellent extension <strong>textext</strong> by Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
+<p>Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
 <p>Instalation procedure and requirements of the modified <strong>textext</strong> are exactly the same of the original. Please refer to the installation section on Pauli Virtanen&#8217;s page to get further instructions.</p>
 <p><strong>Modifications</strong></p>
 <p>Here is the full list of changes I made:</p>
@@ -113,7 +113,7 @@
 <li>create custom markers, including a few pre-defined often used types. All can be assigned to custom colors in both stroke and filling colors</li>
 <li>create line styles, with or without custom markers and custom line dash pattern</li>
 <li>create text styles</li>
-<li>create LaTeX contents (thanks to <strong>textext</strong> from Pauli Virtanen)</li>
+<li>create LaTeX contents (thanks to <strong>textext</strong> by Pauli Virtanen)</li>
 <li>direct control over text size and color of LaTeX contents</li>
 <li>draw straight polylines using absolute or relative coordinates</li>
 <li>draw arcs given the start and end points and its radius</li>
@@ -158,6 +158,7 @@
 <p>You can find all the files on GitHub.</p>
 <p><strong>LaTeX package requirement</strong></p>
 <p>If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p>
+<p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (debian based distros) from your package manager. It should have most (all?) needed LaTeX packages.</p>
 <p><strong>Disabling LaTeX support</strong></p>
 <p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it&#8217;s free and awesome! =] ), together with a few python modules (pygtk and Tkinter among others). The later might be a problem for non-Linux systems (precompiled inkscape for Windows as OS X don&#8217;t come with them).</p>
 <p>Since many people don&#8217;t use LaTeX and/or don&#8217;t have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. <strong>By default, LaTeX support is ENABLED.</strong></p>
