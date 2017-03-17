@@ -75,7 +75,7 @@ Main Features
 Optional LaTeX support via textext extension
 --------------------------------------------
 
-.. warning:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+.. Important note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
 
 Many of the functions implemented in this project can use LaTeX to generate text if the support is enabled. To this end I decided to employ the excellent extension **textext** by Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
 
