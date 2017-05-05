@@ -1702,7 +1702,133 @@ class circle():
 
         return inkex.etree.SubElement(parent, inkex.addNS('path', 'svg'), Attribs)
 
+class rectangle():
+    """ This is a class with different methods for drawing rectangles.
 
+    This class contains only static methods so that you don't have to inherit this in your class
+    """
+    @staticmethod
+    def widthHeightCenter(parent, centerPoint, width, height,radiusX=None,radiusY=None, offset=[0, 0], label='rectangle', lineStyle=lineStyle.setSimpleBlack()):
+        """draws a rectangle given its center point and dimensions
+
+        .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param parent: parent object
+        :param centerPoint: center coordinate [x,y]
+        :param width: dimension in X direction
+        :param height: dimension in Y direction
+        :param radiusX: rounding radius in X direction. If this value is ``None``, the rectangle will have sharp corners. Default: None
+        :param radiusY: rounding radius in Y direction. If this value is ``None``, then radiusX will also be used in Y direction. If radiusX is also ``None``, then the rectangle will have sharp corners. Default: None
+        :param offset: extra offset coords [x,y]
+        :param label: label of the line. Default 'circle'
+        :param lineStyle: line style to be used. See class ``lineStyle``. Default: lineStyle=lineStyle.setSimpleBlack()
+
+        :type parent: inkscapeMadeEasy object (see example below)
+        :type centerPoint: list
+        :type width: float
+        :type height: float
+        :type radiusX: float
+        :type radiusY: float
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+
+        :returns: the new rectangle object
+        :rtype: rectangle Object
+
+        **Example**
+
+        >>> import inkex
+        >>> import inkscapeMadeEasy_Base as inkBase
+        >>> import inkscapeMadeEasy_Draw as inkDraw
+        >>> 
+        >>> class myExtension(inkBase.inkscapeMadeEasy):
+        >>>   def __init__(self):
+        >>>     ...
+        >>>     ...
+        >>> 
+        >>>   def effect(self):
+        >>>     root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>>     myLineStyle=inkDraw.lineStyle.setSimpleBlack()
+        >>>     
+        >>>     #draws a 50x60 rectangle with radiusX=2.0 and radiusY=3.0
+        >>>     inkDraw.rectangle.widthHeightCenter(parent=root_layer, centerPoint=[0,0], width=50, height=60, radiusX=2.0,radiusY=3.0, offset=[0,0], label='rect1',  lineStyle=myLineStyle)
+        """
+        x= centerPoint[0]-width/2.0 + offset[0]
+        y= centerPoint[1]-height/2.0 + offset[1]
+        
+        Attribs = {inkex.addNS('label', 'inkscape'): label,
+                      'style': simplestyle.formatStyle(lineStyle),
+                      'width': str(width),
+                      'height': str(height),
+                      'x': str(x),
+                      'y': str(y),
+                      'rx': str(radiusX),
+                      'ry': str(radiusY)}
+        
+        if radiusX and radiusX>0.0:
+          Attribs['rx'] = str(radiusX)
+          if radiusY == None:
+            Attribs['ry'] = str(radiusX)
+          else:
+            if radiusY > 0.0:
+              Attribs['ry'] = str(radiusY)
+
+        return inkex.etree.SubElement(parent, inkex.addNS('rect', 'svg'), Attribs)
+
+    @staticmethod
+    def corners(parent, corner1, corner2, radiusX=None,radiusY=None, offset=[0, 0], label='rectangle', lineStyle=lineStyle.setSimpleBlack()):
+        """draws a rectangle given the coordinates of two oposite corners
+
+        .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param parent: parent object
+        :param corner1: coordinates of corner 1 [x,y]
+        :param corner2: coordinates of corner 1 [x,y]
+        :param radiusX: rounding radius in X direction. If this value is ``None``, the rectangle will have sharp corners. Default: None
+        :param radiusY: rounding radius in Y direction. If this value is ``None``, then radiusX will also be used in Y direction. If radiusX is also ``None``, then the rectangle will have sharp corners. Default: None
+        :param offset: extra offset coords [x,y]
+        :param label: label of the line. Default 'circle'
+        :param lineStyle: line style to be used. See class ``lineStyle``. Default: lineStyle=lineStyle.setSimpleBlack()
+
+        :type parent: inkscapeMadeEasy object (see example below)
+        :type corner1: list
+        :type corner2: list
+        :type radiusX: float
+        :type radiusY: float
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+
+        :returns: the new rectangle object
+        :rtype: rectangle Object
+
+        **Example**
+
+        >>> import inkex
+        >>> import inkscapeMadeEasy_Base as inkBase
+        >>> import inkscapeMadeEasy_Draw as inkDraw
+        >>> 
+        >>> class myExtension(inkBase.inkscapeMadeEasy):
+        >>>   def __init__(self):
+        >>>     ...
+        >>>     ...
+        >>> 
+        >>>   def effect(self):
+        >>>     root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>>     myLineStyle=inkDraw.lineStyle.setSimpleBlack()
+        >>>     
+        >>>     #draws a rectangle with corners C1=[1,5] and C2=[6,10], with radiusX=2.0 and radiusY=3.0
+        >>>     inkDraw.rectangle.corners(parent=root_layer, corner1=[1,5], corner2=[6,10], radiusX=2.0,radiusY=3.0, offset=[0,0], label='rect1',  lineStyle=myLineStyle)
+        """
+        x= (corner1[0]+corner2[0])/2.0
+        y= (corner1[1]+corner2[1])/2.0
+        
+        width = abs(corner1[0]-corner2[0])
+        height = abs(corner1[1]-corner2[1])
+
+        return rectangle.widthHeightCenter(parent, [x,y], width, height, radiusX, radiusY, offset, label, lineStyle)    
+     
 class ellipse():
     """ This is a class with different methods for drawing ellipses.
 

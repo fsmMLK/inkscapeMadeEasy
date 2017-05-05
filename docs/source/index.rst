@@ -75,9 +75,11 @@ Main Features
 Optional LaTeX support via textext extension
 --------------------------------------------
 
-Many of the functions implemented in this project uses LaTeX to generate text. To this end I decided to employ the excellent extension **textext** from Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
+.. Important note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
 
-Since I made very few modifications to his module, I decided to include the modified files in this extension. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
+Many of the functions implemented in this project can use LaTeX to generate text if the support is enabled. To this end I decided to employ the excellent extension **textext** by Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
+
+Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
 
 Instalation procedure and requirements of the modified **textext** are exactly the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
 
@@ -106,7 +108,7 @@ inkscapeMadeEasy_Draw module provides powerful tools to:
  - create custom markers, including a few pre-defined often used types. All can be assigned to custom colors in both stroke and filling colors
  - create line styles, with or without custom markers and custom line dash pattern
  - create text styles
- - create LaTeX contents (thanks to **textext** from Pauli Virtanen)
+ - create LaTeX contents (thanks to **textext** by Pauli Virtanen)
  - direct control over text size and color of LaTeX contents
  - draw straight polylines using absolute or relative coordinates
  - draw arcs given the start and end points and its radius
@@ -155,6 +157,8 @@ You can find all the files on GitHub.
 **LaTeX package requirement**
 
 If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.
+
+Linux users: You might find useful installing the packages ``texlive-science`` and ``texlive-latex-base`` (debian based distros) from your package manager. It should have most (all?) needed LaTeX packages.
 
 **Disabling LaTeX support**
 
