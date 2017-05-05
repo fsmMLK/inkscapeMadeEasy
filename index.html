@@ -1912,6 +1912,118 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="inkscapeMadeEasy_Draw.rectangle">
+<em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">rectangle</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#rectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a class with different methods for drawing rectangles.</p>
+<p>This class contains only static methods so that you don&#8217;t have to inherit this in your class</p>
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.rectangle.widthHeightCenter">
+<em class="property">static </em><code class="descname">widthHeightCenter</code><span class="sig-paren">(</span><em>parent, centerPoint, width, height, radiusX=None, radiusY=None, offset=[0, 0], label='rectangle', lineStyle={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#rectangle.widthHeightCenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.rectangle.widthHeightCenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>draws a rectangle given its center point and dimensions</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape&#8217;s y axis is upside down!</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>inkscapeMadeEasy object (see example below)</em>) &#8211; parent object</li>
+<li><strong>centerPoint</strong> (<em>list</em>) &#8211; center coordinate [x,y]</li>
+<li><strong>width</strong> (<em>float</em>) &#8211; dimension in X direction</li>
+<li><strong>height</strong> (<em>float</em>) &#8211; dimension in Y direction</li>
+<li><strong>radiusX</strong> (<em>float</em>) &#8211; rounding radius in X direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, the rectangle will have sharp corners. Default: None</li>
+<li><strong>radiusY</strong> (<em>float</em>) &#8211; rounding radius in Y direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, then radiusX will also be used in Y direction. If radiusX is also <code class="docutils literal"><span class="pre">None</span></code>, then the rectangle will have sharp corners. Default: None</li>
+<li><strong>offset</strong> (<em>list</em>) &#8211; extra offset coords [x,y]</li>
+<li><strong>label</strong> (<em>string</em>) &#8211; label of the line. Default &#8216;circle&#8217;</li>
+<li><strong>lineStyle</strong> (<em>lineStyle object</em>) &#8211; line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new rectangle object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">rectangle Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">myExtension</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myLineStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#draws a 50x60 rectangle with radiusX=2.0 and radiusY=3.0</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rect1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.rectangle.corners">
+<em class="property">static </em><code class="descname">corners</code><span class="sig-paren">(</span><em>parent, corner1, corner2, radiusX=None, radiusY=None, offset=[0, 0], label='rectangle', lineStyle={'stroke-linejoin': 'round', 'stroke': '#000000', 'stroke-linecap': 'round', 'stroke-dasharray': 'none', 'stroke-width': '1.0', 'fill': 'none'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#rectangle.corners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.rectangle.corners" title="Permalink to this definition">¶</a></dt>
+<dd><p>draws a rectangle given the coordinates of two oposite corners</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape&#8217;s y axis is upside down!</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>inkscapeMadeEasy object (see example below)</em>) &#8211; parent object</li>
+<li><strong>corner1</strong> (<em>list</em>) &#8211; coordinates of corner 1 [x,y]</li>
+<li><strong>corner2</strong> (<em>list</em>) &#8211; coordinates of corner 1 [x,y]</li>
+<li><strong>radiusX</strong> (<em>float</em>) &#8211; rounding radius in X direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, the rectangle will have sharp corners. Default: None</li>
+<li><strong>radiusY</strong> (<em>float</em>) &#8211; rounding radius in Y direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, then radiusX will also be used in Y direction. If radiusX is also <code class="docutils literal"><span class="pre">None</span></code>, then the rectangle will have sharp corners. Default: None</li>
+<li><strong>offset</strong> (<em>list</em>) &#8211; extra offset coords [x,y]</li>
+<li><strong>label</strong> (<em>string</em>) &#8211; label of the line. Default &#8216;circle&#8217;</li>
+<li><strong>lineStyle</strong> (<em>lineStyle object</em>) &#8211; line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new rectangle object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">rectangle Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">myExtension</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myLineStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#draws a rectangle with corners C1=[1,5] and C2=[6,10], with radiusX=2.0 and radiusY=3.0</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">corners</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">corner1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">corner2</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">radiusX</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rect1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="inkscapeMadeEasy_Draw.ellipse">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">ellipse</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipse" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a class with different methods for drawing ellipses.</p>

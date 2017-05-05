@@ -1751,7 +1751,133 @@
 
         <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div></div>
 
+<div class="viewcode-block" id="rectangle"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle">[docs]</a><span class="k">class</span> <span class="nc">rectangle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; This is a class with different methods for drawing rectangles.</span>
 
+<span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="rectangle.widthHeightCenter"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.widthHeightCenter">[docs]</a>    <span class="k">def</span> <span class="nf">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span><span class="n">radiusX</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+        <span class="sd">&quot;&quot;&quot;draws a rectangle given its center point and dimensions</span>
+
+<span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param parent: parent object</span>
+<span class="sd">        :param centerPoint: center coordinate [x,y]</span>
+<span class="sd">        :param width: dimension in X direction</span>
+<span class="sd">        :param height: dimension in Y direction</span>
+<span class="sd">        :param radiusX: rounding radius in X direction. If this value is ``None``, the rectangle will have sharp corners. Default: None</span>
+<span class="sd">        :param radiusY: rounding radius in Y direction. If this value is ``None``, then radiusX will also be used in Y direction. If radiusX is also ``None``, then the rectangle will have sharp corners. Default: None</span>
+<span class="sd">        :param offset: extra offset coords [x,y]</span>
+<span class="sd">        :param label: label of the line. Default &#39;circle&#39;</span>
+<span class="sd">        :param lineStyle: line style to be used. See class ``lineStyle``. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+
+<span class="sd">        :type parent: inkscapeMadeEasy object (see example below)</span>
+<span class="sd">        :type centerPoint: list</span>
+<span class="sd">        :type width: float</span>
+<span class="sd">        :type height: float</span>
+<span class="sd">        :type radiusX: float</span>
+<span class="sd">        :type radiusY: float</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+
+<span class="sd">        :returns: the new rectangle object</span>
+<span class="sd">        :rtype: rectangle Object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; import inkex</span>
+<span class="sd">        &gt;&gt;&gt; import inkscapeMadeEasy_Base as inkBase</span>
+<span class="sd">        &gt;&gt;&gt; import inkscapeMadeEasy_Draw as inkDraw</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; class myExtension(inkBase.inkscapeMadeEasy):</span>
+<span class="sd">        &gt;&gt;&gt;   def __init__(self):</span>
+<span class="sd">        &gt;&gt;&gt;     ...</span>
+<span class="sd">        &gt;&gt;&gt;     ...</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt;   def effect(self):</span>
+<span class="sd">        &gt;&gt;&gt;     root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt;     myLineStyle=inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;     </span>
+<span class="sd">        &gt;&gt;&gt;     #draws a 50x60 rectangle with radiusX=2.0 and radiusY=3.0</span>
+<span class="sd">        &gt;&gt;&gt;     inkDraw.rectangle.widthHeightCenter(parent=root_layer, centerPoint=[0,0], width=50, height=60, radiusX=2.0,radiusY=3.0, offset=[0,0], label=&#39;rect1&#39;,  lineStyle=myLineStyle)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="o">=</span> <span class="n">centerPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">width</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y</span><span class="o">=</span> <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">height</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">Attribs</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;inkscape&#39;</span><span class="p">):</span> <span class="n">label</span><span class="p">,</span>
+                      <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="n">simplestyle</span><span class="o">.</span><span class="n">formatStyle</span><span class="p">(</span><span class="n">lineStyle</span><span class="p">),</span>
+                      <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
+                      <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">height</span><span class="p">),</span>
+                      <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                      <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+                      <span class="s1">&#39;rx&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">),</span>
+                      <span class="s1">&#39;ry&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusY</span><span class="p">)}</span>
+        
+        <span class="k">if</span> <span class="n">radiusX</span> <span class="ow">and</span> <span class="n">radiusX</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
+          <span class="n">Attribs</span><span class="p">[</span><span class="s1">&#39;rx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">)</span>
+          <span class="k">if</span> <span class="n">radiusY</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">Attribs</span><span class="p">[</span><span class="s1">&#39;ry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">)</span>
+          <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">radiusY</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+              <span class="n">Attribs</span><span class="p">[</span><span class="s1">&#39;ry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusY</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="rectangle.corners"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.corners">[docs]</a>    <span class="k">def</span> <span class="nf">corners</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">corner1</span><span class="p">,</span> <span class="n">corner2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+        <span class="sd">&quot;&quot;&quot;draws a rectangle given the coordinates of two oposite corners</span>
+
+<span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param parent: parent object</span>
+<span class="sd">        :param corner1: coordinates of corner 1 [x,y]</span>
+<span class="sd">        :param corner2: coordinates of corner 1 [x,y]</span>
+<span class="sd">        :param radiusX: rounding radius in X direction. If this value is ``None``, the rectangle will have sharp corners. Default: None</span>
+<span class="sd">        :param radiusY: rounding radius in Y direction. If this value is ``None``, then radiusX will also be used in Y direction. If radiusX is also ``None``, then the rectangle will have sharp corners. Default: None</span>
+<span class="sd">        :param offset: extra offset coords [x,y]</span>
+<span class="sd">        :param label: label of the line. Default &#39;circle&#39;</span>
+<span class="sd">        :param lineStyle: line style to be used. See class ``lineStyle``. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+
+<span class="sd">        :type parent: inkscapeMadeEasy object (see example below)</span>
+<span class="sd">        :type corner1: list</span>
+<span class="sd">        :type corner2: list</span>
+<span class="sd">        :type radiusX: float</span>
+<span class="sd">        :type radiusY: float</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+
+<span class="sd">        :returns: the new rectangle object</span>
+<span class="sd">        :rtype: rectangle Object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; import inkex</span>
+<span class="sd">        &gt;&gt;&gt; import inkscapeMadeEasy_Base as inkBase</span>
+<span class="sd">        &gt;&gt;&gt; import inkscapeMadeEasy_Draw as inkDraw</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; class myExtension(inkBase.inkscapeMadeEasy):</span>
+<span class="sd">        &gt;&gt;&gt;   def __init__(self):</span>
+<span class="sd">        &gt;&gt;&gt;     ...</span>
+<span class="sd">        &gt;&gt;&gt;     ...</span>
+<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt;   def effect(self):</span>
+<span class="sd">        &gt;&gt;&gt;     root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt;     myLineStyle=inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;     </span>
+<span class="sd">        &gt;&gt;&gt;     #draws a rectangle with corners C1=[1,5] and C2=[6,10], with radiusX=2.0 and radiusY=3.0</span>
+<span class="sd">        &gt;&gt;&gt;     inkDraw.rectangle.corners(parent=root_layer, corner1=[1,5], corner2=[6,10], radiusX=2.0,radiusY=3.0, offset=[0,0], label=&#39;rect1&#39;,  lineStyle=myLineStyle)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="o">=</span> <span class="p">(</span><span class="n">corner1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">corner2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="n">y</span><span class="o">=</span> <span class="p">(</span><span class="n">corner1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">corner2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mf">2.0</span>
+        
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">corner1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">corner2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">corner1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">corner2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">)</span>    </div></div>
+     
 <div class="viewcode-block" id="ellipse"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.ellipse">[docs]</a><span class="k">class</span> <span class="nc">ellipse</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; This is a class with different methods for drawing ellipses.</span>
 
