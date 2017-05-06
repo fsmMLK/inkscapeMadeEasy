@@ -1,3 +1,9 @@
+2017-05may-06
+-------------
+
+inkscapeMadeEeasy_Draw.py
+  - added a class and two methods to draw rectangles.
+
 2016-11nov-02
 -------------
 
