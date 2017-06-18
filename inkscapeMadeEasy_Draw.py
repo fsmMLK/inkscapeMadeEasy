@@ -315,8 +315,7 @@ class color():
              <_option value="red">red</_option>
              <_option value="blue">blue</_option>
              <_option value="yellow">yellow</_option>
-             <_option value="green">green</_option>
-             <_option value="purple">purple</_option>          <-- these are all standardized colors in inkscapeMadeEasy_Draw.color class!
+             <_option value="green">green</_option>          <-- these are all standardized colors in inkscapeMadeEasy_Draw.color class!
              <_option value="magen">magenta</_option>
              <_option value="white">white</_option>
              <_option value="Lred">Lred</_option>
