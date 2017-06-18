@@ -1,8 +1,15 @@
+2017-05may-18
+-------------
+
+inkscapeMadeEeasy_Draw.py
+  - fixed documentation on predefined color 'purple'
+
 2017-05may-06
 -------------
 
 inkscapeMadeEeasy_Draw.py
   - added a class and two methods to draw rectangles.
+
 2017-06jun-18
 -------------
 
