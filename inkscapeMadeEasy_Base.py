@@ -464,13 +464,13 @@ class inkscapeMadeEasy(inkex.Effect):
 
         if element.tag == inkex.addNS('path', 'svg') or element.tag == 'path':  # if object is path
 
-
             dString = re.sub('([a-df-zA-DF-Z])+?', r'#\1#', element.attrib['d']).replace('z', '').replace('Z', '').replace(',', ' ').split('#')  # adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S
 
             dString = [i.lstrip() for i in dString]  # removes leading spaces from strings
             dString = filter(None, dString)  # removes empty elements
             Xcurrent = 0
             Ycurrent = 0
+
             while len(dString) > 0:
                 commandType = dString[0]
                 argument = [float(x) for x in dString[1].split()]  # extracts arguments from M command and converts to float
@@ -502,18 +502,28 @@ class inkscapeMadeEasy(inkex.Effect):
                     Y = argument[6::7]  # 7 parameters per segment, y is 7th
 
                 if commandType in 'h':  # if h
-                    for i in range(1, len(X)):  # convert to abs coordinates
-                        X[i] = X[i] + X[i - 1]
+                    for i in range(0, len(X)):  # convert to abs coordinates
+                        if i==0:
+                            X[i] = X[i] + Xcurrent
+                        else:
+                            X[i] = X[i] + X[i - 1]
 
                 if commandType in 'v':  # if v
-                    for i in range(1, len(Y)):  # convert to abs coordinates
-                        Y[i] = Y[i] + Y[i - 1]
-
+                    for i in range(0, len(Y)):  # convert to abs coordinates
+                        if i==0:
+                            Y[i] = Y[i] + Ycurrent
+                        else:
+                            Y[i] = Y[i] + Y[i - 1]
+                       
                 if commandType in 'mltcsqa':  # if m or l
-                    for i in range(1, len(X)):  # convert to abs coordinates
-                        X[i] = X[i] + X[i - 1]
-                        Y[i] = Y[i] + Y[i - 1]
-
+                    for i in range(0, len(X)):  # convert to abs coordinates
+                        if i==0:
+                            X[i] = X[i] + Xcurrent
+                            Y[i] = Y[i] + Ycurrent
+                        else:
+                            X[i] = X[i] + X[i - 1]
+                            Y[i] = Y[i] + Y[i - 1]
+                            
                 coords = zip(X, Y)
                 listCoords.extend(coords)
                 Xcurrent = X[-1]

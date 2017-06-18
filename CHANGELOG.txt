@@ -3,6 +3,11 @@
 
 inkscapeMadeEeasy_Draw.py
   - added a class and two methods to draw rectangles.
+2017-06jun-18
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - fix a bug in getPoints method.
 
 2016-11nov-02
 -------------
