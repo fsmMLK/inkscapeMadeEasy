@@ -605,3 +605,4 @@ class inkscapeMadeEasy(inkex.Effect):
         bboxCenter = [(bboxMax[0] + bboxMin[0]) / 2, (bboxMax[1] + bboxMin[1]) / 2]
 
         return bboxCenter
+

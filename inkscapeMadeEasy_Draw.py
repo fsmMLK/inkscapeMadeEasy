@@ -1021,7 +1021,7 @@ class text():
         """Adds a text line to the document
 
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
-        :param text: text to be drawn
+        :param text: text to be drawn. Use \n in the string to start a new line
         :param coords: position [x,y]
         :param parent: parent object
         :param textStyle: text style to be used. See class ``textStyle``. Default: textStyle.setSimpleBlack(fontSize=10,justification='left')
@@ -1060,12 +1060,15 @@ class text():
         >>>     root_layer = self.document.getroot()     # retrieves the root layer of the document
         >>>     mySimpleStyle = inkDraw.textStyle.setSimpleBlack(fontSize=20,justification='center')  # creates a simple text style.
         >>>     
-        >>>     #adds a text 'foobar', at the point x=5.0,y=6.0
-        >>>     inkDraw.text.write(self, text='foo bar', coords=[5.0,6.0], parent=root_layer, textStyle=mySimpleStyle, fontSize=None, justification=None, angleDeg=0.0)
+        >>>     #adds a two-line text, at the point x=5.0,y=6.0
+        >>>     #               L1: 'foo bar who-hoo!'
+        >>>     #               L2: 'second line!'
+        >>>     myText='foo bar who-hoo!\ntwo lines!'
+        >>>     inkDraw.text.write(self, text=myText, coords=[5.0,6.0], parent=root_layer, textStyle=mySimpleStyle, fontSize=None, justification=None, angleDeg=0.0)
         >>> 
         >>>     # creates a group in root-layer and add text to it
         >>>     myGroup = self.createGroup(parent=root_layer,'textGroup')
-        >>>     #adds a text 'foobar', rotated 45 degrees, at the point x=0,y=0, overriding justification of mySimpleStyle
+        >>>     #adds a text 'foo bar', rotated 45 degrees, at the point x=0,y=0, overriding justification of mySimpleStyle
         >>>     inkDraw.text.write(self, text='foo bar', coords=[0.0,0.0], parent=myGroup, textStyle=mySimpleStyle, fontSize=None, justification='left', angleDeg=45.0)
 
         """
@@ -1098,9 +1101,13 @@ class text():
                            'x': str(coords[0]),
                            'y': str(coords[1])}
 
-        myTspan = inkex.etree.SubElement(textObj, inkex.addNS('tspan', 'svg'), AttribsLineText)
-        myTspan.text = text
-
+        textLines=text.split('\\n')
+        
+        for n in range(len(textLines)):
+          displayMsg(textLines[n])
+          myTspan = inkex.etree.SubElement(textObj, inkex.addNS('tspan', 'svg'), AttribsLineText)
+          myTspan.text = textLines[n].decode('utf-8')   
+          
         if angleDeg != 0:
             ExtensionBaseObj.rotateElement(textObj, center=coords, angleDeg=angleDeg)  # negative angle bc inkscape is upside down
 

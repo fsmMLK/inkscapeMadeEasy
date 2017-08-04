@@ -1,3 +1,9 @@
+2017-08aug-04
+-------------
+
+inkscapeMadeEeasy_Draw.py
+  - now text.write() allows multi-line text.
+
 2017-05may-18
 -------------
 
