@@ -1021,7 +1021,7 @@ class text():
         """Adds a text line to the document
 
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
-        :param text: text to be drawn. Use \n in the string to start a new line
+        :param text: text to be drawn. Use \\\\n in the string to start a new line
         :param coords: position [x,y]
         :param parent: parent object
         :param textStyle: text style to be used. See class ``textStyle``. Default: textStyle.setSimpleBlack(fontSize=10,justification='left')
@@ -1063,7 +1063,7 @@ class text():
         >>>     #adds a two-line text, at the point x=5.0,y=6.0
         >>>     #               L1: 'foo bar who-hoo!'
         >>>     #               L2: 'second line!'
-        >>>     myText='foo bar who-hoo!\ntwo lines!'
+        >>>     myText='foo bar who-hoo!\\ntwo lines!'
         >>>     inkDraw.text.write(self, text=myText, coords=[5.0,6.0], parent=root_layer, textStyle=mySimpleStyle, fontSize=None, justification=None, angleDeg=0.0)
         >>> 
         >>>     # creates a group in root-layer and add text to it
