@@ -1446,55 +1446,31 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dt id="inkscapeMadeEasy_Draw.text.write">
 <em class="property">static </em><code class="descname">write</code><span class="sig-paren">(</span><em>ExtensionBaseObj</em>, <em>text</em>, <em>coords</em>, <em>parent</em>, <em>textStyle={'font-size': '10px'</em>, <em>'fill-opacity': '1'</em>, <em>'letter-spacing': '0px'</em>, <em>'word-spacing': '0px'</em>, <em>'stroke': 'none'</em>, <em>'text-align': 'start'</em>, <em>'font-family': 'Sans'</em>, <em>'font-style': 'normal'</em>, <em>'fill': '#000000'</em>, <em>'text-anchor': 'start'</em>, <em>'font-weight': 'normal'</em>, <em>'line-height': '100%'}</em>, <em>fontSize=None</em>, <em>justification=None</em>, <em>angleDeg=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#text.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.text.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a text line to the document</p>
-<blockquote>
-<div><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param ExtensionBaseObj:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Most of the times you have to use &#8216;self&#8217; from inkscapeMadeEasy related objects</td>
-</tr>
-<tr class="field-even field"><th class="field-name">param text:</th><td class="field-body">text to be drawn. Use \n in the string to start a new line</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">param coords:</th><td class="field-body">position [x,y]</td>
-</tr>
-<tr class="field-even field"><th class="field-name">param parent:</th><td class="field-body">parent object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param textStyle:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">text style to be used. See class <code class="docutils literal"><span class="pre">textStyle</span></code>. Default: textStyle.setSimpleBlack(fontSize=10,justification=&#8217;left&#8217;)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">param fontSize:</th><td class="field-body">size of the font in px.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ExtensionBaseObj</strong> (<em>inkscapeMadeEasy object (see example below)</em>) &#8211; Most of the times you have to use &#8216;self&#8217; from inkscapeMadeEasy related objects</li>
+<li><strong>text</strong> (<em>string</em>) &#8211; text to be drawn. Use \n in the string to start a new line</li>
+<li><strong>coords</strong> (<em>list</em>) &#8211; position [x,y]</li>
+<li><strong>parent</strong> (<em>element object</em>) &#8211; parent object</li>
+<li><strong>textStyle</strong> (<em>textStyle object</em>) &#8211; text style to be used. See class <code class="docutils literal"><span class="pre">textStyle</span></code>. Default: textStyle.setSimpleBlack(fontSize=10,justification=&#8217;left&#8217;)</li>
+<li><strong>fontSize</strong> (<em>float</em>) &#8211; size of the font in px.
 - <code class="docutils literal"><span class="pre">None</span></code>: Uses fontSize of textStyle argument (Default)
-- number: takes precedence over the size on textStyle</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">param justification:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">text justification. <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">right</span></code>, <code class="docutils literal"><span class="pre">center</span></code>
+- number: takes precedence over the size on textStyle</li>
+<li><strong>justification</strong> (<em>string</em>) &#8211; text justification. <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">right</span></code>, <code class="docutils literal"><span class="pre">center</span></code>
 - <code class="docutils literal"><span class="pre">None</span></code>: Uses justification of textStyle argument (Default)
-- <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">right</span></code>, <code class="docutils literal"><span class="pre">center</span></code>: takes precedence over the justification set on textStyle</td>
+- <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">right</span></code>, <code class="docutils literal"><span class="pre">center</span></code>: takes precedence over the justification set on textStyle</li>
+<li><strong>angleDeg</strong> (<em>float</em>) &#8211; angle of the text, counterclockwise, in degrees. Default: 0</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">param angleDeg:</th><td class="field-body">angle of the text, counterclockwise, in degrees. Default: 0</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new text object</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">type ExtensionBaseObj:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">inkscapeMadeEasy object (see example below)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type text:</th><td class="field-body">string</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">type coords:</th><td class="field-body">list</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type parent:</th><td class="field-body">element object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">type textStyle:</th><td class="field-body">textStyle object</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type fontSize:</th><td class="field-body">float</td>
-</tr>
-<tr class="field-odd field"><th class="field-name" colspan="2">type justification:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">string</td>
-</tr>
-<tr class="field-even field"><th class="field-name">type angleDeg:</th><td class="field-body">float</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">the new text object</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">text Object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">text Object</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1515,13 +1491,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#adds a two-line text, at the point x=5.0,y=6.0</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#               L1: &#39;foo bar who-hoo!&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#               L2: &#39;second line!&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myText</span><span class="o">=</span><span class="s1">&#39;foo bar who-hoo!</span>
-</pre></div>
-</div>
-</div></blockquote>
-<dl class="docutils">
-<dt>two lines!&#8217;</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">myText</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">],</span> <span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mySimpleStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myText</span><span class="o">=</span><span class="s1">&#39;foo bar who-hoo!</span><span class="se">\\</span><span class="s1">ntwo lines!&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">myText</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">],</span> <span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mySimpleStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># creates a group in root-layer and add text to it</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">myGroup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span><span class="s1">&#39;textGroup&#39;</span><span class="p">)</span>
@@ -1529,8 +1500,6 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;foo bar&#39;</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">parent</span><span class="o">=</span><span class="n">myGroup</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mySimpleStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">45.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="staticmethod">
