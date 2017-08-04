@@ -1104,7 +1104,6 @@ class text():
         textLines=text.split('\\n')
         
         for n in range(len(textLines)):
-          displayMsg(textLines[n])
           myTspan = inkex.etree.SubElement(textObj, inkex.addNS('tspan', 'svg'), AttribsLineText)
           myTspan.text = textLines[n].decode('utf-8')   
           
