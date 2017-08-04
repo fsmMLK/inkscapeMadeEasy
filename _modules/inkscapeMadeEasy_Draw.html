@@ -1070,7 +1070,7 @@
         <span class="sd">&quot;&quot;&quot;Adds a text line to the document</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
-<span class="sd">        :param text: text to be drawn</span>
+<span class="sd">        :param text: text to be drawn. Use \n in the string to start a new line</span>
 <span class="sd">        :param coords: position [x,y]</span>
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param textStyle: text style to be used. See class ``textStyle``. Default: textStyle.setSimpleBlack(fontSize=10,justification=&#39;left&#39;)</span>
@@ -1109,12 +1109,15 @@
 <span class="sd">        &gt;&gt;&gt;     root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
 <span class="sd">        &gt;&gt;&gt;     mySimpleStyle = inkDraw.textStyle.setSimpleBlack(fontSize=20,justification=&#39;center&#39;)  # creates a simple text style.</span>
 <span class="sd">        &gt;&gt;&gt;     </span>
-<span class="sd">        &gt;&gt;&gt;     #adds a text &#39;foobar&#39;, at the point x=5.0,y=6.0</span>
-<span class="sd">        &gt;&gt;&gt;     inkDraw.text.write(self, text=&#39;foo bar&#39;, coords=[5.0,6.0], parent=root_layer, textStyle=mySimpleStyle, fontSize=None, justification=None, angleDeg=0.0)</span>
+<span class="sd">        &gt;&gt;&gt;     #adds a two-line text, at the point x=5.0,y=6.0</span>
+<span class="sd">        &gt;&gt;&gt;     #               L1: &#39;foo bar who-hoo!&#39;</span>
+<span class="sd">        &gt;&gt;&gt;     #               L2: &#39;second line!&#39;</span>
+<span class="sd">        &gt;&gt;&gt;     myText=&#39;foo bar who-hoo!\ntwo lines!&#39;</span>
+<span class="sd">        &gt;&gt;&gt;     inkDraw.text.write(self, text=myText, coords=[5.0,6.0], parent=root_layer, textStyle=mySimpleStyle, fontSize=None, justification=None, angleDeg=0.0)</span>
 <span class="sd">        &gt;&gt;&gt; </span>
 <span class="sd">        &gt;&gt;&gt;     # creates a group in root-layer and add text to it</span>
 <span class="sd">        &gt;&gt;&gt;     myGroup = self.createGroup(parent=root_layer,&#39;textGroup&#39;)</span>
-<span class="sd">        &gt;&gt;&gt;     #adds a text &#39;foobar&#39;, rotated 45 degrees, at the point x=0,y=0, overriding justification of mySimpleStyle</span>
+<span class="sd">        &gt;&gt;&gt;     #adds a text &#39;foo bar&#39;, rotated 45 degrees, at the point x=0,y=0, overriding justification of mySimpleStyle</span>
 <span class="sd">        &gt;&gt;&gt;     inkDraw.text.write(self, text=&#39;foo bar&#39;, coords=[0.0,0.0], parent=myGroup, textStyle=mySimpleStyle, fontSize=None, justification=&#39;left&#39;, angleDeg=45.0)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1147,9 +1150,13 @@
                            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
 
-        <span class="n">myTspan</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">textObj</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;tspan&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">AttribsLineText</span><span class="p">)</span>
-        <span class="n">myTspan</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
-
+        <span class="n">textLines</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">textLines</span><span class="p">)):</span>
+          <span class="n">displayMsg</span><span class="p">(</span><span class="n">textLines</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+          <span class="n">myTspan</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">textObj</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;tspan&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">AttribsLineText</span><span class="p">)</span>
+          <span class="n">myTspan</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">textLines</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>   
+          
         <span class="k">if</span> <span class="n">angleDeg</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">rotateElement</span><span class="p">(</span><span class="n">textObj</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="n">angleDeg</span><span class="p">)</span>  <span class="c1"># negative angle bc inkscape is upside down</span>
 
