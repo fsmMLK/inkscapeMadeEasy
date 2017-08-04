@@ -1447,7 +1447,6 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <em class="property">static </em><code class="descname">write</code><span class="sig-paren">(</span><em>ExtensionBaseObj</em>, <em>text</em>, <em>coords</em>, <em>parent</em>, <em>textStyle={'font-size': '10px'</em>, <em>'fill-opacity': '1'</em>, <em>'letter-spacing': '0px'</em>, <em>'word-spacing': '0px'</em>, <em>'stroke': 'none'</em>, <em>'text-align': 'start'</em>, <em>'font-family': 'Sans'</em>, <em>'font-style': 'normal'</em>, <em>'fill': '#000000'</em>, <em>'text-anchor': 'start'</em>, <em>'font-weight': 'normal'</em>, <em>'line-height': '100%'}</em>, <em>fontSize=None</em>, <em>justification=None</em>, <em>angleDeg=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#text.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.text.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a text line to the document</p>
 <blockquote>
-<div><blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1455,17 +1454,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <tr class="field-odd field"><th class="field-name" colspan="2">param ExtensionBaseObj:</th></tr>
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Most of the times you have to use &#8216;self&#8217; from inkscapeMadeEasy related objects</td>
 </tr>
-<tr class="field-even field"><th class="field-name">param text:</th><td class="field-body">text to be drawn. Use</td>
+<tr class="field-even field"><th class="field-name">param text:</th><td class="field-body">text to be drawn. Use n in the string to start a new line</td>
 </tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="docutils">
-<dt>in the string to start a new line</dt>
-<dd><table class="first docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
 <tr class="field-odd field"><th class="field-name">param coords:</th><td class="field-body">position [x,y]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">param parent:</th><td class="field-body">parent object</td>
@@ -1509,7 +1499,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
 <span class="gp">&gt;&gt;&gt; </span>
@@ -1528,8 +1518,6 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">myText</span><span class="o">=</span><span class="s1">&#39;foo bar who-hoo!</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </div></blockquote>
 <dl class="docutils">
 <dt>two lines!&#8217;</dt>
