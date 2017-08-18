@@ -143,7 +143,8 @@
 <div class="section" id="installation-and-requirements">
 <span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
 <p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
-<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.</p>
+<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), pygtk, Tkinter, sys and os.</p>
+<p>You will also need the command: pstoedit. Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
 <p>In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Base.py
@@ -281,6 +282,41 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">writes</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector2</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">append</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">
+<code class="descname">removeElement</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.removeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to remove one element or group. If the parent of the element is a group and has no other children, then the parent is also removed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> (<em>element object</em>) &#8211; element object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                              <span class="c1"># retrieves the root layer of the file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>                <span class="c1"># creates a group inside rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line1</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># creates a line in rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line3</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># creates a line in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">removeElement</span><span class="p">(</span><span class="n">line1</span><span class="p">)</span>                              <span class="c1"># removes line 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">removeElement</span><span class="p">(</span><span class="n">line2</span><span class="p">)</span>                              <span class="c1"># removes line 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">removeElement</span><span class="p">(</span><span class="n">line3</span><span class="p">)</span>                              <span class="c1"># removes line 3. Also removes groupA since this group has no other children</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp1&#39;</span><span class="p">)</span>                <span class="c1"># creates a group inside rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line4</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">removeElement</span><span class="p">(</span><span class="n">groupB</span><span class="p">)</span>                              <span class="c1"># removes group B and all its children</span>
 </pre></div>
 </div>
 </dd></dl>

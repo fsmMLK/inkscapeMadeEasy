@@ -161,7 +161,39 @@
         <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-    <span class="c1">#</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.removeElement"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">[docs]</a>    <span class="k">def</span> <span class="nf">removeElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to remove one element or group. If the parent of the element is a group and has no other children, then the parent is also removed.</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                              # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; groupA = self.createGroup(rootLayer,label=&#39;temp&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[5,0]],[0,0])       # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; line2 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0]],[0,0])    # creates a line in rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; line3 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[15,0]],[10,0])    # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; self.removeElement(line1)                              # removes line 1</span>
+<span class="sd">        &gt;&gt;&gt; self.removeElement(line2)                              # removes line 2</span>
+<span class="sd">        &gt;&gt;&gt; self.removeElement(line3)                              # removes line 3. Also removes groupA since this group has no other children</span>
+<span class="sd">        &gt;&gt;&gt; groupB = self.createGroup(rootLayer,label=&#39;temp1&#39;)                # creates a group inside rootLayer</span>
+<span class="sd">        &gt;&gt;&gt; line4 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[5,0]],[0,0])       # creates a line in groupB</span>
+<span class="sd">        &gt;&gt;&gt; self.removeElement(groupB)                              # removes group B and all its children</span>
+<span class="sd">   </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span> 
+          
+        <span class="n">parent</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span><span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">getchildren</span><span class="p">())</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>  <span class="c1"># if object&#39;s parent is a group and has no other children, remove parent as well</span>
+          <span class="c1">#self.Dump(len(parent.getchildren()),&#39;/home/fernando/lixo.txt&#39;,&#39;w&#39;)</span>
+          <span class="n">parent</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span></div>
+          
+          
 <div class="viewcode-block" id="inkscapeMadeEasy.uniqueIdNumber"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber">[docs]</a>    <span class="k">def</span> <span class="nf">uniqueIdNumber</span><span class="p">(</span><span class="n">prefix_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Generates a unique ID with a given prefix ID by adding a numeric suffix</span>
 
