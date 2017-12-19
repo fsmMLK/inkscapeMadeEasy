@@ -1157,10 +1157,10 @@ class text():
 
         When a preamble file is not provided, inkscapeMadeEasy assumes a standard preamble file located at ``./textextLib/basicLatexPackages.tex``. By default, its contents is::
 
-          \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
-          \usepackage[per=slash]{siunitx}
-          \usepackage{steinmetz}
-          \usepackage[utf8]{inputenc}
+          \\usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
+          \\usepackage[per=slash]{siunitx}
+          \\usepackage{steinmetz}
+          \\usepackage[utf8]{inputenc}
 
         You will need these packages installed. This file can be modified to include extra default packages and/or commands.
 
@@ -1168,7 +1168,7 @@ class text():
 
         LaTeX .tex document have the following structure. Note that LatexCommands lies within document environment::
 
-          \documentclass[landscape,a0]{article}
+          \\documentclass[landscape,a0]{article}
 
           [contents of Preamble file]
 
@@ -1181,7 +1181,7 @@ class text():
 
           [contens of LaTeXtext]
 
-          \end{document}
+          \\end{document}
 
 
         **Example**

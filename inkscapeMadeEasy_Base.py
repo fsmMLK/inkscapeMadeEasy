@@ -69,9 +69,9 @@ class inkscapeMadeEasy(inkex.Effect):
 
         The default packages are::
 
-        \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
-        \usepackage[per=slash]{siunitx}
-        \usepackage{steinmetz}
+        \\usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
+        \\usepackage[per=slash]{siunitx}
+        \\usepackage{steinmetz}
 
         You can add other packages to the file ``basicLatexPackages.tex``, located in the extension directory.
 
@@ -578,7 +578,9 @@ class inkscapeMadeEasy(inkex.Effect):
 
         # creates numpy array with the points to be transformed
         coordsNP = np.hstack((np.array(listCoords), np.ones([len(listCoords), 1]))).transpose()
-
+        
+        self.Dump(coordsNP,'/home/fernando/lixo.txt', mode='w')
+        
         coordsTransformed = np.dot(transfMat, coordsNP)
         coordsTransformed = np.delete(coordsTransformed, 2, 0).transpose().tolist()  # remove last line, transposes and converts to list of lists
 

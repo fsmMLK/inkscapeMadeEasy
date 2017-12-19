@@ -1,3 +1,12 @@
+
+2017-11nov-19
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - added a function to erase elements:  removeElement(element)
+  - escaped some backslashes missing in the documentation sections. This caused issues for some users.
+
+
 2017-08aug-04
 -------------
 
