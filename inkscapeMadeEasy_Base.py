@@ -112,7 +112,39 @@ class inkscapeMadeEasy(inkex.Effect):
         file.write(str(obj) + '\n')
         file.close()
 
-    #
+    def removeElement(self,element):
+        """Function to remove one element or group. If the parent of the element is a group and has no other children, then the parent is also removed.
+
+        :param element: element object
+        :type element: element object
+        :returns:  nothing
+        :rtype: -
+
+        **Example**
+
+        >>> rootLayer = self.document.getroot()                              # retrieves the root layer of the file
+        >>> groupA = self.createGroup(rootLayer,label='temp')                # creates a group inside rootLayer
+        >>> line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[5,0]],[0,0])       # creates a line in groupA
+        >>> line2 = inkscapeMadeEasy_Draw.line.relCoords(rootLayer, [[5,0]],[0,0])    # creates a line in rootLayer
+        >>> line3 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[15,0]],[10,0])    # creates a line in groupA
+        >>> self.removeElement(line1)                              # removes line 1
+        >>> self.removeElement(line2)                              # removes line 2
+        >>> self.removeElement(line3)                              # removes line 3. Also removes groupA since this group has no other children
+        >>> groupB = self.createGroup(rootLayer,label='temp1')                # creates a group inside rootLayer
+        >>> line4 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[5,0]],[0,0])       # creates a line in groupB
+        >>> self.removeElement(groupB)                              # removes group B and all its children
+   
+        """
+        
+        parent = element.getparent() 
+          
+        parent.remove(element)
+        
+        if parent.tag == 'g'and len(parent.getchildren())==0:  # if object's parent is a group and has no other children, remove parent as well
+          #self.Dump(len(parent.getchildren()),'/home/fernando/lixo.txt','w')
+          parent.getparent().remove(parent)
+          
+          
     def uniqueIdNumber(prefix_id):
         """ Generates a unique ID with a given prefix ID by adding a numeric suffix
 

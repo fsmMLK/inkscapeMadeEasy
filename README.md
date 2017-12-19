@@ -1,6 +1,6 @@
 # inkscapeMadeEasy
 
-This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the development of new extensions for Inkscape <https://inkscape.org>.
+This set of python modules is intended to extend Aaron Spike's inkex.py module <https://github.com/inkscape/inkscape/blob/bzr-original/share/extensions/inkex.py>, adding functions to help the development of new extensions for Inkscape <https://inkscape.org>.
 
 Here you will find methods and classes to deal with drawings, styles, markers, texts, plots, etc. It is a work-in-progress project and new features will be added in the future. However there is no roadmap right now.
 

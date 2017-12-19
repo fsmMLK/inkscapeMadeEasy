@@ -142,6 +142,9 @@ These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubun
 
 The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.
 
+If you want LaTeX support, you will also need the python modules pygtk and Tkinter. You will also need the command 'pstoedit'. Linux users can install from your prefered package manager. Windows users can download it from its website.
+
+
 In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure
 
 >>> inkscape/extensions/
