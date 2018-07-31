@@ -18,6 +18,7 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 - **polarAxes2D**             <https://github.com/fsmMLK/inkscapePolarAxes2D>
 - **logicGates**              <https://github.com/fsmMLK/inkscapeLogicGates>
 - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
+- **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
 ## History and Objectives
 

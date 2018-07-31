@@ -179,7 +179,6 @@ class axis():
 
     .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
 
-    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
 
     """
     @staticmethod
@@ -190,8 +189,6 @@ class axis():
         """Creates the axes for cartesian plot
 
         .. note:: This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
     
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -559,8 +556,6 @@ class axis():
         """Creates the axes for polar plot
 
         .. note:: This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -879,8 +874,6 @@ class plot():
     This class contains only static methods so that you don't have to inherit this in your class
 
     .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-    .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
     
     """
     @staticmethod
@@ -892,8 +885,6 @@ class plot():
         """Cartesian Plot
         
         .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -1152,8 +1143,6 @@ class plot():
         """Polar Plot
 
         .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -1380,8 +1369,6 @@ class plot():
         """Stem plot in Cartesian axis
 
         .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
-
-        .. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object

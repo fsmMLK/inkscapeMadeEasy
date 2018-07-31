@@ -1,4 +1,11 @@
 
+2018-07jul-31
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - added two new funcions: getSegmentParameters and getSegmentFromPoints
+  - Removed the GUI of the textex module and its dependencies with GUI modules. It might be easier now to run the extensions under Windows/Mac
+
 2017-11nov-19
 -------------
 

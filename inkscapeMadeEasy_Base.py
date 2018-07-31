@@ -28,6 +28,7 @@ from lxml.etree import tostring
 import numpy as np
 import os
 import sys
+import math
 
 """
 Base helper module that extends Aaron Spike's inkex.py module, adding basic manipulation functions
@@ -638,3 +639,99 @@ class inkscapeMadeEasy(inkex.Effect):
 
         return bboxCenter
 
+    def getSegmentFromPoints(self, pointList,normalDirection='R'):
+        """given two points of a straight line segment, returns the parameters of that segment:
+        
+        length, angle (in radians), tangent unitary vector and normal unitary vector
+
+        :param pointList: start and end coordinates [ Pstart, Pend ]
+        :param normalDirection:
+        
+          - 'R': normal vector points to the right of the tangent vector (Default)
+          - 'L': normal vector points to the left of the tangent vector (Default)
+          
+        :type pointList: list of points
+        :type normalDirection: string
+    
+        :returns: list: [length, theta, t_versor,n_versor]
+        :rtype: list
+        
+        **Example**
+
+        >>> segementParam = getSegmentParameters([1,1],[2,2],'R')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]
+        >>> segementParam = getSegmentParameters([1,1],[2,2],'L')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]
+
+        """
+
+        # tangent versor (pointing P2)
+        P1=np.array(pointList[0])
+        P2=np.array(pointList[1])
+        
+        t_vector=P2-P1
+        length=np.linalg.norm(t_vector)
+        t_versor=t_vector/length
+        
+        # normal vector: counter-clockwise with respect to tangent vector
+        if normalDirection in 'rR':
+          n_versor=np.array([t_versor[1],-t_versor[0]])
+        if normalDirection in 'lL':
+          n_versor=np.array([-t_versor[1],t_versor[0]])
+        
+        # angle
+        theta=math.atan2(t_versor[1],t_versor[0])
+        
+        return [length,theta,t_versor,n_versor]
+      
+      
+    def getSegmentParameters(self, element,normalDirection='R'):
+        """given a path segment composed by only two points, returns the parameters of that segment:
+        
+        length, angle (in radians), start point, end point, tangent unitary vector and normal unitary vector
+
+        This function works with paths only.
+
+        :param element: path element object
+        :param normalDirection:
+        
+          - 'R': normal vector points to the right of the tangent vector (Default)
+          - 'L': normal vector points to the left of the tangent vector (Default)
+          
+        :type element: element object
+        :type normalDirection: string
+        
+        :returns: list: [Pstart,Pend,length, theta, t_versor,n_versor]
+        :rtype: list
+
+        If the element is not a path, the function returns an empty list
+        If the path element has more than two points, the function returns an empty list
+        
+           
+        .. note:: This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object
+
+        **Example**
+
+        >>> rootLayer = self.document.getroot()                                      # retrieves the root layer of the file
+        >>> line1 = inkscapeMadeEasy_Draw.line.absCoords(rootLayer, [[1,1],[2,2]])   # creates a line in groupA
+        >>> segementList = getSegmentParameters(line1,'R')                               # returns [[1,1], [2,2],1.4142, 0.78540,  [0.7071,0.7071], [0.7071,-0.7071] ]
+
+        """
+        
+        
+        # check if element is valid. 'path'
+        accepted_strings = set( [ inkex.addNS('path', 'svg'), 'path'] )
+        if element.tag not in accepted_strings:
+            return []
+
+        listPoints = self.getPoints(element)
+        if len(listPoints) >2:  # if the path has more than two points
+            return []
+
+        data = self.getSegmentFromPoints( listPoints,normalDirection)
+        
+        return listPoints + data
+    
+    
+    
+    
+    
+    

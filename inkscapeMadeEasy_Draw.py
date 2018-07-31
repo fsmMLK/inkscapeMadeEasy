@@ -1254,8 +1254,8 @@ class text():
             
             mytextStyle = textStyle.setSimpleColor(fontSize=fontSize/0.76, justification='left', textColor=textColor)
             groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent,textStyle=mytextStyle, fontSize=fontSize/0.76,justification=justification, angleDeg=0.0) # attention! keep angleDeg=0.0 here bc it will be rotated below
-  
-  
+
+
         BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
         
         if useLatex:  # set useLatex=False to replace latex by an standard text (much faster for debugging =)  )
@@ -1592,8 +1592,8 @@ class arc():
         :type parent: inkscapeMadeEasy object (see example below)
         :type centerPoint: list
         :type radius: float
-        :type angStart: list
-        :type angEnd: list
+        :type angStart: float
+        :type angEnd: float
         :type offset: list
         :type label: string
         :type lineStyle: lineStyle object
