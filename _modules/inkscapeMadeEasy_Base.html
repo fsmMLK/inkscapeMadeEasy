@@ -705,8 +705,9 @@
 <span class="sd">        </span>
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentParameters([1,1],[2,2],&#39;R&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
-<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentParameters([1,1],[2,2],&#39;L&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
+<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentFromPoints([[1,1],[2,2]],&#39;R&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
+<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentFromPoints([[1,1],[2,2]],&#39;L&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
+
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -762,7 +763,6 @@
 <span class="sd">        &gt;&gt;&gt; segementList = getSegmentParameters(line1,&#39;R&#39;)                               # returns [[1,1], [2,2],1.4142, 0.78540,  [0.7071,0.7071], [0.7071,-0.7071] ]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        
         
         <span class="c1"># check if element is valid. &#39;path&#39;</span>
         <span class="n">accepted_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span> <span class="p">[</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="p">)</span>

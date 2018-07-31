@@ -143,7 +143,6 @@
 <span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
 <p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
 <p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.</p>
-<p>If you want LaTeX support, you will also need the python modules pygtk and Tkinter.</p>
 <p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter.</strong>  Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
 <p>In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
@@ -185,6 +184,7 @@
 <li><strong>polarAxes2D</strong>             &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapePolarAxes2D">https://github.com/fsmMLK/inkscapePolarAxes2D</a>&gt;</li>
 <li><strong>logicGates</strong>              &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeLogicGates">https://github.com/fsmMLK/inkscapeLogicGates</a>&gt;</li>
 <li><strong>circuitSymbols</strong>          &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCircuitSymbols">https://github.com/fsmMLK/inkscapeCircuitSymbols</a>&gt;</li>
+<li><strong>dimensions</strong>              &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeDimensions">https://github.com/fsmMLK/inkscapeDimensions</a>&gt;</li>
 </ul>
 </div></blockquote>
 </div>
@@ -686,8 +686,8 @@
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentParameters</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentParameters</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
 </pre></div>
 </div>
 </dd></dl>
