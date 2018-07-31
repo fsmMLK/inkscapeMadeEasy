@@ -1,32 +1,30 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>inkscapeMadeEasy_Draw &mdash; inkscapeMadeEasy 0.1 documentation</title>
-    
+    <title>inkscapeMadeEasy_Draw &#8212; inkscapeMadeEasy 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="inkscapeMadeEasy 0.1 documentation" href="../index.html" />
-    <link rel="up" title="Module code" href="index.html" /> 
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,8 +34,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -78,17 +76,17 @@
 <span class="k">try</span><span class="p">:</span>
   <span class="n">useLatex</span>
 <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-  <span class="n">useLatex</span><span class="o">=</span><span class="bp">True</span>
+  <span class="n">useLatex</span><span class="o">=</span><span class="kc">True</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">useLatex</span><span class="o">=</span><span class="bp">False</span>
+  <span class="n">useLatex</span><span class="o">=</span><span class="kc">False</span>
   
 <span class="kn">import</span> <span class="nn">inkex</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">simplestyle</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="k">import</span> <span class="n">tostring</span>
 <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>
-  <span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="kn">as</span> <span class="nn">textext</span>
+  <span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="k">as</span> <span class="nn">textext</span>
   
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
@@ -112,7 +110,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
     
-<div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.Dump">[docs]</a><span class="k">def</span> <span class="nf">Dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;./dump_file.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.Dump">[docs]</a><span class="k">def</span> <span class="nf">Dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;./dump_file.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Function to easily output the result of ``str(obj)`` to a file</span>
 
 <span class="sd">    This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function ``str()`` in a text file.</span>
@@ -137,9 +135,9 @@
 <span class="sd">    &gt;&gt;&gt; Dump(vector2,file=&#39;~/temporary.txt&#39;,mode=&#39;a&#39;)   % append the list to a file</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-    <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="color"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color">[docs]</a><span class="k">class</span> <span class="nc">color</span><span class="p">():</span>
@@ -153,8 +151,8 @@
 <span class="sd">    .. note:: alpha channel is not implemented yet. Assume alpha=1.0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="color.defined"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.defined">[docs]</a>    <span class="k">def</span> <span class="nf">defined</span><span class="p">(</span><span class="n">colorName</span><span class="p">):</span>
+<div class="viewcode-block" id="color.defined"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.defined">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">defined</span><span class="p">(</span><span class="n">colorName</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Returns the color string representing a predefined color name</span>
 
 <span class="sd">        :param colorName: color name</span>
@@ -220,8 +218,8 @@
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lmagen&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;#FF81FF&#39;</span></div>
 
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="color.RGB"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.RGB">[docs]</a>    <span class="k">def</span> <span class="nf">RGB</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">):</span>
+<div class="viewcode-block" id="color.RGB"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.RGB">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">RGB</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; returns a string representing a color specified by RGB level in the range 0-255</span>
 
 <span class="sd">        :param RGBlist: list containing RGB levels in the range 0-225 each</span>
@@ -251,8 +249,8 @@
         <span class="k">return</span> <span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%s%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RGBhex</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="color.gray"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.gray">[docs]</a>    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">percentage</span><span class="p">):</span>
+<div class="viewcode-block" id="color.gray"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.gray">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">percentage</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; returns a gray level compatible string based on white percentage between 0.0 and 1.0</span>
 
 <span class="sd">        if percentage is higher than 1.0, percentage is truncated to 1.0 (white)</span>
@@ -278,8 +276,8 @@
         <span class="k">return</span> <span class="n">color</span><span class="o">.</span><span class="n">RGB</span><span class="p">([</span><span class="n">RGBLevel</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="color.colorPickerToRGBalpha"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.colorPickerToRGBalpha">[docs]</a>    <span class="k">def</span> <span class="nf">colorPickerToRGBalpha</span><span class="p">(</span><span class="n">colorPickerString</span><span class="p">):</span>
+<div class="viewcode-block" id="color.colorPickerToRGBalpha"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.colorPickerToRGBalpha">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">colorPickerToRGBalpha</span><span class="p">(</span><span class="n">colorPickerString</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Function that converts the string returned by  the widget &#39;color&#39; in the .inx file into 2 strings, one representing the color in format ``#RRGGBB`` and the other representing the alpha channel ``AA``</span>
 
 <span class="sd">        :param colorPickerString: string returned by &#39;color&#39; widget</span>
@@ -333,8 +331,8 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">RGB</span><span class="p">,</span> <span class="n">alpha</span><span class="p">]</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="color.parseColorPicker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.parseColorPicker">[docs]</a>    <span class="k">def</span> <span class="nf">parseColorPicker</span><span class="p">(</span><span class="n">stringColorOption</span><span class="p">,</span> <span class="n">stringColorPicker</span><span class="p">):</span>
+<div class="viewcode-block" id="color.parseColorPicker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.color.parseColorPicker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parseColorPicker</span><span class="p">(</span><span class="n">stringColorOption</span><span class="p">,</span> <span class="n">stringColorPicker</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Function that converts the string returned by  the widgets &#39;color&#39; and &#39;optiongroup&#39; in the .inx file into 2 strings, one representing the color in format ``#RRGGBB`` and the other representing the alpha channel ``AA``</span>
 
 <span class="sd">        You must have in your .inx both &#39;optiongroup&#39; and &#39;color&#39; widgets as defined below. You don&#39;t have to have all the color options presented in the example. That is the most complete example, considering the default colors in color.defined method.   </span>
@@ -422,8 +420,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="marker.createMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createMarker">[docs]</a>    <span class="k">def</span> <span class="nf">createMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">markerPath</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">markerTransform</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="marker.createMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createMarker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">markerPath</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">markerTransform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a custom line marker</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
@@ -545,8 +543,8 @@
         <span class="k">return</span> <span class="n">nameID</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="marker.createDotMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createDotMarker">[docs]</a>    <span class="k">def</span> <span class="nf">createDotMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
+<div class="viewcode-block" id="marker.createDotMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createDotMarker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createDotMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Creates a dotS/M/L marker, exactly like inkscape default markers</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
@@ -592,8 +590,8 @@
         <span class="k">return</span> <span class="n">marker</span><span class="o">.</span><span class="n">createMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">markerPath</span><span class="p">,</span> <span class="n">RenameMode</span><span class="p">,</span> <span class="n">strokeColor</span><span class="p">,</span> <span class="n">fillColor</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">markerTransform</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="marker.createCrossMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createCrossMarker">[docs]</a>    <span class="k">def</span> <span class="nf">createCrossMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
+<div class="viewcode-block" id="marker.createCrossMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createCrossMarker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createCrossMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Creates a cross marker</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
@@ -639,8 +637,8 @@
         <span class="k">return</span> <span class="n">marker</span><span class="o">.</span><span class="n">createMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">markerPath</span><span class="p">,</span> <span class="n">RenameMode</span><span class="p">,</span> <span class="n">strokeColor</span><span class="p">,</span> <span class="n">fillColor</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">markerTransform</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="marker.createArrow1Marker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createArrow1Marker">[docs]</a>    <span class="k">def</span> <span class="nf">createArrow1Marker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
+<div class="viewcode-block" id="marker.createArrow1Marker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createArrow1Marker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createArrow1Marker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Creates a arrowS/M/L arrow markers (both start and end markers), exactly like inkscape</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
@@ -699,8 +697,8 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">nameStart</span><span class="p">,</span> <span class="n">nameEnd</span><span class="p">]</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="marker.createInfLineMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createInfLineMarker">[docs]</a>    <span class="k">def</span> <span class="nf">createInfLineMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
+<div class="viewcode-block" id="marker.createInfLineMarker"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.marker.createInfLineMarker">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createInfLineMarker</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">nameID</span><span class="p">,</span> <span class="n">RenameMode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">strokeColor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fillColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Creates ellipsis markers, both start and end markers.</span>
 
 <span class="sd">        These markers differ from inkscape&#39;s default ellipsis since these markers are made such that the diameter of the dots are equal to the line width.</span>
@@ -787,9 +785,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="lineStyle.set"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.lineStyle.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lineColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">lineJoin</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span>
-            <span class="n">lineCap</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">markerStart</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">markerMid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">markerEnd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">strokeDashArray</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="lineStyle.set"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.lineStyle.set">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lineColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fillColor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lineJoin</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span>
+            <span class="n">lineCap</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">markerStart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">markerMid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">markerEnd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strokeDashArray</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Creates a new line style</span>
 
 <span class="sd">        :param lineWidth: line width. Default: 1.0</span>
@@ -873,8 +871,8 @@
         <span class="k">return</span> <span class="n">lineStyle</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="lineStyle.setSimpleBlack"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.lineStyle.setSimpleBlack">[docs]</a>    <span class="k">def</span> <span class="nf">setSimpleBlack</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="viewcode-block" id="lineStyle.setSimpleBlack"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.lineStyle.setSimpleBlack">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">setSimpleBlack</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Defines a standard black line style.</span>
 
 <span class="sd">        The only adjustable parameter is its width. The fixed parameters are: lineColor=black, fillColor=None, lineJoin=&#39;round&#39;, lineCap=&#39;round&#39;, no markers, no dash pattern</span>
@@ -914,8 +912,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="textStyle.set"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fontFamily</span><span class="o">=</span><span class="s1">&#39;Sans&#39;</span><span class="p">,</span> <span class="n">fontStyle</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">fontWeight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">lineSpacing</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">letterSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">,</span> <span class="n">wordSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="textStyle.set"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.set">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fontFamily</span><span class="o">=</span><span class="s1">&#39;Sans&#39;</span><span class="p">,</span> <span class="n">fontStyle</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">fontWeight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">lineSpacing</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">letterSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">,</span> <span class="n">wordSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Defines a new text style</span>
 
 <span class="sd">        :param fontSize: size of the font in px. Default: 10</span>
@@ -987,8 +985,8 @@
         <span class="k">return</span> <span class="n">textStyle</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="textStyle.setSimpleBlack"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.setSimpleBlack">[docs]</a>    <span class="k">def</span> <span class="nf">setSimpleBlack</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="textStyle.setSimpleBlack"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.setSimpleBlack">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">setSimpleBlack</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Defines a standard black text style</span>
 
 <span class="sd">        The only adjustable parameter are font size and justification. The fixed parameters are: textColor=color.defined(&#39;black&#39;), fontFamily=&#39;Sans&#39;, fontStyle=&#39;normal&#39;, fontWeight=&#39;normal&#39;, lineSpacing=&#39;100%&#39;, letterSpacing=&#39;0px&#39;, wordSpacing=&#39;0px.</span>
@@ -1021,8 +1019,8 @@
         <span class="k">return</span> <span class="n">textStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">fontSize</span><span class="p">,</span> <span class="n">justification</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="textStyle.setSimpleColor"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.setSimpleColor">[docs]</a>    <span class="k">def</span> <span class="nf">setSimpleColor</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
+<div class="viewcode-block" id="textStyle.setSimpleColor"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.textStyle.setSimpleColor">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">setSimpleColor</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;Defines a standard colored text style</span>
 
 <span class="sd">        The only adjustable parameter are font size justification and textColor. The fixed parameters are: fontFamily=&#39;Sans&#39;, fontStyle=&#39;normal&#39;, fontWeight=&#39;normal&#39;, lineSpacing=&#39;100%&#39;, letterSpacing=&#39;0px&#39;, wordSpacing=&#39;0px.</span>
@@ -1065,8 +1063,8 @@
 <span class="sd">    .. note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="text.write"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">textStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">),</span> <span class="n">fontSize</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<div class="viewcode-block" id="text.write"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.write">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">textStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">),</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds a text line to the document</span>
 
 <span class="sd">        :param ExtensionBaseObj: Most of the times you have to use &#39;self&#39; from inkscapeMadeEasy related objects</span>
@@ -1162,8 +1160,8 @@
         <span class="k">return</span> <span class="n">textObj</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="text.latex"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.latex">[docs]</a>    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refPoint</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">LatexCommands</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preambleFile</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="text.latex"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.text.latex">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refPoint</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">LatexCommands</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preambleFile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draws a text line using LaTeX. You can use any LaTeX contents here.</span>
 
 <span class="sd">        .. note:: Employs the excellent &#39;textext&#39; extension from Pauli Virtanen&#39;s &lt;https://pav.iki.fi/software/textext/&gt; is incorporated here. Please refer to `Main Features`_ section for further instructions</span>
@@ -1206,10 +1204,10 @@
 
 <span class="sd">        When a preamble file is not provided, inkscapeMadeEasy assumes a standard preamble file located at ``./textextLib/basicLatexPackages.tex``. By default, its contents is::</span>
 
-<span class="sd">          \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}</span>
-<span class="sd">          \usepackage[per=slash]{siunitx}</span>
-<span class="sd">          \usepackage{steinmetz}</span>
-<span class="sd">          \usepackage[utf8]{inputenc}</span>
+<span class="sd">          \\usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}</span>
+<span class="sd">          \\usepackage[per=slash]{siunitx}</span>
+<span class="sd">          \\usepackage{steinmetz}</span>
+<span class="sd">          \\usepackage[utf8]{inputenc}</span>
 
 <span class="sd">        You will need these packages installed. This file can be modified to include extra default packages and/or commands.</span>
 
@@ -1217,7 +1215,7 @@
 
 <span class="sd">        LaTeX .tex document have the following structure. Note that LatexCommands lies within document environment::</span>
 
-<span class="sd">          \documentclass[landscape,a0]{article}</span>
+<span class="sd">          \\documentclass[landscape,a0]{article}</span>
 
 <span class="sd">          [contents of Preamble file]</span>
 
@@ -1230,7 +1228,7 @@
 
 <span class="sd">          [contens of LaTeXtext]</span>
 
-<span class="sd">          \end{document}</span>
+<span class="sd">          \\end{document}</span>
 
 
 <span class="sd">        **Example**</span>
@@ -1260,12 +1258,12 @@
         
         <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
           
-            <span class="n">Dump</span><span class="p">(</span><span class="s1">r&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; width=&quot;744.09448819&quot; height=&quot;1052.3622047&quot; id=&quot;svg19803&quot; version=&quot;1.1&quot; inkscape:version=&quot;0.48.3.1 r9886&quot; sodipodi:docname=&quot;New document 45&quot;&gt; &lt;defs id=&quot;defs19805&quot; /&gt; &lt;sodipodi:namedview id=&quot;base&quot; pagecolor=&quot;#ffffff&quot; bordercolor=&quot;#666666&quot; borderopacity=&quot;1.0&quot; inkscape:pageopacity=&quot;0.0&quot; inkscape:pageshadow=&quot;2&quot; inkscape:zoom=&quot;0.35&quot; inkscape:cx=&quot;375&quot; inkscape:cy=&quot;520&quot; inkscape:document-units=&quot;px&quot; inkscape:current-layer=&quot;layer1&quot; showgrid=&quot;false&quot; inkscape:window-width=&quot;500&quot; inkscape:window-height=&quot;445&quot; inkscape:window-x=&quot;932&quot; inkscape:window-y=&quot;0&quot; inkscape:window-maximized=&quot;0&quot; /&gt; &lt;metadata id=&quot;metadata19808&quot;&gt; &lt;rdf:RDF&gt; &lt;cc:Work rdf:about=&quot;&quot;&gt; &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt; &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt; &lt;dc:title&gt;&lt;/dc:title&gt; &lt;/cc:Work&gt; &lt;/rdf:RDF&gt; &lt;/metadata&gt; &lt;g inkscape:label=&quot;Layer 1&quot; inkscape:groupmode=&quot;layer&quot; id=&quot;layer1&quot; /&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span><span class="n">tempFilePath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="n">Dump</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; width=&quot;744.09448819&quot; height=&quot;1052.3622047&quot; id=&quot;svg19803&quot; version=&quot;1.1&quot; inkscape:version=&quot;0.48.3.1 r9886&quot; sodipodi:docname=&quot;New document 45&quot;&gt; &lt;defs id=&quot;defs19805&quot; /&gt; &lt;sodipodi:namedview id=&quot;base&quot; pagecolor=&quot;#ffffff&quot; bordercolor=&quot;#666666&quot; borderopacity=&quot;1.0&quot; inkscape:pageopacity=&quot;0.0&quot; inkscape:pageshadow=&quot;2&quot; inkscape:zoom=&quot;0.35&quot; inkscape:cx=&quot;375&quot; inkscape:cy=&quot;520&quot; inkscape:document-units=&quot;px&quot; inkscape:current-layer=&quot;layer1&quot; showgrid=&quot;false&quot; inkscape:window-width=&quot;500&quot; inkscape:window-height=&quot;445&quot; inkscape:window-x=&quot;932&quot; inkscape:window-y=&quot;0&quot; inkscape:window-maximized=&quot;0&quot; /&gt; &lt;metadata id=&quot;metadata19808&quot;&gt; &lt;rdf:RDF&gt; &lt;cc:Work rdf:about=&quot;&quot;&gt; &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt; &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt; &lt;dc:title&gt;&lt;/dc:title&gt; &lt;/cc:Work&gt; &lt;/rdf:RDF&gt; &lt;/metadata&gt; &lt;g inkscape:label=&quot;Layer 1&quot; inkscape:groupmode=&quot;layer&quot; id=&quot;layer1&quot; /&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span><span class="n">tempFilePath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
             <span class="c1"># temp instance for determining font height. Draws a F letter just to find the height of the font</span>
             <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># turning off this part of the code.</span>
                 <span class="n">texTemp</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
-                <span class="n">texTemp</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">texTemp</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;--text=&#39;</span> <span class="o">+</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                 <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">texTemp</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
                 <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
                 <span class="n">Height0</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1276,9 +1274,9 @@
         
             <span class="n">tex</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
             <span class="k">if</span> <span class="n">preambleFile</span><span class="p">:</span>
-                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">preambleFile</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">preambleFile</span><span class="p">,</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="s1">r&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBasicLatexPackagesFile</span><span class="p">(),</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBasicLatexPackagesFile</span><span class="p">(),</span> <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
             <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">tex</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 
@@ -1303,8 +1301,8 @@
             
             <span class="n">mytextStyle</span> <span class="o">=</span> <span class="n">textStyle</span><span class="o">.</span><span class="n">setSimpleColor</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="o">/</span><span class="mf">0.76</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">textColor</span><span class="p">)</span>
             <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">,</span><span class="n">textStyle</span><span class="o">=</span><span class="n">mytextStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="o">/</span><span class="mf">0.76</span><span class="p">,</span><span class="n">justification</span><span class="o">=</span><span class="n">justification</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="c1"># attention! keep angleDeg=0.0 here bc it will be rotated below</span>
-  
-  
+
+
         <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
         
         <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
@@ -1351,8 +1349,8 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="line.absCoords"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.line.absCoords">[docs]</a>    <span class="k">def</span> <span class="nf">absCoords</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">coordsList</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="line.absCoords"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.line.absCoords">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">absCoords</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">coordsList</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;Draws a (poly)line based on a list of absolute coordinates</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1413,8 +1411,8 @@
         <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="line.relCoords"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.line.relCoords">[docs]</a>    <span class="k">def</span> <span class="nf">relCoords</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">coordsList</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="line.relCoords"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.line.relCoords">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">relCoords</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">coordsList</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;Draws a (poly)line based on a list of relative coordinates</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1479,8 +1477,8 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="arc.startEndRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.arc.startEndRadius">[docs]</a>    <span class="k">def</span> <span class="nf">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">flagRightOf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="arc.startEndRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.arc.startEndRadius">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">flagRightOf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draws a circle arc from ``Pstart`` to ``Pend`` with a given radius</span>
 
 <span class="sd">        .. image:: ../imagesDocs/arc_startEndRadius.png</span>
@@ -1562,7 +1560,7 @@
         <span class="n">DistVector</span> <span class="o">=</span> <span class="n">EndVector</span> <span class="o">-</span> <span class="n">StartVector</span>
         <span class="n">Dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">DistVector</span><span class="p">)</span>  <span class="c1"># distance between start and end</span>
         <span class="k">if</span> <span class="n">Dist</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">radius</span><span class="p">:</span>
-            <span class="nb">exit</span>
+            <span class="n">exit</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">flagRightOf</span> <span class="ow">and</span> <span class="n">largeArc</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">flagRightOf</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">largeArc</span><span class="p">):</span>
             <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># perpendicular to DistVector</span>
@@ -1595,7 +1593,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sweepFlag</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">arcString</span> <span class="o">=</span> <span class="s1">&#39; a </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1"> 0 </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">largeArcFlag</span><span class="p">,</span> <span class="n">sweepFlag</span><span class="p">,</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">flagOpen</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>  <span class="c1"># option to close arc</span>
+        <span class="k">if</span> <span class="n">flagOpen</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># option to close arc</span>
             <span class="n">arcString</span> <span class="o">=</span> <span class="n">arcString</span> <span class="o">+</span> <span class="s1">&#39; L &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span>
 
         <span class="n">Attribs</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;inkscape&#39;</span><span class="p">):</span> <span class="n">label</span><span class="p">,</span>
@@ -1615,8 +1613,8 @@
         <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
 
     <span class="c1">#---------------------------------------------</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="arc.centerAngStartAngEnd"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.arc.centerAngStartAngEnd">[docs]</a>    <span class="k">def</span> <span class="nf">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">flagOpen</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="arc.centerAngStartAngEnd"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.arc.centerAngStartAngEnd">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draws a circle arc given its center and start and end angles</span>
 
 <span class="sd">        .. image:: ../imagesDocs/arc_centerAngStartAngEnd.png</span>
@@ -1641,8 +1639,8 @@
 <span class="sd">        :type parent: inkscapeMadeEasy object (see example below)</span>
 <span class="sd">        :type centerPoint: list</span>
 <span class="sd">        :type radius: float</span>
-<span class="sd">        :type angStart: list</span>
-<span class="sd">        :type angEnd: list</span>
+<span class="sd">        :type angStart: float</span>
+<span class="sd">        :type angEnd: float</span>
 <span class="sd">        :type offset: list</span>
 <span class="sd">        :type label: string</span>
 <span class="sd">        :type lineStyle: lineStyle object</span>
@@ -1696,8 +1694,8 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="circle.centerRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.circle.centerRadius">[docs]</a>    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="circle.centerRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.circle.centerRadius">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;draws a circle given its center point and radius</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1761,8 +1759,8 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="rectangle.widthHeightCenter"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.widthHeightCenter">[docs]</a>    <span class="k">def</span> <span class="nf">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span><span class="n">radiusX</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="rectangle.widthHeightCenter"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.widthHeightCenter">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span><span class="n">radiusX</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;draws a rectangle given its center point and dimensions</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1822,7 +1820,7 @@
         
         <span class="k">if</span> <span class="n">radiusX</span> <span class="ow">and</span> <span class="n">radiusX</span><span class="o">&gt;</span><span class="mf">0.0</span><span class="p">:</span>
           <span class="n">Attribs</span><span class="p">[</span><span class="s1">&#39;rx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">)</span>
-          <span class="k">if</span> <span class="n">radiusY</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+          <span class="k">if</span> <span class="n">radiusY</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Attribs</span><span class="p">[</span><span class="s1">&#39;ry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">)</span>
           <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">radiusY</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
@@ -1830,8 +1828,8 @@
 
         <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
 
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="rectangle.corners"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.corners">[docs]</a>    <span class="k">def</span> <span class="nf">corners</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">corner1</span><span class="p">,</span> <span class="n">corner2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="rectangle.corners"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.rectangle.corners">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">corners</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">corner1</span><span class="p">,</span> <span class="n">corner2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">radiusY</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rectangle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;draws a rectangle given the coordinates of two oposite corners</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1888,8 +1886,8 @@
 
 <span class="sd">    This class contains only static methods so that you don&#39;t have to inherit this in your class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ellipse.centerRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.ellipse.centerRadius">[docs]</a>    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+<div class="viewcode-block" id="ellipse.centerRadius"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Draw.ellipse.centerRadius">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;draws an ellipse given its center point and radius</span>
 
 <span class="sd">        .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
@@ -1959,8 +1957,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -1979,13 +1977,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, fsmMLK.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+        &#169; Copyright 2016, fsmMLK.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

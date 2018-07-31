@@ -1,32 +1,30 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>inkscapeMadeEasy_Base &mdash; inkscapeMadeEasy 0.1 documentation</title>
-    
+    <title>inkscapeMadeEasy_Base &#8212; inkscapeMadeEasy 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="inkscapeMadeEasy 0.1 documentation" href="../index.html" />
-    <link rel="up" title="Module code" href="index.html" /> 
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -36,8 +34,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -73,10 +71,11 @@
 
 <span class="kn">import</span> <span class="nn">inkex</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">tostring</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="k">import</span> <span class="n">tostring</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Base helper module that extends Aaron Spike&#39;s inkex.py module, adding basic manipulation functions</span>
@@ -95,7 +94,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="c1"># coordinates o the origin of the grid. unfortunately the grid does not fit</span>
     <span class="c1"># x0=0</span>
@@ -118,9 +117,9 @@
 
 <span class="sd">        The default packages are::</span>
 
-<span class="sd">        \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}</span>
-<span class="sd">        \usepackage[per=slash]{siunitx}</span>
-<span class="sd">        \usepackage{steinmetz}</span>
+<span class="sd">        \\usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}</span>
+<span class="sd">        \\usepackage[per=slash]{siunitx}</span>
+<span class="sd">        \\usepackage{steinmetz}</span>
 
 <span class="sd">        You can add other packages to the file ``basicLatexPackages.tex``, located in the extension directory.</span>
 
@@ -131,7 +130,7 @@
         <span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">directory</span> <span class="o">+</span> <span class="s1">&#39;/textextLib/basicLatexPackages.tex&#39;</span></div>
 
-<div class="viewcode-block" id="inkscapeMadeEasy.Dump"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.Dump">[docs]</a>    <span class="k">def</span> <span class="nf">Dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="s1">&#39;./dump_file.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.Dump"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.Dump">[docs]</a>    <span class="k">def</span> <span class="nf">Dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;./dump_file.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to easily output the result of ``str(obj)`` to a file</span>
 
 <span class="sd">        This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function ``str()`` in a text file.</span>
@@ -157,9 +156,9 @@
 
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="inkscapeMadeEasy.removeElement"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">[docs]</a>    <span class="k">def</span> <span class="nf">removeElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">element</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to remove one element or group. If the parent of the element is a group and has no other children, then the parent is also removed.</span>
@@ -242,7 +241,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">defs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpathSingle</span><span class="p">(</span><span class="s1">&#39;/svg:svg//svg:defs&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">defs</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">defs</span> <span class="o">=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">(),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">defs</span></div>
@@ -510,9 +509,9 @@
 
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDefinitions</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">markerName</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="k">return</span> <span class="bp">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
     <span class="c1">#---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.getPoints"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints">[docs]</a>    <span class="k">def</span> <span class="nf">getPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
@@ -545,10 +544,10 @@
 
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span>  <span class="c1"># if object is path</span>
 
-            <span class="n">dString</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;([a-df-zA-DF-Z])+?&#39;</span><span class="p">,</span> <span class="s1">r&#39;#\1#&#39;</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  <span class="c1"># adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S</span>
+            <span class="n">dString</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;([a-df-zA-DF-Z])+?&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;#\1#&#39;</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  <span class="c1"># adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S</span>
 
             <span class="n">dString</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dString</span><span class="p">]</span>  <span class="c1"># removes leading spaces from strings</span>
-            <span class="n">dString</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">dString</span><span class="p">)</span>  <span class="c1"># removes empty elements</span>
+            <span class="n">dString</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">dString</span><span class="p">)</span>  <span class="c1"># removes empty elements</span>
             <span class="n">Xcurrent</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">Ycurrent</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -627,7 +626,7 @@
 
         <span class="c1"># creates numpy array with the points to be transformed</span>
         <span class="n">coordsNP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="mi">1</span><span class="p">])))</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-
+                
         <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMat</span><span class="p">,</span> <span class="n">coordsNP</span><span class="p">)</span>
         <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">coordsTransformed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># remove last line, transposes and converts to list of lists</span>
 
@@ -685,8 +684,104 @@
 
         <span class="n">bboxCenter</span> <span class="o">=</span> <span class="p">[(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="n">bboxCenter</span></div></div>
+        <span class="k">return</span> <span class="n">bboxCenter</span></div>
 
+<div class="viewcode-block" id="inkscapeMadeEasy.getSegmentFromPoints"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getSegmentFromPoints">[docs]</a>    <span class="k">def</span> <span class="nf">getSegmentFromPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pointList</span><span class="p">,</span><span class="n">normalDirection</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;given two points of a straight line segment, returns the parameters of that segment:</span>
+<span class="sd">        </span>
+<span class="sd">        length, angle (in radians), tangent unitary vector and normal unitary vector</span>
+
+<span class="sd">        :param pointList: start and end coordinates [ Pstart, Pend ]</span>
+<span class="sd">        :param normalDirection:</span>
+<span class="sd">        </span>
+<span class="sd">          - &#39;R&#39;: normal vector points to the right of the tangent vector (Default)</span>
+<span class="sd">          - &#39;L&#39;: normal vector points to the left of the tangent vector (Default)</span>
+<span class="sd">          </span>
+<span class="sd">        :type pointList: list of points</span>
+<span class="sd">        :type normalDirection: string</span>
+<span class="sd">    </span>
+<span class="sd">        :returns: list: [length, theta, t_versor,n_versor]</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        </span>
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentParameters([1,1],[2,2],&#39;R&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
+<span class="sd">        &gt;&gt;&gt; segementParam = getSegmentParameters([1,1],[2,2],&#39;L&#39;)                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># tangent versor (pointing P2)</span>
+        <span class="n">P1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pointList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">P2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pointList</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="n">t_vector</span><span class="o">=</span><span class="n">P2</span><span class="o">-</span><span class="n">P1</span>
+        <span class="n">length</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">t_vector</span><span class="p">)</span>
+        <span class="n">t_versor</span><span class="o">=</span><span class="n">t_vector</span><span class="o">/</span><span class="n">length</span>
+        
+        <span class="c1"># normal vector: counter-clockwise with respect to tangent vector</span>
+        <span class="k">if</span> <span class="n">normalDirection</span> <span class="ow">in</span> <span class="s1">&#39;rR&#39;</span><span class="p">:</span>
+          <span class="n">n_versor</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">if</span> <span class="n">normalDirection</span> <span class="ow">in</span> <span class="s1">&#39;lL&#39;</span><span class="p">:</span>
+          <span class="n">n_versor</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        
+        <span class="c1"># angle</span>
+        <span class="n">theta</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">t_versor</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="p">[</span><span class="n">length</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="n">t_versor</span><span class="p">,</span><span class="n">n_versor</span><span class="p">]</span></div>
+      
+      
+<div class="viewcode-block" id="inkscapeMadeEasy.getSegmentParameters"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getSegmentParameters">[docs]</a>    <span class="k">def</span> <span class="nf">getSegmentParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span><span class="n">normalDirection</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;given a path segment composed by only two points, returns the parameters of that segment:</span>
+<span class="sd">        </span>
+<span class="sd">        length, angle (in radians), start point, end point, tangent unitary vector and normal unitary vector</span>
+
+<span class="sd">        This function works with paths only.</span>
+
+<span class="sd">        :param element: path element object</span>
+<span class="sd">        :param normalDirection:</span>
+<span class="sd">        </span>
+<span class="sd">          - &#39;R&#39;: normal vector points to the right of the tangent vector (Default)</span>
+<span class="sd">          - &#39;L&#39;: normal vector points to the left of the tangent vector (Default)</span>
+<span class="sd">          </span>
+<span class="sd">        :type element: element object</span>
+<span class="sd">        :type normalDirection: string</span>
+<span class="sd">        </span>
+<span class="sd">        :returns: list: [Pstart,Pend,length, theta, t_versor,n_versor]</span>
+<span class="sd">        :rtype: list</span>
+
+<span class="sd">        If the element is not a path, the function returns an empty list</span>
+<span class="sd">        If the path element has more than two points, the function returns an empty list</span>
+<span class="sd">        </span>
+<span class="sd">           </span>
+<span class="sd">        .. note:: This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                                      # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkscapeMadeEasy_Draw.line.absCoords(rootLayer, [[1,1],[2,2]])   # creates a line in groupA</span>
+<span class="sd">        &gt;&gt;&gt; segementList = getSegmentParameters(line1,&#39;R&#39;)                               # returns [[1,1], [2,2],1.4142, 0.78540,  [0.7071,0.7071], [0.7071,-0.7071] ]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        
+        <span class="c1"># check if element is valid. &#39;path&#39;</span>
+        <span class="n">accepted_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span> <span class="p">[</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accepted_strings</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="n">listPoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPoints</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">listPoints</span><span class="p">)</span> <span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>  <span class="c1"># if the path has more than two points</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSegmentFromPoints</span><span class="p">(</span> <span class="n">listPoints</span><span class="p">,</span><span class="n">normalDirection</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">listPoints</span> <span class="o">+</span> <span class="n">data</span></div></div>
+    
+    
+    
+    
+    
+    
 </pre></div>
 
           </div>
@@ -697,8 +792,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -717,13 +812,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">inkscapeMadeEasy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, fsmMLK.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+        &#169; Copyright 2016, fsmMLK.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

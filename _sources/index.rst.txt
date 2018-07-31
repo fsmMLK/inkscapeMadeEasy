@@ -33,6 +33,8 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 
   - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 
+  - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
+
 History and Objectives
 ----------------------
 
@@ -83,7 +85,9 @@ Many of the functions implemented in this project can use LaTeX to generate text
 
 Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
 
-Instalation procedure and requirements of the modified **textext** are exactly the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
+Instalation procedure and requirements of the modified **textext** are the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
+
+**Please keep in mind that you will need to install 'pstoedit' converter.** Linux users can install from your prefered package manager. Windows users can download it from its website.
 
 **Modifications**
 
@@ -142,8 +146,9 @@ These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubun
 
 The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.
 
-If you want LaTeX support, you will also need the python modules pygtk and Tkinter. You will also need the command 'pstoedit'. Linux users can install from your prefered package manager. Windows users can download it from its website.
+If you want LaTeX support, you will also need the python modules pygtk and Tkinter.
 
+**Please keep in mind that you will need to install 'pstoedit' converter.**  Linux users can install from your prefered package manager. Windows users can download it from its website.
 
 In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure
 
@@ -180,8 +185,6 @@ If you don't want LaTeX support or your system does not allow it, you can still 
  3- Remove the comment character ``#`` of this line, leaving just ``useLatex=False``.
 
  4- Save the file.
-
-.. warning:: Since disabling LaTeX support is a new feature, text positioning of **inkscapeMadeEasy_Plot** methods was not extensively checked for misplacements/errors when this support is disabled. Please report any issues you find.
 
 
 Usage
