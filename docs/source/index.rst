@@ -144,9 +144,7 @@ Installation and requirements
 
 These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.
 
-The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.
-
-If you want LaTeX support, you will also need the python modules pygtk and Tkinter.
+The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.
 
 **Please keep in mind that you will need to install 'pstoedit' converter.**  Linux users can install from your prefered package manager. Windows users can download it from its website.
 
@@ -168,7 +166,7 @@ You can find all the files on GitHub.
 
 If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.
 
-Linux users: You might find useful installing the packages ``texlive-science`` and ``texlive-latex-base`` (debian based distros) from your package manager. It should have most (all?) needed LaTeX packages.
+Linux users: You might find useful installing the packages ``texlive-science``,   ``texlive-pictures`` and ``texlive-latex-base`` (debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.
 
 **Disabling LaTeX support**
 
@@ -207,6 +205,8 @@ For examples on how to use, please take a look at the examples provided below an
   - **logicGates**              <https://github.com/fsmMLK/inkscapeLogicGates>
 
   - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
+
+  - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
 Module definitions
 ==================

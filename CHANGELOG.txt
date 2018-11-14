@@ -1,4 +1,10 @@
 
+2018-11nov-14
+-------------
+
+inkscapeMadeEeasy_Base.py
+  - added new funcions: getElemFromXpath, getElemAtrib, getDocumentName, getDocumentUnit, getcurrentLayer, unit2userUnit, userUnit2unit, unit2unit
+
 2018-07jul-31
 -------------
 

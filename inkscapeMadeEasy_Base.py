@@ -48,7 +48,22 @@ class inkscapeMadeEasy(inkex.Effect):
 
     def __init__(self):
         inkex.Effect.__init__(self)
-
+        self.inkscapeResolution_dpi=96.0  # number of pixels per inch
+        
+        resolution_in=self.inkscapeResolution_dpi
+        resolution_mm=self.inkscapeResolution_dpi/25.4
+        
+        self.unitsDict = {'mm': resolution_mm,           # 25.4mm per inch
+                         'cm': resolution_mm*10.0,       # 1cm = 10mm
+                          'm': resolution_mm*1.0e3,      # 1m = 1000mm 
+                         'km': resolution_mm*1.0e6,      # 1km = 1e6mm
+                         'in': resolution_in,            # 1in = 96px
+                         'ft': resolution_in*12.0,       # foot = 12*in
+                         'yd': resolution_in*12.0*3.0,   # yard = 3*ft
+                         'pt': resolution_in/72.0,       # point 1pt = 1/72th of an inch
+                         'px': 1.0,
+                         'pc': resolution_in/6.0}        # picas	1pc = 1/6th of and inch
+    
     # coordinates o the origin of the grid. unfortunately the grid does not fit
     # x0=0
     # y0=-7.637817382813
@@ -193,12 +208,249 @@ class inkscapeMadeEasy(inkex.Effect):
         :rtype: xpath
 
         """
-        defs = self.xpathSingle('/svg:svg//svg:defs')
+        defs = self.getElemFromXpath('/svg:svg//svg:defs')
         if defs == None:
             defs = inkex.etree.SubElement(self.document.getroot(), inkex.addNS('defs', 'svg'))
 
         return defs
 
+    #---------------------------------------------
+    def getElemFromXpath(self,tag):
+      """ returns the element from the xml, given its tag
+      
+      :param tag: tag of the element to be searched
+      :type tag: string
+      :returns: element
+      :rtype: element
+        
+      **Example**
+        
+      >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy 
+      >>> x=inkscapeMadeEasy
+      >>> name = x.getElemFromXpath('/svg:svg//svg:defs')   # returns the list of definitions of the document
+        
+      """
+      elem = self.xpathSingle(tag)
+      #self.displayMsg(str(elem.tag) + '<--')
+      return elem
+
+    #---------------------------------------------
+    def getElemAtrib(self,elem,atribName):
+      """ Returns the atribute of one element, given the atribute name
+      
+      :param elem: elem under consideration
+      :param atribName: atribute to be searched
+      :type elem: element      
+      :type atribName: string
+      :returns: atribute
+      :rtype: string
+      
+      >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy 
+      >>> x=inkscapeMadeEasy
+      >>> elem= x.getElemFromXpath('/svg:svg')
+      >>> docNAme = x.getElemAtrib(elem,'sodipodi:docname')
+      """
+      #splits namespace and attrib name
+      atribList=atribName.split(':')
+      
+      if len(atribList)==1:  # if has no namespace
+        attrib=atribName
+      else:           # if has namespace
+        namespace=inkex.NSS[atribList[0]]
+        attrib='{%s}' %namespace + atribList[1]
+        
+      return elem.attrib[attrib]
+
+    #---------------------------------------------
+    def getDocumentName(self):
+        """returns the name of the document
+        
+        :returns: fileName
+        :rtype: string
+        
+        **Example**
+        
+        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy 
+        >>> x=inkscapeMadeEasy
+        >>> name = x.getDocumentName()
+        
+        """
+        elem= self.getElemFromXpath('/svg:svg')
+        try:
+            fileName = self.getElemAtrib(elem,'sodipodi:docname')
+        except:
+            fileName = None
+        return fileName
+    
+    #---------------------------------------------
+    def getDocumentUnit(self):
+        """returns the unit of the document
+        
+        :returns: unit string code. See table below
+        :rtype: string
+        
+        **Units**
+        
+        The list of available units are:
+        
+        ==================   ============   =============
+        Name                 string code    relation
+        ==================   ============   =============
+        millimetre           mm             1in = 25.4mm
+        centimetre           cm             1cm = 10mm
+        metre                m              1m = 100cm
+        kilometre            km             1km = 1000m
+        inch                 in             1in = 96px
+        foot                 ft             1ft = 12in
+        yard                 yd             1yd = 3ft
+        point                pt             1in = 72pt
+        pixel                px             
+        pica                 pc             1in = 6pc
+        ==================   ============   =============
+        
+        **Example**
+        
+        >>> docunit = self.getDocumentUnit()    #returns 'cm', 'mm', etc.
+        
+        
+        """
+        elem= self.getElemFromXpath('/svg:svg/sodipodi:namedview')
+        try:
+            unit = self.getElemAtrib(elem,'inkscape:document-units')
+        except:
+            unit = 'px'
+        return unit
+
+    #---------------------------------------------
+    def getcurrentLayer(self):
+        """returns the current layer of the document
+        
+        :returns: name of the current layer
+        :rtype: string
+        
+        **Example**
+        
+        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy 
+        >>> x=inkscapeMadeEasy
+        >>> name = x.getDocumentName()
+        
+        """
+        return self.current_layer
+        
+    #---------------------------------------------
+    def unit2userUnit(self,value,unit_in):
+        """Converts a value from given unit to inkscape's default unit (px)
+
+        :param value: value to be converted
+        :param unit_in: input unit string code. See table below
+        :type value: float
+        :type unit_in: string
+        :returns: converted value
+        :rtype: float
+        
+        **Units**
+        
+        The list of available units are:
+        
+        ==================   ============   =============
+        Name                 string code    relation
+        ==================   ============   =============
+        millimetre           mm             1in = 25.4mm
+        centimetre           cm             1cm = 10mm
+        metre                m              1m = 100cm
+        kilometre            km             1km = 1000m
+        inch                 in             1in = 96px
+        foot                 ft             1ft = 12in
+        yard                 yd             1yd = 3ft
+        point                pt             1in = 72pt
+        pixel                px             
+        pica                 pc             1in = 6pc
+        ==================   ============   =============
+
+        **Example**
+        
+        >>> x_cm = 5.0
+        >>> x_px = self.unit2userUnit(x_cm,'cm')       # converts  5.0cm -> 188.97px
+        """
+
+        return value * self.unitsDict[unit_in.lower()]
+    
+    #---------------------------------------------
+    def userUnit2unit(self,value,unit_out):
+        """Converts a value from inkscape's default unit (px) to specified unit
+        
+        :param value: value to be converted
+        :param unit_out: output unit string code. See table below
+        :type value: float
+        :type unit_out: string
+        :returns: converted value
+        :rtype: float
+        
+        **Units**
+        
+        The list of available units are:
+        
+        ==================   ============   =============
+        Name                 string code    relation
+        ==================   ============   =============
+        millimetre           mm             1in = 25.4mm
+        centimetre           cm             1cm = 10mm
+        metre                m              1m = 100cm
+        kilometre            km             1km = 1000m
+        inch                 in             1in = 96px
+        foot                 ft             1ft = 12in
+        yard                 yd             1yd = 3ft
+        point                pt             1in = 72pt
+        pixel                px             
+        pica                 pc             1in = 6pc
+        ==================   ============   =============
+
+        **Example**
+
+        >>> x_px = 5.0
+        >>> x_cm = self.userUnit2unit(x_px,'cm')       # converts  5.0px -> 0.1322cm
+        """
+        return value / float(self.unitsDict[unit_out.lower()])
+    
+    #---------------------------------------------
+    def unit2unit(self,value,unit_in,unit_out):
+        """Converts a value from one provided unit to another unit
+        
+        :param value: value to be converted
+        :param unit_in: input unit string code. See table below
+        :param unit_out: output unit string code. See table below
+        :type value: float
+        :type unit_in: string
+        :type unit_out: string
+        :returns: converted value
+        :rtype: float
+        
+        **Units**
+        
+        The list of available units are:
+        
+        ==================   ============   =============
+        Name                 string code    relation
+        ==================   ============   =============
+        millimetre           mm             1in = 25.4mm
+        centimetre           cm             1cm = 10mm
+        metre                m              1m = 100cm
+        kilometre            km             1km = 1000m
+        inch                 in             1in = 96px
+        foot                 ft             1ft = 12in
+        yard                 yd             1yd = 3ft
+        point                pt             1in = 72pt
+        pixel                px             
+        pica                 pc             1in = 6pc
+        ==================   ============   =============
+
+        **Example**
+
+        >>> x_in = 5.0
+        >>> x_cm = self.unit2unit(x_in,'in','cm')       # converts  5.0in -> 12.7cm
+        """
+        return value *self.unitsDict[unit_in.lower()] / float(self.unitsDict[unit_out.lower()])
+      
     #---------------------------------------------
     def createGroup(self, parent, label='none'):
         """Creates a new empty group of elements.
@@ -658,8 +910,9 @@ class inkscapeMadeEasy(inkex.Effect):
         
         **Example**
 
-        >>> segementParam = getSegmentParameters([1,1],[2,2],'R')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]
-        >>> segementParam = getSegmentParameters([1,1],[2,2],'L')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]
+        >>> segementParam = getSegmentFromPoints([[1,1],[2,2]],'R')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]
+        >>> segementParam = getSegmentFromPoints([[1,1],[2,2]],'L')                               # returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]
+
 
         """
 
@@ -715,7 +968,6 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> segementList = getSegmentParameters(line1,'R')                               # returns [[1,1], [2,2],1.4142, 0.78540,  [0.7071,0.7071], [0.7071,-0.7071] ]
 
         """
-        
         
         # check if element is valid. 'path'
         accepted_strings = set( [ inkex.addNS('path', 'svg'), 'path'] )
