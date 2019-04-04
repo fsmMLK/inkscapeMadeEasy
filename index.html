@@ -142,9 +142,10 @@
 <div class="section" id="installation-and-requirements">
 <span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
 <p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
-<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), textext (inside the subfolder textextLib), sys and os.</p>
-<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter.</strong>  Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
-<p>In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure</p>
+<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.</p>
+<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter if you want to use LaTeX support.</strong>  Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
+<p>In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape’s extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.</p>
+<p>In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape’s extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Base.py
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Draw.py
@@ -156,12 +157,12 @@
 &gt;&gt;&gt;                 |-- textext.py
 </pre></div>
 </div>
-<p>You can find all the files on GitHub.</p>
+<p><strong>Inkscape’s extension directory</strong> Your inkscape extension directory location can be found opening Inkskape and selecting <code class="docutils literal"><span class="pre">Edit&gt;Preferences&gt;System</span></code> and checking <code class="docutils literal"><span class="pre">User</span> <span class="pre">Extensions</span> <span class="pre">field</span></code>. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer)</p>
 <p><strong>LaTeX package requirement</strong></p>
 <p>If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p>
-<p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (debian based distros) from your package manager. It should have most (all?) needed LaTeX packages.</p>
+<p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code>,   <code class="docutils literal"><span class="pre">texlive-pictures</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.</p>
 <p><strong>Disabling LaTeX support</strong></p>
-<p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it’s free and awesome! =] ), together with a few python modules (pygtk and Tkinter among others). The later might be a problem for non-Linux systems (precompiled inkscape for Windows as OS X don’t come with them).</p>
+<p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it’s free and awesome! =] ). It  might be a problem to install for non-Linux systems.</p>
 <p>Since many people don’t use LaTeX and/or don’t have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. <strong>By default, LaTeX support is ENABLED.</strong></p>
 <p>If you don’t want LaTeX support or your system does not allow it, you can still use <strong>inkscapeMadeEasy</strong> as long as you disable it. You can easily do it by setting a flag in <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.py</span></code>:</p>
 <blockquote>
@@ -365,6 +366,440 @@
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath">
+<code class="descname">getElemFromXpath</code><span class="sig-paren">(</span><em>tag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemFromXpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the element from the xml, given its tag</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tag</strong> (<em>string</em>) – tag of the element to be searched</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">element</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">element</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg//svg:defs&#39;</span><span class="p">)</span>   <span class="c1"># returns the list of definitions of the document</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAtrib">
+<code class="descname">getElemAtrib</code><span class="sig-paren">(</span><em>elem</em>, <em>atribName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemAtrib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAtrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the atribute of one element, given the atribute name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>elem</strong> (<em>element</em>) – elem under consideration</li>
+<li><strong>atribName</strong> (<em>string</em>) – atribute to be searched</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">atribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elem</span><span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">docNAme</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemAtrib</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span><span class="s1">&#39;sodipodi:docname&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentName">
+<code class="descname">getDocumentName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDocumentName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentName" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the name of the document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">fileName</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getDocumentName</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentUnit">
+<code class="descname">getDocumentUnit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDocumentUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the unit of the document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">unit string code. See table below</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Units</strong></p>
+<p>The list of available units are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="28%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">string code</th>
+<th class="head">relation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>millimetre</td>
+<td>mm</td>
+<td>1in = 25.4mm</td>
+</tr>
+<tr class="row-odd"><td>centimetre</td>
+<td>cm</td>
+<td>1cm = 10mm</td>
+</tr>
+<tr class="row-even"><td>metre</td>
+<td>m</td>
+<td>1m = 100cm</td>
+</tr>
+<tr class="row-odd"><td>kilometre</td>
+<td>km</td>
+<td>1km = 1000m</td>
+</tr>
+<tr class="row-even"><td>inch</td>
+<td>in</td>
+<td>1in = 96px</td>
+</tr>
+<tr class="row-odd"><td>foot</td>
+<td>ft</td>
+<td>1ft = 12in</td>
+</tr>
+<tr class="row-even"><td>yard</td>
+<td>yd</td>
+<td>1yd = 3ft</td>
+</tr>
+<tr class="row-odd"><td>point</td>
+<td>pt</td>
+<td>1in = 72pt</td>
+</tr>
+<tr class="row-even"><td>pixel</td>
+<td>px</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>pica</td>
+<td>pc</td>
+<td>1in = 6pc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">docunit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDocumentUnit</span><span class="p">()</span>    <span class="c1">#returns &#39;cm&#39;, &#39;mm&#39;, etc.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getcurrentLayer">
+<code class="descname">getcurrentLayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getcurrentLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getcurrentLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the current layer of the document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of the current layer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getDocumentName</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.unit2userUnit">
+<code class="descname">unit2userUnit</code><span class="sig-paren">(</span><em>value</em>, <em>unit_in</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.unit2userUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.unit2userUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a value from given unit to inkscape’s default unit (px)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>float</em>) – value to be converted</li>
+<li><strong>unit_in</strong> (<em>string</em>) – input unit string code. See table below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">converted value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Units</strong></p>
+<p>The list of available units are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="28%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">string code</th>
+<th class="head">relation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>millimetre</td>
+<td>mm</td>
+<td>1in = 25.4mm</td>
+</tr>
+<tr class="row-odd"><td>centimetre</td>
+<td>cm</td>
+<td>1cm = 10mm</td>
+</tr>
+<tr class="row-even"><td>metre</td>
+<td>m</td>
+<td>1m = 100cm</td>
+</tr>
+<tr class="row-odd"><td>kilometre</td>
+<td>km</td>
+<td>1km = 1000m</td>
+</tr>
+<tr class="row-even"><td>inch</td>
+<td>in</td>
+<td>1in = 96px</td>
+</tr>
+<tr class="row-odd"><td>foot</td>
+<td>ft</td>
+<td>1ft = 12in</td>
+</tr>
+<tr class="row-even"><td>yard</td>
+<td>yd</td>
+<td>1yd = 3ft</td>
+</tr>
+<tr class="row-odd"><td>point</td>
+<td>pt</td>
+<td>1in = 72pt</td>
+</tr>
+<tr class="row-even"><td>pixel</td>
+<td>px</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>pica</td>
+<td>pc</td>
+<td>1in = 6pc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x_cm</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_px</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit2userUnit</span><span class="p">(</span><span class="n">x_cm</span><span class="p">,</span><span class="s1">&#39;cm&#39;</span><span class="p">)</span>       <span class="c1"># converts  5.0cm -&gt; 188.97px</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.userUnit2unit">
+<code class="descname">userUnit2unit</code><span class="sig-paren">(</span><em>value</em>, <em>unit_out</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.userUnit2unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.userUnit2unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a value from inkscape’s default unit (px) to specified unit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>float</em>) – value to be converted</li>
+<li><strong>unit_out</strong> (<em>string</em>) – output unit string code. See table below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">converted value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Units</strong></p>
+<p>The list of available units are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="28%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">string code</th>
+<th class="head">relation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>millimetre</td>
+<td>mm</td>
+<td>1in = 25.4mm</td>
+</tr>
+<tr class="row-odd"><td>centimetre</td>
+<td>cm</td>
+<td>1cm = 10mm</td>
+</tr>
+<tr class="row-even"><td>metre</td>
+<td>m</td>
+<td>1m = 100cm</td>
+</tr>
+<tr class="row-odd"><td>kilometre</td>
+<td>km</td>
+<td>1km = 1000m</td>
+</tr>
+<tr class="row-even"><td>inch</td>
+<td>in</td>
+<td>1in = 96px</td>
+</tr>
+<tr class="row-odd"><td>foot</td>
+<td>ft</td>
+<td>1ft = 12in</td>
+</tr>
+<tr class="row-even"><td>yard</td>
+<td>yd</td>
+<td>1yd = 3ft</td>
+</tr>
+<tr class="row-odd"><td>point</td>
+<td>pt</td>
+<td>1in = 72pt</td>
+</tr>
+<tr class="row-even"><td>pixel</td>
+<td>px</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>pica</td>
+<td>pc</td>
+<td>1in = 6pc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x_px</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_cm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userUnit2unit</span><span class="p">(</span><span class="n">x_px</span><span class="p">,</span><span class="s1">&#39;cm&#39;</span><span class="p">)</span>       <span class="c1"># converts  5.0px -&gt; 0.1322cm</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.unit2unit">
+<code class="descname">unit2unit</code><span class="sig-paren">(</span><em>value</em>, <em>unit_in</em>, <em>unit_out</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.unit2unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.unit2unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a value from one provided unit to another unit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>float</em>) – value to be converted</li>
+<li><strong>unit_in</strong> (<em>string</em>) – input unit string code. See table below</li>
+<li><strong>unit_out</strong> (<em>string</em>) – output unit string code. See table below</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">converted value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Units</strong></p>
+<p>The list of available units are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="28%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">string code</th>
+<th class="head">relation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>millimetre</td>
+<td>mm</td>
+<td>1in = 25.4mm</td>
+</tr>
+<tr class="row-odd"><td>centimetre</td>
+<td>cm</td>
+<td>1cm = 10mm</td>
+</tr>
+<tr class="row-even"><td>metre</td>
+<td>m</td>
+<td>1m = 100cm</td>
+</tr>
+<tr class="row-odd"><td>kilometre</td>
+<td>km</td>
+<td>1km = 1000m</td>
+</tr>
+<tr class="row-even"><td>inch</td>
+<td>in</td>
+<td>1in = 96px</td>
+</tr>
+<tr class="row-odd"><td>foot</td>
+<td>ft</td>
+<td>1ft = 12in</td>
+</tr>
+<tr class="row-even"><td>yard</td>
+<td>yd</td>
+<td>1yd = 3ft</td>
+</tr>
+<tr class="row-odd"><td>point</td>
+<td>pt</td>
+<td>1in = 72pt</td>
+</tr>
+<tr class="row-even"><td>pixel</td>
+<td>px</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>pica</td>
+<td>pc</td>
+<td>1in = 6pc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x_in</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_cm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit2unit</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="s1">&#39;cm&#39;</span><span class="p">)</span>       <span class="c1"># converts  5.0in -&gt; 12.7cm</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
