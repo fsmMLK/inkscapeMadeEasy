@@ -701,7 +701,7 @@ class Pdf2Svg(PdfConverterBase):
 
     def available(cls):
         """Check whether pdf2svg is available, raise RuntimeError if not"""
-        exec_command(['pdf2svg'], ok_return_value=254)
+        exec_command(['pdf2svg'], ok_return_value=None)
     available = classmethod(available)
 
 #original: CONVERTERS = [Pdf2Svg, PstoeditPlotSvg, SkConvert]
