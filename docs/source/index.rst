@@ -146,9 +146,13 @@ These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubun
 
 The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.
 
-**Please keep in mind that you will need to install 'pstoedit' converter.**  Linux users can install from your prefered package manager. Windows users can download it from its website.
+**Please keep in mind that you will need to install 'pstoedit' converter if you want to use LaTeX support.**  Linux users can install from your prefered package manager. Windows users can download it from its website.
 
-In order to install inkscapeMadeEasy, your Inkscape extension directory must contain the following structure
+
+In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape's extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.
+
+
+In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape's extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.
 
 >>> inkscape/extensions/
 >>>             |-- inkscapeMadeEasy_Base.py
@@ -160,7 +164,7 @@ In order to install inkscapeMadeEasy, your Inkscape extension directory must con
 >>>                 |-- textext.inx
 >>>                 |-- textext.py
 
-You can find all the files on GitHub.
+**Inkscape's extension directory** Your inkscape extension directory location can be found opening Inkskape and selecting ``Edit>Preferences>System`` and checking ``User Extensions field``. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer)
 
 **LaTeX package requirement**
 
@@ -170,7 +174,7 @@ Linux users: You might find useful installing the packages ``texlive-science``, 
 
 **Disabling LaTeX support**
 
-LaTeX support via textext extension requires LaTeX typesetting system in your computer (it's free and awesome! =] ), together with a few python modules (pygtk and Tkinter among others). The later might be a problem for non-Linux systems (precompiled inkscape for Windows as OS X don't come with them).
+LaTeX support via textext extension requires LaTeX typesetting system in your computer (it's free and awesome! =] ). It  might be a problem to install for non-Linux systems.
 
 Since many people don't use LaTeX and/or don't have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. **By default, LaTeX support is ENABLED.**
 

@@ -1,4 +1,9 @@
 
+2019-04apr-04
+-------------
+
+ - fixed documentation on instalation procedure
+
 2018-11nov-14
 -------------
 
