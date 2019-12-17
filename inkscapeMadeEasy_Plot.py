@@ -22,10 +22,8 @@
 # --------------------------------------------------------------------------------------
 
 import math
-import numpy as np
-from lxml.etree import tostring
-import inkscapeMadeEasy_Draw as inkDraw
 import sys
+import inkscapeMadeEasy_Draw as inkDraw
 
 """
 This module contains a set of classes to help producing graphs.
@@ -33,6 +31,7 @@ This module contains a set of classes to help producing graphs.
 This module requires the following modules: math, numpy, lxml and sys
 
 """
+
 
 def displayMsg(msg):
     """Displays a message to the user.
@@ -44,11 +43,13 @@ def displayMsg(msg):
     
     """
     sys.stderr.write(msg + '\n')
-    
+
+
 def Dump(obj, file='./dump_file.txt', mode='w'):
     """Function to easily output the result of ``str(obj)`` to a file
 
-    This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function ``str()`` in a text file.
+    This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016),
+    this function overcomes partially the issue of sending things to stdout by dumping result of the function ``str()`` in a text file.
 
 
     :param obj: object to sent to the file. Any type that can be used in ``str()``
@@ -65,9 +66,9 @@ def Dump(obj, file='./dump_file.txt', mode='w'):
     **Example**
 
     >>> vector1=[1,2,3,4,5,6]
-    >>> Dump(vector,file='~/temporary.txt',mode='w')   % writes the list to a file
+    >>> Dump(vector1,file='~/temporary.txt',mode='w')   # writes the list to a file
     >>> vector2=[7,8,9,10]
-    >>> Dump(vector2,file='~/temporary.txt',mode='a')   % append the list to a file
+    >>> Dump(vector2,file='~/temporary.txt',mode='a')   # append the list to a file
 
     """
     file = open(file, mode)
@@ -167,8 +168,8 @@ def getPositionAndText(value, scale, flagLog10, axisUnitFactor):
             Text = valStr
 
     if inkDraw.useLatex:
-        Text='$' + Text + '$'
-        
+        Text = '$' + Text + '$'
+
     return [pos, Text]
 
 
@@ -181,11 +182,10 @@ class axis():
 
 
     """
+
     @staticmethod
-    def cartesian(ExtensionBaseObj, parent, xLim, yLim, position=[0, 0],
-                  xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
-                  xScale=20, yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False,
-                  forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
+    def cartesian(ExtensionBaseObj, parent, xLim, yLim, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20,
+                  yScale=20, xAxisUnitFactor='', yAxisUnitFactor='', xGrid=False, yGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Creates the axes for cartesian plot
 
         .. note:: This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
@@ -308,12 +308,12 @@ class axis():
         else:
             textSize = forceTextSize
 
-        textSizeSmall = 0.8 * textSize   # font size for axis ticks
+        textSizeSmall = 0.8 * textSize  # font size for axis ticks
 
-        text_offset = textSize         # base space for text positioning
+        text_offset = textSize  # base space for text positioning
         ExtraSpaceArrowX = (2.0 + ExtraLenghtAxisX) * text_offset  # extra space for drawing arrow on axis
         ExtraSpaceArrowY = (3.0 + ExtraLenghtAxisY) * text_offset  # extra space for drawing arrow on axis
-        lenghtTicks = textSize / 2.0       # length of the ticks
+        lenghtTicks = textSize / 2.0  # length of the ticks
 
         # create styles
         if forceLineWidth == 0:
@@ -383,9 +383,7 @@ class axis():
 
         # build the list of tuples with the limits of the plotting area
         outputLimits = zip([xLimits[0], xLimits[1], yLimits[0], yLimits[1]],
-                           [xLimitsPos[0] - axisOrigin[0] + position[0],
-                            xLimitsPos[1] - axisOrigin[0] + position[0],
-                            yLimitsPos[0] - axisOrigin[1] + position[1],
+                           [xLimitsPos[0] - axisOrigin[0] + position[0], xLimitsPos[1] - axisOrigin[0] + position[0], yLimitsPos[0] - axisOrigin[1] + position[1],
                             yLimitsPos[1] - axisOrigin[1] + position[1]])
         if not drawAxis:
             return [None, outputLimits, axisOrigin]
@@ -428,14 +426,13 @@ class axis():
                     if axisOrigin[1] == yLimitsPos[0]:
                         justif = 'tc'
                         offsetX = 0
-                        offsetY = text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
+                        offsetY = text_offset / 2.0  # inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
 
                     if axisOrigin[1] != yLimitsPos[0] and axisOrigin[1] != yLimitsPos[1]:
                         justif = 'tr'
                         offsetX = -text_offset / 4.0
                         offsetY = text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
+                        # inkDraw.circle.centerRadius(groupTicks, axisOrigin, 10, [0,0])
                         # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[1]),[axisOrigin[0]+10,axisOrigin[1]+10],groupTicks,fontSize=7)
                         # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]),[axisOrigin[0]+10,axisOrigin[1]+20],groupTicks,fontSize=7)
                         if posX == axisOrigin[0]:
@@ -450,7 +447,7 @@ class axis():
                         justif = 'bc'
                         offsetX = 0
                         offsetY = -text_offset / 2.0
-                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
+                        # inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
                         if posX == axisOrigin[0]:
                             if posX == xLimitsPos[1]:
                                 justif = 'br'
@@ -499,14 +496,13 @@ class axis():
                     if axisOrigin[0] == xLimitsPos[0]:
                         justif = 'cr'
                         offsetX = -text_offset / 2.0
-                        offsetY = 0
-                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0],'trash')
+                        offsetY = 0  # inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0],'trash')
 
                     if axisOrigin[0] != xLimitsPos[0] and axisOrigin[0] != xLimitsPos[1]:
                         justif = 'tr'
                         offsetX = -text_offset / 2.0
                         offsetY = text_offset / 4.0
-                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
+                        # inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
                         # inkDraw.text.write(ExtensionBaseObj,str(axisOrigin[0]),[axisOrigin[0]+10,axisOrigin[1]+10],groupTicks,fontSize=7)
                         # inkDraw.text.write(ExtensionBaseObj,str(yLimitsPos[0]*scaleX),[axisOrigin[0]+10,axisOrigin[1]+20],groupTicks,fontSize=7)
                         if posY == axisOrigin[1]:
@@ -521,7 +517,7 @@ class axis():
                         justif = 'cl'
                         offsetX = text_offset / 2.0
                         offsetY = 0
-                        #inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
+                        # inkDraw.circle.centerRadius(groupTicks,axisOrigin, 10, [0,0])
                         if posY == axisOrigin[1]:
                             if posY == yLimitsPos[1]:
                                 justif = 'tl'
@@ -550,12 +546,12 @@ class axis():
         return [GroupPlot, outputLimits, axisOrigin]
 
     @staticmethod
-    def polar(ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0],
-              rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0,
-              rScale=20, rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0):
+    def polar(ExtensionBaseObj, parent, rLim, tLim=[0.0, 360.0], position=[0.0, 0.0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20,
+              rAxisUnitFactor='', rGrid=False, tGrid=False, forceTextSize=0, forceLineWidth=0, drawAxis=True, ExtraLenghtAxisR=0.0):
         """Creates the axes for polar plot
 
-        .. note:: This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+        .. note:: This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, **enabled by default**.
+            Please refer to :ref:`latexSupport` on how to disable it.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -649,11 +645,11 @@ class axis():
         else:
             textSize = forceTextSize
 
-        textSizeSmall = 0.8 * textSize   # font size for axis ticks
+        textSizeSmall = 0.8 * textSize  # font size for axis ticks
 
-        text_offset = textSize         # base space for text positioning
+        text_offset = textSize  # base space for text positioning
         ExtraSpaceArrowR = (2.0 + ExtraLenghtAxisR) * text_offset  # extra space for drawing arrow on axis
-        lenghtTicks = textSize / 2.0       # length of the ticks
+        lenghtTicks = textSize / 2.0  # length of the ticks
 
         # create styles
         if forceLineWidth == 0:
@@ -664,7 +660,7 @@ class axis():
         lineWidthGrid = 0.7 * lineWidth
         lineWidthGridFine = lineWidthGrid / 2.0
 
-        #nameTickerArrowAxis = inkDraw.marker.createArrow1Marker(ExtensionBaseObj, 'ArrowAxis', RenameMode=1, scale=0.4)
+        # nameTickerArrowAxis = inkDraw.marker.createArrow1Marker(ExtensionBaseObj, 'ArrowAxis', RenameMode=1, scale=0.4)
         lineStyleAxis = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
         lineStyleTicks = inkDraw.lineStyle.set(lineWidth, lineColor=inkDraw.color.gray(0.3))
         lineStyleGrid = inkDraw.lineStyle.set(lineWidthGrid, lineColor=inkDraw.color.gray(0.7))
@@ -693,10 +689,10 @@ class axis():
             rLimits = rLim
 
         tLimits = tLim
-        
+
         if abs(tLimits[1] - tLimits[0]) > 360:
-          tLimits=[0, 360]
-        
+            tLimits = [0, 360]
+
         if abs(tLimits[1] - tLimits[0]) > 180:
             largeArc = True
         else:
@@ -706,7 +702,7 @@ class axis():
         axisOrigin = [0.0, 0.0]
         axisOrigin[0] = findOrigin(rLimits, rlog10scale, scaleR)
         axisOrigin[1] = findOrigin(tLimits, False, 1.0)
-        
+
         # computes the positions of the limits on svg, considering the scale
 
         if rlog10scale:  # convert limits to position in diagram, including scaling factor
@@ -715,12 +711,10 @@ class axis():
             rLimitsPos = [x * scaleR for x in rLimits]
 
         # build the list of tuples with the limits of the plotting area
-        outputLimits = zip([rLimits[0], rLimits[1]],
-                           [rLimitsPos[0] - axisOrigin[0] + position[0],
-                            rLimitsPos[1] - axisOrigin[0] + position[0]])
+        outputLimits = zip([rLimits[0], rLimits[1]], [rLimitsPos[0] - axisOrigin[0] + position[0], rLimitsPos[1] - axisOrigin[0] + position[0]])
 
         if not drawAxis:
-            return [None, outputLimits, [0,0]]
+            return [None, outputLimits, [0, 0]]
 
         # axis ticks
         groupTicks = ExtensionBaseObj.createGroup(GroupPlot, 'Ticks')
@@ -740,24 +734,27 @@ class axis():
 
                     if rGrid and posR > 0.0 and r > rLimits[0] and r < rLimits[1]:  # grid lines.
                         if tLimits[1] - tLimits[0] < 360:
-                            inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                            inkDraw.arc.centerAngStartAngEnd(groupTicks, [0, 0], posR, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGrid,
+                                                             largeArc=largeArc)  # negative angles bc inkscape is upside down
                         else:
-                            inkDraw.circle.centerRadius(groupTicks, [0,0], posR, offset=[0, 0], lineStyle=lineStyleGrid)
+                            inkDraw.circle.centerRadius(groupTicks, [0, 0], posR, offset=[0, 0], lineStyle=lineStyleGrid)
 
                     # intermediate grid lines in case of logarithmic scale
                     if rGrid and rlog10scale and r < rLimits[1]:
                         for i in range(2, 10):
                             aditionalStep = math.log10(i) * scaleR
                             if tLimits[1] - tLimits[0] < 360:
-                                inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine, largeArc=largeArc)  # negative angles bc inkscape is upside down
+                                inkDraw.arc.centerAngStartAngEnd(groupTicks, [0, 0], posR + aditionalStep, -tLimits[1], -tLimits[0], [0, 0], lineStyle=lineStyleGridFine,
+                                                                 largeArc=largeArc)  # negative angles bc inkscape is upside down
                             else:
-                                inkDraw.circle.centerRadius(groupTicks, [0,0], posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
+                                inkDraw.circle.centerRadius(groupTicks, [0, 0], posR + aditionalStep, offset=[0, 0], lineStyle=lineStyleGridFine)
 
                     # tick
                     if rTicks and posR > 0.0:
-                        inkDraw.arc.centerAngStartAngEnd(groupTicks, [0,0], posR, -tLimits[0] - math.degrees(lenghtTicks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtTicks / float(posR * 2)), [0, 0], lineStyle=lineStyleTicks, largeArc=False)
+                        inkDraw.arc.centerAngStartAngEnd(groupTicks, [0, 0], posR, -tLimits[0] - math.degrees(lenghtTicks / float(posR * 2)), -tLimits[0] + math.degrees(lenghtTicks / float(posR * 2)),
+                                                         [0, 0], lineStyle=lineStyleTicks, largeArc=False)
                     if rTicks and posR == 0.0:
-                        inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [0,  - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
+                        inkDraw.line.relCoords(groupTicks, [[0, lenghtTicks]], [0, - lenghtTicks / 2.0], lineStyle=lineStyleTicks)
 
                     # sets justification
                     # inkDraw.text.write(ExtensionBaseObj,'orig='+str(axisOrigin),[axisOrigin[0]+10,axisOrigin[1]-30],groupTicks,fontSize=7)
@@ -767,20 +764,20 @@ class axis():
                     if posR == 0:
                         justif = 'cc'
                         offsetX = 0
-                        offsetY = text_offset*1.2
+                        offsetY = text_offset * 1.2
                         posX = posR * math.cos(math.radians(-tLimits[0])) + offsetX
                         posY = posR * math.sin(math.radians(-tLimits[0])) + offsetY
                     else:
-                        offsetT = text_offset*1.2
+                        offsetT = text_offset * 1.2
                         if tLimits[1] - tLimits[0] > 340:
-                            offsetR = text_offset/2.0
+                            offsetR = text_offset / 2.0
                         else:
                             offsetR = 0
                         justif = 'cc'
-                        posX = (posR + offsetR) * math.cos(math.radians(-tLimits[0])) + offsetT*math.sin(math.radians(tLimits[0]))
-                        posY = (posR + offsetR) * math.sin(math.radians(-tLimits[0])) + offsetT*math.cos(math.radians(-tLimits[0]))
+                        posX = (posR + offsetR) * math.cos(math.radians(-tLimits[0])) + offsetT * math.sin(math.radians(tLimits[0]))
+                        posY = (posR + offsetR) * math.sin(math.radians(-tLimits[0])) + offsetT * math.cos(math.radians(-tLimits[0]))
                     # value
-                    #inkDraw.circle.centerRadius(groupTicks,[posX,posY], 1)
+                    # inkDraw.circle.centerRadius(groupTicks,[posX,posY], 1)
                     if rTicks:
                         inkDraw.text.latex(ExtensionBaseObj, groupTicks, rText, [posX, posY], textSizeSmall, refPoint=justif)
 
@@ -793,9 +790,9 @@ class axis():
                     s = math.sin(math.radians(-t))  # negative angles bc inkscape is upside down
                     # get position, considering the scale and its text
                     if inkDraw.useLatex:
-                      tText = '$' + str(t) + '$'
+                        tText = '$' + str(t) + '$'
                     else:
-                      tText = str(t)
+                        tText = str(t)
 
                     if (tGrid and t > tLimits[0] and t < tLimits[1]) or (tGrid and t == tLimits[0] and tLimits[1] - tLimits[0] >= 360):
                         if rLimitsPos[0] == 0:  # if rmin is zero, then make the lines to reach the center
@@ -806,7 +803,7 @@ class axis():
                         else:
                             P1 = [rLimitsPos[0] * c, rLimitsPos[0] * s]
                         P2 = [rLimitsPos[1] * c, rLimitsPos[1] * s]
-                        inkDraw.line.absCoords(groupTicks, [P1, P2], [0,0], lineStyle=lineStyleGrid)
+                        inkDraw.line.absCoords(groupTicks, [P1, P2], [0, 0], lineStyle=lineStyleGrid)
 
                     # tick
                     if (tTicks and t != tLimits[1]) or (tTicks and t == tLimits[1] and tLimits[1] - tLimits[0] < 360):
@@ -854,18 +851,16 @@ class axis():
             inkDraw.arc.startEndRadius(GroupAxis, P2, P3, rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, flagOpen=True, largeArc=largeArc)
         else:
             if rLimitsPos[0] > 0:
-                inkDraw.circle.centerRadius(GroupAxis, [0,0], rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis)
-            inkDraw.circle.centerRadius(GroupAxis, [0,0], rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis)
-
-        #inkDraw.line.relCoords(GroupAxis, [ [(rLimitsPos[1] + ExtraSpaceArrowR)* math.cos(math.radians(-tLimits[0])),(rLimitsPos[1] + ExtraSpaceArrowR)* math.sin(math.radians(-tLimits[0]))] ], axisOrigin, 'Raxis',lineStyle=lineStyleAxis)
+                inkDraw.circle.centerRadius(GroupAxis, [0, 0], rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis)
+            inkDraw.circle.centerRadius(GroupAxis, [0, 0], rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis)
 
         if rLabel:  # axis labels
             c0 = math.cos(math.radians(-tLimits[0]) + text_offset / rLimitsPos[1])  # negative angles bc inkscape is upside down
             s0 = math.sin(math.radians(-tLimits[0]) + text_offset / rLimitsPos[1])  # negative angles bc inkscape is upside down
             posText = [(rLimitsPos[1] + ExtraSpaceArrowR) * c0, (rLimitsPos[1] + ExtraSpaceArrowR) * s0]
-            inkDraw.text.latex(ExtensionBaseObj, GroupAxis, rLabel,  posText, textSize, refPoint='cl')
+            inkDraw.text.latex(ExtensionBaseObj, GroupAxis, rLabel, posText, textSize, refPoint='cl')
 
-        return [GroupPlot, outputLimits, [0,0]]
+        return [GroupPlot, outputLimits, [0, 0]]
 
 
 class plot():
@@ -873,18 +868,19 @@ class plot():
 
     This class contains only static methods so that you don't have to inherit this in your class
 
-    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+    .. note::  This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, **enabled by default**.
+        Please refer to :ref:`latexSupport` on how to disable it.
     
     """
+
     @staticmethod
-    def cartesian(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='',
-                  xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
-                  xScale=20, yScale=20, xExtraText='', yExtraText='',
-                  xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
-                  forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
+    def cartesian(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', xlog10scale=False, ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
+                  xScale=20, yScale=20, xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(), forceXlim=None,
+                  forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Cartesian Plot
         
-        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**.
+            Please refer to :ref:`latexSupport` on how to disable it.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -934,12 +930,14 @@ class plot():
         :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceXlim=None Limits will be defined by min and max of xData (Default)
                 - if forceXlim=[xMin,xMax] then these limits will be used.
 
-        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceYlim=None Limits will be defined by min and max of yData (Default)
                 - if forceYlim=[yMin,yMax] then these limits will be used.
@@ -989,9 +987,11 @@ class plot():
                   - axisOrigin [X0,Y0]:                      A list with the coordinates of the point where the axes cross.
         :rtype: list
 
-        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0 (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or
+            equal to 0.0 (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
 
-        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers
+            (basically inf  =)  ). The method will create a text object alongside your plot warning this.
 
         **Example**
 
@@ -1039,7 +1039,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]),
+                                           [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1049,7 +1050,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent,
+                                           fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
 
@@ -1066,7 +1068,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]),
+                                           [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1076,7 +1079,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent,
+                                           fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
 
@@ -1111,11 +1115,9 @@ class plot():
         # draw axis
         axisGroup = ExtensionBaseObj.createGroup(parent, 'PlotData')
 
-        [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position,
-                                                   xLabel=xLabel, yLabel=yLabel, xlog10scale=xlog10scale, ylog10scale=ylog10scale,
-                                                   xTicks=xTicks, yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep,
-                                                   xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText, yAxisUnitFactor=yExtraText,
-                                                   xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
+        [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position, xLabel=xLabel, yLabel=yLabel, xlog10scale=xlog10scale, ylog10scale=ylog10scale,
+                                                   xTicks=xTicks, yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep, xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText,
+                                                   yAxisUnitFactor=yExtraText, xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
                                                    ExtraLenghtAxisX=ExtraLenghtAxisX, ExtraLenghtAxisY=ExtraLenghtAxisY)
 
         # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
@@ -1136,10 +1138,8 @@ class plot():
         return [axisGroup, limits, origin]
 
     @staticmethod
-    def polar(ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='',
-                  rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0,rScale=20, rExtraText='',
-                  rGrid=False, tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
-                  forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0):
+    def polar(ExtensionBaseObj, parent, rData, tData, position=[0, 0], rLabel='', rlog10scale=False, rTicks=True, tTicks=True, rTickStep=1.0, tTickStep=45.0, rScale=20, rExtraText='', rGrid=False,
+              tGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(), forceRlim=None, forceTlim=None, drawAxis=True, ExtraLenghtAxisR=0.0):
         """Polar Plot
 
         .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
@@ -1178,12 +1178,14 @@ class plot():
         :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceRlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceRlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceRlim=None Limits will be defined by min and max of rData (Default)
                 - if forceRlim=[xMin,xMax] then these limits will be used.
 
-        :param forceTlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceTlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceTlim=None Limits will be defined by min and max of tData (Default)
                 - if forceTlim=[yMin,yMax] then these limits will be used.
@@ -1194,7 +1196,6 @@ class plot():
                - False: returns the limits and origin position without drawing the axis itself
 
         :param ExtraLenghtAxisR: extra length left near the arrow pointer of X axis. Default 0.0
-        :param ExtraLenghtAxisY: extra length left near the arrow pointer of Y axis. Default 0.0
 
         :type ExtensionBaseObj: inkscapeMadeEasy object (see example below)
         :type parent: inkscapeMadeEasy object (see example below)
@@ -1228,9 +1229,11 @@ class plot():
                   - axisOrigin [X0,Y0]:                      A list with the coordinates of the point where the axes cross.
         :rtype: list
 
-        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if rData and/or tData is less than or equal to 0.0 (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if rData and/or tData is less
+            than or equal to 0.0 (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
 
-        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers
+            (basically inf  =)  ). The method will create a text object alongside your plot warning this.
 
         **Example**
 
@@ -1291,7 +1294,8 @@ class plot():
                     rDataTemp.append(rData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (rData[i], tData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (rData[i], tData[i]),
+                                           [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1301,7 +1305,8 @@ class plot():
                     rDataTemp.append(rData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (rData[i], tData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (rData[i], tData[i]), [position[0], position[1] + 2 * textSize], parent,
+                                           fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
 
@@ -1336,39 +1341,37 @@ class plot():
         # draw axis
         axisGroup = ExtensionBaseObj.createGroup(parent, 'PlotData')
 
-        [axisObj, limits, origin] = axis.polar(ExtensionBaseObj, axisGroup, Rlimits, Tlimits, position,rLabel=rLabel, rlog10scale=rlog10scale,
-                                               rTicks=rTicks, tTicks=tTicks, rTickStep=rTickStep, tTickStep=tTickStep,rScale=rScale, rAxisUnitFactor=rExtraText,
-                                               rGrid=rGrid, tGrid=tGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
-                                               ExtraLenghtAxisR=ExtraLenghtAxisR) 
-  
+        [axisObj, limits, origin] = axis.polar(ExtensionBaseObj, axisGroup, Rlimits, Tlimits, position, rLabel=rLabel, rlog10scale=rlog10scale, rTicks=rTicks, tTicks=tTicks, rTickStep=rTickStep,
+                                               tTickStep=tTickStep, rScale=rScale, rAxisUnitFactor=rExtraText, rGrid=rGrid, tGrid=tGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis,
+                                               drawAxis=drawAxis, ExtraLenghtAxisR=ExtraLenghtAxisR)
+
         # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
-        nPoints=min(len(rData),len(tData))
-        xData=[]
-        yData=[]
+        nPoints = min(len(rData), len(tData))
+        xData = []
+        yData = []
         if rlog10scale:
-          for i in range(nPoints):
-            xData.append(math.log10(rData[i])*math.cos(math.radians(-tData[i]))* rScale  )  # negative theta bc inkscape is upside down
-            yData.append(math.log10(rData[i])*math.sin(math.radians(-tData[i]))* rScale   ) # negative theta bc inkscape is upside down
+            for i in range(nPoints):
+                xData.append(math.log10(rData[i]) * math.cos(math.radians(-tData[i])) * rScale)  # negative theta bc inkscape is upside down
+                yData.append(math.log10(rData[i]) * math.sin(math.radians(-tData[i])) * rScale)  # negative theta bc inkscape is upside down
         else:
-          for i in range(nPoints):
-            xData.append(rData[i]*math.cos(math.radians(-tData[i]))* (rScale / rTickStep) )  # negative theta bc inkscape is upside down
-            yData.append(rData[i]*math.sin(math.radians(-tData[i]))* (rScale / rTickStep)  ) # negative theta bc inkscape is upside down
+            for i in range(nPoints):
+                xData.append(rData[i] * math.cos(math.radians(-tData[i])) * (rScale / rTickStep))  # negative theta bc inkscape is upside down
+                yData.append(rData[i] * math.sin(math.radians(-tData[i])) * (rScale / rTickStep))  # negative theta bc inkscape is upside down
 
         coords = zip(xData, yData)
 
         inkDraw.line.absCoords(axisGroup, coords, position, lineStyle=lineStylePlot)
 
         return [axisGroup, limits, origin]
-      
+
     @staticmethod
-    def stem(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='',
-             ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0,
-             xScale=20, yScale=20, xExtraText='', yExtraText='',
-             xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(),
-             forceXlim=None, forceYlim=None, drawAxis=True, ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
+    def stem(ExtensionBaseObj, parent, xData, yData, position=[0, 0], xLabel='', yLabel='', ylog10scale=False, xTicks=True, yTicks=True, xTickStep=1.0, yTickStep=1.0, xScale=20, yScale=20,
+             xExtraText='', yExtraText='', xGrid=False, yGrid=False, generalAspectFactorAxis=1.0, lineStylePlot=inkDraw.lineStyle.setSimpleBlack(), forceXlim=None, forceYlim=None, drawAxis=True,
+             ExtraLenghtAxisX=0.0, ExtraLenghtAxisY=0.0):
         """Stem plot in Cartesian axis
 
-        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
+        .. note:: This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, **enabled by default**.
+            Please refer to :ref:`latexSupport` on how to disable it.
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
@@ -1417,12 +1420,14 @@ class plot():
         :param generalAspectFactorAxis: regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0
 
         :param lineStylePlot: line style to be used to plot the data. See class ``inkscapeMadeEasy_Draw.lineStyle``. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()
-        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceXlim: forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceXlim=None Limits will be defined by min and max of xData (Default)
                 - if forceXlim=[xMin,xMax] then these limits will be used.
 
-        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
+        :param forceYlim: forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits.
+            Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don't need this for logarithmic scale
 
                 - if forceYlim=None Limits will be defined by min and max of yData (Default)
                 - if forceYlim=[yMin,yMax] then these limits will be used.
@@ -1471,9 +1476,11 @@ class plot():
                   - axisOrigin [X0,Y0]:                      A list with the coordinates of the point where the axes cross.
         :rtype: list
 
-        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0 (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0
+            (they would result in complex log10... =P ). The method will create a text object alongside your plot warning this.
 
-        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000. this avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.
+        .. note:: If any of the axis are linear, the method will ignore any value greater than 10.000. this avoids plotting too big numbers (basically inf  =)  ).
+            The method will create a text object alongside your plot warning this.
 
         **Example**
 
@@ -1524,7 +1531,8 @@ class plot():
                 xDataTemp.append(xData[i])
             else:
                 if not flagShowedError:
-                    inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                    inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent,
+                                       fontSize=textSize / 2.0)
                     inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                     flagShowedError = True
 
@@ -1541,7 +1549,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is invalid in logarithmic scale. Ignoring it...' % (xData[i], yData[i]),
+                                           [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
         else:  # remove invalid pairs of coordinates for linear plot (larger than +-10k )
@@ -1551,7 +1560,8 @@ class plot():
                     xDataTemp.append(xData[i])
                 else:
                     if not flagShowedError:
-                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent, fontSize=textSize / 2.0)
+                        inkDraw.text.write(ExtensionBaseObj, 'Error: The point (%f,%f)\n is too large. Ignoring it...' % (xData[i], yData[i]), [position[0], position[1] + 2 * textSize], parent,
+                                           fontSize=textSize / 2.0)
                         inkDraw.text.write(ExtensionBaseObj, '       Please check your graph', [position[0], position[1] + 2.5 * textSize], parent, fontSize=textSize / 2.0)
                         flagShowedError = True
 
@@ -1586,12 +1596,10 @@ class plot():
         # draw axis
         axisGroup = ExtensionBaseObj.createGroup(parent, 'PlotData')
 
-        [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position,
-                                                   xLabel=xLabel, yLabel=yLabel, xlog10scale=False, ylog10scale=ylog10scale,
-                                                   xTicks=xTicks, yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep,
-                                                   xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText, yAxisUnitFactor=yExtraText,
-                                                   xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis,
-                                                   ExtraLenghtAxisX=ExtraLenghtAxisX, ExtraLenghtAxisY=ExtraLenghtAxisY)
+        [axisObj, limits, origin] = axis.cartesian(ExtensionBaseObj, axisGroup, Xlimits, Ylimits, position, xLabel=xLabel, yLabel=yLabel, xlog10scale=False, ylog10scale=ylog10scale, xTicks=xTicks,
+                                                   yTicks=yTicks, xTickStep=xTickStep, yTickStep=yTickStep, xScale=xScale, yScale=yScale, xAxisUnitFactor=xExtraText, yAxisUnitFactor=yExtraText,
+                                                   xGrid=xGrid, yGrid=yGrid, forceTextSize=textSize, forceLineWidth=lineWidthAxis, drawAxis=drawAxis, ExtraLenghtAxisX=ExtraLenghtAxisX,
+                                                   ExtraLenghtAxisY=ExtraLenghtAxisY)
 
         # scales data and convert to logarithmic scale if needed. Also subtracts the origin point of the axis to move the plot to the correct position
         xData = [x * (xScale / xTickStep) - origin[0] for x in xData]

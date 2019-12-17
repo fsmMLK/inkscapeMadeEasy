@@ -1,26 +1,39 @@
 
+2019-12dec-17
+-------------
+
+inkscapeMadeEasy_Base.py
+  - added new function: copyElement
+  - fixed documentation
+  - reformatted the code using pycharm
+
+inkscapeMadeEasy_Draw.py
+inkscapeMadeEasy_Plot.py
+  - fixed documentation
+  - reformatted the code using pycharm
+
 2019-04apr-04
 -------------
 
- - fixed documentation on instalation procedure
+ - fixed documentation on installation procedure
 
 2018-11nov-14
 -------------
 
-inkscapeMadeEeasy_Base.py
-  - added new funcions: getElemFromXpath, getElemAtrib, getDocumentName, getDocumentUnit, getcurrentLayer, unit2userUnit, userUnit2unit, unit2unit
+inkscapeMadeEasy_Base.py
+  - added new functions: getElemFromXpath, getElemAtrib, getDocumentName, getDocumentUnit, getcurrentLayer, unit2userUnit, userUnit2unit, unit2unit
 
 2018-07jul-31
 -------------
 
-inkscapeMadeEeasy_Base.py
-  - added two new funcions: getSegmentParameters and getSegmentFromPoints
+inkscapeMadeEasy_Base.py
+  - added two new functions: getSegmentParameters and getSegmentFromPoints
   - Removed the GUI of the textex module and its dependencies with GUI modules. It might be easier now to run the extensions under Windows/Mac
 
 2017-11nov-19
 -------------
 
-inkscapeMadeEeasy_Base.py
+inkscapeMadeEasy_Base.py
   - added a function to erase elements:  removeElement(element)
   - escaped some backslashes missing in the documentation sections. This caused issues for some users.
 
@@ -28,70 +41,70 @@ inkscapeMadeEeasy_Base.py
 2017-08aug-04
 -------------
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - now text.write() allows multi-line text.
 
 2017-05may-18
 -------------
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - fixed documentation on predefined color 'purple'
 
 2017-05may-06
 -------------
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - added a class and two methods to draw rectangles.
 
 2017-06jun-18
 -------------
 
-inkscapeMadeEeasy_Base.py
+inkscapeMadeEasy_Base.py
   - fix a bug in getPoints method.
 
 2016-11nov-02
 -------------
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - fix text.latex() method in case LaTeX support is disabled. There was a bug when angleDeg was different than zero.
 
 2016-11nov-02
 -------------
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - small modification in text.latex() method to fix incompatibility with temporary diretory under windows.
 
 2016-10oct-31
 -------------
 
-inkscapeMadeEeasy_Draw.py
-inkscapeMadeEeasy_Plot.py
+inkscapeMadeEasy_Draw.py
+inkscapeMadeEasy_Plot.py
   - LaTeX support is now optional. See documentation on how to enable/disable it.
 
 
 2016-10oct-28
 -------------
 
-inkscapeMadeEeasy_Base.py
+inkscapeMadeEasy_Base.py
   - Changes in inkscapeMadeEasy.getPoints() to become compatible with Python 2.6
 
 2016-10oct-12
 -------------
 
-inkscapeMadeEeasy_Base.py
+inkscapeMadeEasy_Base.py
   - Fix inkscapeMadeEasy.displayMsg() definition.
 
 
 2016-09sep-21
 -------------
 
-inkscapeMadeEeasy_Base.py
+inkscapeMadeEasy_Base.py
   - New method inkscapeMadeEasy.displayMsg() to show messages to the user
 
-inkscapeMadeEeasy_Draw.py
+inkscapeMadeEasy_Draw.py
   - New method displayMsg() to show messages to the user
   - Minor documentation changes
 
-inkscapeMadeEeasy_Plot.py
+inkscapeMadeEasy_Plot.py
   - New method displayMsg() to show messages to the user
   - Changed argument names containing '__Mark__' to '__Tick__' to comply with other plotting packages. Attention: This might break your code.

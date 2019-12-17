@@ -164,7 +164,7 @@ In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files f
 >>>                 |-- textext.inx
 >>>                 |-- textext.py
 
-**Inkscape's extension directory** Your inkscape extension directory location can be found opening Inkskape and selecting ``Edit>Preferences>System`` and checking ``User Extensions field``. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer)
+**Inkscape's extension directory** Your inkscape extension directory location can be found opening Inkskape and selecting ``Edit>Preferences>System`` and checking ``User Extensions``  field. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer's search bar)
 
 **LaTeX package requirement**
 
