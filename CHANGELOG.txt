@@ -1,4 +1,10 @@
 
+2019-12dec-22
+-------------
+
+inkscapeMadeEasy_Draw.py
+  - fixed a bug introduced in my last commit
+
 2019-12dec-17
 -------------
 
