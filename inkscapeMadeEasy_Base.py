@@ -267,6 +267,23 @@ class inkscapeMadeEasy(inkex.Effect):
 
         return elem.attrib[attrib]
 
+    def getDocumentScale(self):
+        """returns the scale of the document
+
+        **Example**
+
+        >>> scale = x.getDocumentScale()
+
+        """
+        try:
+            elem = self.getElemFromXpath('/svg:svg/sodipodi:namedview')
+            doc_scale = self.getElemAtrib(elem, 'scale-x')
+            doc_scale = float(doc_scale)
+        except:
+            doc_scale = 1
+
+        return doc_scale
+
     # ---------------------------------------------
     def getDocumentName(self):
         """returns the name of the document
@@ -275,8 +292,8 @@ class inkscapeMadeEasy(inkex.Effect):
         :rtype: string
         
         **Example**
-        
-        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy 
+
+        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy
         >>> x=inkscapeMadeEasy
         >>> name = x.getDocumentName()
         
@@ -711,7 +728,7 @@ class inkscapeMadeEasy(inkex.Effect):
         element.attrib['transform'] = newTransform
 
     # ---------------------------------------------
-    def scaleElement(self, element, scaleX=1.0, scaleY=0.0):
+    def scaleElement(self, element, scaleX=1.0, scaleY=0.0, center=None):
         """Scales the element using the transformation attribute.
 
         It is possible to scale elements isolated or entire groups.
@@ -719,9 +736,11 @@ class inkscapeMadeEasy(inkex.Effect):
         :param element: element object to be rotated
         :param scaleX: scaling factor in X direction. Default=1.0
         :param scaleY: scaling factor in Y direction. Default=0.0
+        :param center: center point considered as the origin for the scaling. Default=None. If None, the origin is adopted
         :type element: element object
         :type scaleX: float
         :type scaleX: float
+        :type center: tuple
         :returns:  nothing
         :rtype: -
 
@@ -738,6 +757,8 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> self.scaleElement(circ1,2.0,3.0)                                 # scales x2 in X and x3 in Y
         >>> self.scaleElement(groupA,0.5)                                    # scales x0.5 the group in both X and Y directions
         """
+        if center is not None:
+            self.moveElement(element, [-center[0], -center[1]])
 
         transfString = ''
 
@@ -757,6 +778,9 @@ class inkscapeMadeEasy(inkex.Effect):
                 newTransform = 'scale(%f)' % scaleX
 
         element.attrib['transform'] = newTransform
+
+        if center is not None:
+            self.moveElement(element, [center[0], center[1]])
 
     # ---------------------------------------------
     def findMarker(self, markerName):

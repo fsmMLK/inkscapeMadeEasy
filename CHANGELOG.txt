@@ -1,4 +1,11 @@
 
+2019-12dec-29
+-------------
+
+inkscapeMadeEasy_Base.py
+  - Added a new function: getDocumentScale
+  - new optional argument for scaleElement function.
+
 2019-12dec-22
 -------------
 
