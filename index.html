@@ -89,8 +89,8 @@
 <h2>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
 <p>Many of the functions implemented in this project can use LaTeX to generate text if the support is enabled. To this end I decided to employ the excellent extension <strong>textext</strong> by Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
 <p>Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
-<p>Instalation procedure and requirements of the modified <strong>textext</strong> are the same of the original. Please refer to the installation section on Pauli Virtanen’s page to get further instructions.</p>
-<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter.</strong> Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
+<p>Installation procedure and requirements of the modified <strong>textext</strong> are the same of the original. Please refer to the installation section on Pauli Virtanen’s page to get further instructions.</p>
+<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter.</strong> Linux users can install from your preferred package manager. Windows users can download it from its website.</p>
 <p><strong>Modifications</strong></p>
 <p>Here is the full list of changes I made:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Changes: line  67-68: added a few variables to control debug mode</span>
@@ -127,23 +127,23 @@
 <p>inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.</li>
+<li>Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method partially overcomes this issue by sending the object to a text file.</li>
 <li>unique ID number generator (adapted from inkex.py)</li>
 <li>list defined elements (e.g. markers) in the current document</li>
 <li>create groups</li>
 <li>get the resulting transformation matrix of an object, even when multiple transformations are stacked</li>
 <li>rotate, scale and move objects</li>
 <li>find markers</li>
-<li>get the list of points coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them</li>
+<li>get the list of point coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them</li>
 <li>get the bounding box of an object or group</li>
 <li>get the center of the bounding box of an object or group</li>
 </ul>
 </div></blockquote>
 <div class="section" id="installation-and-requirements">
 <span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
-<p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.</p>
+<p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.</p>
 <p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.</p>
-<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter if you want to use LaTeX support.</strong>  Linux users can install from your prefered package manager. Windows users can download it from its website.</p>
+<p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter if you want to use LaTeX support.</strong>  Linux users can install from your preferred package manager. Windows users can download it from its website.</p>
 <p>In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape’s extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <p>In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape’s extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
@@ -157,10 +157,10 @@
 &gt;&gt;&gt;                 |-- textext.py
 </pre></div>
 </div>
-<p><strong>Inkscape’s extension directory</strong> Your inkscape extension directory location can be found opening Inkskape and selecting <code class="docutils literal"><span class="pre">Edit&gt;Preferences&gt;System</span></code> and checking <code class="docutils literal"><span class="pre">User</span> <span class="pre">Extensions</span></code>  field. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer’s search bar)</p>
+<p><strong>Inkscape’s extension directory</strong> Your inkscape extension directory location can be found opening Inkscape and selecting <code class="docutils literal"><span class="pre">Edit&gt;Preferences&gt;System</span></code> and checking <code class="docutils literal"><span class="pre">User</span> <span class="pre">Extensions</span></code>  field. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer’s search bar)</p>
 <p><strong>LaTeX package requirement</strong></p>
-<p>If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p>
-<p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code>,   <code class="docutils literal"><span class="pre">texlive-pictures</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.</p>
+<p>If LaTeX support is enabled (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p>
+<p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code>,   <code class="docutils literal"><span class="pre">texlive-pictures</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.</p>
 <p><strong>Disabling LaTeX support</strong></p>
 <p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it’s free and awesome! =] ). It  might be a problem to install for non-Linux systems.</p>
 <p>Since many people don’t use LaTeX and/or don’t have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. <strong>By default, LaTeX support is ENABLED.</strong></p>
@@ -200,7 +200,8 @@
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Base.</code><code class="descname">inkscapeMadeEasy</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">inkex.Effect</span></code></p>
 <p>Base class for extensions.</p>
-<p>This class extends the inkex.Effect class by adding several basic functions to help manipulating inkscape elements. All extensions should inherit this class.</p>
+<p>This class extends the inkex.Effect class by adding several basic functions to help
+manipulating inkscape elements. All extensions should inherit this class.</p>
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.displayMsg">
 <code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.displayMsg" title="Permalink to this definition">¶</a></dt>
@@ -249,14 +250,16 @@
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.Dump">
 <code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.Dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to easily output the result of <code class="docutils literal"><span class="pre">str(obj)</span></code> to a file</p>
-<p>This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
+<p>This function was created to help debugging the code while it is running under inkscape.
+Since inkscape does not possess a terminal as today (2016), this function overcomes partially the
+issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>obj</strong> (any, as long as <code class="docutils literal"><span class="pre">str(obj)</span></code> is implemented (see <code class="docutils literal"><span class="pre">__str__()</span></code> metaclass definition )) – object to sent to a file. Any type that can be used in <code class="docutils literal"><span class="pre">str()</span></code></li>
-<li><strong>file</strong> – file path. Default: <code class="docutils literal"><span class="pre">./dump_file.txt</span></code></li>
+<li><strong>file</strong> (<em>string</em>) – file path. Default: <code class="docutils literal"><span class="pre">./dump_file.txt</span></code></li>
 <li><strong>mode</strong> (<em>string</em>) – writing mode of the file Default: <code class="docutils literal"><span class="pre">w</span></code> (write)</li>
 </ul>
 </td>
@@ -276,9 +279,9 @@
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">writes</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="c1"># writes the list to a file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector2</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">append</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1"># append the list to a file</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -286,7 +289,8 @@
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">
 <code class="descname">removeElement</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.removeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function to remove one element or group. If the parent of the element is a group and has no other children, then the parent is also removed.</p>
+<dd><p>Function to remove one element or group. If the parent of the element is a group
+and has no other children, then the parent is also removed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -319,11 +323,59 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.exportSVG">
+<code class="descname">exportSVG</code><span class="sig-paren">(</span><em>element</em>, <em>fileOut</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.exportSVG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.exportSVG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the elements in a new svgfile</p>
+<p>This function will export the element in a new SVG file. If a list of elements is passed as argument. All elements in the list will be exported to the same file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>element</strong> (<em>element</em><em> or </em><em>list of elements</em>) – element or list of elements to be exported</li>
+<li><strong>fileOut</strong> – file path, including the extension.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nothing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the defs of the original file will be copied to the new file. Therefore you might want to run te vacuum tool to cleanup the new SVG file</p>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                             <span class="c1"># retrieves the root layer of the file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupA</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>               <span class="c1"># creates a group inside rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupB</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;child&#39;</span><span class="p">)</span>              <span class="c1"># creates a group inside groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line1</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">exportSVG</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span><span class="s1">&#39;file1.svg&#39;</span><span class="p">)</span>                            <span class="c1"># exports only line1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">exportSVG</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span><span class="s1">&#39;file2.svg&#39;</span><span class="p">)</span>                           <span class="c1"># exports groupA (and all elements contained in it)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">exportSVG</span><span class="p">([</span><span class="n">groupA</span><span class="p">,</span><span class="n">groupB</span><span class="p">],</span><span class="s1">&#39;file3.svg&#39;</span><span class="p">)</span>                  <span class="c1"># exports groupA and groupB (and all elements contained in it) to the same file</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber">
 <code class="descname">uniqueIdNumber</code><span class="sig-paren">(</span><em>prefix_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.uniqueIdNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a unique ID with a given prefix ID by adding a numeric suffix</p>
-<p>This function is used to generate a valid unique ID by concatenating a given prefix with a numeric suffix. The overall format is <code class="docutils literal"><span class="pre">prefix-%05d</span></code>.</p>
-<p>This function makes sure the ID is unique by checking in <code class="docutils literal"><span class="pre">doc_ids</span></code> member. This function is specially useful for creating an unique ID for markers and other elements in defs.</p>
+<p>This function is used to generate a valid unique ID by concatenating a given prefix with a
+numeric suffix. The overall format is <code class="docutils literal"><span class="pre">prefix-%05d</span></code>.</p>
+<p>This function makes sure the ID is unique by checking in <code class="docutils literal"><span class="pre">doc_ids</span></code> member.
+This function is specially useful for creating an unique ID for markers and other elements in defs.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -343,9 +395,9 @@
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">a</span><span class="o">=</span><span class="n">myName</span><span class="o">-</span><span class="mi">00001</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">b</span><span class="o">=</span><span class="n">myName</span><span class="o">-</span><span class="mi">00002</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">c</span><span class="o">=</span><span class="n">myName</span><span class="o">-</span><span class="mi">00003</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="c1"># a=myName-00001</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="c1"># b=myName-00002</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">uniqueIdNumber</span><span class="p">(</span><span class="s1">&#39;myName&#39;</span><span class="p">)</span>   <span class="c1"># c=myName-00003</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -353,7 +405,7 @@
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefinitions">
 <code class="descname">getDefinitions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDefinitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefinitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>retrieves the Defs (xpath) element of the svg file.</p>
+<dd><p>retrieves the Defs element of the svg file.</p>
 <p>This function returns the element Defs of the current svg file. This elements stores the definition (e.g. marker definition)</p>
 <p>if no Defs can be found, a new empty Defs is created</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -362,7 +414,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the defs element</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">xpath</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">etree element</td>
 </tr>
 </tbody>
 </table>
@@ -385,7 +437,7 @@
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg//svg:defs&#39;</span><span class="p">)</span>   <span class="c1"># returns the list of definitions of the document</span>
 </pre></div>
@@ -414,10 +466,20 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">elem</span><span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">docNAme</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemAtrib</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span><span class="s1">&#39;sodipodi:docname&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentScale">
+<code class="descname">getDocumentScale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDocumentScale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDocumentScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the scale of the document</p>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scale</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getDocumentScale</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -437,7 +499,7 @@
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span> 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getDocumentName</span><span class="p">()</span>
 </pre></div>
@@ -542,6 +604,11 @@
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.removeAbsPath">
+<code class="descname">removeAbsPath</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.removeAbsPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeAbsPath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.unit2userUnit">
@@ -806,7 +873,8 @@
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.createGroup">
 <code class="descname">createGroup</code><span class="sig-paren">(</span><em>parent</em>, <em>label='none'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.createGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.createGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new empty group of elements.</p>
-<p>This function creates a new empty group of elements. In order to create new elements inside this groups you must create them informing the group as the parent element.</p>
+<p>This function creates a new empty group of elements. In order to create new elements inside
+this groups you must create them informing the group as the parent element.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -909,6 +977,42 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.copyElement">
+<code class="descname">copyElement</code><span class="sig-paren">(</span><em>element</em>, <em>newParent</em>, <em>distance=None</em>, <em>angleDeg=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.copyElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.copyElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies one element to the same or other parent Element.</p>
+<p>It is possible to copy elements isolated or entire groups.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>element</strong> (<em>element object</em>) – element object to be copied</li>
+<li><strong>newParent</strong> (<em>element object</em>) – New parent object. It can be another group or the group</li>
+<li><strong>distance</strong> (<em>tuple</em>) – tuple with the distance to move the object. If None, then the copy is placed at the same position</li>
+<li><strong>angleDeg</strong> (<em>float</em>) – angle of rotation in degrees, counter-clockwise direction</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">newElement</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">element object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                              <span class="c1"># retrieves the root layer of the file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>                <span class="c1"># creates a group inside rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line1</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># creates a line in rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">copyElement</span><span class="p">(</span><span class="n">line2</span><span class="p">,</span><span class="n">groupA</span><span class="p">)</span>                                  <span class="c1"># create a copy of line2 in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">groupA</span><span class="p">,[</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">])</span>                                <span class="c1"># moves line2  DeltaX=10, DdeltaY=-10</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.moveElement">
 <code class="descname">moveElement</code><span class="sig-paren">(</span><em>element</em>, <em>distance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.moveElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.moveElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Moves the element using the transformation attribute.</p>
@@ -947,7 +1051,7 @@
 
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.scaleElement">
-<code class="descname">scaleElement</code><span class="sig-paren">(</span><em>element</em>, <em>scaleX=1.0</em>, <em>scaleY=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.scaleElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.scaleElement" title="Permalink to this definition">¶</a></dt>
+<code class="descname">scaleElement</code><span class="sig-paren">(</span><em>element</em>, <em>scaleX=1.0</em>, <em>scaleY=0.0</em>, <em>center=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.scaleElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.scaleElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scales the element using the transformation attribute.</p>
 <p>It is possible to scale elements isolated or entire groups.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -958,6 +1062,7 @@
 <li><strong>element</strong> (<em>element object</em>) – element object to be rotated</li>
 <li><strong>scaleX</strong> (<em>float</em>) – scaling factor in X direction. Default=1.0</li>
 <li><strong>scaleY</strong> – scaling factor in Y direction. Default=0.0</li>
+<li><strong>center</strong> (<em>tuple</em>) – center point considered as the origin for the scaling. Default=None. If None, the origin is adopted</li>
 </ul>
 </td>
 </tr>
@@ -1025,7 +1130,8 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</p>
+<p class="last">This function will consider any transformation stored in transform attribute,
+that is, it will compute the resulting coordinates of each object</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                                   <span class="c1"># retrieves the root layer of the file</span>
@@ -1054,7 +1160,8 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</p>
+<p class="last">This function will consider any transformation stored in transform attribute,
+that is, it will compute the resulting coordinates of each object</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                                   <span class="c1"># retrieves the root layer of the file</span>
@@ -1083,7 +1190,8 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</p>
+<p class="last">This function will consider any transformation stored in transform attribute,
+that is, it will compute the resulting coordinates of each object</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                                   <span class="c1"># retrieves the root layer of the file</span>
@@ -1121,8 +1229,8 @@
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">segementParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segmentParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [0.7071,-0.7071] ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segmentParam</span> <span class="o">=</span> <span class="n">getSegmentFromPoints</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>                               <span class="c1"># returns [1.4142, 0.78540, [0.7071,0.7071], [-0.7071,0.7071] ]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1159,7 +1267,8 @@
 If the path element has more than two points, the function returns an empty list</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This function will consider any transformation stored in transform attribute, that is, it will compute the resulting coordinates of each object</p>
+<p class="last">This function will consider any transformation stored in transform attribute,
+that is, it will compute the resulting coordinates of each object</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                                      <span class="c1"># retrieves the root layer of the file</span>
@@ -1201,14 +1310,15 @@ If the path element has more than two points, the function returns an empty list
 <dt id="inkscapeMadeEasy_Draw.Dump">
 <code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.Dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to easily output the result of <code class="docutils literal"><span class="pre">str(obj)</span></code> to a file</p>
-<p>This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
+<p>This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016),
+this function overcomes partially the issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>obj</strong> (any, as long as <code class="docutils literal"><span class="pre">str(obj</span></code>) is implemented (see <code class="docutils literal"><span class="pre">__str__()</span></code> metaclass definition )) – object to sent to the file. Any type that can be used in <code class="docutils literal"><span class="pre">str()</span></code></li>
-<li><strong>file</strong> – file path. Default: <code class="docutils literal"><span class="pre">./dump_file.txt</span></code></li>
+<li><strong>file</strong> (<em>string</em>) – file path. Default: <code class="docutils literal"><span class="pre">./dump_file.txt</span></code></li>
 <li><strong>mode</strong> (<em>string</em>) – writing mode of the file. Default: <code class="docutils literal"><span class="pre">w</span></code> (write)</li>
 </ul>
 </td>
@@ -1230,9 +1340,9 @@ If the path element has more than two points, the function returns an empty list
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">writes</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="c1"># writes the list to a file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector2</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">append</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1"># append the list to a file</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1320,7 +1430,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.color.colorPickerToRGBalpha">
 <em class="property">static </em><code class="descname">colorPickerToRGBalpha</code><span class="sig-paren">(</span><em>colorPickerString</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#color.colorPickerToRGBalpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.color.colorPickerToRGBalpha" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function that converts the string returned by  the widget ‘color’ in the .inx file into 2 strings, one representing the color in format <code class="docutils literal"><span class="pre">#RRGGBB</span></code> and the other representing the alpha channel <code class="docutils literal"><span class="pre">AA</span></code></p>
+<dd><p>Function that converts the string returned by  the widget ‘color’ in the .inx file into 2 strings,
+one representing the color in format <code class="docutils literal"><span class="pre">#RRGGBB</span></code> and the other representing the alpha channel <code class="docutils literal"><span class="pre">AA</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1385,8 +1496,10 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.color.parseColorPicker">
 <em class="property">static </em><code class="descname">parseColorPicker</code><span class="sig-paren">(</span><em>stringColorOption</em>, <em>stringColorPicker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#color.parseColorPicker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.color.parseColorPicker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function that converts the string returned by  the widgets ‘color’ and ‘optiongroup’ in the .inx file into 2 strings, one representing the color in format <code class="docutils literal"><span class="pre">#RRGGBB</span></code> and the other representing the alpha channel <code class="docutils literal"><span class="pre">AA</span></code></p>
-<p>You must have in your .inx both ‘optiongroup’ and ‘color’ widgets as defined below. You don’t have to have all the color options presented in the example. That is the most complete example, considering the default colors in color.defined method.</p>
+<dd><p>Function that converts the string returned by  the widgets ‘color’ and ‘optiongroup’ in the .inx file into 2 strings,
+one representing the color in format <code class="docutils literal"><span class="pre">#RRGGBB</span></code> and the other representing the alpha channel <code class="docutils literal"><span class="pre">AA</span></code></p>
+<p>You must have in your .inx both ‘optiongroup’ and ‘color’ widgets as defined below. You don’t have to have all the color options presented in the example.
+That is the most complete example, considering the default colors in color.defined method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1412,7 +1525,9 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <p class="last">For more information on this widget, see &lt;<a class="reference external" href="http://wiki.inkscape.org/wiki/index.php/INX_Parameters">http://wiki.inkscape.org/wiki/index.php/INX_Parameters</a>&gt;</p>
 </div>
 <p><strong>Example</strong></p>
-<p>It works in the following manner: The user select in the optiongroup list the desired color. All pre defined colors are listed there. There is also a ‘my default color’ where you can set your preferred default color and a ‘use color picker’ to select from the color picker widget. Keep in mind that the selected color in this widget will be considered ONLY if ‘use color picker’ option is selected.</p>
+<p>It works in the following manner: The user select in the optiongroup list the desired color. All pre defined colors are listed there.
+There is also a ‘my default color’ where you can set your preferred default color and a ‘use color picker’ to select from the color picker widget.
+Keep in mind that the selected color in this widget will be considered ONLY if ‘use color picker’ option is selected.</p>
 <p>Let your .inx file contains a widget of type ‘color’ with the name ‘myColorPicker’ and another ‘optiongroup’ with the name ‘myColorOption’:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&lt;param name=&quot;myColorOption&quot; type=&quot;optiongroup&quot; appearance=&quot;minimal&quot; _gui-text=&quot;some text here&quot;&gt;
     &lt;_option value=&quot;#FF0022&quot;&gt;my default color&lt;/_option&gt;    &lt;--you can set your pre define color in the form #RRGGBB
@@ -1888,7 +2003,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myTextStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">textStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fontFamily</span><span class="o">=</span><span class="s1">&#39;Sans&#39;</span><span class="p">,</span> <span class="n">fontStyle</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">fontWeight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">lineSpacing</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">letterSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">,</span> <span class="n">wordSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myTextStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">textStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">fontFamily</span><span class="o">=</span><span class="s1">&#39;Sans&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                      <span class="n">fontStyle</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">fontWeight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">lineSpacing</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">letterSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">,</span> <span class="n">wordSpacing</span><span class="o">=</span><span class="s1">&#39;0px&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1897,7 +2013,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dt id="inkscapeMadeEasy_Draw.textStyle.setSimpleBlack">
 <em class="property">static </em><code class="descname">setSimpleBlack</code><span class="sig-paren">(</span><em>fontSize=10</em>, <em>justification='left'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#textStyle.setSimpleBlack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.textStyle.setSimpleBlack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a standard black text style</p>
-<p>The only adjustable parameter are font size and justification. The fixed parameters are: textColor=color.defined(‘black’), fontFamily=’Sans’, fontStyle=’normal’, fontWeight=’normal’, lineSpacing=‘100%’, letterSpacing=‘0px’, wordSpacing=‘0px.</p>
+<p>The only adjustable parameter are font size and justification. The fixed parameters are: textColor=color.defined(‘black’), fontFamily=’Sans’,
+fontStyle=’normal’, fontWeight=’normal’, lineSpacing=‘100%’, letterSpacing=‘0px’, wordSpacing=‘0px.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1937,7 +2054,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dt id="inkscapeMadeEasy_Draw.textStyle.setSimpleColor">
 <em class="property">static </em><code class="descname">setSimpleColor</code><span class="sig-paren">(</span><em>fontSize=10</em>, <em>justification='left'</em>, <em>textColor='#000000'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#textStyle.setSimpleColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.textStyle.setSimpleColor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a standard colored text style</p>
-<p>The only adjustable parameter are font size justification and textColor. The fixed parameters are: fontFamily=’Sans’, fontStyle=’normal’, fontWeight=’normal’, lineSpacing=‘100%’, letterSpacing=‘0px’, wordSpacing=‘0px.</p>
+<p>The only adjustable parameter are font size justification and textColor. The fixed parameters are: fontFamily=’Sans’, fontStyle=’normal’,
+fontWeight=’normal’, lineSpacing=‘100%’, letterSpacing=‘0px’, wordSpacing=‘0px.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2038,7 +2156,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">myText</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">],</span> <span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mySimpleStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># creates a group in root-layer and add text to it</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myGroup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span><span class="s1">&#39;textGroup&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myGroup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">root_layer</span><span class="p">,</span><span class="s1">&#39;textGroup&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#adds a text &#39;foo bar&#39;, rotated 45 degrees, at the point x=0,y=0, overriding justification of mySimpleStyle</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;foo bar&#39;</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">parent</span><span class="o">=</span><span class="n">myGroup</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mySimpleStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">45.0</span><span class="p">)</span>
 </pre></div>
@@ -2051,11 +2169,13 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dd><p>Draws a text line using LaTeX. You can use any LaTeX contents here.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Employs the excellent ‘textext’ extension from Pauli Virtanen’s &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt; is incorporated here. Please refer to <a class="reference internal" href="#main-features">Main Features</a> section for further instructions</p>
+<p class="last">Employs the excellent ‘textext’ extension from Pauli Virtanen’s &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt; is incorporated here.
+Please refer to <a class="reference internal" href="#main-features">Main Features</a> section for further instructions</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. <strong>It is enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it. If disabled, this function will still work, internally calling the method text.write().</p>
+<p class="last">LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. <strong>It is enabled by default</strong>.
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it. If disabled, this function will still work, internally calling the method text.write().</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2129,9 +2249,179 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">customCommand</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\newcommand{\fooBar}{\textbf{Foo Bar Function! WhooHoo!}}&#39;</span>   <span class="c1"># do not forget the r to avoid backslash escape.</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_layer</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;This is one equation \begin</span><span class="si">{align}</span><span class="s1"> x=y^2\end</span><span class="si">{align}</span><span class="s1"> And this is my \fooBar</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refPoint</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">LatexCommands</span><span class="o">=</span><span class="n">customCommand</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preambleFile</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_layer</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;This is one equation \begin</span><span class="si">{align}</span><span class="s1"> x=y^2\end</span><span class="si">{align}</span><span class="s1"> And this is my \fooBar</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                       <span class="n">position</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">refPoint</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">LatexCommands</span><span class="o">=</span><span class="n">customCommand</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preambleFile</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="inkscapeMadeEasy_Draw.cubicBezier">
+<em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">cubicBezier</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#cubicBezier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.cubicBezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a class with different methods for drawing cubic bezier lines.</p>
+<p>This class contains only static methods so that you don’t have to inherit this in your class</p>
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.cubicBezier.addNode">
+<em class="property">static </em><code class="descname">addNode</code><span class="sig-paren">(</span><em>NodeList, coord=[0, 0], cPbefore=[-1, 0], cPafter=[1, 0], typeNode='corner', flagAbsCoords=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#cubicBezier.addNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.cubicBezier.addNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new node to the list of nodes of the cubic bezier line.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>NodeList</strong> (<em>list</em>) – list of nodes to be appended with the new node.</li>
+<li><strong>coord</strong> (<em>list</em><em> [</em><em>x</em><em>,</em><em>y</em><em>]</em>) – list with the coordinates of the node</li>
+<li><strong>cPbefore</strong> (<em>list</em><em> [</em><em>x</em><em>,</em><em>y</em><em>]</em>) – list with the coordinates of the control point before the node.</li>
+<li><strong>cPafter</strong> (<em>list</em><em> [</em><em>x</em><em>,</em><em>y</em><em>]</em>) – list with the coordinates of the control point after the node. Used only if ‘typeNode’ is ‘smooth’ or ‘corner’</li>
+<li><strong>typeNode</strong> (<em>string</em>) – <p>type of node to be added. See image below</p>
+<ul>
+<li><code class="docutils literal"><span class="pre">corner</span></code>: Node without smoothness constraint at the node. The bezier curve can have a sharp edge at the node</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">smooth</span></code>: Node with smoothness constraint at the node. The bezier curve will be smooth at the node.</dt>
+<dd>If the control points do not form a straight line, then they are modified to form a straight line. See image below</dd>
+</dl>
+</li>
+<li><code class="docutils literal"><span class="pre">symmetric</span></code>: same as <code class="docutils literal"><span class="pre">smooth</span></code>, but the control points are forced to be symmetric with respect to the node.</li>
+</ul>
+</li>
+<li><strong>flagAbsCoords</strong> (<em>bool</em>) – indicate absolute or relative coordinates. See section below on how reference system works.
+.. warning:: All nodes in a given list must be defined in the same reference system (absolute or relative).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Node Types</strong></p>
+<p>The image below presents the types of nodes</p>
+<a class="reference internal image-reference" href="_images/bezier_nodeTypes.png"><img alt="_images/bezier_nodeTypes.png" src="_images/bezier_nodeTypes.png" style="width: 500px;" /></a>
+<p>Image below present the process of smoothing control nodes not completely aligned when  <code class="docutils literal"><span class="pre">smooth</span></code> is selected.</p>
+<a class="reference internal image-reference" href="_images/bezier_smoothProcess.png"><img alt="_images/bezier_smoothProcess.png" src="_images/bezier_smoothProcess.png" style="width: 500px;" /></a>
+<p><strong>Absolute and relative coordinate systems</strong></p>
+<p>cubic bezier curves are composed by segments which are defined by 4 coordinates, two node coordinates and two control points.</p>
+<a class="reference internal image-reference" href="_images/bezier_definitions.png"><img alt="_images/bezier_definitions.png" src="_images/bezier_definitions.png" style="width: 500px;" /></a>
+<p>In absolute coordinate system, all node and control point localizations are specified using the origin as reference.
+In relative coordinate system, control point localizations are specified using its node as reference, and each node
+use the previous node as reference (the first node use the origin as reference). See image below.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+<a class="reference internal image-reference" href="_images/bezier_references.png"><img alt="_images/bezier_references.png" src="_images/bezier_references.png" style="width: 700px;" /></a>
+<p><strong>Example</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the following example, the control point before the first node and after the last node are important
+when the bezier curve must be closed. See method <code class="docutils literal"><span class="pre">draw</span></code></p>
+</div>
+<a class="reference internal image-reference" href="_images/bezier_example.png"><img alt="_images/bezier_example.png" src="_images/bezier_example.png" style="width: 400px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># create a list of nodes using absolute coordinate system</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">nodeListABS</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;smooth&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># create a list of nodes using relative coordinate system</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">nodeListREL</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;smooth&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.cubicBezier.draw">
+<em class="property">static </em><code class="descname">draw</code><span class="sig-paren">(</span><em>parent</em>, <em>NodeList</em>, <em>offset=array([0</em>, <em>0])</em>, <em>label='none'</em>, <em>lineStyle={'fill': 'none'</em>, <em>'stroke': '#000000'</em>, <em>'stroke-dasharray': 'none'</em>, <em>'stroke-linecap': 'round'</em>, <em>'stroke-linejoin': 'round'</em>, <em>'stroke-width': '1.0'}</em>, <em>closePath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#cubicBezier.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.cubicBezier.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>draws the bezier line, given a list of nodes, built using <code class="docutils literal"><span class="pre">addNode</span></code> method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>inkscapeMadeEasy object</em><em> (</em><em>see example below</em><em>)</em>) – parent object</li>
+<li><strong>NodeList</strong> (<em>list of nodes</em>) – list of nodes. See <code class="docutils literal"><span class="pre">addNode</span></code> method</li>
+<li><strong>offset</strong> (<em>list</em>) – offset coords. Default [0,0]</li>
+<li><strong>label</strong> (<em>string</em>) – label of the line. Default ‘none’</li>
+<li><strong>lineStyle</strong> (<em>lineStyle object</em>) – line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+<li><strong>closePath</strong> (<em>bool</em>) – Connects the first point to the last. Default: False</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new line object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">line Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the following example, the control point before the first node and after the last node are important
+when the bezier curve must be closed.</p>
+</div>
+<a class="reference internal image-reference" href="_images/bezier_example.png"><img alt="_images/bezier_example.png" src="_images/bezier_example.png" style="width: 400px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">myExtension</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">myLineStyle</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lineColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># create a list of nodes using absolute coordinate system</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">nodeListABS</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;smooth&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># create a list of nodes using relative coordinate system</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">nodeListREL</span><span class="o">=</span><span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;smooth&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">addNode</span><span class="p">(</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">cPbefore</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cPafter</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">typeNode</span><span class="o">=</span><span class="s1">&#39;corner&#39;</span><span class="p">,</span> <span class="n">flagAbsCoords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>    <span class="n">C1</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">root_layer</span><span class="p">,</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">closePath</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">C2</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">root_layer</span><span class="p">,</span><span class="n">nodeListABS</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">closePath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">C3</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">root_layer</span><span class="p">,</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">closePath</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">C4</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">cubicBezier</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">root_layer</span><span class="p">,</span><span class="n">nodeListREL</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">closePath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Result of the example</p>
+<a class="reference internal image-reference" href="_images/bezier_example_draw.png"><img alt="_images/bezier_example_draw.png" src="_images/bezier_example_draw.png" style="width: 800px;" /></a>
 </dd></dl>
 
 </dd></dl>
@@ -2143,7 +2433,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <p>This class contains only static methods so that you don’t have to inherit this in your class</p>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.line.absCoords">
-<em class="property">static </em><code class="descname">absCoords</code><span class="sig-paren">(</span><em>parent, coordsList, offset=[0, 0], label='none', lineStyle={'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#line.absCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.line.absCoords" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">absCoords</code><span class="sig-paren">(</span><em>parent, coordsList, offset=[0, 0], label='none', lineStyle={'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}, closePath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#line.absCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.line.absCoords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws a (poly)line based on a list of absolute coordinates</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -2159,6 +2449,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <li><strong>offset</strong> (<em>list</em>) – offset coords. Default [0,0]</li>
 <li><strong>label</strong> (<em>string</em>) – label of the line. Default ‘none’</li>
 <li><strong>lineStyle</strong> (<em>lineStyle object</em>) – line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+<li><strong>closePath</strong> (<em>bool</em>) – Connects the first point to the last. Default: False</li>
 </ul>
 </td>
 </tr>
@@ -2198,7 +2489,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.line.relCoords">
-<em class="property">static </em><code class="descname">relCoords</code><span class="sig-paren">(</span><em>parent, coordsList, offset=[0, 0], label='none', lineStyle={'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#line.relCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.line.relCoords" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">relCoords</code><span class="sig-paren">(</span><em>parent, coordsList, offset=[0, 0], label='none', lineStyle={'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}, closePath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#line.relCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.line.relCoords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws a (poly)line based on a list of relative coordinates</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -2214,6 +2505,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <li><strong>offset</strong> (<em>list</em>) – offset coords. Default [0,0]</li>
 <li><strong>label</strong> (<em>string</em>) – label of the line. Default ‘none’</li>
 <li><strong>lineStyle</strong> (<em>lineStyle object</em>) – line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+<li><strong>closePath</strong> (<em>bool</em>) – Connects the first point to the last. Default: False</li>
 </ul>
 </td>
 </tr>
@@ -2391,9 +2683,11 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">myLineStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span>    
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#draws the shortest arc</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                     <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1">#draws the longest arc</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                     <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">flagOpen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2480,7 +2774,7 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <li><strong>width</strong> (<em>float</em>) – dimension in X direction</li>
 <li><strong>height</strong> (<em>float</em>) – dimension in Y direction</li>
 <li><strong>radiusX</strong> (<em>float</em>) – rounding radius in X direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, the rectangle will have sharp corners. Default: None</li>
-<li><strong>radiusY</strong> (<em>float</em>) – rounding radius in Y direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, then radiusX will also be used in Y direction. If radiusX is also <code class="docutils literal"><span class="pre">None</span></code>, then the rectangle will have sharp corners. Default: None</li>
+<li><strong>radiusY</strong> (<em>float</em>) – rounding radius in Y direction. If this value is <code class="docutils literal"><span class="pre">None</span></code>, then radiusX will also be used in Y direction. If radiusX is also <code class="docutils literal"><span class="pre">None</span></code>,then the rectangle will have sharp corners. Default: None</li>
 <li><strong>offset</strong> (<em>list</em>) – extra offset coords [x,y]</li>
 <li><strong>label</strong> (<em>string</em>) – label of the line. Default ‘circle’</li>
 <li><strong>lineStyle</strong> (<em>lineStyle object</em>) – line style to be used. See class <code class="docutils literal"><span class="pre">lineStyle</span></code>. Default: lineStyle=lineStyle.setSimpleBlack()</li>
@@ -2657,7 +2951,8 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 <dt id="inkscapeMadeEasy_Plot.Dump">
 <code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>obj</em>, <em>file='./dump_file.txt'</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#Dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.Dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to easily output the result of <code class="docutils literal"><span class="pre">str(obj)</span></code> to a file</p>
-<p>This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016), this function overcomes partially the issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
+<p>This function was created to help debugging the code while it is running under inkscape. Since inkscape does not possess a terminal as today (2016),
+this function overcomes partially the issue of sending things to stdout by dumping result of the function <code class="docutils literal"><span class="pre">str()</span></code> in a text file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -2686,9 +2981,9 @@ if percentage is lower than 0.0, percentage is truncated to 0.0 (black)</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">writes</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>   <span class="c1"># writes the list to a file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector2</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="o">%</span> <span class="n">append</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="n">vector2</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;~/temporary.txt&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>   <span class="c1"># append the list to a file</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2806,7 +3101,8 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <dd><p>Creates the axes for polar plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, <strong>enabled by default</strong>.
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2889,7 +3185,8 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <p>This class contains only static methods so that you don’t have to inherit this in your class</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>.
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
 </div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.cartesian">
@@ -2897,7 +3194,8 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <dd><p>Cartesian Plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>.
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2951,17 +3249,23 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <li><strong>yGrid</strong> (<em>bool</em>) – adds grid lines to Y axis if true. Default: False</li>
 <li><strong>generalAspectFactorAxis</strong> (<em>float</em>) – regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) – line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceXlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceXlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceXlim=None Limits will be defined by min and max of xData (Default)</li>
 <li>if forceXlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
-<li><strong>forceYlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceYlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceYlim=None Limits will be defined by min and max of yData (Default)</li>
 <li>if forceYlim=[yMin,yMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
 <li><strong>drawAxis</strong> (<em>bool</em>) – <p>control flag of the axis method</p>
 <ul>
@@ -2998,11 +3302,13 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0 (they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or
+equal to 0.0 (they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers
+(basically inf  =)  ). The method will create a text object alongside your plot warning this.</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
@@ -3050,8 +3356,8 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ExtensionBaseObj</strong> (<em>inkscapeMadeEasy object</em><em> (</em><em>see example below</em><em>)</em>) – Most of the times you have to use ‘self’ from inkscapeMadeEasy related objects</li>
 <li><strong>parent</strong> (<em>inkscapeMadeEasy object</em><em> (</em><em>see example below</em><em>)</em>) – parent object</li>
-<li><strong>rData</strong> (<em>list</em>) – list of x data</li>
-<li><strong>tData</strong> (<em>list</em>) – list of y data</li>
+<li><strong>rData</strong> (<em>list</em>) – list of R data</li>
+<li><strong>tData</strong> (<em>list</em>) – list of Theta data</li>
 <li><strong>position</strong> (<em>list</em>) – <p>position of the point where x and y axis cross [x0,y0]. The point where the axis cross depend on the limits.</p>
 <ul>
 <li>If xLimits comprises the origin x=0, then the  Y axis crosses the X axis at x=0.</li>
@@ -3081,17 +3387,23 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <li><strong>tGrid</strong> (<em>bool</em>) – adds grid lines to Y axis if true. Default: False</li>
 <li><strong>generalAspectFactorAxis</strong> (<em>float</em>) – regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) – line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceRlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceRlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all rData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceRlim=None Limits will be defined by min and max of rData (Default)</li>
 <li>if forceRlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
-<li><strong>forceTlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceTlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all tData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceTlim=None Limits will be defined by min and max of tData (Default)</li>
 <li>if forceTlim=[yMin,yMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
 <li><strong>drawAxis</strong> (<em>bool</em>) – <p>control flag of the axis method</p>
 <ul>
@@ -3100,7 +3412,6 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 </ul>
 </li>
 <li><strong>ExtraLenghtAxisR</strong> (<em>float</em>) – extra length left near the arrow pointer of X axis. Default 0.0</li>
-<li><strong>ExtraLenghtAxisY</strong> – extra length left near the arrow pointer of Y axis. Default 0.0</li>
 </ul>
 </td>
 </tr>
@@ -3128,11 +3439,13 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if rData and/or tData is less than or equal to 0.0 (they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if rData and/or tData is less
+than or equal to 0.0 (they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000 (in absolute value). This avoids plotting too big numbers
+(basically inf  =)  ). The method will create a text object alongside your plot warning this.</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>
@@ -3183,7 +3496,8 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <dd><p>Stem plot in Cartesian axis</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>.
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3236,17 +3550,23 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <li><strong>yGrid</strong> (<em>bool</em>) – adds grid lines to Y axis if true. Default: False</li>
 <li><strong>generalAspectFactorAxis</strong> (<em>float</em>) – regulates the general aspect ratio between grid lines, text and Ticks separations. Default: 1.0</li>
 <li><strong>lineStylePlot</strong> (<em>lineStyle object</em>) – line style to be used to plot the data. See class <code class="docutils literal"><span class="pre">inkscapeMadeEasy_Draw.lineStyle</span></code>. Default: lineStylePlot=inkDraw.lineStyle.setSimpleBlack()</li>
-<li><strong>forceXlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceXlim</strong> (<em>list</em>) – <p>forces limits of X axis to these limits. These limits affect the axis only, that is, all xData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceXlim=None Limits will be defined by min and max of xData (Default)</li>
 <li>if forceXlim=[xMin,xMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
-<li><strong>forceYlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits. Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
-<ul>
+<li><strong>forceYlim</strong> (<em>list</em>) – <p>forces limits of Y axis to these limits. These limits affect the axis only, that is, all yData is plotted despite of these limits.
+Obs: for logarithmic scale, the limits are always adjusted to complete the decade. Usually you don’t need this for logarithmic scale</p>
+<blockquote>
+<div><ul>
 <li>if forceYlim=None Limits will be defined by min and max of yData (Default)</li>
 <li>if forceYlim=[yMin,yMax] then these limits will be used.</li>
 </ul>
+</div></blockquote>
 </li>
 <li><strong>drawAxis</strong> (<em>bool</em>) – <p>control flag of the axis method</p>
 <ul>
@@ -3283,11 +3603,13 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0 (they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are log10, then the method ignores any pairs of (x,y) data with invalid coordinates, that is, if xData and/or yData is less than or equal to 0.0
+(they would result in complex log10… =P ). The method will create a text object alongside your plot warning this.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000. this avoids plotting too big numbers (basically inf  =)  ). The method will create a text object alongside your plot warning this.</p>
+<p class="last">If any of the axis are linear, the method will ignore any value greater than 10.000. this avoids plotting too big numbers (basically inf  =)  ).
+The method will create a text object alongside your plot warning this.</p>
 </div>
 <p><strong>Example</strong></p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkex</span>

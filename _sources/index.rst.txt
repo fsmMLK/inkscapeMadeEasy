@@ -85,9 +85,9 @@ Many of the functions implemented in this project can use LaTeX to generate text
 
 Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
 
-Instalation procedure and requirements of the modified **textext** are the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
+Installation procedure and requirements of the modified **textext** are the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
 
-**Please keep in mind that you will need to install 'pstoedit' converter.** Linux users can install from your prefered package manager. Windows users can download it from its website.
+**Please keep in mind that you will need to install 'pstoedit' converter.** Linux users can install from your preferred package manager. Windows users can download it from its website.
 
 **Modifications**
 
@@ -126,14 +126,14 @@ Useful backstage functions
 
 inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:
 
- - Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method overcomes partially this issue by sending the object to a text file.
+ - Dump objects to a text file. Rationale: As of today, 2016, Inkscape does not return the stdout() during python code run. This method partially overcomes this issue by sending the object to a text file.
  - unique ID number generator (adapted from inkex.py)
  - list defined elements (e.g. markers) in the current document
  - create groups
  - get the resulting transformation matrix of an object, even when multiple transformations are stacked
  - rotate, scale and move objects
  - find markers
- - get the list of points coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them
+ - get the list of point coordinates of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them
  - get the bounding box of an object or group
  - get the center of the bounding box of an object or group
 
@@ -142,11 +142,11 @@ inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing
 Installation and requirements
 ==========================================
 
-These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in differente OSs too as long as all requirements are met.
+These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.
 
 The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.
 
-**Please keep in mind that you will need to install 'pstoedit' converter if you want to use LaTeX support.**  Linux users can install from your prefered package manager. Windows users can download it from its website.
+**Please keep in mind that you will need to install 'pstoedit' converter if you want to use LaTeX support.**  Linux users can install from your preferred package manager. Windows users can download it from its website.
 
 
 In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape's extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.
@@ -164,13 +164,13 @@ In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files f
 >>>                 |-- textext.inx
 >>>                 |-- textext.py
 
-**Inkscape's extension directory** Your inkscape extension directory location can be found opening Inkskape and selecting ``Edit>Preferences>System`` and checking ``User Extensions``  field. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer's search bar)
+**Inkscape's extension directory** Your inkscape extension directory location can be found opening Inkscape and selecting ``Edit>Preferences>System`` and checking ``User Extensions``  field. (Windows users: you can easily open this directory using Windows Explorer by copying the text in this field and pasting on Windows Explorer's search bar)
 
 **LaTeX package requirement**
 
-If LaTeX support is enables (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.
+If LaTeX support is enabled (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.
 
-Linux users: You might find useful installing the packages ``texlive-science``,   ``texlive-pictures`` and ``texlive-latex-base`` (debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.
+Linux users: You might find useful installing the packages ``texlive-science``,   ``texlive-pictures`` and ``texlive-latex-base`` (Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.
 
 **Disabling LaTeX support**
 
