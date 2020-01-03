@@ -29,7 +29,6 @@ import sys
 from copy import deepcopy
 
 import numpy as np
-
 import inkex
 
 """
@@ -154,7 +153,7 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> groupB = self.createGroup(rootLayer,label='temp1')                # creates a group inside rootLayer
         >>> line4 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[5,0]],[0,0])       # creates a line in groupB
         >>> self.removeElement(groupB)                              # removes group B and all its children
-   
+
         """
 
         parent = element.getparent()
@@ -163,7 +162,56 @@ class inkscapeMadeEasy(inkex.Effect):
 
         if parent.tag == 'g' and len(parent.getchildren()) == 0:  # if object's parent is a group and has no other children, remove parent as well
             # self.Dump(len(parent.getchildren()),'/home/fernando/lixo.txt','w')
-            parent.getparent().remove(parent)
+            temp = parent.getparent()
+            if temp is not None:
+                temp.remove(parent)
+
+    def exportSVG(self, element, fileOut):
+        """ Export the elements in a new svgfile
+
+        This function will export the element in a new SVG file. If a list of elements is passed as argument. All elements in the list will be exported to the same file.
+
+        :param element: element or list of elements to be exported
+        :param fileOut: file path, including the extension.
+        :type element: element or list of elements
+        :type file: string
+        :returns:  nothing
+        :rtype: -
+
+        .. note:: All the defs of the original file will be copied to the new file. Therefore you might want to run te vacuum tool to cleanup the new SVG file
+
+        **Example**
+
+        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy
+        >>> import inkscapeMadeEasy_Draw as inkDraw
+        >>> x=inkscapeMadeEasy
+        >>> rootLayer = x.document.getroot()                             # retrieves the root layer of the file
+        >>> groupA = x.createGroup(rootLayer,label='temp')               # creates a group inside rootLayer
+        >>> groupB = x.createGroup(rootLayer,label='child')              # creates a group inside groupA
+        >>> line1 = inkDraw.line.relCoords(groupA, [[10,0]],[0,0])       # creates a line in groupA
+        >>> line2 = inkDraw.line.relCoords(groupB, [[20,0]],[0,0])       # creates a line in groupB
+        >>> self.exportSVG(line1,'file1.svg')                            # exports only line1
+        >>> self.exportSVG(groupA,'file2.svg')                           # exports groupA (and all elements contained in it)
+        >>> self.exportSVG([groupA,groupB],'file3.svg')                  # exports groupA and groupB (and all elements contained in it) to the same file
+
+        """
+        document = inkex.etree.fromstring(blankSVG)
+
+        elem_tmp = deepcopy(element)
+        # add definitions
+        defs_tmp = deepcopy(self.getDefinitions())
+        document.append(defs_tmp)
+
+        # add elements
+        if isinstance(elem_tmp, list):
+            for e in elem_tmp:
+                document.append(e)
+        else:
+            document.append(elem_tmp)
+
+        et = inkex.etree.ElementTree(document)
+        et.write(fileOut, pretty_print=True)
+
 
     def uniqueIdNumber(self, prefix_id):
         """ Generates a unique ID with a given prefix ID by adding a numeric suffix
@@ -203,15 +251,14 @@ class inkscapeMadeEasy(inkex.Effect):
 
     # ---------------------------------------------
     def getDefinitions(self):
-        """ retrieves the Defs (xpath) element of the svg file.
-
+        """ retrieves the Defs element of the svg file.
 
         This function returns the element Defs of the current svg file. This elements stores the definition (e.g. marker definition)
 
         if no Defs can be found, a new empty Defs is created
 
         :returns: the defs element
-        :rtype: xpath
+        :rtype: etree element
 
         """
         defs = self.getElemFromXpath('/svg:svg//svg:defs')
@@ -275,12 +322,17 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> scale = x.getDocumentScale()
 
         """
+
         try:
-            elem = self.getElemFromXpath('/svg:svg/sodipodi:namedview')
-            doc_scale = self.getElemAtrib(elem, 'scale-x')
-            doc_scale = float(doc_scale)
+            elem = self.getElemFromXpath('/svg:svg')
+            width = float(self.getElemAtrib(elem, 'width').replace(self.documentUnit, ''))
+
+            viewBox = self.getElemFromXpath('/svg:svg')
+            viewBox_width = float(self.getElemAtrib(viewBox, 'viewBox').split(' ')[2])
+
+            doc_scale = viewBox_width / width
         except:
-            doc_scale = 1
+            doc_scale = 1.0
 
         return doc_scale
 
@@ -1066,3 +1118,63 @@ class inkscapeMadeEasy(inkex.Effect):
         data = self.getSegmentFromPoints(listPoints, normalDirection)
 
         return listPoints + data
+
+
+blankSVG = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 793.7008056641 1122.51965332"
+   version="1.1"
+   id="svg1406"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="blank.svg">
+  <metadata
+     id="metadata1412">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     id="namedview1408"
+     showgrid="true"
+     inkscape:snap-text-baseline="true"
+     inkscape:zoom="0.7296085858586"
+     inkscape:cx="396.8503937008"
+     inkscape:cy="561.2598425197"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1406">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1957" />
+  </sodipodi:namedview>
+</svg>
+
+"""

@@ -1,4 +1,20 @@
 
+2020-01jan-02
+-------------
+
+inkscapeMadeEasy_Draw.py
+  - Added a new class: cubicBezier
+  - Added new option for line.absCoords and line.relCoords. Now it is possible to close the path, connecting the start
+  and end points.
+  - fixed documentation
+
+inkscapeMadeEasy_Base.py
+  - Added a new function: exportSVG, getDocumentScale
+  - fixed documentation
+
+inkscapeMadeEasy_Plot.py
+  - fixed documentation
+
 2019-12dec-29
 -------------
 

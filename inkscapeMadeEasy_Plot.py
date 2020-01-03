@@ -1146,8 +1146,8 @@ class plot():
         
         :param ExtensionBaseObj: Most of the times you have to use 'self' from inkscapeMadeEasy related objects
         :param parent: parent object
-        :param rData: list of x data
-        :param tData: list of y data
+        :param rData: list of R data
+        :param tData: list of Theta data
         :param position: position of the point where x and y axis cross [x0,y0]. The point where the axis cross depend on the limits.
 
               - If xLimits comprises the origin x=0, then the  Y axis crosses the X axis at x=0.
