@@ -161,7 +161,6 @@ class inkscapeMadeEasy(inkex.Effect):
         parent.remove(element)
 
         if parent.tag == 'g' and len(parent.getchildren()) == 0:  # if object's parent is a group and has no other children, remove parent as well
-            # self.Dump(len(parent.getchildren()),'/home/fernando/lixo.txt','w')
             temp = parent.getparent()
             if temp is not None:
                 temp.remove(parent)
@@ -211,7 +210,6 @@ class inkscapeMadeEasy(inkex.Effect):
 
         et = inkex.etree.ElementTree(document)
         et.write(fileOut, pretty_print=True)
-
 
     def uniqueIdNumber(self, prefix_id):
         """ Generates a unique ID with a given prefix ID by adding a numeric suffix
@@ -268,11 +266,53 @@ class inkscapeMadeEasy(inkex.Effect):
         return defs
 
     # ---------------------------------------------
-    def getElemFromXpath(self, tag):
-        """ returns the element from the xml, given its tag
+    def unifyDefs(self):
+        """Unify all <defs> nodes in a single <defs> node.
 
-        :param tag: tag of the element to be searched
-        :type tag: string
+        :returns: None
+        :rtype: -
+
+        .. note:: This function does not check whether the ids are unique
+        """
+        root = self.getElemFromXpath('/svg:svg')
+        mainDef = self.getDefinitions()
+
+        for d in root.findall('.//svg:defs', namespaces=inkex.NSS):
+            if d != mainDef:
+                for child in d:
+                    mainDef.append(child)
+                    if child.tag == inkex.addNS('g', 'svg') or child.tag == 'g':
+                        self.ungroup(child)
+                d.getparent().remove(d)
+
+    # ---------------------------------------------
+    def getDefsByTag(self, tag='marker'):
+        """ retrieves the Defs elements of the svg file of a given a tag.
+
+        :returns: a list with the def elements
+        :rtype: list of etree element
+
+        """
+
+        return self.getDefinitions().findall('.//svg:%s' % tag, namespaces=inkex.NSS)
+
+    # ---------------------------------------------
+    def getDefsById(self,id):
+        """ return a list of elements in the defs node, given (part of) the id
+
+        :returns: a list with the def elements
+        :rtype: list of etree element
+
+        """
+
+        return self.getDefinitions().xpath('./*[contains(@id,"%s")]' % id)
+
+    # ---------------------------------------------
+    def getElemFromXpath(self, xpath):
+        """ returns the element from the xml, given its xpath
+
+        :param xpath: tag of the element to be searched
+        :type xpath: string
         :returns: element
         :rtype: element
 
@@ -283,37 +323,38 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> name = x.getElemFromXpath('/svg:svg//svg:defs')   # returns the list of definitions of the document
 
         """
-        elem = self.xpathSingle(tag)
-        # self.displayMsg(str(elem.tag) + '<--')
+        elem = self.xpathSingle(xpath)
         return elem
 
     # ---------------------------------------------
-    def getElemAtrib(self, elem, atribName):
+    def getElemAttrib(self, elem, attribName):
         """ Returns the atribute of one element, given the atribute name
 
+
         :param elem: elem under consideration
-        :param atribName: atribute to be searched
+        :param attribName: attribute to be searched. Format:  namespace:attrName
         :type elem: element
-        :type atribName: string
-        :returns: atribute
+        :type attribName: string
+        :returns: attribute
         :rtype: string
 
         >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy
         >>> x=inkscapeMadeEasy
         >>> elem= x.getElemFromXpath('/svg:svg')
-        >>> docNAme = x.getElemAtrib(elem,'sodipodi:docname')
+        >>> docNAme = x.getElemAttrib(elem,'sodipodi:docname')
         """
         # splits namespace and attrib name
-        atribList = atribName.split(':')
+        atribList = attribName.split(':')
 
         if len(atribList) == 1:  # if has no namespace
-            attrib = atribName
+            attrib = attribName
         else:  # if has namespace
             namespace = inkex.NSS[atribList[0]]
             attrib = '{%s}' % namespace + atribList[1]
 
         return elem.attrib[attrib]
 
+    # ---------------------------------------------
     def getDocumentScale(self):
         """returns the scale of the document
 
@@ -325,10 +366,10 @@ class inkscapeMadeEasy(inkex.Effect):
 
         try:
             elem = self.getElemFromXpath('/svg:svg')
-            width = float(self.getElemAtrib(elem, 'width').replace(self.documentUnit, ''))
+            width = float(self.getElemAttrib(elem, 'width').replace(self.documentUnit, ''))
 
             viewBox = self.getElemFromXpath('/svg:svg')
-            viewBox_width = float(self.getElemAtrib(viewBox, 'viewBox').split(' ')[2])
+            viewBox_width = float(self.getElemAttrib(viewBox, 'viewBox').split(' ')[2])
 
             doc_scale = viewBox_width / width
         except:
@@ -352,7 +393,7 @@ class inkscapeMadeEasy(inkex.Effect):
         """
         elem = self.getElemFromXpath('/svg:svg')
         try:
-            fileName = self.getElemAtrib(elem, 'sodipodi:docname')
+            fileName = self.getElemAttrib(elem, 'sodipodi:docname')
         except:
             fileName = None
         return fileName
@@ -391,7 +432,7 @@ class inkscapeMadeEasy(inkex.Effect):
         """
         elem = self.getElemFromXpath('/svg:svg/sodipodi:namedview')
         try:
-            unit = self.getElemAtrib(elem, 'inkscape:document-units')
+            unit = self.getElemAttrib(elem, 'inkscape:document-units')
         except:
             unit = 'px'
         return unit
@@ -414,7 +455,7 @@ class inkscapeMadeEasy(inkex.Effect):
 
     # ---------------------------------------------
     def removeAbsPath(self, element):
-        abspath = self.getElemAtrib(element, 'sodipodi:absref')
+        abspath = self.getElemAttrib(element, 'sodipodi:absref')
         fileName = os.path.basename(abspath)
         dirName = os.path.dirname(abspath)
 
@@ -575,6 +616,42 @@ class inkscapeMadeEasy(inkex.Effect):
             group = inkex.etree.SubElement(parent, 'g')
 
         return group
+
+    # ---------------------------------------------
+    def ungroup(self, group):
+        """Ungroup elements
+
+        The new parent element of the ungrouped elements will be the parent of the removed group. See example below
+
+        :param group: group to be removed
+        :type group: group element
+        :returns: none
+        :rtype: -
+
+        **Example**
+
+
+        >>> rootLayer = self.document.getroot()                              # retrieves the root layer of the file
+        >>> groupA = self.createGroup(rootLayer,label='temp')                # creates a group inside rootLayer
+        >>> groupB = self.createGroup(groupA,label='temp')                # creates a group inside groupA
+        >>> line1 = inkscapeMadeEasy_Draw.line.relCoords(groupA, [[10,0]],[0,0])       # creates a line in groupA
+        >>> line2 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[20,0]],[0,0])       # creates a line in groupB
+        >>> line3 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[30,0]],[0,0])       # creates a line in groupB
+        >>>  # at this point, the file struct is:   groupA[ line1, groupB[ line2, line3 ] ]
+        >>> self.ungroup(groupB)                                                       # ungroup line2 and line3.
+        >>>  # now the file struct is:   groupA[ line1, line2, line3 ]
+        """
+
+        if group.tag == 'g' or group.tag == inkex.addNS('g', 'svg'):  # if object is a group
+            parent = group.getparent()
+
+            if parent is not None:
+                for child in group:
+                    parent.append(child)
+
+                self.removeElement(group)
+
+        return
 
     # ---------------------------------------------
     def getTransformMatrix(self, element):
@@ -845,8 +922,8 @@ class inkscapeMadeEasy(inkex.Effect):
         :rtype: bool
         """
 
-        for child in self.getDefinitions():
-            if child.get('id') == markerName:
+        for m in self.getDefsByTag(tag='marker'):
+            if m.get('id') == markerName:
                 return True
 
         return False
@@ -877,7 +954,7 @@ class inkscapeMadeEasy(inkex.Effect):
         listCoords = []
 
         # check if element is valid. 'path', 'text' and 'g' are valid
-        accepted_strings = set([inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', 'path'])
+        accepted_strings = set([inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', 'path', 'use', inkex.addNS('use', 'svg')])
         if element.tag not in accepted_strings:
             return listCoords
 
@@ -956,19 +1033,39 @@ class inkscapeMadeEasy(inkex.Effect):
             listCoords.extend(coords)
 
         if element.tag == 'g':  # if object is a group
-            for obj in element.iter():
-                if obj != element:
+            for obj in element.iterchildren("*"):
+                if obj != element and obj.tag != 'defs':
                     listPoints = self.getPoints(obj)
                     listCoords.extend(listPoints)
 
+        if element.tag == 'use' or element.tag == inkex.addNS('use', 'svg'):  # if object is a use
+            listCoordsTemp = []
+            x = float(element.attrib['x'])
+            y = float(element.attrib['y'])
+            link = self.getElemAttrib(element, 'xlink:href').replace('#','')
+            elemLink = self.getElementById(link)
+            for obj in elemLink.iter():
+                if obj != elemLink:
+                    listPoints = self.getPoints(obj)
+                    listCoordsTemp.extend(listPoints)
+
+            #apply translation
+            listCoords=[[coord[0]+x,coord[1]+y] for coord in listCoordsTemp]
+
+
         # apply transformation
-        transfMat = self.getTransformMatrix(element)[1]
+        if len(listCoords)>0:
 
-        # creates numpy array with the points to be transformed
-        coordsNP = np.hstack((np.array(listCoords), np.ones([len(listCoords), 1]))).transpose()
+            # creates numpy array with the points to be transformed
+            transfMat = self.getTransformMatrix(element)[1]
 
-        coordsTransformed = np.dot(transfMat, coordsNP)
-        coordsTransformed = np.delete(coordsTransformed, 2, 0).transpose().tolist()  # remove last line, transposes and converts to list of lists
+            coordsNP = np.hstack((np.array(listCoords), np.ones([len(listCoords), 1]))).transpose()
+
+            coordsTransformed = np.dot(transfMat, coordsNP)
+            coordsTransformed = np.delete(coordsTransformed, 2, 0).transpose().tolist()  # remove last line, transposes and converts to list of lists
+
+        else:
+            coordsTransformed = []
 
         return coordsTransformed
 

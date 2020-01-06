@@ -11,10 +11,10 @@ textext
 :modified: Fernando Moura
 :Date: 2016
 # All GTK and TK bits were removed
-# Changes: line  67-68: added a few variables to control debug mode
-# Changes: line 944: changed order of programs
-# Changes: line 665: debug option to save temporary files to an easy acess directory
-# Changes: line 696: debug option to keep the .tex file
+# Changes: line  67-69: added a few variables to control debug mode
+# Changes: line 708: changed order of programs
+# Changes: line 428: debug option to save temporary files to an easy access directory
+# Changes: line 459: debug option to keep the .tex file
 
 Textext is an extension for Inkscape_ that allows adding
 LaTeX-generated text objects to your SVG drawing. What's more, you can
@@ -62,7 +62,6 @@ sys.path.append(os.path.dirname(__file__))
 import inkex
 import os, sys, tempfile, traceback, glob, re, md5, copy
 from lxml import etree
-
 
 
 # tex file will be saved in
@@ -533,7 +532,6 @@ class PdfConverterBase(LatexConverterBase):
             self.pdf_to_svg()
         finally:
             os.chdir(cwd)
-        
         new_node = self.svg_to_group()
         if new_node is None:
             return None

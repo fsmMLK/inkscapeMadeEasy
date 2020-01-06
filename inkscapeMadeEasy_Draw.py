@@ -44,6 +44,7 @@ if useLatex:
     import textextLib.textext as textext
 
 import sys
+import os
 import tempfile
 import copy
 
@@ -1203,21 +1204,26 @@ class text():
         >>>     inkDraw.text.latex(self, root_layer,r'This is one equation \\begin{align} x=y^2\\end{align} And this is my \\fooBar{}',
         >>>                        position=[0.0,0.0], fontSize=10, refPoint='cc', textColor=inkDraw.color.defined('black'), LatexCommands=customCommand, angleDeg=0, preambleFile=None)
         """
+        newTmp = True
 
         # write an empty svg file.
 
         if not LaTeXtext:  # check whether text is empty
             return 0
 
-        tempDir = tempfile.gettempdir()
-        tempFilePath = tempDir + '/temp_svg_inkscapeMadeEasy_Draw.txt'
-
         if useLatex:  # set useLatex=False to replace latex by an standard text (much faster for debugging =)  )
 
-            Dump(
-                r'<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Created with Inkscape (http://www.inkscape.org/) --><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="744.09448819" height="1052.3622047" id="svg19803" version="1.1" inkscape:version="0.48.3.1 r9886" sodipodi:docname="New document 45"> <defs id="defs19805" /> <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.35" inkscape:cx="375" inkscape:cy="520" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="500" inkscape:window-height="445" inkscape:window-x="932" inkscape:window-y="0" inkscape:window-maximized="0" /> <metadata id="metadata19808"> <rdf:RDF> <cc:Work rdf:about=""> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" /> <dc:title></dc:title> </cc:Work> </rdf:RDF> </metadata> <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" /></svg>',
-                tempFilePath, 'w')
+            if newTmp:
+                tmpf = tempfile.NamedTemporaryFile(mode='w', prefix='temp_svg_inkscapeMadeEasy_Draw_', suffix='.svg', delete=False)
+                tempFilePath = tmpf.name
+                tmpf.write(BlankSVG)
+                tmpf.close()
+            else:
+                tempDir = tempfile.gettempdir()
+                tempFilePath = tempDir + '/temp_svg_inkscapeMadeEasy_Draw.txt'
+                Dump(BlankSVG,tempFilePath, 'w')
 
+            # return
             # temp instance for determining font height. Draws a F letter just to find the height of the font
             if False:  # turning off this part of the code.
                 texTemp = textext.TexText()  # start textText (awesome extension! =] )
@@ -1239,6 +1245,9 @@ class text():
                 tex.affect(
                     [r'--text=' + LatexCommands + LaTeXtext, '--scale-factor=1', '--preamble-file=' + ExtensionBaseObj.getBasicLatexPackagesFile(),
                      tempFilePath], output=False)
+
+            if newTmp:
+                os.unlink(tmpf.name)
 
             groupLatex = tex.current_layer.find('g')
 
@@ -1264,6 +1273,8 @@ class text():
             mytextStyle = textStyle.setSimpleColor(fontSize=fontSize / 0.76, justification='left', textColor=textColor)
             groupLatex = text.write(ExtensionBaseObj, LaTeXtext, [0, 0], parent, textStyle=mytextStyle, fontSize=fontSize / 0.76,
                                     justification=justification, angleDeg=0.0)  # attention! keep angleDeg=0.0 here bc it will be rotated below
+
+        parent.append(groupLatex)
 
         BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
 
@@ -1300,8 +1311,6 @@ class text():
         ExtensionBaseObj.moveElement(groupLatex, [position[0], position[1]])
         if angleDeg != 0:
             ExtensionBaseObj.rotateElement(groupLatex, center=[position[0], position[1]], angleDeg=angleDeg)
-
-        parent.append(groupLatex)
 
         return groupLatex
 
@@ -2177,3 +2186,50 @@ class ellipse():
                        centerPoint[1] + offset[1]) + arcStringA + ' ' + arcStringB + ' z'}
 
         return inkex.etree.SubElement(parent, inkex.addNS('path', 'svg'), Attribs)
+
+
+BlankSVG = r"""<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+     width="744.09448819"
+     height="1052.3622047"
+     id="svg19803"
+     version="1.1"
+     inkscape:version="0.48.3.1 r9886"
+     sodipodi:docname="New document 45">
+    <defs id="defs19805"/>
+    <sodipodi:namedview id="base"
+                        pagecolor="#ffffff"
+                        bordercolor="#666666"
+                        borderopacity="1.0"
+                        inkscape:pageopacity="0.0"
+                        inkscape:pageshadow="2"
+                        inkscape:zoom="0.35"
+                        inkscape:cx="375"
+                        inkscape:cy="520"
+                        inkscape:document-units="px"
+                        inkscape:current-layer="layer1"
+                        showgrid="false"
+                        inkscape:window-width="500"
+                        inkscape:window-height="445"
+                        inkscape:window-x="932"
+                        inkscape:window-y="0"
+                        inkscape:window-maximized="0"/>
+    <metadata id="metadata19808">
+        <rdf:RDF>
+            <cc:Work rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                <dc:title></dc:title>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <g inkscape:label="Layer 1"
+       inkscape:groupmode="layer"
+       id="layer1"/>
+</svg>
+"""

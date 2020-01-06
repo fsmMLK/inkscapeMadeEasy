@@ -1,4 +1,16 @@
 
+2020-01jan-05
+-------------
+
+inkscapeMadeEasy_Base.py
+  - Added a new functions: unifyDefs, getDefsByTag, getDefsById, ungroup
+  - Changed the name of getElemAtrib -> getElemAttrib
+  - method getPoints also can process <use> nodes
+
+inkscapeMadeEasy_Draw.py
+  - Modified text.latex method to try to fix some issues under Windows.
+
+
 2020-01jan-02
 -------------
 
