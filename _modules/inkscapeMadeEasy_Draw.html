@@ -91,6 +91,7 @@
     <span class="kn">import</span> <span class="nn">textextLib.textext</span> <span class="k">as</span> <span class="nn">textext</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 
@@ -1250,21 +1251,26 @@
 <span class="sd">        &gt;&gt;&gt;     inkDraw.text.latex(self, root_layer,r&#39;This is one equation \\begin{align} x=y^2\\end{align} And this is my \\fooBar{}&#39;,</span>
 <span class="sd">        &gt;&gt;&gt;                        position=[0.0,0.0], fontSize=10, refPoint=&#39;cc&#39;, textColor=inkDraw.color.defined(&#39;black&#39;), LatexCommands=customCommand, angleDeg=0, preambleFile=None)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">newTmp</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="c1"># write an empty svg file.</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">LaTeXtext</span><span class="p">:</span>  <span class="c1"># check whether text is empty</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-        <span class="n">tempDir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
-        <span class="n">tempFilePath</span> <span class="o">=</span> <span class="n">tempDir</span> <span class="o">+</span> <span class="s1">&#39;/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
-
         <span class="k">if</span> <span class="n">useLatex</span><span class="p">:</span>  <span class="c1"># set useLatex=False to replace latex by an standard text (much faster for debugging =)  )</span>
 
-            <span class="n">Dump</span><span class="p">(</span>
-                <span class="sa">r</span><span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; width=&quot;744.09448819&quot; height=&quot;1052.3622047&quot; id=&quot;svg19803&quot; version=&quot;1.1&quot; inkscape:version=&quot;0.48.3.1 r9886&quot; sodipodi:docname=&quot;New document 45&quot;&gt; &lt;defs id=&quot;defs19805&quot; /&gt; &lt;sodipodi:namedview id=&quot;base&quot; pagecolor=&quot;#ffffff&quot; bordercolor=&quot;#666666&quot; borderopacity=&quot;1.0&quot; inkscape:pageopacity=&quot;0.0&quot; inkscape:pageshadow=&quot;2&quot; inkscape:zoom=&quot;0.35&quot; inkscape:cx=&quot;375&quot; inkscape:cy=&quot;520&quot; inkscape:document-units=&quot;px&quot; inkscape:current-layer=&quot;layer1&quot; showgrid=&quot;false&quot; inkscape:window-width=&quot;500&quot; inkscape:window-height=&quot;445&quot; inkscape:window-x=&quot;932&quot; inkscape:window-y=&quot;0&quot; inkscape:window-maximized=&quot;0&quot; /&gt; &lt;metadata id=&quot;metadata19808&quot;&gt; &lt;rdf:RDF&gt; &lt;cc:Work rdf:about=&quot;&quot;&gt; &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt; &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt; &lt;dc:title&gt;&lt;/dc:title&gt; &lt;/cc:Work&gt; &lt;/rdf:RDF&gt; &lt;/metadata&gt; &lt;g inkscape:label=&quot;Layer 1&quot; inkscape:groupmode=&quot;layer&quot; id=&quot;layer1&quot; /&gt;&lt;/svg&gt;&#39;</span><span class="p">,</span>
-                <span class="n">tempFilePath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">newTmp</span><span class="p">:</span>
+                <span class="n">tmpf</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;temp_svg_inkscapeMadeEasy_Draw_&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.svg&#39;</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">tempFilePath</span> <span class="o">=</span> <span class="n">tmpf</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">tmpf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">BlankSVG</span><span class="p">)</span>
+                <span class="n">tmpf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tempDir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+                <span class="n">tempFilePath</span> <span class="o">=</span> <span class="n">tempDir</span> <span class="o">+</span> <span class="s1">&#39;/temp_svg_inkscapeMadeEasy_Draw.txt&#39;</span>
+                <span class="n">Dump</span><span class="p">(</span><span class="n">BlankSVG</span><span class="p">,</span><span class="n">tempFilePath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
+            <span class="c1"># return</span>
             <span class="c1"># temp instance for determining font height. Draws a F letter just to find the height of the font</span>
             <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># turning off this part of the code.</span>
                 <span class="n">texTemp</span> <span class="o">=</span> <span class="n">textext</span><span class="o">.</span><span class="n">TexText</span><span class="p">()</span>  <span class="c1"># start textText (awesome extension! =] )</span>
@@ -1286,6 +1292,9 @@
                 <span class="n">tex</span><span class="o">.</span><span class="n">affect</span><span class="p">(</span>
                     <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;--text=&#39;</span> <span class="o">+</span> <span class="n">LatexCommands</span> <span class="o">+</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="s1">&#39;--scale-factor=1&#39;</span><span class="p">,</span> <span class="s1">&#39;--preamble-file=&#39;</span> <span class="o">+</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBasicLatexPackagesFile</span><span class="p">(),</span>
                      <span class="n">tempFilePath</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">newTmp</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">tmpf</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
             <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">tex</span><span class="o">.</span><span class="n">current_layer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 
@@ -1311,6 +1320,8 @@
             <span class="n">mytextStyle</span> <span class="o">=</span> <span class="n">textStyle</span><span class="o">.</span><span class="n">setSimpleColor</span><span class="p">(</span><span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span> <span class="o">/</span> <span class="mf">0.76</span><span class="p">,</span> <span class="n">justification</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">textColor</span><span class="o">=</span><span class="n">textColor</span><span class="p">)</span>
             <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ExtensionBaseObj</span><span class="p">,</span> <span class="n">LaTeXtext</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">parent</span><span class="p">,</span> <span class="n">textStyle</span><span class="o">=</span><span class="n">mytextStyle</span><span class="p">,</span> <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span> <span class="o">/</span> <span class="mf">0.76</span><span class="p">,</span>
                                     <span class="n">justification</span><span class="o">=</span><span class="n">justification</span><span class="p">,</span> <span class="n">angleDeg</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>  <span class="c1"># attention! keep angleDeg=0.0 here bc it will be rotated below</span>
+
+        <span class="n">parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
 
         <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
 
@@ -1347,8 +1358,6 @@
         <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="p">[</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
         <span class="k">if</span> <span class="n">angleDeg</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">rotateElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">angleDeg</span><span class="o">=</span><span class="n">angleDeg</span><span class="p">)</span>
-
-        <span class="n">parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">groupLatex</span></div></div>
 
@@ -2224,6 +2233,53 @@
                        <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">arcStringA</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">arcStringB</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span><span class="p">}</span>
 
         <span class="k">return</span> <span class="n">inkex</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div></div>
+
+
+<span class="n">BlankSVG</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;!-- Created with Inkscape (http://www.inkscape.org/) --&gt;</span>
+<span class="s2">&lt;svg xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;</span>
+<span class="s2">     xmlns:cc=&quot;http://creativecommons.org/ns#&quot;</span>
+<span class="s2">     xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;</span>
+<span class="s2">     xmlns=&quot;http://www.w3.org/2000/svg&quot;</span>
+<span class="s2">     xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot;</span>
+<span class="s2">     xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot;</span>
+<span class="s2">     width=&quot;744.09448819&quot;</span>
+<span class="s2">     height=&quot;1052.3622047&quot;</span>
+<span class="s2">     id=&quot;svg19803&quot;</span>
+<span class="s2">     version=&quot;1.1&quot;</span>
+<span class="s2">     inkscape:version=&quot;0.48.3.1 r9886&quot;</span>
+<span class="s2">     sodipodi:docname=&quot;New document 45&quot;&gt;</span>
+<span class="s2">    &lt;defs id=&quot;defs19805&quot;/&gt;</span>
+<span class="s2">    &lt;sodipodi:namedview id=&quot;base&quot;</span>
+<span class="s2">                        pagecolor=&quot;#ffffff&quot;</span>
+<span class="s2">                        bordercolor=&quot;#666666&quot;</span>
+<span class="s2">                        borderopacity=&quot;1.0&quot;</span>
+<span class="s2">                        inkscape:pageopacity=&quot;0.0&quot;</span>
+<span class="s2">                        inkscape:pageshadow=&quot;2&quot;</span>
+<span class="s2">                        inkscape:zoom=&quot;0.35&quot;</span>
+<span class="s2">                        inkscape:cx=&quot;375&quot;</span>
+<span class="s2">                        inkscape:cy=&quot;520&quot;</span>
+<span class="s2">                        inkscape:document-units=&quot;px&quot;</span>
+<span class="s2">                        inkscape:current-layer=&quot;layer1&quot;</span>
+<span class="s2">                        showgrid=&quot;false&quot;</span>
+<span class="s2">                        inkscape:window-width=&quot;500&quot;</span>
+<span class="s2">                        inkscape:window-height=&quot;445&quot;</span>
+<span class="s2">                        inkscape:window-x=&quot;932&quot;</span>
+<span class="s2">                        inkscape:window-y=&quot;0&quot;</span>
+<span class="s2">                        inkscape:window-maximized=&quot;0&quot;/&gt;</span>
+<span class="s2">    &lt;metadata id=&quot;metadata19808&quot;&gt;</span>
+<span class="s2">        &lt;rdf:RDF&gt;</span>
+<span class="s2">            &lt;cc:Work rdf:about=&quot;&quot;&gt;</span>
+<span class="s2">                &lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt;</span>
+<span class="s2">                &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot;/&gt;</span>
+<span class="s2">                &lt;dc:title&gt;&lt;/dc:title&gt;</span>
+<span class="s2">            &lt;/cc:Work&gt;</span>
+<span class="s2">        &lt;/rdf:RDF&gt;</span>
+<span class="s2">    &lt;/metadata&gt;</span>
+<span class="s2">    &lt;g inkscape:label=&quot;Layer 1&quot;</span>
+<span class="s2">       inkscape:groupmode=&quot;layer&quot;</span>
+<span class="s2">       id=&quot;layer1&quot;/&gt;</span>
+<span class="s2">&lt;/svg&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 
           </div>

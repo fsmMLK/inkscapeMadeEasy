@@ -421,14 +421,69 @@ This function is specially useful for creating an unique ID for markers and othe
 </dd></dl>
 
 <dl class="method">
-<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath">
-<code class="descname">getElemFromXpath</code><span class="sig-paren">(</span><em>tag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemFromXpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the element from the xml, given its tag</p>
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs">
+<code class="descname">unifyDefs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.unifyDefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unify all &lt;defs&gt; nodes in a single &lt;defs&gt; node.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tag</strong> (<em>string</em>) – tag of the element to be searched</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function does not check whether the ids are unique</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsByTag">
+<code class="descname">getDefsByTag</code><span class="sig-paren">(</span><em>tag='marker'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDefsByTag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsByTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieves the Defs elements of the svg file of a given a tag.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list with the def elements</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of etree element</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsById">
+<code class="descname">getDefsById</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDefsById"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsById" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of elements in the defs node, given (part of) the id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list with the def elements</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of etree element</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath">
+<code class="descname">getElemFromXpath</code><span class="sig-paren">(</span><em>xpath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemFromXpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemFromXpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the element from the xml, given its xpath</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xpath</strong> (<em>string</em>) – tag of the element to be searched</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">element</td>
 </tr>
@@ -445,8 +500,8 @@ This function is specially useful for creating an unique ID for markers and othe
 </dd></dl>
 
 <dl class="method">
-<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAtrib">
-<code class="descname">getElemAtrib</code><span class="sig-paren">(</span><em>elem</em>, <em>atribName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemAtrib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAtrib" title="Permalink to this definition">¶</a></dt>
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAttrib">
+<code class="descname">getElemAttrib</code><span class="sig-paren">(</span><em>elem</em>, <em>attribName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getElemAttrib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getElemAttrib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the atribute of one element, given the atribute name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -454,11 +509,11 @@ This function is specially useful for creating an unique ID for markers and othe
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>elem</strong> (<em>element</em>) – elem under consideration</li>
-<li><strong>atribName</strong> (<em>string</em>) – atribute to be searched</li>
+<li><strong>attribName</strong> (<em>string</em>) – attribute to be searched. Format:  namespace:attrName</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">atribute</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">attribute</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
@@ -469,7 +524,7 @@ This function is specially useful for creating an unique ID for markers and othe
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">inkscapeMadeEasy_Base</span> <span class="k">import</span> <span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">inkscapeMadeEasy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">elem</span><span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">docNAme</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemAtrib</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span><span class="s1">&#39;sodipodi:docname&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">docNAme</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span><span class="s1">&#39;sodipodi:docname&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -903,6 +958,40 @@ this groups you must create them informing the group as the parent element.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">groupB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;child&#39;</span><span class="p">)</span>                  <span class="c1"># creates a group inside groupA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line1</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.ungroup">
+<code class="descname">ungroup</code><span class="sig-paren">(</span><em>group</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.ungroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.ungroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ungroup elements</p>
+<p>The new parent element of the ungrouped elements will be the parent of the removed group. See example below</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>group</strong> (<em>group element</em>) – group to be removed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">none</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rootLayer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>                              <span class="c1"># retrieves the root layer of the file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">rootLayer</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>                <span class="c1"># creates a group inside rootLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>                <span class="c1"># creates a group inside groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line1</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupA</span><span class="p">,</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line3</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># at this point, the file struct is:   groupA[ line1, groupB[ line2, line3 ] ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">ungroup</span><span class="p">(</span><span class="n">groupB</span><span class="p">)</span>                                                       <span class="c1"># ungroup line2 and line3.</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># now the file struct is:   groupA[ line1, line2, line3 ]</span>
 </pre></div>
 </div>
 </dd></dl>
