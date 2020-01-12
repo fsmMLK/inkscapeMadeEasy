@@ -672,8 +672,8 @@
 
 <span class="sd">        :param group: group to be removed</span>
 <span class="sd">        :type group: group element</span>
-<span class="sd">        :returns: none</span>
-<span class="sd">        :rtype: -</span>
+<span class="sd">        :returns: list of the elements previously contained in the group</span>
+<span class="sd">        :rtype: list of elements</span>
 
 <span class="sd">        **Example**</span>
 
@@ -685,20 +685,22 @@
 <span class="sd">        &gt;&gt;&gt; line2 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[20,0]],[0,0])       # creates a line in groupB</span>
 <span class="sd">        &gt;&gt;&gt; line3 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[30,0]],[0,0])       # creates a line in groupB</span>
 <span class="sd">        &gt;&gt;&gt;  # at this point, the file struct is:   groupA[ line1, groupB[ line2, line3 ] ]</span>
-<span class="sd">        &gt;&gt;&gt; self.ungroup(groupB)                                                       # ungroup line2 and line3.</span>
+<span class="sd">        &gt;&gt;&gt; elemList = self.ungroup(groupB)                                    # ungroup line2 and line3. elemList is a list containing line2 and line3 elements.</span>
 <span class="sd">        &gt;&gt;&gt;  # now the file struct is:   groupA[ line1, line2, line3 ]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span> <span class="ow">or</span> <span class="n">group</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">):</span>  <span class="c1"># if object is a group</span>
             <span class="n">parent</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span>
 
+            <span class="n">listElem</span><span class="o">=</span><span class="p">[]</span>
             <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
                     <span class="n">parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                    <span class="n">listElem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">removeElement</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
-        <span class="k">return</span></div>
+        <span class="k">return</span> <span class="n">listElem</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.getTransformMatrix"><a class="viewcode-back" href="../index.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getTransformMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">getTransformMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>

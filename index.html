@@ -61,6 +61,7 @@
 <li><strong>logicGates</strong>              &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeLogicGates">https://github.com/fsmMLK/inkscapeLogicGates</a>&gt;</li>
 <li><strong>circuitSymbols</strong>          &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeCircuitSymbols">https://github.com/fsmMLK/inkscapeCircuitSymbols</a>&gt;</li>
 <li><strong>dimensions</strong>              &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeDimensions">https://github.com/fsmMLK/inkscapeDimensions</a>&gt;</li>
+<li><strong>SlopeField</strong>             &lt;<a class="reference external" href="https://github.com/fsmMLK/inkscapeSlopeField">https://github.com/fsmMLK/inkscapeSlopeField</a>&gt;</li>
 </ul>
 </div></blockquote>
 <div class="section" id="history-and-objectives">
@@ -72,40 +73,32 @@
 <p>In the process of creating these tools (I will upload them to GitHub in a near future) I realized that many of the low level classes and methods used to manipulate elements of the svg file could be grouped in a general purpose set of core modules that extended inkex.py module. <strong>inkscapeMadeEasy</strong> was born! The core modules I created do not intend to provide an extensive array of methods and classes to cover all possibilities of manipulations/transformations and drawing. These modules were born and expanded as I felt the necessity to have new methods to help my workflow. Nevertheless the number of methods created allows many possibilities and is still under development so new features can (will) appear in future versions.</p>
 <p><strong>Obs:</strong> Since it is not very easy to find documentation on other Inkscape modules, there might be other modules with similar/better features that I was not aware of when I was producing my extensions.</p>
 <p>Enough mumbo-jumbo. Let’s start! =D</p>
+</div>
 <div class="section" id="contents">
-<h3>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <p><a class="reference internal" href="#main-features">Main Features</a></p>
-<p><a class="reference internal" href="#installation-and-requirements">Installation and requirements</a></p>
+<p><a href="#id1"><span class="problematic" id="id2">`Installation and requirements`_</span></a></p>
 <p><a class="reference internal" href="#usage">Usage</a></p>
 <p><a class="reference internal" href="#module-definitions">Module definitions</a></p>
 </div>
 <div class="section" id="main-features">
-<h3>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
+<h2>Main Features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="optional-latex-support-via-textext-extension">
-<h2>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h2>
+<h3>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h3>
 <p>Many of the functions implemented in this project can use LaTeX to generate text if the support is enabled. To this end I decided to employ the excellent extension <strong>textext</strong> by Pauli Virtanen  &lt;<a class="reference external" href="https://pav.iki.fi/software/textext/">https://pav.iki.fi/software/textext/</a>&gt;.</p>
-<p>Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.</p>
-<p>Installation procedure and requirements of the modified <strong>textext</strong> are the same of the original. Please refer to the installation section on Pauli Virtanen’s page to get further instructions.</p>
+<p>Since I made very few modifications to his module, I decided to include the modified files here. The modifications
+were merely designed to facilitate debugging and to remove additional GUI modules (GTK or TkInter). If you prefer,
+you can stick with the original version.</p>
 <p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter.</strong> Linux users can install from your preferred package manager. Windows users can download it from its website.</p>
-<p><strong>Modifications</strong></p>
-<p>Here is the full list of changes I made:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Changes: line  67-68: added a few variables to control debug mode</span>
-<span class="c1"># Changes: line 944: changed order of programs (It worked better in my machine)</span>
-<span class="c1"># Changes: line 665: debug option to save temporary files to an easy access directory</span>
-<span class="c1"># Changes: line 696: debug option to keep the .tex file</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="scientific-plotting-system">
-<h2>Scientific plotting system<a class="headerlink" href="#scientific-plotting-system" title="Permalink to this headline">¶</a></h2>
+<h3>Scientific plotting system<a class="headerlink" href="#scientific-plotting-system" title="Permalink to this headline">¶</a></h3>
 <p>inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave’s stem plot style). It was inspired by Tavmjong Bah’s (and collaborators) extension <strong>Function Plotter</strong> already presented in Inkscape. Function Plotter extension is not required here.</p>
 </div>
 <div class="section" id="control-over-text-styles-line-markers-and-other-drawing-features">
-<h2>Control over text styles, line markers and other drawing features<a class="headerlink" href="#control-over-text-styles-line-markers-and-other-drawing-features" title="Permalink to this headline">¶</a></h2>
+<h3>Control over text styles, line markers and other drawing features<a class="headerlink" href="#control-over-text-styles-line-markers-and-other-drawing-features" title="Permalink to this headline">¶</a></h3>
 <p>inkscapeMadeEasy_Draw module provides powerful tools to:</p>
 <blockquote>
 <div><ul class="simple">
@@ -123,7 +116,7 @@
 </div></blockquote>
 </div>
 <div class="section" id="useful-backstage-functions">
-<h2>Useful backstage functions<a class="headerlink" href="#useful-backstage-functions" title="Permalink to this headline">¶</a></h2>
+<h3>Useful backstage functions<a class="headerlink" href="#useful-backstage-functions" title="Permalink to this headline">¶</a></h3>
 <p>inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:</p>
 <blockquote>
 <div><ul class="simple">
@@ -139,12 +132,15 @@
 <li>get the center of the bounding box of an object or group</li>
 </ul>
 </div></blockquote>
-<div class="section" id="installation-and-requirements">
-<span id="latexsupport"></span><h3>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h3>
-<p>These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.</p>
-<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.</p>
+</div>
+</div>
+<div class="section" id="installation-and-requirements-all-users">
+<span id="latexsupport"></span><h2>Installation and requirements (all users)<a class="headerlink" href="#installation-and-requirements-all-users" title="Permalink to this headline">¶</a></h2>
+<p>These modules were partially developed in Inkscape 0.48, 0.91, 0.92 in Linux (Kubuntu 12.04 and 14.04). They should
+work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.</p>
+<p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes
+with inkscape), copy, tempfile, sys and os.</p>
 <p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter if you want to use LaTeX support.</strong>  Linux users can install from your preferred package manager. Windows users can download it from its website.</p>
-<p>In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape’s extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <p>In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape’s extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Base.py
@@ -161,6 +157,7 @@
 <p><strong>LaTeX package requirement</strong></p>
 <p>If LaTeX support is enabled (see below), you will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p>
 <p>Linux users: You might find useful installing the packages <code class="docutils literal"><span class="pre">texlive-science</span></code>,   <code class="docutils literal"><span class="pre">texlive-pictures</span></code> and <code class="docutils literal"><span class="pre">texlive-latex-base</span></code> (Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.</p>
+<p>Windows users: please check <code class="docutils literal"><span class="pre">Installation</span> <span class="pre">and</span> <span class="pre">requirements</span> <span class="pre">(windows</span> <span class="pre">users)</span></code> section</p>
 <p><strong>Disabling LaTeX support</strong></p>
 <p>LaTeX support via textext extension requires LaTeX typesetting system in your computer (it’s free and awesome! =] ). It  might be a problem to install for non-Linux systems.</p>
 <p>Since many people don’t use LaTeX and/or don’t have it installed (it might be a pain to install it on Windows machines), LaTeX support is now optional. <strong>By default, LaTeX support is ENABLED.</strong></p>
@@ -172,8 +169,65 @@
 <p>4- Save the file.</p>
 </div></blockquote>
 </div>
+<div class="section" id="latex-installation-windows-users">
+<h2>LaTeX installation  (windows users)<a class="headerlink" href="#latex-installation-windows-users" title="Permalink to this headline">¶</a></h2>
+<p><strong>1) Install Miktex:</strong></p>
+<p>Download and install Miktex (<a class="reference external" href="https://miktex.org/">https://miktex.org/</a>). You must make sure the following minimal testing example compiles
+correctly using pdflatex using the command prompt. Se
+instructions below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
+\usepackage[per=slash]{siunitx}
+\usepackage{steinmetz}
+\begin{document}
+Minimal example. woo-hoo!
+\begin{align}
+E=mc^2
+\end{align}
+\end{document}
+</pre></div>
+</div>
+<p><strong>1.2) testing pdflatex (for LaTeX experienced users)</strong></p>
+<p>Check whether you can call pdflatex from any folder, in other words, check if pdflatex folder is in the PATH
+environment variable.</p>
+<p>Check whether your pdflatex can compile the testing example from the command prompt.
+Compiling this example will also make sure you have all packages inkscapeMadeEasy requires.</p>
+<p><strong>1.3) testing pdflatex (for LaTeX beginners)</strong></p>
+<blockquote>
+<div><p>1.3.1) Open notepad and create a text file with the contents of the testing example and save it somewhere.</p>
+<p>1.3.2) In File Explorer, go to the folder where you saved the file and click the address bar to select it (or press
+Alt+D).
+Type “cmd” into the address bar and hit Enter to open the Command Prompt with the path of the current folder already set.</p>
+<p>1.3.3) type: &nbsp;pdflatex &lt;name_of_the_file_you_just_saved&gt;. Lots of stuff should appear on your console window.
+Obs: Miktex might require to install additional packages. Depending on how you installed Miktex, it can install
+automatically the needed packages or ask you to confirm. Confirm it!</p>
+<p>1.3.4) Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the
+short message and equation.</p>
+</div></blockquote>
+<p><strong>2) install pstoedit (install version 3.73!)</strong></p>
+<p>windows 32 bits
+<a class="reference external" href="https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe">https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe</a></p>
+<p>windows 64 bits
+<a class="reference external" href="https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_x64.exe">https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_x64.exe</a></p>
+<p>2.1) Add pstoedit folder to windows PATH environment variable (if it is not there already)</p>
+<blockquote>
+<div><p>2.2.1) On the Windows desktop, right-click ‘My Computer’.</p>
+<p>2.2.2-) In the pop-up menu, click Properties.</p>
+<p>2.2.3-) In the System Properties window, click the Advanced tab, and then click Environment Variables.</p>
+<p>2.2.4-) In the System Variables window, highlight PATH, and click Edit.</p>
+<p>2.2.5-) Create a new entry and provide the path where pstoedit was installed. On my machine the folder was ‘C:\Program Files\pstoedit’</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Install ghostscript (install version 9.26!)</li>
+</ol>
+<p>windows 32 bits
+<a class="reference external" href="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe">https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe</a></p>
+<p>windows 64 bits
+<a class="reference external" href="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw64.exe">https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw64.exe</a></p>
+</div>
 <div class="section" id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>These modules are not intended to serve as extensions by themselves. Instead you can import them into your projects to take advantage of the classes and methods developed here.</p>
 <p>For examples on how to use, please take a look at the examples provided below and also check my other extension projects on GitHub (more to come soon):</p>
 <blockquote>
@@ -190,11 +244,9 @@
 </div></blockquote>
 </div>
 <div class="section" id="module-definitions">
-<h3>Module definitions<a class="headerlink" href="#module-definitions" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
+<h2>Module definitions<a class="headerlink" href="#module-definitions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-inkscapeMadeEasy_Base">
-<span id="inkscapemadeeasy-base"></span><h2>inkscapeMadeEasy_Base<a class="headerlink" href="#module-inkscapeMadeEasy_Base" title="Permalink to this headline">¶</a></h2>
+<span id="inkscapemadeeasy-base"></span><h3>inkscapeMadeEasy_Base<a class="headerlink" href="#module-inkscapeMadeEasy_Base" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Base.</code><code class="descname">inkscapeMadeEasy</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy" title="Permalink to this definition">¶</a></dt>
@@ -973,12 +1025,9 @@ this groups you must create them informing the group as the parent element.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>group</strong> (<em>group element</em>) – group to be removed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">none</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of the elements previously contained in the group</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
-<li></li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of elements</td>
 </tr>
 </tbody>
 </table>
@@ -990,7 +1039,7 @@ this groups you must create them informing the group as the parent element.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line2</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">line3</span> <span class="o">=</span> <span class="n">inkscapeMadeEasy_Draw</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">relCoords</span><span class="p">(</span><span class="n">groupB</span><span class="p">,</span> <span class="p">[[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># creates a line in groupB</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="c1"># at this point, the file struct is:   groupA[ line1, groupB[ line2, line3 ] ]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">ungroup</span><span class="p">(</span><span class="n">groupB</span><span class="p">)</span>                                                       <span class="c1"># ungroup line2 and line3.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elemList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ungroup</span><span class="p">(</span><span class="n">groupB</span><span class="p">)</span>                                    <span class="c1"># ungroup line2 and line3. elemList is a list containing line2 and line3 elements.</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="c1"># now the file struct is:   groupA[ line1, line2, line3 ]</span>
 </pre></div>
 </div>
@@ -1371,7 +1420,7 @@ that is, it will compute the resulting coordinates of each object</p>
 
 </div>
 <div class="section" id="module-inkscapeMadeEasy_Draw">
-<span id="inkscapemadeeasy-draw"></span><h2>inkscapeMadeEasy_Draw<a class="headerlink" href="#module-inkscapeMadeEasy_Draw" title="Permalink to this headline">¶</a></h2>
+<span id="inkscapemadeeasy-draw"></span><h3>inkscapeMadeEasy_Draw<a class="headerlink" href="#module-inkscapeMadeEasy_Draw" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="inkscapeMadeEasy_Draw.displayMsg">
 <code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.displayMsg" title="Permalink to this definition">¶</a></dt>
@@ -2190,7 +2239,7 @@ fontWeight=’normal’, lineSpacing=‘100%’, letterSpacing=‘0px’, wordSp
 <p>This class contains only static methods so that you don’t have to inherit this in your class</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">LaTeX support is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">LaTeX support is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.text.write">
@@ -2264,7 +2313,7 @@ Please refer to <a class="reference internal" href="#main-features">Main Feature
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">LaTeX support is an optional feature that requires a few extra packages to be installed outside inkscape. <strong>It is enabled by default</strong>.
-Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it. If disabled, this function will still work, internally calling the method text.write().</p>
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it. If disabled, this function will still work, internally calling the method text.write().</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3012,7 +3061,7 @@ when the bezier curve must be closed.</p>
 
 </div>
 <div class="section" id="module-inkscapeMadeEasy_Plot">
-<span id="inkscapemadeeasy-plot"></span><h2>inkscapeMadeEasy_Plot<a class="headerlink" href="#module-inkscapeMadeEasy_Plot" title="Permalink to this headline">¶</a></h2>
+<span id="inkscapemadeeasy-plot"></span><h3>inkscapeMadeEasy_Plot<a class="headerlink" href="#module-inkscapeMadeEasy_Plot" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="inkscapeMadeEasy_Plot.displayMsg">
 <code class="descclassname">inkscapeMadeEasy_Plot.</code><code class="descname">displayMsg</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Plot.html#displayMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Plot.displayMsg" title="Permalink to this definition">¶</a></dt>
@@ -3084,7 +3133,7 @@ this function overcomes partially the issue of sending things to stdout by dumpi
 <p>This class contains only static methods so that you don’t have to inherit this in your class</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.axis.cartesian">
@@ -3092,7 +3141,7 @@ this function overcomes partially the issue of sending things to stdout by dumpi
 <dd><p>Creates the axes for cartesian plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This method uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3191,7 +3240,7 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This method uses LaTeX in labels and tick marks if LaTeS support is enabled. This is an optional feature, <strong>enabled by default</strong>.
-Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3275,7 +3324,7 @@ The text can be any LaTeX text. Keep in mind that this text will be inserted wit
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This class uses LaTeX in labels and tick marks if LaTeX support is enabled. This is an optional feature, <strong>enabled by default</strong>.
-Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Plot.plot.cartesian">
@@ -3284,7 +3333,7 @@ Please refer to <a class="reference internal" href="#latexsupport"><span class="
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>.
-Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3436,7 +3485,7 @@ equal to 0.0 (they would result in complex log10… =P ). The method will create
 <dd><p>Polar Plot</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+<p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3586,7 +3635,7 @@ than or equal to 0.0 (they would result in complex log10… =P ). The method wil
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This method uses LaTeX in labels and tick marks if the support is enabled. This is an optional feature, <strong>enabled by default</strong>.
-Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements</span></a> on how to disable it.</p>
+Please refer to <a class="reference internal" href="#latexsupport"><span class="std std-ref">Installation and requirements (all users)</span></a> on how to disable it.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -3735,6 +3784,7 @@ The method will create a text object alongside your plot warning this.</p>
 
 </dd></dl>
 
+</div>
 <div class="section" id="indices-and-tables">
 <h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -3755,23 +3805,22 @@ The method will create a text object alongside your plot warning this.</p>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to inkscapeMadeEasy’s documentation!</a><ul>
-<li><a class="reference internal" href="#history-and-objectives">History and Objectives</a><ul>
+<li><a class="reference internal" href="#history-and-objectives">History and Objectives</a></li>
 <li><a class="reference internal" href="#contents">Contents:</a></li>
-<li><a class="reference internal" href="#main-features">Main Features</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#main-features">Main Features</a><ul>
 <li><a class="reference internal" href="#optional-latex-support-via-textext-extension">Optional LaTeX support via textext extension</a></li>
 <li><a class="reference internal" href="#scientific-plotting-system">Scientific plotting system</a></li>
 <li><a class="reference internal" href="#control-over-text-styles-line-markers-and-other-drawing-features">Control over text styles, line markers and other drawing features</a></li>
-<li><a class="reference internal" href="#useful-backstage-functions">Useful backstage functions</a><ul>
-<li><a class="reference internal" href="#installation-and-requirements">Installation and requirements</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#module-definitions">Module definitions</a></li>
+<li><a class="reference internal" href="#useful-backstage-functions">Useful backstage functions</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#installation-and-requirements-all-users">Installation and requirements (all users)</a></li>
+<li><a class="reference internal" href="#latex-installation-windows-users">LaTeX installation  (windows users)</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#module-definitions">Module definitions</a><ul>
 <li><a class="reference internal" href="#module-inkscapeMadeEasy_Base">inkscapeMadeEasy_Base</a></li>
 <li><a class="reference internal" href="#module-inkscapeMadeEasy_Draw">inkscapeMadeEasy_Draw</a></li>
-<li><a class="reference internal" href="#module-inkscapeMadeEasy_Plot">inkscapeMadeEasy_Plot</a><ul>
+<li><a class="reference internal" href="#module-inkscapeMadeEasy_Plot">inkscapeMadeEasy_Plot</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
