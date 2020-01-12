@@ -68,7 +68,9 @@ Contents:
 
 `Main Features`_
 
-`Installation and requirements`_
+`Installation and requirements (all users)`_
+
+`LaTeX installation  (windows users)`_
 
 `Usage`_
 
@@ -141,6 +143,15 @@ The following python modules are required: inkex (comes with inkscape), re, lxml
 with inkscape), copy, tempfile, sys and os.
 
 **Please keep in mind that you will need to install 'pstoedit' converter if you want to use LaTeX support.**  Linux users can install from your preferred package manager. Windows users can download it from its website.
+
+
+**Some combinations of pstoedit and ghostscript versions fails to produce svg on most distributions**
+
+   Problematic combinations:
+      - pstoedit 3.70  +  ghostscript 9.22
+      - pstoedit <= 3.74  +  ghostscript 9.27**
+
+
 
 In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape's extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.
 
@@ -225,7 +236,7 @@ Compiling this example will also make sure you have all packages inkscapeMadeEas
    short message and equation.
 
 
-**2) install pstoedit (install version 3.73!)**
+**2) install pstoedit (version 3.73)**
 
 windows 32 bits
 https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe
@@ -246,7 +257,7 @@ https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_x64.
    2.2.5-) Create a new entry and provide the path where pstoedit was installed. On my machine the folder was 'C:\\Program Files\\pstoedit'
 
 
-3) Install ghostscript (install version 9.26!)
+3) Install ghostscript (version 9.26)
 
 windows 32 bits
 https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe
