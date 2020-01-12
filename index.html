@@ -142,6 +142,17 @@ work on both versions of Inkscape. Also, they should work in different OSs too a
 <p>The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes
 with inkscape), copy, tempfile, sys and os.</p>
 <p><strong>Please keep in mind that you will need to install ‘pstoedit’ converter if you want to use LaTeX support.</strong>  Linux users can install from your preferred package manager. Windows users can download it from its website.</p>
+<p><strong>Some combinations of pstoedit and ghostscript versions fails to produce svg on most distributions</strong></p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Problematic combinations:</dt>
+<dd><ul class="first last simple">
+<li>pstoedit 3.70  +  ghostscript 9.22</li>
+<li>pstoedit &lt;= 3.74  +  ghostscript 9.27**</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
 <p>In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape’s extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>&gt;&gt;&gt; inkscape/extensions/
 &gt;&gt;&gt;             |-- inkscapeMadeEasy_Base.py
@@ -206,7 +217,7 @@ automatically the needed packages or ask you to confirm. Confirm it!</p>
 <p>1.3.4) Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the
 short message and equation.</p>
 </div></blockquote>
-<p><strong>2) install pstoedit (install version 3.73!)</strong></p>
+<p><strong>2) install pstoedit (version 3.73)</strong></p>
 <p>windows 32 bits
 <a class="reference external" href="https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe">https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe</a></p>
 <p>windows 64 bits
@@ -220,7 +231,7 @@ short message and equation.</p>
 <p>2.2.5-) Create a new entry and provide the path where pstoedit was installed. On my machine the folder was ‘C:\Program Files\pstoedit’</p>
 </div></blockquote>
 <ol class="arabic simple" start="3">
-<li>Install ghostscript (install version 9.26!)</li>
+<li>Install ghostscript (version 9.26)</li>
 </ol>
 <p>windows 32 bits
 <a class="reference external" href="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe">https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe</a></p>
