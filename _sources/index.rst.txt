@@ -68,7 +68,9 @@ Contents:
 
 `Main Features`_
 
-`Installation and requirements`_
+`Installation and requirements (all users)`_
+
+`LaTeX installation  (windows users)`_
 
 `Usage`_
 
