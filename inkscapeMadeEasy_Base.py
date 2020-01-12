@@ -625,8 +625,8 @@ class inkscapeMadeEasy(inkex.Effect):
 
         :param group: group to be removed
         :type group: group element
-        :returns: none
-        :rtype: -
+        :returns: list of the elements previously contained in the group
+        :rtype: list of elements
 
         **Example**
 
@@ -638,20 +638,22 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> line2 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[20,0]],[0,0])       # creates a line in groupB
         >>> line3 = inkscapeMadeEasy_Draw.line.relCoords(groupB, [[30,0]],[0,0])       # creates a line in groupB
         >>>  # at this point, the file struct is:   groupA[ line1, groupB[ line2, line3 ] ]
-        >>> self.ungroup(groupB)                                                       # ungroup line2 and line3.
+        >>> elemList = self.ungroup(groupB)                                    # ungroup line2 and line3. elemList is a list containing line2 and line3 elements.
         >>>  # now the file struct is:   groupA[ line1, line2, line3 ]
         """
 
         if group.tag == 'g' or group.tag == inkex.addNS('g', 'svg'):  # if object is a group
             parent = group.getparent()
 
+            listElem=[]
             if parent is not None:
                 for child in group:
                     parent.append(child)
+                    listElem.append(child)
 
                 self.removeElement(group)
 
-        return
+        return listElem
 
     # ---------------------------------------------
     def getTransformMatrix(self, element):

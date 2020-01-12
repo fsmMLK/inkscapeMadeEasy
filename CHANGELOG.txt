@@ -1,4 +1,12 @@
 
+2020-01jan-11
+-------------
+
+added LaTeX installation instructions for windows users.
+
+inkscapeMadeEasy_Base.py
+  - Now ungroup method returns a list with the elements previously contained in the removed group
+
 2020-01jan-05
 -------------
 

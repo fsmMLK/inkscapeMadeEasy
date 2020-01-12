@@ -35,6 +35,8 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
+  - **SlopeField**             <https://github.com/fsmMLK/inkscapeSlopeField>
+
 History and Objectives
 ----------------------
 
@@ -58,7 +60,7 @@ Enough mumbo-jumbo. Let's start! =D
 
 
 Contents:
-==========================================
+-------------
 
 .. toctree::
    :maxdepth: 2
@@ -73,40 +75,30 @@ Contents:
 `Module definitions`_
 
 Main Features
-=============
+-------------
 
 
 Optional LaTeX support via textext extension
---------------------------------------------
+============================================
 
 .. Important note:: LaTeX support is an optional feature, **enabled by default**. Please refer to :ref:`latexSupport` on how to disable it.
 
 Many of the functions implemented in this project can use LaTeX to generate text if the support is enabled. To this end I decided to employ the excellent extension **textext** by Pauli Virtanen  <https://pav.iki.fi/software/textext/>. 
 
-Since I made very few modifications to his module, I decided to include the modified files here. The modifications were merely designed to facilitate debugging. No deep modifications were made to it. If you prefer, you can stick with the original version.
-
-Installation procedure and requirements of the modified **textext** are the same of the original. Please refer to the installation section on Pauli Virtanen's page to get further instructions.
+Since I made very few modifications to his module, I decided to include the modified files here. The modifications
+were merely designed to facilitate debugging and to remove additional GUI modules (GTK or TkInter). If you prefer,
+you can stick with the original version.
 
 **Please keep in mind that you will need to install 'pstoedit' converter.** Linux users can install from your preferred package manager. Windows users can download it from its website.
 
-**Modifications**
-
-Here is the full list of changes I made::
-
-  # Changes: line  67-68: added a few variables to control debug mode
-  # Changes: line 944: changed order of programs (It worked better in my machine)
-  # Changes: line 665: debug option to save temporary files to an easy access directory
-  # Changes: line 696: debug option to keep the .tex file
-
 
 Scientific plotting system
---------------------------
-
+============================================
 
 inkscapeMadeEasy_Plot module provides simple yet powerful tools to generate 2D Cartesian and Polar axes and 2D plots (lines and Octave's stem plot style). It was inspired by Tavmjong Bah's (and collaborators) extension **Function Plotter** already presented in Inkscape. Function Plotter extension is not required here.
 
 Control over text styles, line markers and other drawing features
------------------------------------------------------------------
+=================================================================
 
 inkscapeMadeEasy_Draw module provides powerful tools to:
 
@@ -122,7 +114,7 @@ inkscapeMadeEasy_Draw module provides powerful tools to:
  - draw circles/ellipses given center and radius
 
 Useful backstage functions
----------------------------------------------------------
+============================================
 
 inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing useful core functions:
 
@@ -139,18 +131,16 @@ inkscapeMadeEasy_Base module inherits inkex.py module, extending it by providing
 
 .. _latexSupport:
 
-Installation and requirements
-==========================================
+Installation and requirements (all users)
+-----------------------------------------
 
-These modules were partially developed in Inkscape 0.48 and 0.91 in Linux (Kubuntu 12.04 and 14.04). They should work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.
+These modules were partially developed in Inkscape 0.48, 0.91, 0.92 in Linux (Kubuntu 12.04 and 14.04). They should
+work on both versions of Inkscape. Also, they should work in different OSs too as long as all requirements are met.
 
-The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes with inkscape), sys and os.
+The following python modules are required: inkex (comes with inkscape), re, lxml, numpy, math, simplestyle (comes
+with inkscape), copy, tempfile, sys and os.
 
 **Please keep in mind that you will need to install 'pstoedit' converter if you want to use LaTeX support.**  Linux users can install from your preferred package manager. Windows users can download it from its website.
-
-
-In order to use circuitSymbols extension, you must also download inkscapeMadeEasy files and put them inside Inkscape's extension directory. Please refer to inkscapeMadeEasy installation instructions. In the end you must have the following files and directories in your Inkscape extension directory.
-
 
 In order to install inkscapeMadeEasy, you must download inkscapeMadeEasy files from github and place them inside Inkscape's extension directory (see below how to find it). In the end you must have the following files and directories in your Inkscape extension directory.
 
@@ -172,6 +162,8 @@ If LaTeX support is enabled (see below), you will need in your system the follow
 
 Linux users: You might find useful installing the packages ``texlive-science``,   ``texlive-pictures`` and ``texlive-latex-base`` (Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages.
 
+Windows users: please check ``Installation and requirements (windows users)`` section
+
 **Disabling LaTeX support**
 
 LaTeX support via textext extension requires LaTeX typesetting system in your computer (it's free and awesome! =] ). It  might be a problem to install for non-Linux systems.
@@ -188,9 +180,82 @@ If you don't want LaTeX support or your system does not allow it, you can still 
 
  4- Save the file.
 
+LaTeX installation  (windows users)
+-----------------------------------
+
+**1) Install Miktex:**
+
+Download and install Miktex (https://miktex.org/). You must make sure the following minimal testing example compiles
+correctly using pdflatex using the command prompt. Se
+instructions below::
+
+   \documentclass[11pt]{article}
+   \usepackage[utf8]{inputenc}
+   \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
+   \usepackage[per=slash]{siunitx}
+   \usepackage{steinmetz}
+   \begin{document}
+   Minimal example. woo-hoo!
+   \begin{align}
+   E=mc^2
+   \end{align}
+   \end{document}
+
+**1.2) testing pdflatex (for LaTeX experienced users)**
+
+Check whether you can call pdflatex from any folder, in other words, check if pdflatex folder is in the PATH
+environment variable.
+
+Check whether your pdflatex can compile the testing example from the command prompt.
+Compiling this example will also make sure you have all packages inkscapeMadeEasy requires.
+
+**1.3) testing pdflatex (for LaTeX beginners)**
+
+   1.3.1) Open notepad and create a text file with the contents of the testing example and save it somewhere.
+
+   1.3.2) In File Explorer, go to the folder where you saved the file and click the address bar to select it (or press
+   Alt+D).
+   Type “cmd” into the address bar and hit Enter to open the Command Prompt with the path of the current folder already set.
+    
+   1.3.3) type:  pdflatex <name_of_the_file_you_just_saved>. Lots of stuff should appear on your console window.
+   Obs: Miktex might require to install additional packages. Depending on how you installed Miktex, it can install
+   automatically the needed packages or ask you to confirm. Confirm it!
+
+   1.3.4) Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the
+   short message and equation.
+
+
+**2) install pstoedit (install version 3.73!)**
+
+windows 32 bits
+https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_win32.exe
+
+windows 64 bits
+https://sourceforge.net/projects/pstoedit/files/pstoedit/3.73/pstoeditsetup_x64.exe
+
+2.1) Add pstoedit folder to windows PATH environment variable (if it is not there already)
+
+   2.2.1) On the Windows desktop, right-click 'My Computer'.
+
+   2.2.2-) In the pop-up menu, click Properties.
+
+   2.2.3-) In the System Properties window, click the Advanced tab, and then click Environment Variables.
+
+   2.2.4-) In the System Variables window, highlight PATH, and click Edit.
+
+   2.2.5-) Create a new entry and provide the path where pstoedit was installed. On my machine the folder was 'C:\\Program Files\\pstoedit'
+
+
+3) Install ghostscript (install version 9.26!)
+
+windows 32 bits
+https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw32.exe
+
+windows 64 bits
+https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs926/gs926aw64.exe
 
 Usage
-==========================================
+-------------
 
 These modules are not intended to serve as extensions by themselves. Instead you can import them into your projects to take advantage of the classes and methods developed here.
 
@@ -213,10 +278,10 @@ For examples on how to use, please take a look at the examples provided below an
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
 Module definitions
-==================
+------------------
 
 inkscapeMadeEasy_Base
-----------------------
+=====================
 
 
 .. automodule:: inkscapeMadeEasy_Base
@@ -225,7 +290,7 @@ inkscapeMadeEasy_Base
     :show-inheritance:
 
 inkscapeMadeEasy_Draw
-----------------------
+=====================
 
 .. automodule:: inkscapeMadeEasy_Draw
     :members:
@@ -233,7 +298,7 @@ inkscapeMadeEasy_Draw
     :show-inheritance:
 
 inkscapeMadeEasy_Plot
-----------------------
+=====================
 
 .. automodule:: inkscapeMadeEasy_Plot
     :members:

@@ -19,6 +19,7 @@ For end-user extensions see my other projects on GitHub (more to come soon):
 - **logicGates**              <https://github.com/fsmMLK/inkscapeLogicGates>
 - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
+- **SlopeField**              <https://github.com/fsmMLK/inkscapeSlopeField>
 
 ## History and Objectives
 
