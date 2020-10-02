@@ -1,4 +1,4 @@
-Change log
+Changelog
 ==========
 
 2020-10oct-02
