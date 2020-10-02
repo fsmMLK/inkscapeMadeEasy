@@ -1,3 +1,48 @@
+Change log
+==========
+
+2020-10oct-02
+-------------
+
+.. important::
+    - inkscapeMadeEasy is now compatible with 1.0
+    - The older version, compatible with inkscape 0.9x is now unde the directory 0.9x.
+    - latex support now uses an updated version of textext (https://github.com/textext/textext), simplifying installation.
+
+inkscapeMadeEasy_Base.py
+   - getDocumentScale() was renamed as getDocumentScaleFactor
+   - scaleElement() Changed scaleY=0.0 to scaleY = None to indicate scaleY=scaleX.
+   - blankSVG: new member variable with a string representing a blank svg file
+
+inkscapeMadeEasy_Draw.py
+   - arc.startEndRadius and arc.centerAngStartAngEnd now have a new argument, 'arcType' that replace and extends the old 'flagOpen' argument
+   - new function color.rgb() that accepts normalized input color values in the range 0.0-1.0
+   - the function marker.createInfLineMarker was renamed as marker.createElipsisMarker
+   - the argument 'fillColor' of marker.createCrossMarker was removed.
+   - the argument 'strokeColor' of marker.createElipsisMarker was removed.
+
+inkscapeMadeEasty_Plot.py
+  - axis.cartesian
+      - the argument ExtraLenghtAxisX was renamed as ExtraLengthAxisX
+      - the argument ExtraLenghtAxisY was renamed as ExtraLengthAxisY
+  - axis.polar
+      - the argument ExtraLenghtAxisR was renamed as ExtraLengthAxisR
+  - plot.cartesian
+      - the argument ExtraLenghtAxisX was renamed as ExtraLengthAxisX
+      - the argument ExtraLenghtAxisY was renamed as ExtraLengthAxisY
+  - plot.polar
+      - the argument ExtraLenghtAxisR was renamed as ExtraLengthAxisR
+  - plot.stem
+      - the argument ExtraLenghtAxisX was renamed as ExtraLengthAxisX
+      - the argument ExtraLenghtAxisY was renamed as ExtraLengthAxisY
+
+
+2020-01jan-12
+-------------
+
+inkscapeMadeEasy_Base.py
+  - Added a new function: importSVG
+
 
 2020-01jan-11
 -------------
@@ -18,14 +63,13 @@ inkscapeMadeEasy_Base.py
 inkscapeMadeEasy_Draw.py
   - Modified text.latex method to try to fix some issues under Windows.
 
-
 2020-01jan-02
 -------------
 
 inkscapeMadeEasy_Draw.py
   - Added a new class: cubicBezier
-  - Added new option for line.absCoords and line.relCoords. Now it is possible to close the path, connecting the start
-  and end points.
+  - Added new option for line.absCoords and line.relCoords. Now it is possible to close the path, connecting the
+start and end points.
   - fixed documentation
 
 inkscapeMadeEasy_Base.py
@@ -56,8 +100,7 @@ inkscapeMadeEasy_Base.py
   - fixed documentation
   - reformatted the code using pycharm
 
-inkscapeMadeEasy_Draw.py
-inkscapeMadeEasy_Plot.py
+inkscapeMadeEasy_Draw.py, inkscapeMadeEasy_Plot.py
   - fixed documentation
   - reformatted the code using pycharm
 
@@ -126,8 +169,7 @@ inkscapeMadeEasy_Draw.py
 2016-10oct-31
 -------------
 
-inkscapeMadeEasy_Draw.py
-inkscapeMadeEasy_Plot.py
+inkscapeMadeEasy_Draw.py, inkscapeMadeEasy_Plot.py
   - LaTeX support is now optional. See documentation on how to enable/disable it.
 
 

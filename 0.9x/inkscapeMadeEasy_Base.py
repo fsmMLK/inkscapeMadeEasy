@@ -165,6 +165,47 @@ class inkscapeMadeEasy(inkex.Effect):
             if temp is not None:
                 temp.remove(parent)
 
+    def importSVG(self, parent, fileIn, createGroup=True):
+        """ Import SVG file into the current document
+
+        :param parent: parent element where all contents will be placed
+        :param fileIn: SVG file path
+        :param createGroup: create a group containing all imported elements. (Default: True)
+        :type parent: element object
+        :type fileIn: string
+        :type createGroup: bool
+        :returns:  imported element objects. If createGroup==True, returns the group. Otherwise returns a list with all imported elements
+        :rtype: element object or list of objects
+
+        **Example**
+
+        >>> from inkscapeMadeEasy_Base import inkscapeMadeEasy
+        >>> import inkscapeMadeEasy_Draw as inkDraw
+        >>> x=inkscapeMadeEasy
+        >>> rootLayer = x.document.getroot()                             # retrieves the root layer of the file
+        >>> imported1 = self.importSVG(rootLayer,'/path/to/file1.svg',True) # import contents of the file and group them. imported1 is the group element
+        >>> imported2 = self.importSVG(rootLayer,'/path/to/file2.svg',False) # import contents of the file. imported2 is a list of the imported elements
+
+        """
+        documentIn = inkex.etree.parse(fileIn, parser=inkex.etree.XMLParser(huge_tree=True)).getroot()
+
+        if createGroup:
+            group = self.createGroup(parent, label='importedSVG')
+            for elem in documentIn:
+                if elem.tag != inkex.addNS('namedview', 'sodipodi') and elem.tag != inkex.addNS('metadata', 'svg'):
+                    group.append(elem)
+            self.unifyDefs()
+            return group
+        else:
+            listElements=[]
+            for elem in documentIn:
+                if elem.tag != inkex.addNS('namedview', 'sodipodi') and elem.tag != inkex.addNS('metadata', 'svg'):
+                    parent.append(elem)
+                    if elem.tag != inkex.addNS('defs', 'svg'):
+                        listElements.append(elem)
+            self.unifyDefs()
+            return listElements
+
     def exportSVG(self, element, fileOut):
         """ Export the elements in a new svgfile
 

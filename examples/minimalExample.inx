@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Minimal Example</name>
+    <id>minimalExample</id>
+    <dependency type="executable" location="inx">minimalExample.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy/inkscapeMadeEasy_Base.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy/inkscapeMadeEasy_Draw.py</dependency>
+    <dependency type="executable" location="extensions">inkscapeMadeEasy/inkscapeMadeEasy_Plot.py</dependency>
+
+    <param name="drawCircle" type="bool" gui-text="Draw Circle">false</param>
+    <param name="drawPlot" type="bool" gui-text="Draw Plot">false</param>
+
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">minimalExample.py</command>
+    </script>
+</inkscape-extension>

@@ -50,7 +50,7 @@ class myExtension(inkBase.inkscapeMadeEasy):
         # -- Creates a second line style with ellipsis and 
         
         # creates a ellipsis marker with default values
-        infMarkerStart,infMarkerEnd = inkDraw.marker.createInfLineMarker(self,
+        infMarkerStart,infMarkerEnd = inkDraw.marker.createElipsisMarker(self,
                                                                         nameID='myEllipsis' ,
                                                                         RenameMode=1)             # overwrite an eventual markers with the same name
         
