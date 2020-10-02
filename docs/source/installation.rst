@@ -49,7 +49,7 @@ Installation procedure
 
   c) Download `inkscapeMadeEasy <https://github.com/fsmMLK/inkscapeMadeEasy>`_ files and place them inside Inkscape's extension directory.
 
-   You don't have to copy all files from Github. The files you will need are `inkscapeMadeEasy_Base.py`, `inkscapeMadeEasy_Draw.py`, `inkscapeMadeEasy_Plot.py`, and  `basicLatexPackages.tex`. **You can find these files inside the ``latest`` folder. In the end you must have the following files and directories in your Inkscape extension directory.
+   You don't have to copy all files from Github. The files you will need are `inkscapeMadeEasy_Base.py`, `inkscapeMadeEasy_Draw.py`, `inkscapeMadeEasy_Plot.py`, and  `basicLatexPackages.tex`. **You can find these files inside the ``latest`` folder**. In the end you must have the following files and directories in your Inkscape extension directory.
 
 .. code-block::
     
