@@ -25,13 +25,16 @@ Installation procedure (v1.0 only)
 1) Install python 3 in your machine if you don't have it yet. You can download it from `here <https://www.python.org/>`_ or use your package manager. See the instructions for `Linux <https://docs.python.org/3/using/unix.html>`_,  `Windows  <https://docs.python.org/3/using/windows.html>`_ or  `Mac <https://docs.python.org/3/using/mac.html>`_ if you need help.
 
 
-   .. note :: Windows users: make sure you check **Add Python 3.x to PATH** on the bottom of the installer screen.
+   .. note :: **Windows users:** make sure you check **Add Python 3.x to PATH** on the bottom of the installer screen.
 
    Install the following python modules: math, os, re, sys, copy, numpy, lxml, tempfile.
 
 2) Install `Inkscape 1.0 <https://inkscape.org/>`_.
 
-   **Windows users:** Make sure that you checked the Python option in Program Files as well as the Extensions options in Inkscape Data during the installation of Inkscape (by default this is the case).
+   .. note :: **Windows users:** Make sure that you checked the **Python** option in Program Files as well as the **Extensions** options in Inkscape Data during the installation of Inkscape (by default this is the case).
+
+        .. image:: ../imagesDocs/inkscape-install-options-windows.png
+              :width: 400px
 
 3) **if you want LaTeX support:** Install a LaTeX distribution . See `LaTeX installation`_ on further instructions for Linux, Mac and Windows users. 
 
