@@ -1,3 +1,6 @@
+This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the
+development of new extensions for Inkscape <https://inkscape.org>.
+
 # IMPORTANT: 1.0 UPDATE
 
 At the moment I am porting all my inkscape plugins to inkscape 1.0. This is a lengthy process that will need some
