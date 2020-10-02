@@ -1,7 +1,7 @@
 Inkscape Version
 ================
 
-.. attention:: The procedure bellow  refers to inkscapeMadeEasy **version 1.0 or later**  only. For older versions, please see the pdf manual inside the legacy folder.
+.. attention:: The procedure bellow  refers to inkscapeMadeEasy **version 1.0 or later**  only. For older versions, please see the pdf manual inside the `legacy folder 0.9x <https://github.com/fsmMLK/inkscapeMadeEasy/tree/master/0.9x>`_.
 
 InkscapeMadeEasy was developed using Inkscape 1.0 in Linux (Kubuntu 18.04). It should work in different OSs too as long as all requirements are met.
 
@@ -19,8 +19,8 @@ Requirements
 .. note:: Starting from InkscapeMadeEasy 1.0, you don't need pstoedit, ghostscript and pdf2svg anymore. Thanks TexText team! =)
 
 
-Installation procedure
-======================
+Installation procedure (v1.0 only)
+==================================
 
 1) Install python 3 in your machine if you don't have it yet. You can download it from `here <https://www.python.org/>`_ or use your package manager. See the instructions for `Linux <https://docs.python.org/3/using/unix.html>`_,  `Windows  <https://docs.python.org/3/using/windows.html>`_ or  `Mac <https://docs.python.org/3/using/mac.html>`_ if you need help.
 
