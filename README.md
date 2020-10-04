@@ -28,7 +28,7 @@ If the plugin of your interest is not updated yet, you can still use it, but wit
  need to install the legacy version of inkscapeMadeEasy. Please refer to the documentation pages on how to install
   the legacy versions. 
 
-###Plugin developers:
+### Plugin developers:
 please check the changelog file (see documentation page) for changes. There are a couple of
  function names and function arguments that were modified. I tried to list all changes there. If you find any
   function that seems to have changed and is not there, let me know.   
