@@ -12,7 +12,7 @@ The table below shows the current state of my 1.0 updates. If the plugin is list
 | plugin name             | 1.0 compatible? |  Status                      |
 |-------------------------|-----------------|------------------------------|
 |inkscapeMadeEasy         | yes             | 100%                         |
-|createMarkers            | no              | 80% (updating documentation) |
+|createMarkers            | yes             | 100%                         |
 |cartesianAxes2D          | no              |                              |
 |cartesianPlotFunction2D  | no              |                              |
 |cartesianPlotData2D      | no              |                              |

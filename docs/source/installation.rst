@@ -67,7 +67,7 @@ Installation procedure (v1.0 only)
         ┣━━ textext   <-- textext folder (if you installed textText)
         ┋
 
-.. note::  You might have other sub folders inside the extension directory. They don't interfere with inkscapeMadeEasy.
+.. note::  You might have other sub folders inside the extensions directory. They don't interfere with inkscapeMadeEasy.
 
 
 
