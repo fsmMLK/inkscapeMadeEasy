@@ -1,6 +1,16 @@
 Changelog
 ==========
 
+
+2020-10oct-06
+-------------
+
+inkscapeMadeEasy_Base.py and inkscapeMadeEasy_Draw.py
+   - fixed a bug in text.latex that would result in wrong font size.
+
+inkscapeMadeEasy_Draw.py
+   - fixed a bug in color.rgb() method.
+
 2020-10oct-02
 -------------
 

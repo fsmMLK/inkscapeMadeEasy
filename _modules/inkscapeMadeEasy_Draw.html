@@ -394,12 +394,12 @@
         <span class="n">RGBhex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">:</span>
-                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 
             <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
                 <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">255</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
                 <span class="n">RGBhex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">255</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
             <span class="k">else</span><span class="p">:</span>
@@ -1348,10 +1348,14 @@
 
                 <span class="n">BboxMin</span><span class="p">,</span> <span class="n">BboxMax</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">)</span>
                 <span class="n">Height0</span> <span class="o">=</span> <span class="n">BboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">BboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">scale</span> <span class="o">=</span> <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">getDocumentScaleFactor</span><span class="p">()</span>
+                <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">displayMsg</span><span class="p">(</span><span class="s1">&#39;H0=</span><span class="si">%f</span><span class="se">\n</span><span class="s1">scaleFactor=</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Height0</span><span class="p">,</span><span class="n">scale</span> <span class="p">))</span>
+
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># running the code above, we get a &#39;F&#39; with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification &#39;fontSize&#39;</span>
                 <span class="c1"># Height0 = 6.76</span>
-                <span class="n">Height0</span> <span class="o">=</span> <span class="mf">9.04</span>
+                <span class="n">Height0</span> <span class="o">=</span> <span class="mf">9.041644</span>
 
             <span class="n">scale</span> <span class="o">=</span> <span class="n">fontSize</span> <span class="o">/</span> <span class="n">Height0</span>
 
