@@ -215,12 +215,12 @@ class color():
         RGBhex = [''] * 3
         for i in range(3):
             if RGBlist[i] >= 1.0:
-                RGBlist[i] = 255
+                RGBlist[i] = 1.0
 
             if RGBlist[i] <= 0.0:
                 RGBlist[i] = 0
 
-            if RGBlist[i] < 16:
+            if RGBlist[i]*255 < 16:
                 RGBhex[i] = '0' + hex(int(RGBlist[i]*255))[2:].upper()
 
             else:
@@ -1169,10 +1169,14 @@ class text():
 
                 BboxMin, BboxMax = ExtensionBaseObj.getBoundingBox(groupLatex)
                 Height0 = BboxMax[1] - BboxMin[1]
+
+                scale = ExtensionBaseObj.getDocumentScaleFactor()
+                ExtensionBaseObj.displayMsg('H0=%f\nscaleFactor=%f' % (Height0,scale ))
+
             else:
                 # running the code above, we get a 'F' with height of 6.76, with scale 1.0 from textext. This will be used to scale the text accordingly to fit user specification 'fontSize'
                 # Height0 = 6.76
-                Height0 = 9.04
+                Height0 = 9.041644
 
             scale = fontSize / Height0
 

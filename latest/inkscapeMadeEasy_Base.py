@@ -60,13 +60,13 @@ class inkscapeMadeEasy(inkex.Effect):
        xmlns="http://www.w3.org/2000/svg"
        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-       width="210mm"
-       height="297mm"
+       width="210px"
+       height="297px"
        viewBox="0 0 210 297"
        version="1.1"
        id="svg878"
        inkscape:version="1.0.1 (1.0.1+r73)"
-       sodipodi:docname="teste.svg">
+       sodipodi:docname="blank.svg">
       <defs
          id="defs872" />
       <sodipodi:namedview
@@ -79,7 +79,7 @@ class inkscapeMadeEasy(inkex.Effect):
          inkscape:zoom="0.35"
          inkscape:cx="400"
          inkscape:cy="560"
-         inkscape:document-units="mm"
+         inkscape:document-units="px"
          inkscape:current-layer="layer1"
          inkscape:document-rotation="0"
          showgrid="false"
