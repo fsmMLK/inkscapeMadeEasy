@@ -9,19 +9,19 @@ At the moment I am porting all my inkscape plugins to inkscape 1.0. This is a le
 The table below shows the current state of my 1.0 updates. If the plugin is listed as **1.0 compatible**, you
  can use it already in inkscape 1.0, otherwise you will have to wait a bit.
 
-| plugin name             | 1.0 compatible? |  Status                      |
+| plugin name             | 1.0 compatible? |  1.0 update status           |
 |-------------------------|-----------------|------------------------------|
 |inkscapeMadeEasy         | yes             | 100%                         |
 |createMarkers            | yes             | 100%                         |
-|cartesianAxes2D          | no              |                              |
-|cartesianPlotFunction2D  | no              |                              |
-|cartesianPlotData2D      | no              |                              |
-|cartesianStemPlot        | no              |                              |
-|polarAxes2D              | no              |                              |
+|cartesianAxes2D          | no              | 0%                           |
+|cartesianPlotFunction2D  | no              | 0%                           |
+|cartesianPlotData2D      | no              | 0%                           |
+|cartesianStemPlot        | no              | 0%                           |
+|polarAxes2D              | no              | 0%                           |
 |logicGates               | yes             | 100%                         |
 |circuitSymbols           | no              | 80% (updating documentation) |
-|dimensions               | no              |                              |
-|SlopeField               | no              |                              |
+|dimensions               | no              | 0%                           |
+|SlopeField               | no              | 0%                           |
 
 ### Legacy version
 If the plugin of your interest is not updated yet, you can still use it, but with inkscape 0.92. In this case, you will
