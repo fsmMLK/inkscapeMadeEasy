@@ -54,22 +54,22 @@ Installation procedure (v1.0 only)
 
    You don't have to copy all files from Github. The files you will need are `inkscapeMadeEasy_Base.py`, `inkscapeMadeEasy_Draw.py`, `inkscapeMadeEasy_Plot.py`, and  `basicLatexPackages.tex`. **You can find these files inside the ``latest`` folder**. In the end you must have the following files and directories in your Inkscape extension directory.
 
-.. code-block::
-    
-   inkscape
-    ┣━━extensions
-    ┋   ┣━━ inkscapeMadeEasy   <-- inkscapeMadeEasy folder
-        ┃    ┣━━ inkscapeMadeEasy_Base.py
-        ┃    ┣━━ inkscapeMadeEasy_Draw.py
-        ┃    ┣━━ inkscapeMadeEasy_Plot.py
-        ┃    ┗━━ basicLatexPackages.tex
-        ┃
-        ┣━━ textext   <-- textext folder (if you installed textText)
-        ┋
+    .. code-block::
+        
+       inkscape
+        ┣━━extensions
+        ┋   ┣━━ inkscapeMadeEasy   <-- inkscapeMadeEasy folder
+            ┃    ┣━━ inkscapeMadeEasy_Base.py
+            ┃    ┣━━ inkscapeMadeEasy_Draw.py
+            ┃    ┣━━ inkscapeMadeEasy_Plot.py
+            ┃    ┗━━ basicLatexPackages.tex
+            ┃
+            ┣━━ textext   <-- textext folder (if you installed textText)
+            ┋
 
-.. note::  You might have other sub folders inside the extensions directory. They don't interfere with inkscapeMadeEasy.
-
-
+        Note:  You might have other sub folders inside the extensions directory.
+               They don't interfere with inkscapeMadeEasy.
+    .. note:: **LaTeX users**: The file `logicGatesPreamble.tex` contains a basic set o packages and macros to be used with **InkscapeMadeEasy**. You can add your own macros to this file. This way they will be accessible  by all plugins that employ inkscapeMadeEasy.
 
 LaTeX installation
 ------------------
