@@ -19,7 +19,7 @@ The table below shows the current state of my 1.0 updates. If the plugin is list
 |cartesianStemPlot        | no              | 0%                           |
 |polarAxes2D              | no              | 0%                           |
 |logicGates               | yes             | 100%                         |
-|circuitSymbols           | no              | 80% (updating documentation) |
+|circuitSymbols           | yes             | 100%                         |
 |dimensions               | no              | 0%                           |
 |SlopeField               | no              | 0%                           |
 

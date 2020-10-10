@@ -52,7 +52,7 @@ Installation procedure (v1.0 only)
 
   c) Download `inkscapeMadeEasy <https://github.com/fsmMLK/inkscapeMadeEasy>`_ files and place them inside the directory you just created.
 
-   You don't have to copy all files from Github. The files you will need are `inkscapeMadeEasy_Base.py`, `inkscapeMadeEasy_Draw.py`, `inkscapeMadeEasy_Plot.py`, and  `basicLatexPackages.tex`. **You can find these files inside the ``latest`` folder**. In the end you must have the following files and directories in your Inkscape extension directory.
+   You don't have to copy all files from Github. The files you will need are inside the ``latest`` folder. In the end you must have the following files and directories in your Inkscape extension directory.
 
     .. code-block::
         
@@ -69,7 +69,7 @@ Installation procedure (v1.0 only)
 
         Note:  You might have other sub folders inside the extensions directory.
                They don't interfere with inkscapeMadeEasy.
-    .. note:: **LaTeX users**: The file `logicGatesPreamble.tex` contains a basic set o packages and macros to be used with **InkscapeMadeEasy**. You can add your own macros to this file. This way they will be accessible  by all plugins that employ inkscapeMadeEasy.
+    .. note:: **LaTeX users**: The file `basicLatexPackages.tex` contains a basic set o packages and macros to be used with **InkscapeMadeEasy**. You can add your own macros to this file. This way they will be accessible  by all plugins that employ inkscapeMadeEasy.
 
 LaTeX installation
 ------------------
