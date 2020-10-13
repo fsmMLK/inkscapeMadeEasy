@@ -13,9 +13,9 @@ The table below shows the current state of my 1.0 updates. If the plugin is list
 |-------------------------|-----------------|------------------------------|
 |inkscapeMadeEasy         | yes             | 100%                         |
 |createMarkers            | yes             | 100%                         |
-|cartesianAxes2D          | no              | 0%                           |
-|cartesianPlotFunction2D  | no              | 0%                           |
-|cartesianPlotData2D      | no              | 0%                           |
+|cartesianAxes2D          | no              | 50%                           |
+|cartesianPlotFunction2D  | no              | 50%                           |
+|cartesianPlotData2D      | no              | 50%                           |
 |cartesianStemPlot        | no              | 0%                           |
 |polarAxes2D              | no              | 0%                           |
 |logicGates               | yes             | 100%                         |
