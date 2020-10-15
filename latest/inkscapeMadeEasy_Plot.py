@@ -875,9 +875,9 @@ class axis():
 
         if tLimits[1] - tLimits[0] < 360:
             if rLimitsPos[0] > 0:
-                inkDraw.arc.startEndRadius(GroupAxis, P1, P4, rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, flagOpen=True,
+                inkDraw.arc.startEndRadius(GroupAxis, P1, P4, rLimitsPos[0], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, arcType='open',
                                            largeArc=largeArc)
-            inkDraw.arc.startEndRadius(GroupAxis, P2, P3, rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, flagOpen=True,
+            inkDraw.arc.startEndRadius(GroupAxis, P2, P3, rLimitsPos[1], offset=[0, 0], lineStyle=lineStyleAxis, flagRightOf=True, arcType='open',
                                        largeArc=largeArc)
         else:
             if rLimitsPos[0] > 0:
