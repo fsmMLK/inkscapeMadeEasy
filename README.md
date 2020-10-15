@@ -13,14 +13,14 @@ The table below shows the current state of my 1.0 updates. If the plugin is list
 |-------------------------|-----------------|------------------------------|
 |inkscapeMadeEasy         | yes             | 100%                         |
 |createMarkers            | yes             | 100%                         |
-|cartesianAxes2D          | yes             | 100%                           |
-|cartesianPlotFunction2D  | yes             | 100%                           |
-|cartesianPlotData2D      | yes             | 100%                           |
-|cartesianStemPlot        | yes             | 100%                           |
-|polarAxes2D              | yes             | 100%                           |
+|cartesianAxes2D          | yes             | 100%                         |
+|cartesianPlotFunction2D  | yes             | 100%                         |
+|cartesianPlotData2D      | yes             | 100%                         |
+|cartesianStemPlot        | yes             | 100%                         |
+|polarAxes2D              | yes             | 100%                         |
 |logicGates               | yes             | 100%                         |
 |circuitSymbols           | yes             | 100%                         |
-|dimensions               | no              | 0%                           |
+|dimensions               | yes             | 100%                         |
 |SlopeField               | no              | 0%                           |
 
 ### Legacy version
