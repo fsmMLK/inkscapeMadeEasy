@@ -1,38 +1,6 @@
 This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the
 development of new extensions for Inkscape <https://inkscape.org>.
 
-# IMPORTANT: 1.0 UPDATE
-
-At the moment I am porting all my inkscape plugins to inkscape 1.0. This is a lengthy process that will need some
- time to complete.
- 
-The table below shows the current state of my 1.0 updates. If the plugin is listed as **1.0 compatible**, you
- can use it already in inkscape 1.0, otherwise you will have to wait a bit.
-
-| plugin name             | 1.0 compatible? |  1.0 update status           |
-|-------------------------|-----------------|------------------------------|
-|inkscapeMadeEasy         | yes             | 100%                         |
-|createMarkers            | yes             | 100%                         |
-|cartesianAxes2D          | yes             | 100%                         |
-|cartesianPlotFunction2D  | yes             | 100%                         |
-|cartesianPlotData2D      | yes             | 100%                         |
-|cartesianStemPlot        | yes             | 100%                         |
-|polarAxes2D              | yes             | 100%                         |
-|logicGates               | yes             | 100%                         |
-|circuitSymbols           | yes             | 100%                         |
-|dimensions               | yes             | 100%                         |
-|SlopeField               | no              | 0%                           |
-
-### Legacy version
-If the plugin of your interest is not updated yet, you can still use it, but with inkscape 0.92. In this case, you will
- need to install the legacy version of inkscapeMadeEasy. Please refer to the documentation pages on how to install
-  the legacy versions. 
-
-### Plugin developers:
-please check the changelog file (see documentation page) for changes. There are a couple of
- function names and function arguments that were modified. I tried to list all changes there. If you find any
-  function that seems to have changed and is not there, let me know.   
-  
 # inkscapeMadeEasy
 
 This set of python modules is intended to extend Aaron Spike's inkex.py module, adding functions to help the
