@@ -67,7 +67,7 @@ classes to cover all possibilities of manipulations/transformations, and drawing
  expanded as I felt the necessity to have new methods to help my workflow. Nevertheless, the number of methods
   created allows many possibilities and is still under development so new features can (will) appear in future versions.
 
-**Obs:** Since it is not very easy to find documentation on other Inkscape modules, there might be other modules with
+**Obs:** Since it is not very easy to find documentation of other Inkscape modules, there might be other modules with
 similar/better features that I was not aware of when I was producing my extensions.
 
 Enough mumbo-jumbo. Let's start! =D

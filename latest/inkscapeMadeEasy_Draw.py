@@ -95,6 +95,44 @@ def Dump(obj, file='./dump_file.txt', mode='w'):
         file.write(str(obj) + '\n')
 
 
+def circle3Points(P1, P2, P3):
+    """Find the center and radius of a circle based on 3 points on the circle.
+
+    Returns [None,None] either if the points are aligned and no (finite radius) circle can be defined or if two of the points are coincident.
+
+    :param P1,P2,P3: points [x,y]
+
+            .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+    :type P1,P2,P3: list
+
+    :returns: [center, radius]
+    :rtype: [numpy array, float]
+
+    """
+    # check if points are aligned
+    v1 = np.array(P1) - np.array(P2)
+    v2 = np.array(P1) - np.array(P3)
+
+    if np.sqrt((v1[0] ** 2 + v1[1] ** 2))==0  or  np.sqrt((v2[0] ** 2 + v2[1] ** 2))==0:
+        displayMsg('Error: Two of the points are coincident. Aborting it...')
+        return [None, None]
+
+    v1 = v1 / np.sqrt((v1[0] ** 2 + v1[1] ** 2))
+    v2 = v2 / np.sqrt((v2[0] ** 2 + v2[1] ** 2))
+    cosTheta = v1.dot(v2)
+
+    if abs(cosTheta) > 0.99999:
+        displayMsg('Error: The 3 points are collinear (or very close). Aborting it...')
+        return [None, None]
+
+    # find the center
+    A = np.array([[-2 * P1[0], -2 * P1[1], 1], [-2 * P2[0], -2 * P2[1], 1], [-2 * P3[0], - 2 * P3[1], 1]])
+    b = np.array([-P1[0] ** 2 - P1[1] ** 2, -P2[0] ** 2 - P2[1] ** 2, -P3[0] ** 2 - P3[1] ** 2])
+    x = np.linalg.solve(A, b)
+    center = np.array([x[0], x[1]])
+    radius = np.sqrt(x[0] ** 2 + x[1] ** 2 - x[2])
+    return [center, radius]
+
 class color():
     """
     This class manipulates color information, generating a string in inkscape's expected format ``#RRGGBB``
@@ -1711,7 +1749,7 @@ class arc():
         >>>
         >>> #draws an open arc
         >>> inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[25,0], label='arc1',  lineStyle=myLineStyle, arcType='open')
-        >>> 
+        >>>
         >>> #draws a closed (slice) arc
         >>> inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[25,20], label='arc2',  lineStyle=myLineStyle, arcType='slice')
         >>>
@@ -1848,6 +1886,89 @@ class arc():
 
         return arc.startEndRadius(parent, Pstart, Pend, radius, pos, label, lineStyle, flagRight, arcType, largeArc)
 
+    # ---------------------------------------------
+    @staticmethod
+    def threePoints(parent, Pstart, Pmid, Pend, offset=[0, 0], label='arc', lineStyle=lineStyle.setSimpleBlack(), arcType='open'):
+        """Draw a circle arc given 3 points
+
+        .. image:: ../imagesDocs/arc_3points.png
+          :width: 120px
+
+
+        :param parent: parent object
+        :param Pstart: Start coordinate [x,y]
+
+            .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param Pmid: Mid coordinate [x,y]
+        :param Pend: End coordinate [x,y]
+        :param offset: Extra offset coords [x,y]
+        :param label: Label of the line. Default 'arc'
+        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()
+        :param arcType: Type of arc. Valid values: 'open', 'slice', 'chord'. See image below. Default: 'open'
+
+        :type parent: inkscape element object
+        :type Pstart: list
+        :type Pmid: list
+        :type Pend: list
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+        :type arcType: string
+
+        :returns: the new arc object
+        :rtype: line Object
+
+        **Arc options**
+
+        .. image:: ../imagesDocs/arc_type_flags.png
+          :width: 400px
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>> myLineStyle = inkDraw.lineStyle.setSimpleBlack()
+        >>>
+        >>> P1=[10.0,0.0]
+        >>> P2=[20.0,10.0]
+        >>> P3=[50.0,30.0]
+        >>>
+        >>> #draws an open arc
+        >>> inkDraw.arc.threePoints(parent=root_layer, Pstart=P1, Pmid=P3, Pend=P3, offset=[25,0], label='arc1',  lineStyle=myLineStyle, arcType='open')
+        """
+
+        [center,radius] = circle3Points(Pstart, Pmid, Pend)
+
+        if center is None:
+            return
+        vStart=np.array(Pstart)
+        vEnd=np.array(Pend)
+        vMid=np.array(Pmid)
+
+        # find side
+        DistVector = vEnd-vStart
+        NormalLeftVector = np.array([DistVector[1],-DistVector[0]])
+        MidVector = vMid - vStart
+        CenterVector = center - vStart
+
+        # check if  MidVector and CenterVector are pointing to the same side of DistVector
+        if np.dot(CenterVector,NormalLeftVector)*np.dot(MidVector,NormalLeftVector)>0:
+            largeArc = True
+        else:
+            largeArc = False
+
+        angStart = math.atan2(Pstart[1]-center[1], Pstart[0]-center[0])
+        angEnd = math.atan2(Pend[1]-center[1], Pend[0]-center[0])
+
+        angles = np.unwrap([angStart, angEnd])*180/np.pi
+        angStart=angles[0]
+        angEnd=angles[1]
+
+        if angEnd - angStart>0:
+            return arc.centerAngStartAngEnd(parent, center, radius, angStart, angEnd, offset, label,lineStyle,arcType,largeArc)
+        else:
+            return arc.centerAngStartAngEnd(parent, center, radius, angEnd, angStart, offset, label,lineStyle,arcType,largeArc)
+
 
 class circle():
     """ Class with methods for drawing circles.
@@ -1901,6 +2022,50 @@ class circle():
 
         return etree.SubElement(parent, inkex.addNS('path', 'svg'), Attribs)
 
+    # ---------------------------------------------
+    @staticmethod
+    def threePoints(parent, P1, P2, P3, offset=[0, 0], label='circle', lineStyle=lineStyle.setSimpleBlack()):
+        """Draw a circle given 3 poins on the circle.
+
+        The function checks if the 3 points are aligned. In this case, no circle is drawn.
+
+        :param parent: parent object
+        :param P1: point coordinates [x,y]
+        :param P2: point coordinates [x,y]
+        :param P3: point coordinates [x,y]
+
+            .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param offset: Extra offset coords [x,y]
+        :param label: Label of the line. Default 'arc'
+        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()
+
+        :type parent: inkscape element object
+        :type P1: list
+        :type P2: list
+        :type P3: list
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+
+        :returns: the new circle object
+        :rtype: line Object
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>> myLineStyle = inkDraw.lineStyle.setSimpleBlack()
+        >>>
+        >>> inkDraw.circle.threePoints(parent=root_layer, P1=[0,0], P2=[30,40], P3=[-20,20], offset=[0,0], label='circle1', lineStyle=myLineStyle)
+
+        .. image:: ../imagesDocs/circle_3P.png
+          :width: 200px
+
+        """
+
+        [center,radius] = circle3Points(P1, P2, P3)
+
+        return circle.centerRadius(parent, center, radius, offset, label, lineStyle)
 
 class rectangle():
     """ Class with methods for drawing rectangles.
