@@ -274,6 +274,44 @@
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="circle3Points"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.circle3Points">[docs]</a><span class="k">def</span> <span class="nf">circle3Points</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the center and radius of a circle based on 3 points on the circle.</span>
+
+<span class="sd">    Returns [None,None] either if the points are aligned and no (finite radius) circle can be defined or if two of the points are coincident.</span>
+
+<span class="sd">    :param P1,P2,P3: points [x,y]</span>
+
+<span class="sd">            .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+<span class="sd">    :type P1,P2,P3: list</span>
+
+<span class="sd">    :returns: [center, radius]</span>
+<span class="sd">    :rtype: [numpy array, float]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check if points are aligned</span>
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">P2</span><span class="p">)</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">P3</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">v1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">v1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span>  <span class="ow">or</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">v2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">displayMsg</span><span class="p">(</span><span class="s1">&#39;Error: Two of the points are coincident. Aborting it...&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">v1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">v1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="n">v2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">v2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">cosTheta</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">cosTheta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.99999</span><span class="p">:</span>
+        <span class="n">displayMsg</span><span class="p">(</span><span class="s1">&#39;Error: The 3 points are collinear (or very close). Aborting it...&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># find the center</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">P3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">P1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">P1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">P2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">P2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">P3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">P3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="color"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color">[docs]</a><span class="k">class</span> <span class="nc">color</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class manipulates color information, generating a string in inkscape&#39;s expected format ``#RRGGBB``</span>
@@ -1890,7 +1928,7 @@
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; #draws an open arc</span>
 <span class="sd">        &gt;&gt;&gt; inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[25,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; #draws a closed (slice) arc</span>
 <span class="sd">        &gt;&gt;&gt; inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[25,20], label=&#39;arc2&#39;,  lineStyle=myLineStyle, arcType=&#39;slice&#39;)</span>
 <span class="sd">        &gt;&gt;&gt;</span>
@@ -2025,7 +2063,90 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">flagRight</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">largeArc</span>
 
-        <span class="k">return</span> <span class="n">arc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span> <span class="n">flagRight</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">arc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span> <span class="n">flagRight</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div>
+
+    <span class="c1"># ---------------------------------------------</span>
+<div class="viewcode-block" id="arc.threePoints"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.arc.threePoints">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">threePoints</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pmid</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw a circle arc given 3 points</span>
+
+<span class="sd">        .. image:: ../imagesDocs/arc_3points.png</span>
+<span class="sd">          :width: 120px</span>
+
+
+<span class="sd">        :param parent: parent object</span>
+<span class="sd">        :param Pstart: Start coordinate [x,y]</span>
+
+<span class="sd">            .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param Pmid: Mid coordinate [x,y]</span>
+<span class="sd">        :param Pend: End coordinate [x,y]</span>
+<span class="sd">        :param offset: Extra offset coords [x,y]</span>
+<span class="sd">        :param label: Label of the line. Default &#39;arc&#39;</span>
+<span class="sd">        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+<span class="sd">        :param arcType: Type of arc. Valid values: &#39;open&#39;, &#39;slice&#39;, &#39;chord&#39;. See image below. Default: &#39;open&#39;</span>
+
+<span class="sd">        :type parent: inkscape element object</span>
+<span class="sd">        :type Pstart: list</span>
+<span class="sd">        :type Pmid: list</span>
+<span class="sd">        :type Pend: list</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+<span class="sd">        :type arcType: string</span>
+
+<span class="sd">        :returns: the new arc object</span>
+<span class="sd">        :rtype: line Object</span>
+
+<span class="sd">        **Arc options**</span>
+
+<span class="sd">        .. image:: ../imagesDocs/arc_type_flags.png</span>
+<span class="sd">          :width: 400px</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; P1=[10.0,0.0]</span>
+<span class="sd">        &gt;&gt;&gt; P2=[20.0,10.0]</span>
+<span class="sd">        &gt;&gt;&gt; P3=[50.0,30.0]</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; #draws an open arc</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.arc.threePoints(parent=root_layer, Pstart=P1, Pmid=P3, Pend=P3, offset=[25,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="p">[</span><span class="n">center</span><span class="p">,</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="n">circle3Points</span><span class="p">(</span><span class="n">Pstart</span><span class="p">,</span> <span class="n">Pmid</span><span class="p">,</span> <span class="n">Pend</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">center</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">vStart</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pstart</span><span class="p">)</span>
+        <span class="n">vEnd</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pend</span><span class="p">)</span>
+        <span class="n">vMid</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pmid</span><span class="p">)</span>
+
+        <span class="c1"># find side</span>
+        <span class="n">DistVector</span> <span class="o">=</span> <span class="n">vEnd</span><span class="o">-</span><span class="n">vStart</span>
+        <span class="n">NormalLeftVector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="n">MidVector</span> <span class="o">=</span> <span class="n">vMid</span> <span class="o">-</span> <span class="n">vStart</span>
+        <span class="n">CenterVector</span> <span class="o">=</span> <span class="n">center</span> <span class="o">-</span> <span class="n">vStart</span>
+
+        <span class="c1"># check if  MidVector and CenterVector are pointing to the same side of DistVector</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">CenterVector</span><span class="p">,</span><span class="n">NormalLeftVector</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">MidVector</span><span class="p">,</span><span class="n">NormalLeftVector</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">largeArc</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">largeArc</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">angStart</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">Pstart</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Pstart</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">angEnd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">Pend</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Pend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">([</span><span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">])</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">angStart</span><span class="o">=</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">angEnd</span><span class="o">=</span><span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">angEnd</span> <span class="o">-</span> <span class="n">angStart</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span><span class="n">lineStyle</span><span class="p">,</span><span class="n">arcType</span><span class="p">,</span><span class="n">largeArc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">arc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span><span class="n">lineStyle</span><span class="p">,</span><span class="n">arcType</span><span class="p">,</span><span class="n">largeArc</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="circle"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.circle">[docs]</a><span class="k">class</span> <span class="nc">circle</span><span class="p">():</span>
@@ -2078,8 +2199,52 @@
                    <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="s1">&#39;M &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">centerPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
                        <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">arcStringA</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">arcStringB</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
 
+    <span class="c1"># ---------------------------------------------</span>
+<div class="viewcode-block" id="circle.threePoints"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.circle.threePoints">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">threePoints</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+        <span class="sd">&quot;&quot;&quot;Draw a circle given 3 poins on the circle.</span>
+
+<span class="sd">        The function checks if the 3 points are aligned. In this case, no circle is drawn.</span>
+
+<span class="sd">        :param parent: parent object</span>
+<span class="sd">        :param P1: point coordinates [x,y]</span>
+<span class="sd">        :param P2: point coordinates [x,y]</span>
+<span class="sd">        :param P3: point coordinates [x,y]</span>
+
+<span class="sd">            .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param offset: Extra offset coords [x,y]</span>
+<span class="sd">        :param label: Label of the line. Default &#39;arc&#39;</span>
+<span class="sd">        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+
+<span class="sd">        :type parent: inkscape element object</span>
+<span class="sd">        :type P1: list</span>
+<span class="sd">        :type P2: list</span>
+<span class="sd">        :type P3: list</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+
+<span class="sd">        :returns: the new circle object</span>
+<span class="sd">        :rtype: line Object</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.circle.threePoints(parent=root_layer, P1=[0,0], P2=[30,40], P3=[-20,20], offset=[0,0], label=&#39;circle1&#39;, lineStyle=myLineStyle)</span>
+
+<span class="sd">        .. image:: ../imagesDocs/circle_3P.png</span>
+<span class="sd">          :width: 200px</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="p">[</span><span class="n">center</span><span class="p">,</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="n">circle3Points</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="rectangle"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.rectangle">[docs]</a><span class="k">class</span> <span class="nc">rectangle</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Class with methods for drawing rectangles.</span>

@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+2020-03mar-20
+-------------
+
+inkscapeMadeEasy_Draw.py
+   - new function arc.threePoints that creates an arc based on 3 points in the arc
+   - new function circle.threePoints that creates a circle based on 3 points in the circle
 
 2020-10oct-06
 -------------

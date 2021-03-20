@@ -81,7 +81,7 @@ Unfortunately, exporting plots as vector graphics is not always successful in th
 
 In the process of creating these tools, I noticed that many of the low-level classes and methods used to manipulate elements of the svg file could be grouped in a general-purpose set of core modules that extended inkex.py module. **inkscapeMadeEasy** was born! The core modules I created do not intend to provide an extensive array of methods and classes to cover all possibilities of manipulations/transformations, and drawing. These modules were created and expanded as I felt the necessity to have new methods to help my workflow. Nevertheless, the number of methods created allows many possibilities and is still under development so new features can (will) appear in future versions.
 
-**Obs:** Since it is not very easy to find documentation on other Inkscape modules, there might be other modules with similar/better features that I was not aware of when I was producing my extensions.
+**Obs:** Since it is not very easy to find documentation of other Inkscape modules, there might be other modules with similar/better features that I was not aware of when I was producing my extensions.
 
 Enough mumbo-jumbo. Let's start! =D
 

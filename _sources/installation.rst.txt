@@ -69,7 +69,7 @@ Installation procedure (v1.0 only)
 
         Note:  You might have other sub folders inside the extensions directory.
                They don't interfere with inkscapeMadeEasy.
-    .. note:: **LaTeX users**: The file `basicLatexPackages.tex` contains a basic set o packages and macros to be used with **InkscapeMadeEasy**. You can add your own macros to this file. This way they will be accessible  by all plugins that employ inkscapeMadeEasy.
+    .. note:: **LaTeX users**: The file `basicLatexPackages.tex` contains a basic set o packages and macros to be used with **InkscapeMadeEasy**. You can add your own macros to this file. This way they will be accessible  to all plugins that employ inkscapeMadeEasy.
 
 LaTeX installation
 ------------------
@@ -104,7 +104,7 @@ Windows users
 
       Lots of text should appear on your console window.
 
-      .. note:: Miktex might require you authorization to install additional packages. Depending on how you installed Miktex, it can install automatically without asking or ask you to confirm. Confirm it!
+      .. note:: Miktex might require your authorization to install additional packages. Depending on how you installed Miktex, it can install automatically without asking or ask you to confirm. Confirm it!
 
    d) Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the    short message and equation.
 

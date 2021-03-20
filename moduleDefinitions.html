@@ -1416,6 +1416,29 @@ this function overcomes partially the issue of sending things to stdout by dumpi
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt id="inkscapeMadeEasy_Draw.circle3Points">
+<code class="sig-prename descclassname">inkscapeMadeEasy_Draw.</code><code class="sig-name descname">circle3Points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P1</span></em>, <em class="sig-param"><span class="n">P2</span></em>, <em class="sig-param"><span class="n">P3</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#circle3Points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.circle3Points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the center and radius of a circle based on 3 points on the circle.</p>
+<p>Returns [None,None] either if the points are aligned and no (finite radius) circle can be defined or if two of the points are coincident.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>P1</strong><strong>,</strong><strong>P2</strong><strong>,</strong><strong>P3</strong> (<em>list</em>) – <p>points [x,y]</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[center, radius]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[numpy array, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class">
 <dt id="inkscapeMadeEasy_Draw.color">
 <em class="property">class </em><code class="sig-prename descclassname">inkscapeMadeEasy_Draw.</code><code class="sig-name descname">color</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.color" title="Permalink to this definition">¶</a></dt>
@@ -2567,7 +2590,7 @@ when the bezier curve must be closed.</p>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws an open arc</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P2</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws a closed (slice) arc</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P2</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc2&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;slice&#39;</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -2630,6 +2653,52 @@ when the bezier curve must be closed.</p>
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="inkscapeMadeEasy_Draw.arc.threePoints">
+<em class="property">static </em><code class="sig-name descname">threePoints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parent</span></em>, <em class="sig-param"><span class="n">Pstart</span></em>, <em class="sig-param"><span class="n">Pmid</span></em>, <em class="sig-param"><span class="n">Pend</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">[0, 0]</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">'arc'</span></em>, <em class="sig-param"><span class="n">lineStyle</span><span class="o">=</span><span class="default_value">{'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}</span></em>, <em class="sig-param"><span class="n">arcType</span><span class="o">=</span><span class="default_value">'open'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#arc.threePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.arc.threePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a circle arc given 3 points</p>
+<a class="reference internal image-reference" href="_images/arc_3points.png"><img alt="_images/arc_3points.png" src="_images/arc_3points.png" style="width: 120px;" /></a>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>inkscape element object</em>) – parent object</p></li>
+<li><p><strong>Pstart</strong> (<em>list</em>) – <p>Start coordinate [x,y]</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+</p></li>
+<li><p><strong>Pmid</strong> (<em>list</em>) – Mid coordinate [x,y]</p></li>
+<li><p><strong>Pend</strong> (<em>list</em>) – End coordinate [x,y]</p></li>
+<li><p><strong>offset</strong> (<em>list</em>) – Extra offset coords [x,y]</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – Label of the line. Default ‘arc’</p></li>
+<li><p><strong>lineStyle</strong> (<em>lineStyle object</em>) – Line style to be used. See <a class="reference internal" href="#inkscapeMadeEasy_Draw.lineStyle" title="inkscapeMadeEasy_Draw.lineStyle"><code class="xref py py-class docutils literal notranslate"><span class="pre">lineStyle</span></code></a> class. Default: lineStyle=lineStyle.setSimpleBlack()</p></li>
+<li><p><strong>arcType</strong> (<em>string</em>) – Type of arc. Valid values: ‘open’, ‘slice’, ‘chord’. See image below. Default: ‘open’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new arc object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>line Object</p>
+</dd>
+</dl>
+<p><strong>Arc options</strong></p>
+<a class="reference internal image-reference" href="_images/arc_type_flags.png"><img alt="_images/arc_type_flags.png" src="_images/arc_type_flags.png" style="width: 400px;" /></a>
+<p><strong>Example</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myLineStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P1</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P2</span><span class="o">=</span><span class="p">[</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P3</span><span class="o">=</span><span class="p">[</span><span class="mf">50.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws an open arc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">arc</span><span class="o">.</span><span class="n">threePoints</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pmid</span><span class="o">=</span><span class="n">P3</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -2675,6 +2744,45 @@ when the bezier curve must be closed.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle1&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="inkscapeMadeEasy_Draw.circle.threePoints">
+<em class="property">static </em><code class="sig-name descname">threePoints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parent</span></em>, <em class="sig-param"><span class="n">P1</span></em>, <em class="sig-param"><span class="n">P2</span></em>, <em class="sig-param"><span class="n">P3</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">[0, 0]</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">'circle'</span></em>, <em class="sig-param"><span class="n">lineStyle</span><span class="o">=</span><span class="default_value">{'fill': 'none', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.0'}</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#circle.threePoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.circle.threePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a circle given 3 poins on the circle.</p>
+<p>The function checks if the 3 points are aligned. In this case, no circle is drawn.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>inkscape element object</em>) – parent object</p></li>
+<li><p><strong>P1</strong> (<em>list</em>) – point coordinates [x,y]</p></li>
+<li><p><strong>P2</strong> (<em>list</em>) – point coordinates [x,y]</p></li>
+<li><p><strong>P3</strong> (<em>list</em>) – <p>point coordinates [x,y]</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+</p></li>
+<li><p><strong>offset</strong> (<em>list</em>) – Extra offset coords [x,y]</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – Label of the line. Default ‘arc’</p></li>
+<li><p><strong>lineStyle</strong> (<em>lineStyle object</em>) – Line style to be used. See <a class="reference internal" href="#inkscapeMadeEasy_Draw.lineStyle" title="inkscapeMadeEasy_Draw.lineStyle"><code class="xref py py-class docutils literal notranslate"><span class="pre">lineStyle</span></code></a> class. Default: lineStyle=lineStyle.setSimpleBlack()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the new circle object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>line Object</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myLineStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">circle</span><span class="o">.</span><span class="n">threePoints</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">P1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">P2</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">],</span> <span class="n">P3</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle1&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/circle_3P.png"><img alt="_images/circle_3P.png" src="_images/circle_3P.png" style="width: 200px;" /></a>
 </dd></dl>
 
 </dd></dl>
