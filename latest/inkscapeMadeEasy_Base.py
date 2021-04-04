@@ -29,8 +29,10 @@ import sys
 from copy import deepcopy
 
 import numpy as np
-import inkex
 from lxml import etree
+
+import inkex
+
 
 class inkscapeMadeEasy(inkex.Effect):
 
@@ -60,9 +62,9 @@ class inkscapeMadeEasy(inkex.Effect):
        xmlns="http://www.w3.org/2000/svg"
        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-       width="210"
-       height="297"
-       viewBox="0 0 210 297"
+       width="210mm"
+       height="297mm"
+       viewBox="0 0 793.70081 1122.5197"
        version="1.1"
        id="svg878"
        inkscape:version="1.0.1 (1.0.1+r73)"
@@ -293,7 +295,7 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> self.exportSVG([groupA,groupB],'path/to/file3.svg')          # exports groupA and groupB (and all elements they contain) to the same file
 
         """
-        document = etree.fromstring(self.blankSVG)
+        document = etree.fromstring(self.blankSVG.encode('ascii'))
 
         elem_tmp = deepcopy(element)
         # add definitions
@@ -932,7 +934,7 @@ class inkscapeMadeEasy(inkex.Effect):
         >>> self.moveElement(groupA,[10,-10])                                # moves line2  DeltaX=10, DdeltaY=-10
         """
 
-        if distance == 0:
+        if distance[0] == 0 and distance[1] == 0:
             return
 
         transfString = ''
@@ -1024,8 +1026,8 @@ class inkscapeMadeEasy(inkex.Effect):
 
         :param element: element object
         :type element: inkscape element object
-        :returns: list of points
-        :rtype: list of coordinates
+        :returns: array of points
+        :rtype: numpy array
 
         .. note:: This function will apply any transformation stored in transform attribute,
             that is, it will compute the resulting coordinates of each object
@@ -1150,10 +1152,10 @@ class inkscapeMadeEasy(inkex.Effect):
             coordsNP = np.hstack((np.array(listCoords), np.ones([len(listCoords), 1]))).transpose()
 
             coordsTransformed = np.dot(transfMat, coordsNP)
-            coordsTransformed = np.delete(coordsTransformed, 2, 0).transpose().tolist()  # remove last line, transposes and converts to list of lists
+            coordsTransformed = np.delete(coordsTransformed, 2, 0).transpose()  # remove last line, transposes and converts to list of lists
 
         else:
-            coordsTransformed = []
+            coordsTransformed = np.array([])
 
         return coordsTransformed
 
@@ -1209,7 +1211,7 @@ class inkscapeMadeEasy(inkex.Effect):
 
         bboxMin, bboxMax = self.getBoundingBox(element)
 
-        bboxCenter = [(bboxMax[0] + bboxMin[0]) / 2, (bboxMax[1] + bboxMin[1]) / 2]
+        bboxCenter = np.array([(bboxMax[0] + bboxMin[0]) / 2, (bboxMax[1] + bboxMin[1]) / 2])
 
         return bboxCenter
 
