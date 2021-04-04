@@ -1,7 +1,18 @@
 Changelog
 ==========
 
-2020-03mar-20
+
+2021-04apr-04
+-------------
+
+inkscapeMadeEasy_Base.py
+   - exportSVG() corrected text encoding when creating empty SVG file.
+   - exportSVG() now the blank SVG file will be in px.
+   - moveElement() fixed quick return if distance is 0.0
+   - getPoints() now it returns a 2D numpy array instead of a list of lists.
+   - getBoundingBox() now it returns a 2D numpy array instead of a list.
+
+2021-03mar-20
 -------------
 
 inkscapeMadeEasy_Draw.py
@@ -22,7 +33,7 @@ inkscapeMadeEasy_Draw.py
 
 .. important::
     - inkscapeMadeEasy is now compatible with 1.0
-    - The older version, compatible with inkscape 0.9x is now unde the directory 0.9x.
+    - The older version, compatible with inkscape 0.9x is now under the directory 0.9x.
     - latex support now uses an updated version of textext (https://github.com/textext/textext), simplifying installation.
 
 inkscapeMadeEasy_Base.py

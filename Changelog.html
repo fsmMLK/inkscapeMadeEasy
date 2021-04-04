@@ -114,7 +114,8 @@
 <p class="caption"><span class="caption-text">Changelog</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#mar-20">2020-03mar-20</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apr-04">2021-04apr-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mar-20">2021-03mar-20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oct-06">2020-10oct-06</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oct-02">2020-10oct-02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#jan-12">2020-01jan-12</a></li>
@@ -124,7 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#dec-29">2019-12dec-29</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dec-22">2019-12dec-22</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dec-17">2019-12dec-17</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#apr-04">2019-04apr-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2019-04apr-04</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nov-14">2018-11nov-14</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#jul-31">2018-07jul-31</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nov-19">2017-11nov-19</a></li>
@@ -133,7 +134,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#may-06">2017-05may-06</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#jun-18">2017-06jun-18</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nov-02">2016-11nov-02</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">2016-11nov-02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2016-11nov-02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oct-31">2016-10oct-31</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oct-28">2016-10oct-28</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#oct-12">2016-10oct-12</a></li>
@@ -207,8 +208,21 @@
             
   <div class="section" id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="apr-04">
+<h2>2021-04apr-04<a class="headerlink" href="#apr-04" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>inkscapeMadeEasy_Base.py</dt><dd><ul class="simple">
+<li><p>exportSVG() corrected text encoding when creating empty SVG file.</p></li>
+<li><p>exportSVG() now the blank SVG file will be in px.</p></li>
+<li><p>moveElement() fixed quick return if distance is 0.0</p></li>
+<li><p>getPoints() now it returns a 2D numpy array instead of a list of lists.</p></li>
+<li><p>getBoundingBox() now it returns a 2D numpy array instead of a list.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
 <div class="section" id="mar-20">
-<h2>2020-03mar-20<a class="headerlink" href="#mar-20" title="Permalink to this headline">¶</a></h2>
+<h2>2021-03mar-20<a class="headerlink" href="#mar-20" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>inkscapeMadeEasy_Draw.py</dt><dd><ul class="simple">
 <li><p>new function arc.threePoints that creates an arc based on 3 points in the arc</p></li>
@@ -236,7 +250,7 @@
 <p class="admonition-title">Important</p>
 <ul class="simple">
 <li><p>inkscapeMadeEasy is now compatible with 1.0</p></li>
-<li><p>The older version, compatible with inkscape 0.9x is now unde the directory 0.9x.</p></li>
+<li><p>The older version, compatible with inkscape 0.9x is now under the directory 0.9x.</p></li>
 <li><p>latex support now uses an updated version of textext (<a class="reference external" href="https://github.com/textext/textext">https://github.com/textext/textext</a>), simplifying installation.</p></li>
 </ul>
 </div>
@@ -390,8 +404,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="apr-04">
-<h2>2019-04apr-04<a class="headerlink" href="#apr-04" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>2019-04apr-04<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p>fixed documentation on installation procedure</p></li>
@@ -472,8 +486,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id1">
-<h2>2016-11nov-02<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>2016-11nov-02<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>inkscapeMadeEasy_Draw.py</dt><dd><ul class="simple">
 <li><p>small modification in text.latex() method to fix incompatibility with temporary diretory under windows.</p></li>

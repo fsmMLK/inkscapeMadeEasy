@@ -28,8 +28,20 @@ The basic structure of your plugin should be the following:
 
         def effect(self):
             ...
-            the core of your plugin comes here
+            The method 'effect()' is is the only method called directly by inkscape.
+            Consider this function to be the main function of your plugin.
             ...
+
+        def fooBar(self):
+            ...
+            You can create other methods if you want. These can be called by other
+            methods inside your plugin but inkscape will NEVER call these directly.
+            ...
+
+
+    if __name__ == '__main__':
+        myPlugin = MinimalExample()
+        myPlugin.run()
 
 
 .. note:: The best way of learning how to use it is by looking at real life examples. Check my other `repositories <https://github.com/fsmMLK>`_.

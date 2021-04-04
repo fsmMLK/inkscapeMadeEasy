@@ -208,8 +208,10 @@
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">inkex</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="kn">import</span> <span class="nn">inkex</span>
+
 
 <div class="viewcode-block" id="inkscapeMadeEasy"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy">[docs]</a><span class="k">class</span> <span class="nc">inkscapeMadeEasy</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="p">):</span>
 
@@ -239,9 +241,9 @@
 <span class="s2">       xmlns=&quot;http://www.w3.org/2000/svg&quot;</span>
 <span class="s2">       xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot;</span>
 <span class="s2">       xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot;</span>
-<span class="s2">       width=&quot;210&quot;</span>
-<span class="s2">       height=&quot;297&quot;</span>
-<span class="s2">       viewBox=&quot;0 0 210 297&quot;</span>
+<span class="s2">       width=&quot;210mm&quot;</span>
+<span class="s2">       height=&quot;297mm&quot;</span>
+<span class="s2">       viewBox=&quot;0 0 793.70081 1122.5197&quot;</span>
 <span class="s2">       version=&quot;1.1&quot;</span>
 <span class="s2">       id=&quot;svg878&quot;</span>
 <span class="s2">       inkscape:version=&quot;1.0.1 (1.0.1+r73)&quot;</span>
@@ -472,7 +474,7 @@
 <span class="sd">        &gt;&gt;&gt; self.exportSVG([groupA,groupB],&#39;path/to/file3.svg&#39;)          # exports groupA and groupB (and all elements they contain) to the same file</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">document</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blankSVG</span><span class="p">)</span>
+        <span class="n">document</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blankSVG</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
 
         <span class="n">elem_tmp</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
         <span class="c1"># add definitions</span>
@@ -1111,7 +1113,7 @@
 <span class="sd">        &gt;&gt;&gt; self.moveElement(groupA,[10,-10])                                # moves line2  DeltaX=10, DdeltaY=-10</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">transfString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -1203,8 +1205,8 @@
 
 <span class="sd">        :param element: element object</span>
 <span class="sd">        :type element: inkscape element object</span>
-<span class="sd">        :returns: list of points</span>
-<span class="sd">        :rtype: list of coordinates</span>
+<span class="sd">        :returns: array of points</span>
+<span class="sd">        :rtype: numpy array</span>
 
 <span class="sd">        .. note:: This function will apply any transformation stored in transform attribute,</span>
 <span class="sd">            that is, it will compute the resulting coordinates of each object</span>
@@ -1329,10 +1331,10 @@
             <span class="n">coordsNP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">listCoords</span><span class="p">),</span> <span class="mi">1</span><span class="p">])))</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 
             <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMat</span><span class="p">,</span> <span class="n">coordsNP</span><span class="p">)</span>
-            <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">coordsTransformed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># remove last line, transposes and converts to list of lists</span>
+            <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">coordsTransformed</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>  <span class="c1"># remove last line, transposes and converts to list of lists</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">coordsTransformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
         <span class="k">return</span> <span class="n">coordsTransformed</span></div>
 
@@ -1388,7 +1390,7 @@
 
         <span class="n">bboxMin</span><span class="p">,</span> <span class="n">bboxMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBoundingBox</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 
-        <span class="n">bboxCenter</span> <span class="o">=</span> <span class="p">[(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">bboxCenter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">bboxMax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxMin</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">bboxCenter</span></div>
 
