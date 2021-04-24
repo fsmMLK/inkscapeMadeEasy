@@ -65,7 +65,9 @@ For end-user extensions that employ InskcapeMadeEasy, please refer to my other r
 
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
-  - **SlopeField**             <https://github.com/fsmMLK/inkscapeSlopeField>
+  - **SlopeField**              <https://github.com/fsmMLK/inkscapeSlopeField>
+
+  - **BodePlot**                <https://github.com/fsmMLK/inkscapeBodePlot>
 
 
 History and Objectives
