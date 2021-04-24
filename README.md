@@ -40,6 +40,9 @@ GitHub (more to come soon). They provide many examples of how to use inkscapeMad
 
   - **SlopeField**             <https://github.com/fsmMLK/inkscapeSlopeField>
 
+  - **BodePlot**             <https://github.com/fsmMLK/inkscapeBodePlot>
+
+
 ## History and Objectives
 
 Historically, this project started as a way to help myself while creating extensions, namely focusing on scientific

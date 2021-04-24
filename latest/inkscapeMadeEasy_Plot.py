@@ -389,9 +389,9 @@ class axis():
             yLimitsPos = [y * scaleY for y in yLimits]
 
         # build the list of tuples with the limits of the plotting area
-        outputLimits = zip([xLimits[0], xLimits[1], yLimits[0], yLimits[1]],
+        outputLimits = list(zip([xLimits[0], xLimits[1], yLimits[0], yLimits[1]],
                            [xLimitsPos[0] - axisOrigin[0] + position[0], xLimitsPos[1] - axisOrigin[0] + position[0],
-                            yLimitsPos[0] - axisOrigin[1] + position[1], yLimitsPos[1] - axisOrigin[1] + position[1]])
+                            yLimitsPos[0] - axisOrigin[1] + position[1], yLimitsPos[1] - axisOrigin[1] + position[1]]))
         if not drawAxis:
             return [None, outputLimits, axisOrigin]
 
@@ -737,7 +737,7 @@ class axis():
             rLimitsPos = [x * scaleR for x in rLimits]
 
         # build the list of tuples with the limits of the plotting area
-        outputLimits = zip([rLimits[0], rLimits[1]], [rLimitsPos[0] - axisOrigin[0] + position[0], rLimitsPos[1] - axisOrigin[0] + position[0]])
+        outputLimits = list(zip([rLimits[0], rLimits[1]], [rLimitsPos[0] - axisOrigin[0] + position[0], rLimitsPos[1] - axisOrigin[0] + position[0]]))
 
         if not drawAxis:
             return [None, outputLimits, [0, 0]]
@@ -1114,11 +1114,11 @@ class plot():
         yData = yDataTemp
         xData = xDataTemp
 
-        if forceXlim:
+        if forceXlim is not None:
             Xlimits = forceXlim
         else:
             Xlimits = [min(xData), max(xData)]
-        if forceYlim:
+        if forceYlim is not None:
             Ylimits = forceYlim
         else:
             Ylimits = [min(yData), max(yData)]  # min<->max inverted  bc inkscape is upside down
@@ -1330,11 +1330,11 @@ class plot():
         tData = tDataTemp
         rData = rDataTemp
 
-        if forceRlim:
+        if forceRlim is not None:
             Rlimits = forceRlim
         else:
             Rlimits = [min(rData), max(rData)]
-        if forceTlim:
+        if forceTlim is not None:
             Tlimits = forceTlim
         else:
             Tlimits = [min(tData), max(tData)]  # min<->max inverted  bc inkscape is upside down
