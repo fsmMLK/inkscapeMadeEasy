@@ -135,21 +135,21 @@ def circle3Points(P1, P2, P3):
 
 class color():
     """
-    This class manipulates color information, generating a string in inkscape's expected format ``#RRGGBB``
+    This class manipulates color information, generating a string in inkscape's expected format ``#RRGGBBAA``
 
     .. note:: This class contains only static methods so that your plugin class don't have to inherit it.
-
-    .. warning:: alpha channel is not implemented yet. Assume alpha=1.0
 
     """
 
     @staticmethod
-    def defined(colorName):
+    def defined(colorName,alpha=1.0):
         """ Return the color string representing a predefined color name
 
         :param colorName: prededined color name. See figure below
         :type colorName: string
-        :returns:  string representing the color in inkscape's expected format ``#RRGGBB``
+        :param alpha: alpha channel. Values between 0.0 and 1.0
+        :type alpha: float
+        :returns:  string representing the color in inkscape's expected format ``#RRGGBBAA``
         :rtype: string
 
         **Available pre defined colors**
@@ -159,7 +159,7 @@ class color():
 
         **Example**
 
-        >>> colorString = inkDraw.color.defined('red')        # returns #ff0000 representing red color
+        >>> colorString = inkDraw.color.defined('red',1.0)        # returns #ff0000ff representing red color
 
         """
         if colorName not in ['Dred', 'red', 'Lred', 'Dblue', 'blue', 'Lblue', 'Dgreen', 'green', 'Lgreen', 'Dyellow', 'yellow', 'Lyellow', 'Dmagen',
@@ -167,108 +167,98 @@ class color():
             sys.exit("InkscapeDraw.color.defined() :  Error. color -->" + colorName + "<-- not defined")
 
         if colorName == 'Dred':
-            return '#800000'
+            colorStr = '#800000'
         if colorName == 'red':
-            return '#FF0000'
+            colorStr = '#FF0000'
         if colorName == 'Lred':
-            return '#FF8181'
+            colorStr = '#FF8181'
 
         if colorName == 'Dblue':
-            return '#000080'
+            colorStr = '#000080'
         if colorName == 'blue':
-            return '#0000FF'
+            colorStr = '#0000FF'
         if colorName == 'Lblue':
-            return '#8181FF'
+            colorStr = '#8181FF'
 
         if colorName == 'Dgreen':
-            return '#008000'
+            colorStr = '#008000'
         if colorName == 'green':
-            return '#00FF00'
+            colorStr = '#00FF00'
         if colorName == 'Lgreen':
-            return '#81FF81'
+            colorStr = '#81FF81'
 
         if colorName == 'black':
-            return '#000000'
+            colorStr = '#000000'
         if colorName == 'white':
-            return '#FFFFFF'
+            colorStr = '#FFFFFF'
 
         if colorName == 'Dyellow':
-            return '#808000'
+            colorStr = '#808000'
         if colorName == 'yellow':
-            return '#FFFF00'
+            colorStr = '#FFFF00'
         if colorName == 'Lyellow':
-            return '#FFFF81'
+            colorStr = '#FFFF81'
 
         if colorName == 'Dmagen':
-            return '#800080'
+            colorStr = '#800080'
         if colorName == 'magen':
-            return '#FF00FF'
+            colorStr = '#FF00FF'
         if colorName == 'Lmagen':
-            return '#FF81FF'
+            colorStr = '#FF81FF'
+
+        colorStr += color.val2hex(alpha*255)
+
+        return colorStr
 
     @staticmethod
-    def RGB(RGBlist):
+    def RGB(RGBlist,alpha=255):
         """ return a string representing a color specified by RGB level in the range 0-255
 
         :param RGBlist: list containing RGB levels in the range 0-225 each
         :type RGBlist: list of ints
-        :returns:  string representing the color in inkscape's expected format ``#RRGGBB``
+        :param alpha: alpha channel. Values in the range 0-225. Default: 255
+        :type alpha: int
+        :returns:  string representing the color in inkscape's expected format ``#RRGGBBAA``
         :rtype: string
 
         **Example**
 
-        >>> colorString = inkDraw.color.RGB([120,80,0])        # returns a string representing the color R=120, G=80, B=0
+        >>> colorString = inkDraw.color.RGB([120,80,0],255)        # returns a string representing the color R=120, G=80, B=0, A=255
 
         """
-        RGBhex = [''] * 3
-        for i in range(3):
-            if RGBlist[i] > 255:
-                RGBlist[i] = 255
+        hexVal='#'
+        for c in RGBlist:
+            hexVal += color.val2hex(c)
 
-            if RGBlist[i] < 0:
-                RGBlist[i] = 0
-
-            if RGBlist[i] < 16:
-                RGBhex[i] = '0' + hex(int(RGBlist[i]))[2:].upper()
-
-            else:
-                RGBhex[i] = hex(int(RGBlist[i]))[2:].upper()
-
-        return '#' + '%s%s%s' % (RGBhex[0], RGBhex[1], RGBhex[2])
+        hexVal += color.val2hex(alpha)
+        return hexVal
 
     @staticmethod
-    def rgb(RGBlist):
+    def rgb(RGBlist,alpha=1.0):
         """ Return a string representing a color specified by RGB level in the range 0.0-1.0
 
         :param RGBlist: list containing RGB levels in the range 0.0-1.0 each
         :type RGBlist: list of floats
-        :returns:  string representing the color in inkscape's expected format ``#RRGGBB``
+        :param alpha: alpha channel. Values in the range 0.0-1.0. Default: 1.0
+        :type alpha: int
+        :returns:  string representing the color in inkscape's expected format ``#RRGGBBAA``
         :rtype: string
 
         **Example**
 
-        >>> colorString = color.rgb([0.5,0.8,0.0])                   # returns a string representing the color R=127, G=204, B=0
+        >>> colorString = color.rgb([0.5,0.8,0.0],255)                   # returns a string representing the color R=127, G=204, B=0, A=255
 
         """
-        RGBhex = [''] * 3
-        for i in range(3):
-            if RGBlist[i] >= 1.0:
-                RGBlist[i] = 1.0
+        hexVal='#'
+        for c in RGBlist:
+            hexVal += color.val2hex(c*255)
 
-            if RGBlist[i] <= 0.0:
-                RGBlist[i] = 0
-
-            if RGBlist[i]*255 < 16:
-                RGBhex[i] = '0' + hex(int(RGBlist[i]*255))[2:].upper()
-
-            else:
-                RGBhex[i] = hex(int(RGBlist[i]*255))[2:].upper()
-
-        return '#' + '%s%s%s' % (RGBhex[0], RGBhex[1], RGBhex[2])
+        hexVal += color.val2hex(alpha*255)
+        return hexVal
 
     # ---------------------------------------------
     @staticmethod
-    def gray(percentage):
+    def gray(percentage,alpha=1.0):
         """ Return a string representing a gray color based on white percentage between 0.0 (black) and 1.0 (white)
 
          - if percentage is higher than 1.0, percentage is truncated to 1.0 (white)
@@ -276,22 +266,69 @@ class color():
 
         :param percentage: value between 0.0 (black) and 1.0 (white)
         :type percentage: float
-        :returns:  string representing the color in inkscape's expected format ``#RRGGBB``
+        :param alpha: alpha channel. Values in the range 0.0-1.0. Default: 1.0
+        :type alpha: int
+        :returns: string representing the color in inkscape's expected format ``#RRGGBBAA``
         :rtype: string
 
         **Example**
 
-        >>> colorString = color.gray(0.6)                   # returns a string representing the gray level with 60% of white
+        >>> colorString = color.gray(0.6,1.0)                   # returns a string representing the gray level with 60% of white, alpha=100%
 
         """
-        RGBLevel = 255 * percentage
 
-        if RGBLevel > 255:
-            RGBLevel = 255
-        if RGBLevel < 0.0:
-            RGBLevel = 0
+        return color.rgb([percentage] * 3,alpha)
 
-        return color.RGB([RGBLevel] * 3)
+    @staticmethod
+    def val2hex(value):
+        """ return a string representing a color specified by level in the range 0-255
+
+        If value is not in the range 0-255, the result will be truncated in this range
+
+        :param value: color value in the range 0-255
+        :type value: int
+        :returns:  string representing the color in hexadecimal
+        :rtype: string
+
+        **Example**
+
+
+        >>> colorString = color.val2hex(255)                   # returns FF
+        >>> colorString = color.val2hex(127)                   # returns 7F
+        >>> colorString = color.val2hex(-1)                   # returns 00
+        >>> colorString = color.val2hex(300)                   # returns FF
+
+        """
+        if value > 255:
+            value = 255
+        if value < 0.0:
+            value = 0
+
+        if value < 16:
+            hexVal = '0' + hex(int(value))[2:].upper()
+        else:
+            hexVal = hex(int(value))[2:].upper()
+        return hexVal
+
+    @staticmethod
+    def splitColorAlpha(colorString):
+        """ Split color and alpha channel from colorSting in #RRGGBBAA format
+
+        :param:  string representing the color in hexadecimal in #RRGGBBAA format
+        :type: string
+        :returns: a list of strings: [color,alpha]
+                    - color: string in ``#RRGGBB`` format
+                    - alpha: string in ``AA`` format
+        :rtype: list
+
+
+        **Example**
+
+        >>> colorComponents = color.splitColorAlpha('#FFF700FF')                   # returns ['#FFF700', 'FF']
+
+        """
+
+        return [colorString[0:7],colorString[7:]]
 
     # ---------------------------------------------
     @staticmethod
@@ -319,7 +356,7 @@ class color():
 
         2- Parse it as a string in your .py file::
 
-           self.OptionParser.add_argument("--myColorPicker", type=str, dest="myColorPickerVar", default='#000000')
+           self.OptionParser.add_argument("--myColorPicker", type=str, dest="myColorPickerVar", default='#00000000')
 
         3- call this function to convert self.options.myColorPickerVar into two strings
                  - #RRGGBB   with RGB values in hex
@@ -340,7 +377,7 @@ class color():
          >>> class myExtension(inkBase.inkscapeMadeEasy):
          >>>   def __init__(self):
          >>>     inkBase.inkscapeMadeEasy.__init__(self)
-         >>>     self.OptionParser.add_argument("--myColorPicker", type=str, dest="myColorPickerVar", default='#000000')  # parses the input parameter
+         >>>     self.OptionParser.add_argument("--myColorPicker", type=str, dest="myColorPickerVar", default='#000000FF')  # parses the input parameter
          >>>
          >>>   def effect(self):
          >>>     color,alpha = inkDraw.color.colorPickerToRGBalpha(self.options.myColorPickerVar)       # returns the string representing the selected color and alpha channel
@@ -355,21 +392,19 @@ class color():
     # ---------------------------------------------
     @staticmethod
     def parseColorPicker(stringColorOption, stringColorPicker):
-        """ Function that converts the string returned by  the widgets 'color' and 'optiongroup' in the .inx file into 2 strings,
-        one representing the color in format ``#RRGGBB`` and the other representing the alpha channel ``AA``
+        """ Function that converts the string returned by  the widgets 'color' and 'optiongroup' in the .inx file into a string,
+        in format ``#RRGGBBAA``
 
         You must have in your .inx both 'optiongroup' and 'color' widgets as defined below. You don't have to have all the color options presented in the example.
-        That is the most complete example, considering the default colors in color.defined method.
+        The example presents the most complete list with all the default colors in color.defined method.
 
 
         :param stringColorOption: string returned by 'optiongroup' widget
         :type stringColorOption: string
         :param stringColorPicker: string returned by 'color' widget
         :type stringColorPicker: string
-        :returns: a list of strings: [color,alpha]
-                    - color: string in ``#RRGGBB`` format
-                    - alpha: string in ``AA`` format
-        :rtype: list
+        :returns: color string in ``#RRGGBBAA`` format
+        :rtype: string
 
         .. note:: For more information on this widget, see `this link <http://wiki.inkscape.org/wiki/index.php/INX_Parameters>`_
 
@@ -392,7 +427,7 @@ class color():
         Bellow is the template 'color' widget with name 'myColorPicker' and an 'optiongroup' with the name 'myColorOption' for the .inx file::
 
          <param name="myColorOption" type="optiongroup" appearance="minimal" _gui-text="some text here">
-             <_option value="#FF0022">my default color</_option>    <--you can set your pre define color in the form #RRGGBB
+             <_option value="#FF0022FF">my default color</_option>    <--you can set your pre define color in the form #RRGGBBAA
              <_option value="none">none</_option>                   <-- no color
              <_option value="black">black</_option>
              <_option value="red">red</_option>
@@ -429,21 +464,21 @@ class color():
         >>> 
         >>>   def effect(self):
         >>>     so = self.options
-        >>>     [RGBstring,alpha] = inkDraw.color.parseColorPicker(so.myColorOptionVar,so.myColorPickerVar)
+        >>>     colorString = inkDraw.color.parseColorPicker(so.myColorOptionVar,so.myColorPickerVar)
 
         """
-        alphaString = 'FF'
         if stringColorOption.startswith("#"):
-            return [stringColorOption, alphaString]
+            return stringColorOption
         else:
             if stringColorOption == 'none':
                 colorString = 'none'
             else:
                 if stringColorOption == 'picker':
                     [colorString, alphaString] = color.colorPickerToRGBalpha(stringColorPicker)
+                    colorString += alphaString
                 else:
                     colorString = color.defined(stringColorOption)
-        return [colorString, alphaString]
+        return colorString
 
 
 class marker():
@@ -477,8 +512,8 @@ class marker():
 
                 .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape's canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.
              - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`
-        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
-        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
         :param lineWidth: Line width of the marker. Default: 1.0
         :param markerTransform: custom transform applied to marker's path. Default: ``None``
 
@@ -553,10 +588,21 @@ class marker():
 
         if fillColor is None:
             fillColor = 'none'
+            opacityFill = '1.0'
         if strokeColor is None:
             strokeColor = 'none'
+            opacityStroke = '1.0'
 
-        marker_style = {'fill-rule': 'evenodd', 'fill': fillColor, 'stroke': strokeColor, 'stroke-width': str(lineWidth)}
+        # set color and opacity
+        if fillColor.startswith('#'):
+            [fillColor,alphaFill] = color.splitColorAlpha(fillColor)
+            opacityFill = str(int(alphaFill, 16)/255.0)
+
+        if strokeColor.startswith('#'):
+            [strokeColor, alphaStroke] = color.splitColorAlpha(strokeColor)
+            opacityStroke = str(int(alphaStroke, 16)/255.0)
+
+        marker_style = {'fill-rule': 'evenodd', 'fill': fillColor, 'stroke': strokeColor, 'stroke-width': str(lineWidth),'fill-opacity':opacityFill,'stroke-opacity':opacityStroke}
 
         marker_lineline_attribs = {'d': markerPath, 'style': str(inkex.Style(marker_style))}
 
@@ -588,8 +634,8 @@ class marker():
                 .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape's canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.
              - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`
         :param scale: Scale factor of the marker. To exactly copy inkscape sizes dotS/M/L, use 0.2, 0.4 and 0.8 respectively. Default: 0.4
-        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
-        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
         :type ExtensionBaseObj: inkscapeMadeEasy object
         :type nameID: string
         :type RenameMode: int
@@ -630,7 +676,7 @@ class marker():
                 .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape's canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.
              - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`
         :param scale: Scale of the marker. Default: 0.4
-        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
         :type ExtensionBaseObj: inkscapeMadeEasy object
         :type nameID: string
         :type RenameMode: int
@@ -674,8 +720,8 @@ class marker():
              - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`
 
         :param scale: scale of the marker. Default: 0.4
-        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
-        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
         :type ExtensionBaseObj: inkscapeMadeEasy object
         :type nameID: string
         :type RenameMode: int
@@ -731,7 +777,7 @@ class marker():
                 .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape's canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.
              - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`
         :param scale: Scale of the marker. Default 1.0
-        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
+        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black'). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings
         :type ExtensionBaseObj: inkscapeMadeEasy object
         :type nameID: string
         :type RenameMode: int
@@ -745,8 +791,8 @@ class marker():
 
         **Example**
 
-        >>> startInfMarker,endInfMarker=inkDraw.marker.createElipsisMarker(self,nameID='myInfMarker',RenameMode=1,scale=1.0,fillColor='#00FF00')
-        >>> myLineStyle = inkDraw.lineStyle.set(1.0, markerStart=startInfMarker,markerEnd=endInfMarker,lineColor='#000000')  # see lineStyle class for further information on this function
+        >>> startInfMarker,endInfMarker=inkDraw.marker.createElipsisMarker(self,nameID='myInfMarker',RenameMode=1,scale=1.0,fillColor='#00FF00FF')
+        >>> myLineStyle = inkDraw.lineStyle.set(1.0, markerStart=startInfMarker,markerEnd=endInfMarker,lineColor='#000000FF')  # see lineStyle class for further information on this function
         """
 
         # build path for 3 circles
@@ -800,8 +846,8 @@ class lineStyle():
         """ Create a new line style
 
         :param lineWidth: Line width. Default: 1.0
-        :param lineColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
-        :param fillColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: ``None``
+        :param lineColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
+        :param fillColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: ``None``
         :param lineJoin: Shape of the lines at the joints. Valid values 'miter', 'round', 'bevel'. See image below. Default: round.
         :param lineCap: Shape of the lines at the ends. Valid values 'butt', 'square', 'round'. See image below. Default: round
         :param markerStart: Marker at the start node. Default: ``None``
@@ -839,15 +885,27 @@ class lineStyle():
         >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color,strokeDashArray='5,10,2,3')
         """
 
-        if not fillColor:
+        if fillColor is None:
             fillColor = 'none'
-        if not lineColor:
+            opacityFill = '1.0'
+        if lineColor is None:
             lineColor = 'none'
+            opacityStroke = '1.0'
+
+        # set color and opacity
+        if fillColor.startswith('#'):
+            [fillColor,alphaFill] = color.splitColorAlpha(fillColor)
+            opacityFill = str(int(alphaFill, 16)/255.0)
+
+        if lineColor.startswith('#'):
+            [lineColor, alphaLine] = color.splitColorAlpha(lineColor)
+            opacityStroke = str(int(alphaLine, 16)/255.0)
+
         if not strokeDashArray:
             strokeDashArray = 'none'
 
         # dictionary with the styles
-        lineStyle = {'stroke': lineColor, 'stroke-width': str(lineWidth), 'stroke-dasharray': strokeDashArray, 'fill': fillColor}
+        lineStyle = {'stroke': lineColor, 'stroke-width': str(lineWidth), 'stroke-dasharray': strokeDashArray, 'fill': fillColor,'fill-opacity':opacityFill,'stroke-opacity':opacityStroke}
 
         # Endpoint and junctions
         lineStyle['stroke-linecap'] = lineCap
@@ -904,7 +962,7 @@ class textStyle():
 
         :param fontSize: Size of the font in px. Default: 10
         :param justification: Text justification. ``left``, ``right``, ``center``. Default: ``left``
-        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
+        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
         :param fontFamily: Font family name. Default ``Sans``
 
             .. warning:: This method does NOT verify whether the font family is installed in your machine or not.
@@ -930,12 +988,18 @@ class textStyle():
 
         **Example**
 
-        >>> myTextStyle=inkDraw.textStyle.set(fontSize=10, justification='left', textColor=color.defined('black'), fontFamily='Sans',
+        >>> myTextStyle=inkDraw.textStyle.set(fontSize=10, justification='left', textColor=color.defined('black',0.5), fontFamily='Sans',
         >>>                                   fontStyle='normal', fontWeight='normal', lineSpacing='100%', letterSpacing='0px', wordSpacing='0px')
         """
 
         if not textColor:
             textColor = 'none'
+            opacityFill = '1.0'
+
+        # set color and opacity
+        if textColor.startswith('#'):
+            [textColor, alphaFill] = color.splitColorAlpha(textColor)
+            opacityFill = str(int(alphaFill, 16) / 255.0)
 
         if justification == 'left':
             justification = 'start'
@@ -950,7 +1014,7 @@ class textStyle():
                      # start, center, end
                      'line-height': lineSpacing, 'letter-spacing': letterSpacing, 'word-spacing': wordSpacing, 'text-anchor': anchor,
                      # start, middle, end
-                     'fill': textColor, 'fill-opacity': '1', 'stroke': 'none', 'font-family': fontFamily}
+                     'fill': textColor, 'fill-opacity': opacityFill, 'stroke': 'none', 'font-family': fontFamily}
 
         return textStyle
 
@@ -988,7 +1052,7 @@ class textStyle():
 
         :param fontSize: Size of the font in px. Default: 10
         :param justification: Text justification. ``left``, ``right``, ``center``. Default: ``left``
-        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
+        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
 
         :type fontSize: float     
         :type justification: string
@@ -1112,7 +1176,7 @@ class text():
         :param position: Position of the reference point [x,y]
         :param fontSize: Size of the font. Assume any capitql letter of ``\\normalsize`` will have this size. Default: 10
         :param refPoint: Text reference Point. See figure below for options. Default: ``cc``
-        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
+        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined('black')
         :param LatexCommands: Commands to be included before LaTeXtext (default: ' '). If LaTeX support is disabled, this parameter has no effect.
         :param angleDeg: Angle of the text, counterclockwise, in degrees. Default: 0
         :param preambleFile: Optional preamble file to be included. Default: None. If LaTeX support is disabled, this parameter has no effect.
@@ -1235,13 +1299,23 @@ class text():
                 if child.typename == 'TexTextElement':
                     groupLatex = child
 
+            if textColor is None:
+                textColor = 'none'
+                opacityFill = '1.0'
+
+            # set color and opacity
+            if textColor.startswith('#'):
+                [textColor, alphaFill] = color.splitColorAlpha(textColor)
+                opacityFill = str(int(alphaFill, 16) / 255.0)
+
             # change color
             for obj in groupLatex.iter():
                 oldStyle = obj.get('style')
                 if oldStyle is not None:
                     newStyle = re.sub('fill:#[0-9a-fA-F]+', 'fill:' + textColor, oldStyle)
+                    newStyle = re.sub('fill-opacity:[0-9]+', 'fill-opacity:' + opacityFill, newStyle)
                     newStyle = re.sub('stroke:#[0-9a-fA-F]+', 'stroke:' + textColor, newStyle)
-
+                    newStyle = re.sub('stroke-opacity:[0-9]+', 'stroke-opacity:' + opacityFill, newStyle)
                     obj.set('style', newStyle)
 
             ExtensionBaseObj.scaleElement(groupLatex, scaleX=scale, scaleY=scale)  # scale to fit font size
