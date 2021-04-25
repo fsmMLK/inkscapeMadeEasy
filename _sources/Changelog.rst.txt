@@ -1,6 +1,14 @@
 Changelog
 ==========
 
+2021-04apr-25
+-------------
+
+inkscapeMadeEasy_Draw.py
+   - alpha channel support was added to color() class.
+   - The following functions have now one additional input argument: color.defined(), color.RGB()  color.rgb(), and color.gray()
+   - The function color.parseColorPicker() has new output
+   - added new function color.val2hex()
 
 2021-04apr-04
 -------------

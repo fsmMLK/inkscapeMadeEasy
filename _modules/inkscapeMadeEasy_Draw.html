@@ -314,21 +314,21 @@
 
 <div class="viewcode-block" id="color"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color">[docs]</a><span class="k">class</span> <span class="nc">color</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class manipulates color information, generating a string in inkscape&#39;s expected format ``#RRGGBB``</span>
+<span class="sd">    This class manipulates color information, generating a string in inkscape&#39;s expected format ``#RRGGBBAA``</span>
 
 <span class="sd">    .. note:: This class contains only static methods so that your plugin class don&#39;t have to inherit it.</span>
-
-<span class="sd">    .. warning:: alpha channel is not implemented yet. Assume alpha=1.0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="color.defined"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.defined">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">defined</span><span class="p">(</span><span class="n">colorName</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">defined</span><span class="p">(</span><span class="n">colorName</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return the color string representing a predefined color name</span>
 
 <span class="sd">        :param colorName: prededined color name. See figure below</span>
 <span class="sd">        :type colorName: string</span>
-<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBB``</span>
+<span class="sd">        :param alpha: alpha channel. Values between 0.0 and 1.0</span>
+<span class="sd">        :type alpha: float</span>
+<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBBAA``</span>
 <span class="sd">        :rtype: string</span>
 
 <span class="sd">        **Available pre defined colors**</span>
@@ -338,7 +338,7 @@
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; colorString = inkDraw.color.defined(&#39;red&#39;)        # returns #ff0000 representing red color</span>
+<span class="sd">        &gt;&gt;&gt; colorString = inkDraw.color.defined(&#39;red&#39;,1.0)        # returns #ff0000ff representing red color</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Dred&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;Lred&#39;</span><span class="p">,</span> <span class="s1">&#39;Dblue&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Lblue&#39;</span><span class="p">,</span> <span class="s1">&#39;Dgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;Lgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;Dyellow&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;Lyellow&#39;</span><span class="p">,</span> <span class="s1">&#39;Dmagen&#39;</span><span class="p">,</span>
@@ -346,108 +346,98 @@
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;InkscapeDraw.color.defined() :  Error. color --&gt;&quot;</span> <span class="o">+</span> <span class="n">colorName</span> <span class="o">+</span> <span class="s2">&quot;&lt;-- not defined&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Dred&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#800000&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#800000&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;red&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FF0000&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FF0000&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lred&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FF8181&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FF8181&#39;</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Dblue&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#000080&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#000080&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;blue&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#0000FF&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#0000FF&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lblue&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#8181FF&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#8181FF&#39;</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Dgreen&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#008000&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#008000&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;green&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#00FF00&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#00FF00&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lgreen&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#81FF81&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#81FF81&#39;</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;black&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#000000&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#000000&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;white&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FFFFFF&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FFFFFF&#39;</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Dyellow&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#808000&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#808000&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;yellow&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FFFF00&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FFFF00&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lyellow&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FFFF81&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FFFF81&#39;</span>
 
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Dmagen&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#800080&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#800080&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;magen&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FF00FF&#39;</span>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FF00FF&#39;</span>
         <span class="k">if</span> <span class="n">colorName</span> <span class="o">==</span> <span class="s1">&#39;Lmagen&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;#FF81FF&#39;</span></div>
+            <span class="n">colorStr</span> <span class="o">=</span> <span class="s1">&#39;#FF81FF&#39;</span>
+
+        <span class="n">colorStr</span> <span class="o">+=</span> <span class="n">color</span><span class="o">.</span><span class="n">val2hex</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">colorStr</span></div>
 
 <div class="viewcode-block" id="color.RGB"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.RGB">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">RGB</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">RGB</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; return a string representing a color specified by RGB level in the range 0-255</span>
 
 <span class="sd">        :param RGBlist: list containing RGB levels in the range 0-225 each</span>
 <span class="sd">        :type RGBlist: list of ints</span>
-<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBB``</span>
+<span class="sd">        :param alpha: alpha channel. Values in the range 0-225. Default: 255</span>
+<span class="sd">        :type alpha: int</span>
+<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBBAA``</span>
 <span class="sd">        :rtype: string</span>
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; colorString = inkDraw.color.RGB([120,80,0])        # returns a string representing the color R=120, G=80, B=0</span>
+<span class="sd">        &gt;&gt;&gt; colorString = inkDraw.color.RGB([120,80,0],255)        # returns a string representing the color R=120, G=80, B=0, A=255</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">RGBhex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
-                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+        <span class="n">hexVal</span><span class="o">=</span><span class="s1">&#39;#&#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">RGBlist</span><span class="p">:</span>
+            <span class="n">hexVal</span> <span class="o">+=</span> <span class="n">color</span><span class="o">.</span><span class="n">val2hex</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
-                <span class="n">RGBhex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">RGBhex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%s%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RGBhex</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
+        <span class="n">hexVal</span> <span class="o">+=</span> <span class="n">color</span><span class="o">.</span><span class="n">val2hex</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hexVal</span></div>
 
 <div class="viewcode-block" id="color.rgb"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.rgb">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return a string representing a color specified by RGB level in the range 0.0-1.0</span>
 
 <span class="sd">        :param RGBlist: list containing RGB levels in the range 0.0-1.0 each</span>
 <span class="sd">        :type RGBlist: list of floats</span>
-<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBB``</span>
+<span class="sd">        :param alpha: alpha channel. Values in the range 0.0-1.0. Default: 1.0</span>
+<span class="sd">        :type alpha: int</span>
+<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBBAA``</span>
 <span class="sd">        :rtype: string</span>
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; colorString = color.rgb([0.5,0.8,0.0])                   # returns a string representing the color R=127, G=204, B=0</span>
+<span class="sd">        &gt;&gt;&gt; colorString = color.rgb([0.5,0.8,0.0],255)                   # returns a string representing the color R=127, G=204, B=0, A=255</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">RGBhex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">:</span>
-                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">hexVal</span><span class="o">=</span><span class="s1">&#39;#&#39;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">RGBlist</span><span class="p">:</span>
+            <span class="n">hexVal</span> <span class="o">+=</span> <span class="n">color</span><span class="o">.</span><span class="n">val2hex</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-            <span class="k">if</span> <span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">255</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
-                <span class="n">RGBhex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">255</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">RGBhex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">RGBlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">255</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">%s%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">RGBhex</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">RGBhex</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
+        <span class="n">hexVal</span> <span class="o">+=</span> <span class="n">color</span><span class="o">.</span><span class="n">val2hex</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hexVal</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="color.gray"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.gray">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">percentage</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">percentage</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return a string representing a gray color based on white percentage between 0.0 (black) and 1.0 (white)</span>
 
 <span class="sd">         - if percentage is higher than 1.0, percentage is truncated to 1.0 (white)</span>
@@ -455,22 +445,69 @@
 
 <span class="sd">        :param percentage: value between 0.0 (black) and 1.0 (white)</span>
 <span class="sd">        :type percentage: float</span>
-<span class="sd">        :returns:  string representing the color in inkscape&#39;s expected format ``#RRGGBB``</span>
+<span class="sd">        :param alpha: alpha channel. Values in the range 0.0-1.0. Default: 1.0</span>
+<span class="sd">        :type alpha: int</span>
+<span class="sd">        :returns: string representing the color in inkscape&#39;s expected format ``#RRGGBBAA``</span>
 <span class="sd">        :rtype: string</span>
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; colorString = color.gray(0.6)                   # returns a string representing the gray level with 60% of white</span>
+<span class="sd">        &gt;&gt;&gt; colorString = color.gray(0.6,1.0)                   # returns a string representing the gray level with 60% of white, alpha=100%</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">RGBLevel</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">percentage</span>
 
-        <span class="k">if</span> <span class="n">RGBLevel</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
-            <span class="n">RGBLevel</span> <span class="o">=</span> <span class="mi">255</span>
-        <span class="k">if</span> <span class="n">RGBLevel</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="n">RGBLevel</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">([</span><span class="n">percentage</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span></div>
 
-        <span class="k">return</span> <span class="n">color</span><span class="o">.</span><span class="n">RGB</span><span class="p">([</span><span class="n">RGBLevel</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span></div>
+<div class="viewcode-block" id="color.val2hex"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.val2hex">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">val2hex</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; return a string representing a color specified by level in the range 0-255</span>
+
+<span class="sd">        If value is not in the range 0-255, the result will be truncated in this range</span>
+
+<span class="sd">        :param value: color value in the range 0-255</span>
+<span class="sd">        :type value: int</span>
+<span class="sd">        :returns:  string representing the color in hexadecimal</span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        **Example**</span>
+
+
+<span class="sd">        &gt;&gt;&gt; colorString = color.val2hex(255)                   # returns FF</span>
+<span class="sd">        &gt;&gt;&gt; colorString = color.val2hex(127)                   # returns 7F</span>
+<span class="sd">        &gt;&gt;&gt; colorString = color.val2hex(-1)                   # returns 00</span>
+<span class="sd">        &gt;&gt;&gt; colorString = color.val2hex(300)                   # returns FF</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mi">255</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="n">hexVal</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hexVal</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">hexVal</span></div>
+
+<div class="viewcode-block" id="color.splitColorAlpha"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.splitColorAlpha">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">splitColorAlpha</span><span class="p">(</span><span class="n">colorString</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Split color and alpha channel from colorSting in #RRGGBBAA format</span>
+
+<span class="sd">        :param:  string representing the color in hexadecimal in #RRGGBBAA format</span>
+<span class="sd">        :type: string</span>
+<span class="sd">        :returns: a list of strings: [color,alpha]</span>
+<span class="sd">                    - color: string in ``#RRGGBB`` format</span>
+<span class="sd">                    - alpha: string in ``AA`` format</span>
+<span class="sd">        :rtype: list</span>
+
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; colorComponents = color.splitColorAlpha(&#39;#FFF700FF&#39;)                   # returns [&#39;#FFF700&#39;, &#39;FF&#39;]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">colorString</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span><span class="n">colorString</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="color.colorPickerToRGBalpha"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.colorPickerToRGBalpha">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -498,7 +535,7 @@
 
 <span class="sd">        2- Parse it as a string in your .py file::</span>
 
-<span class="sd">           self.OptionParser.add_argument(&quot;--myColorPicker&quot;, type=str, dest=&quot;myColorPickerVar&quot;, default=&#39;#000000&#39;)</span>
+<span class="sd">           self.OptionParser.add_argument(&quot;--myColorPicker&quot;, type=str, dest=&quot;myColorPickerVar&quot;, default=&#39;#00000000&#39;)</span>
 
 <span class="sd">        3- call this function to convert self.options.myColorPickerVar into two strings</span>
 <span class="sd">                 - #RRGGBB   with RGB values in hex</span>
@@ -519,7 +556,7 @@
 <span class="sd">         &gt;&gt;&gt; class myExtension(inkBase.inkscapeMadeEasy):</span>
 <span class="sd">         &gt;&gt;&gt;   def __init__(self):</span>
 <span class="sd">         &gt;&gt;&gt;     inkBase.inkscapeMadeEasy.__init__(self)</span>
-<span class="sd">         &gt;&gt;&gt;     self.OptionParser.add_argument(&quot;--myColorPicker&quot;, type=str, dest=&quot;myColorPickerVar&quot;, default=&#39;#000000&#39;)  # parses the input parameter</span>
+<span class="sd">         &gt;&gt;&gt;     self.OptionParser.add_argument(&quot;--myColorPicker&quot;, type=str, dest=&quot;myColorPickerVar&quot;, default=&#39;#000000FF&#39;)  # parses the input parameter</span>
 <span class="sd">         &gt;&gt;&gt;</span>
 <span class="sd">         &gt;&gt;&gt;   def effect(self):</span>
 <span class="sd">         &gt;&gt;&gt;     color,alpha = inkDraw.color.colorPickerToRGBalpha(self.options.myColorPickerVar)       # returns the string representing the selected color and alpha channel</span>
@@ -534,21 +571,19 @@
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="color.parseColorPicker"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.color.parseColorPicker">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">parseColorPicker</span><span class="p">(</span><span class="n">stringColorOption</span><span class="p">,</span> <span class="n">stringColorPicker</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Function that converts the string returned by  the widgets &#39;color&#39; and &#39;optiongroup&#39; in the .inx file into 2 strings,</span>
-<span class="sd">        one representing the color in format ``#RRGGBB`` and the other representing the alpha channel ``AA``</span>
+        <span class="sd">&quot;&quot;&quot; Function that converts the string returned by  the widgets &#39;color&#39; and &#39;optiongroup&#39; in the .inx file into a string,</span>
+<span class="sd">        in format ``#RRGGBBAA``</span>
 
 <span class="sd">        You must have in your .inx both &#39;optiongroup&#39; and &#39;color&#39; widgets as defined below. You don&#39;t have to have all the color options presented in the example.</span>
-<span class="sd">        That is the most complete example, considering the default colors in color.defined method.</span>
+<span class="sd">        The example presents the most complete list with all the default colors in color.defined method.</span>
 
 
 <span class="sd">        :param stringColorOption: string returned by &#39;optiongroup&#39; widget</span>
 <span class="sd">        :type stringColorOption: string</span>
 <span class="sd">        :param stringColorPicker: string returned by &#39;color&#39; widget</span>
 <span class="sd">        :type stringColorPicker: string</span>
-<span class="sd">        :returns: a list of strings: [color,alpha]</span>
-<span class="sd">                    - color: string in ``#RRGGBB`` format</span>
-<span class="sd">                    - alpha: string in ``AA`` format</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :returns: color string in ``#RRGGBBAA`` format</span>
+<span class="sd">        :rtype: string</span>
 
 <span class="sd">        .. note:: For more information on this widget, see `this link &lt;http://wiki.inkscape.org/wiki/index.php/INX_Parameters&gt;`_</span>
 
@@ -571,7 +606,7 @@
 <span class="sd">        Bellow is the template &#39;color&#39; widget with name &#39;myColorPicker&#39; and an &#39;optiongroup&#39; with the name &#39;myColorOption&#39; for the .inx file::</span>
 
 <span class="sd">         &lt;param name=&quot;myColorOption&quot; type=&quot;optiongroup&quot; appearance=&quot;minimal&quot; _gui-text=&quot;some text here&quot;&gt;</span>
-<span class="sd">             &lt;_option value=&quot;#FF0022&quot;&gt;my default color&lt;/_option&gt;    &lt;--you can set your pre define color in the form #RRGGBB</span>
+<span class="sd">             &lt;_option value=&quot;#FF0022FF&quot;&gt;my default color&lt;/_option&gt;    &lt;--you can set your pre define color in the form #RRGGBBAA</span>
 <span class="sd">             &lt;_option value=&quot;none&quot;&gt;none&lt;/_option&gt;                   &lt;-- no color</span>
 <span class="sd">             &lt;_option value=&quot;black&quot;&gt;black&lt;/_option&gt;</span>
 <span class="sd">             &lt;_option value=&quot;red&quot;&gt;red&lt;/_option&gt;</span>
@@ -608,21 +643,21 @@
 <span class="sd">        &gt;&gt;&gt; </span>
 <span class="sd">        &gt;&gt;&gt;   def effect(self):</span>
 <span class="sd">        &gt;&gt;&gt;     so = self.options</span>
-<span class="sd">        &gt;&gt;&gt;     [RGBstring,alpha] = inkDraw.color.parseColorPicker(so.myColorOptionVar,so.myColorPickerVar)</span>
+<span class="sd">        &gt;&gt;&gt;     colorString = inkDraw.color.parseColorPicker(so.myColorOptionVar,so.myColorPickerVar)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">alphaString</span> <span class="o">=</span> <span class="s1">&#39;FF&#39;</span>
         <span class="k">if</span> <span class="n">stringColorOption</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">stringColorOption</span><span class="p">,</span> <span class="n">alphaString</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">stringColorOption</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">stringColorOption</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
                 <span class="n">colorString</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">stringColorOption</span> <span class="o">==</span> <span class="s1">&#39;picker&#39;</span><span class="p">:</span>
                     <span class="p">[</span><span class="n">colorString</span><span class="p">,</span> <span class="n">alphaString</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">colorPickerToRGBalpha</span><span class="p">(</span><span class="n">stringColorPicker</span><span class="p">)</span>
+                    <span class="n">colorString</span> <span class="o">+=</span> <span class="n">alphaString</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">colorString</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="n">stringColorOption</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">colorString</span><span class="p">,</span> <span class="n">alphaString</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="n">colorString</span></div></div>
 
 
 <div class="viewcode-block" id="marker"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.marker">[docs]</a><span class="k">class</span> <span class="nc">marker</span><span class="p">():</span>
@@ -656,8 +691,8 @@
 
 <span class="sd">                .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape&#39;s canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.</span>
 <span class="sd">             - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`</span>
-<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
-<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
 <span class="sd">        :param lineWidth: Line width of the marker. Default: 1.0</span>
 <span class="sd">        :param markerTransform: custom transform applied to marker&#39;s path. Default: ``None``</span>
 
@@ -732,10 +767,21 @@
 
         <span class="k">if</span> <span class="n">fillColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fillColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
         <span class="k">if</span> <span class="n">strokeColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strokeColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            <span class="n">opacityStroke</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
 
-        <span class="n">marker_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill-rule&#39;</span><span class="p">:</span> <span class="s1">&#39;evenodd&#39;</span><span class="p">,</span> <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">fillColor</span><span class="p">,</span> <span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="n">strokeColor</span><span class="p">,</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">lineWidth</span><span class="p">)}</span>
+        <span class="c1"># set color and opacity</span>
+        <span class="k">if</span> <span class="n">fillColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="p">[</span><span class="n">fillColor</span><span class="p">,</span><span class="n">alphaFill</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">fillColor</span><span class="p">)</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaFill</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">strokeColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="p">[</span><span class="n">strokeColor</span><span class="p">,</span> <span class="n">alphaStroke</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">strokeColor</span><span class="p">)</span>
+            <span class="n">opacityStroke</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaStroke</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+
+        <span class="n">marker_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill-rule&#39;</span><span class="p">:</span> <span class="s1">&#39;evenodd&#39;</span><span class="p">,</span> <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">fillColor</span><span class="p">,</span> <span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="n">strokeColor</span><span class="p">,</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">lineWidth</span><span class="p">),</span><span class="s1">&#39;fill-opacity&#39;</span><span class="p">:</span><span class="n">opacityFill</span><span class="p">,</span><span class="s1">&#39;stroke-opacity&#39;</span><span class="p">:</span><span class="n">opacityStroke</span><span class="p">}</span>
 
         <span class="n">marker_lineline_attribs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="n">markerPath</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Style</span><span class="p">(</span><span class="n">marker_style</span><span class="p">))}</span>
 
@@ -767,8 +813,8 @@
 <span class="sd">                .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape&#39;s canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.</span>
 <span class="sd">             - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`</span>
 <span class="sd">        :param scale: Scale factor of the marker. To exactly copy inkscape sizes dotS/M/L, use 0.2, 0.4 and 0.8 respectively. Default: 0.4</span>
-<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
-<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
 <span class="sd">        :type ExtensionBaseObj: inkscapeMadeEasy object</span>
 <span class="sd">        :type nameID: string</span>
 <span class="sd">        :type RenameMode: int</span>
@@ -809,7 +855,7 @@
 <span class="sd">                .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape&#39;s canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.</span>
 <span class="sd">             - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`</span>
 <span class="sd">        :param scale: Scale of the marker. Default: 0.4</span>
-<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
 <span class="sd">        :type ExtensionBaseObj: inkscapeMadeEasy object</span>
 <span class="sd">        :type nameID: string</span>
 <span class="sd">        :type RenameMode: int</span>
@@ -853,8 +899,8 @@
 <span class="sd">             - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`</span>
 
 <span class="sd">        :param scale: scale of the marker. Default: 0.4</span>
-<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
-<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param strokeColor: Stroke color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
 <span class="sd">        :type ExtensionBaseObj: inkscapeMadeEasy object</span>
 <span class="sd">        :type nameID: string</span>
 <span class="sd">        :type RenameMode: int</span>
@@ -910,7 +956,7 @@
 <span class="sd">                .. Warning:: when a marker is created using RenameMode=1, any marker with the same name will disapear from inkscape&#39;s canvas. This is an inkscape issue. Save the document and reload it, everything should be fine.</span>
 <span class="sd">             - 2: Create a new unique nameID, adding a suffix number (Please refer to :meth:`inkscapeMadeEasy_Base.inkscapeMadeEasy.uniqueIdNumber()`</span>
 <span class="sd">        :param scale: Scale of the marker. Default 1.0</span>
-<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
+<span class="sd">        :param fillColor: Filling color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;). See :meth:`inkscapeMadeEasy_Draw.color` for functions to create color strings</span>
 <span class="sd">        :type ExtensionBaseObj: inkscapeMadeEasy object</span>
 <span class="sd">        :type nameID: string</span>
 <span class="sd">        :type RenameMode: int</span>
@@ -924,8 +970,8 @@
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; startInfMarker,endInfMarker=inkDraw.marker.createElipsisMarker(self,nameID=&#39;myInfMarker&#39;,RenameMode=1,scale=1.0,fillColor=&#39;#00FF00&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.set(1.0, markerStart=startInfMarker,markerEnd=endInfMarker,lineColor=&#39;#000000&#39;)  # see lineStyle class for further information on this function</span>
+<span class="sd">        &gt;&gt;&gt; startInfMarker,endInfMarker=inkDraw.marker.createElipsisMarker(self,nameID=&#39;myInfMarker&#39;,RenameMode=1,scale=1.0,fillColor=&#39;#00FF00FF&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.set(1.0, markerStart=startInfMarker,markerEnd=endInfMarker,lineColor=&#39;#000000FF&#39;)  # see lineStyle class for further information on this function</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># build path for 3 circles</span>
@@ -979,8 +1025,8 @@
         <span class="sd">&quot;&quot;&quot; Create a new line style</span>
 
 <span class="sd">        :param lineWidth: Line width. Default: 1.0</span>
-<span class="sd">        :param lineColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
-<span class="sd">        :param fillColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: ``None``</span>
+<span class="sd">        :param lineColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
+<span class="sd">        :param fillColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: ``None``</span>
 <span class="sd">        :param lineJoin: Shape of the lines at the joints. Valid values &#39;miter&#39;, &#39;round&#39;, &#39;bevel&#39;. See image below. Default: round.</span>
 <span class="sd">        :param lineCap: Shape of the lines at the ends. Valid values &#39;butt&#39;, &#39;square&#39;, &#39;round&#39;. See image below. Default: round</span>
 <span class="sd">        :param markerStart: Marker at the start node. Default: ``None``</span>
@@ -1018,15 +1064,27 @@
 <span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color,strokeDashArray=&#39;5,10,2,3&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">fillColor</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fillColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fillColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">lineColor</span><span class="p">:</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+        <span class="k">if</span> <span class="n">lineColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lineColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            <span class="n">opacityStroke</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+
+        <span class="c1"># set color and opacity</span>
+        <span class="k">if</span> <span class="n">fillColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="p">[</span><span class="n">fillColor</span><span class="p">,</span><span class="n">alphaFill</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">fillColor</span><span class="p">)</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaFill</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">lineColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="p">[</span><span class="n">lineColor</span><span class="p">,</span> <span class="n">alphaLine</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">lineColor</span><span class="p">)</span>
+            <span class="n">opacityStroke</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaLine</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">strokeDashArray</span><span class="p">:</span>
             <span class="n">strokeDashArray</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
 
         <span class="c1"># dictionary with the styles</span>
-        <span class="n">lineStyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="n">lineColor</span><span class="p">,</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">lineWidth</span><span class="p">),</span> <span class="s1">&#39;stroke-dasharray&#39;</span><span class="p">:</span> <span class="n">strokeDashArray</span><span class="p">,</span> <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">fillColor</span><span class="p">}</span>
+        <span class="n">lineStyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="n">lineColor</span><span class="p">,</span> <span class="s1">&#39;stroke-width&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">lineWidth</span><span class="p">),</span> <span class="s1">&#39;stroke-dasharray&#39;</span><span class="p">:</span> <span class="n">strokeDashArray</span><span class="p">,</span> <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">fillColor</span><span class="p">,</span><span class="s1">&#39;fill-opacity&#39;</span><span class="p">:</span><span class="n">opacityFill</span><span class="p">,</span><span class="s1">&#39;stroke-opacity&#39;</span><span class="p">:</span><span class="n">opacityStroke</span><span class="p">}</span>
 
         <span class="c1"># Endpoint and junctions</span>
         <span class="n">lineStyle</span><span class="p">[</span><span class="s1">&#39;stroke-linecap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lineCap</span>
@@ -1083,7 +1141,7 @@
 
 <span class="sd">        :param fontSize: Size of the font in px. Default: 10</span>
 <span class="sd">        :param justification: Text justification. ``left``, ``right``, ``center``. Default: ``left``</span>
-<span class="sd">        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
+<span class="sd">        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
 <span class="sd">        :param fontFamily: Font family name. Default ``Sans``</span>
 
 <span class="sd">            .. warning:: This method does NOT verify whether the font family is installed in your machine or not.</span>
@@ -1109,12 +1167,18 @@
 
 <span class="sd">        **Example**</span>
 
-<span class="sd">        &gt;&gt;&gt; myTextStyle=inkDraw.textStyle.set(fontSize=10, justification=&#39;left&#39;, textColor=color.defined(&#39;black&#39;), fontFamily=&#39;Sans&#39;,</span>
+<span class="sd">        &gt;&gt;&gt; myTextStyle=inkDraw.textStyle.set(fontSize=10, justification=&#39;left&#39;, textColor=color.defined(&#39;black&#39;,0.5), fontFamily=&#39;Sans&#39;,</span>
 <span class="sd">        &gt;&gt;&gt;                                   fontStyle=&#39;normal&#39;, fontWeight=&#39;normal&#39;, lineSpacing=&#39;100%&#39;, letterSpacing=&#39;0px&#39;, wordSpacing=&#39;0px&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">textColor</span><span class="p">:</span>
             <span class="n">textColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+
+        <span class="c1"># set color and opacity</span>
+        <span class="k">if</span> <span class="n">textColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="p">[</span><span class="n">textColor</span><span class="p">,</span> <span class="n">alphaFill</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">textColor</span><span class="p">)</span>
+            <span class="n">opacityFill</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaFill</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">justification</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
             <span class="n">justification</span> <span class="o">=</span> <span class="s1">&#39;start&#39;</span>
@@ -1129,7 +1193,7 @@
                      <span class="c1"># start, center, end</span>
                      <span class="s1">&#39;line-height&#39;</span><span class="p">:</span> <span class="n">lineSpacing</span><span class="p">,</span> <span class="s1">&#39;letter-spacing&#39;</span><span class="p">:</span> <span class="n">letterSpacing</span><span class="p">,</span> <span class="s1">&#39;word-spacing&#39;</span><span class="p">:</span> <span class="n">wordSpacing</span><span class="p">,</span> <span class="s1">&#39;text-anchor&#39;</span><span class="p">:</span> <span class="n">anchor</span><span class="p">,</span>
                      <span class="c1"># start, middle, end</span>
-                     <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">textColor</span><span class="p">,</span> <span class="s1">&#39;fill-opacity&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;font-family&#39;</span><span class="p">:</span> <span class="n">fontFamily</span><span class="p">}</span>
+                     <span class="s1">&#39;fill&#39;</span><span class="p">:</span> <span class="n">textColor</span><span class="p">,</span> <span class="s1">&#39;fill-opacity&#39;</span><span class="p">:</span> <span class="n">opacityFill</span><span class="p">,</span> <span class="s1">&#39;stroke&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;font-family&#39;</span><span class="p">:</span> <span class="n">fontFamily</span><span class="p">}</span>
 
         <span class="k">return</span> <span class="n">textStyle</span></div>
 
@@ -1167,7 +1231,7 @@
 
 <span class="sd">        :param fontSize: Size of the font in px. Default: 10</span>
 <span class="sd">        :param justification: Text justification. ``left``, ``right``, ``center``. Default: ``left``</span>
-<span class="sd">        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
+<span class="sd">        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
 
 <span class="sd">        :type fontSize: float     </span>
 <span class="sd">        :type justification: string</span>
@@ -1291,7 +1355,7 @@
 <span class="sd">        :param position: Position of the reference point [x,y]</span>
 <span class="sd">        :param fontSize: Size of the font. Assume any capitql letter of ``\\normalsize`` will have this size. Default: 10</span>
 <span class="sd">        :param refPoint: Text reference Point. See figure below for options. Default: ``cc``</span>
-<span class="sd">        :param textColor: Color in the format ``#RRGGBB`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
+<span class="sd">        :param textColor: Color in the format ``#RRGGBBAA`` (hexadecimal), or ``None`` for no color. Default: color.defined(&#39;black&#39;)</span>
 <span class="sd">        :param LatexCommands: Commands to be included before LaTeXtext (default: &#39; &#39;). If LaTeX support is disabled, this parameter has no effect.</span>
 <span class="sd">        :param angleDeg: Angle of the text, counterclockwise, in degrees. Default: 0</span>
 <span class="sd">        :param preambleFile: Optional preamble file to be included. Default: None. If LaTeX support is disabled, this parameter has no effect.</span>
@@ -1414,13 +1478,23 @@
                 <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">typename</span> <span class="o">==</span> <span class="s1">&#39;TexTextElement&#39;</span><span class="p">:</span>
                     <span class="n">groupLatex</span> <span class="o">=</span> <span class="n">child</span>
 
+            <span class="k">if</span> <span class="n">textColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">textColor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+                <span class="n">opacityFill</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+
+            <span class="c1"># set color and opacity</span>
+            <span class="k">if</span> <span class="n">textColor</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+                <span class="p">[</span><span class="n">textColor</span><span class="p">,</span> <span class="n">alphaFill</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">splitColorAlpha</span><span class="p">(</span><span class="n">textColor</span><span class="p">)</span>
+                <span class="n">opacityFill</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alphaFill</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">)</span>
+
             <span class="c1"># change color</span>
             <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">groupLatex</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
                 <span class="n">oldStyle</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">oldStyle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">newStyle</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;fill:#[0-9a-fA-F]+&#39;</span><span class="p">,</span> <span class="s1">&#39;fill:&#39;</span> <span class="o">+</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">oldStyle</span><span class="p">)</span>
+                    <span class="n">newStyle</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;fill-opacity:[0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39;fill-opacity:&#39;</span> <span class="o">+</span> <span class="n">opacityFill</span><span class="p">,</span> <span class="n">newStyle</span><span class="p">)</span>
                     <span class="n">newStyle</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;stroke:#[0-9a-fA-F]+&#39;</span><span class="p">,</span> <span class="s1">&#39;stroke:&#39;</span> <span class="o">+</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">newStyle</span><span class="p">)</span>
-
+                    <span class="n">newStyle</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;stroke-opacity:[0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39;stroke-opacity:&#39;</span> <span class="o">+</span> <span class="n">opacityFill</span><span class="p">,</span> <span class="n">newStyle</span><span class="p">)</span>
                     <span class="n">obj</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="n">newStyle</span><span class="p">)</span>
 
             <span class="n">ExtensionBaseObj</span><span class="o">.</span><span class="n">scaleElement</span><span class="p">(</span><span class="n">groupLatex</span><span class="p">,</span> <span class="n">scaleX</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">scaleY</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>  <span class="c1"># scale to fit font size</span>
