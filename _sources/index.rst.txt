@@ -69,7 +69,9 @@ For end-user extensions that employ InskcapeMadeEasy, please refer to my other r
 
   - **BodePlot**                <https://github.com/fsmMLK/inkscapeBodePlot>
 
-
+  - **Spirograph**                <https://github.com/fsmMLK/inkscapeSpirograph>
+  
+  
 History and Objectives
 ======================
 
