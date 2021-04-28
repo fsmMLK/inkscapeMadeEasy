@@ -7,7 +7,7 @@
   <dependency type="executable" location="extensions">inkscapeMadeEasy_Base.py</dependency>
   <dependency type="executable" location="extensions">inkex.py</dependency>
          <param name="myColorOption" type="optiongroup" appearance="minimal" _gui-text="Choose color">
-         <_option value="#FF0022">my default color</_option> 
+         <_option value="#FF0022FF">my default color</_option>
          <_option value="none">none</_option>
          <_option value="black">black</_option>
          <_option value="red">red</_option>

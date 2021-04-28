@@ -28,7 +28,7 @@ class myExtension(inkBase.inkscapeMadeEasy):
                                                      fillColor=inkDraw.color.gray(0.4))
         
         # parses the input options to get the color of the line
-        lineColor, alpha = inkDraw.color.parseColorPicker(self.options.lineColorOptionVar, self.options.lineColorPickerVar)
+        lineColor = inkDraw.color.parseColorPicker(self.options.lineColorOptionVar, self.options.lineColorPickerVar)
         
         # create a new line style with a 2.0 pt line and the marker just defined at both ends
         myLineStyleDot = inkDraw.lineStyle.set(lineWidth=2.0,

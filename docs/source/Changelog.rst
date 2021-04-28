@@ -1,6 +1,11 @@
 Changelog
 ==========
 
+2021-04apr-28
+-------------
+
+Fixed example of the documentation
+
 2021-04apr-25
 -------------
 

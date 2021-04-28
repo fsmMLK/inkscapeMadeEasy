@@ -38,10 +38,11 @@ GitHub (more to come soon). They provide many examples of how to use inkscapeMad
 
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
-  - **SlopeField**             <https://github.com/fsmMLK/inkscapeSlopeField>
+  - **SlopeField**              <https://github.com/fsmMLK/inkscapeSlopeField>
 
-  - **BodePlot**             <https://github.com/fsmMLK/inkscapeBodePlot>
+  - **BodePlot**                <https://github.com/fsmMLK/inkscapeBodePlot>
 
+  - **Spirograph**              <https://github.com/fsmMLK/inkscapeSpirograph>
 
 ## History and Objectives
 

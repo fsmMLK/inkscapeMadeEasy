@@ -14,10 +14,10 @@ class myExtension(inkBase.inkscapeMadeEasy):
         self.OptionParser.add_option("--myColorOption", action="store", type="string", dest="myColorOptionVar", default='0')
 
     def effect(self):
-        color, alpha = inkDraw.color.colorPickerToRGBalpha(self.options.myColorPickerVar)
+        color = inkDraw.color.colorPickerToRGBalpha(self.options.myColorPickerVar)
 
         # do the same thing, but first verify whether myColorOptionVar is providing a pre defined color or asking to get it from the picker.
-        color, alpha = inkDraw.color.parseColorPicker(self.options.myColorOptionVar, self.options.myColorPickerVar)
+        color = inkDraw.color.parseColorPicker(self.options.myColorOptionVar, self.options.myColorPickerVar)
 
 
 if __name__ == '__main__':

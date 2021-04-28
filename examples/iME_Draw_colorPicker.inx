@@ -9,7 +9,7 @@
   <param name="tab" type="notebook">
     <page name="Help Gates" _gui-text="Help (Logic Gates)">
       <param name="myColorOption" type="optiongroup" appearance="minimal" _gui-text="Choose color">
-        <_option value="#FF0022">my default color</_option>
+        <_option value="#FF0022FF">my default color</_option>
         <_option value="none">none</_option>
         <_option value="black">black</_option>
         <_option value="red">red</_option>
