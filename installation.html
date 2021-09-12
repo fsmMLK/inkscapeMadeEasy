@@ -249,7 +249,22 @@
 <blockquote>
 <div><p>You don’t have to copy all files from Github. The files you will need are inside the <code class="docutils literal notranslate"><span class="pre">latest</span></code> folder. In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <blockquote>
-<div><div class="admonition note">
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>inkscape
+ ┣━━extensions
+ ┋   ┣━━ inkscapeMadeEasy   &lt;-- inkscapeMadeEasy folder
+     ┃    ┣━━ inkscapeMadeEasy_Base.py
+     ┃    ┣━━ inkscapeMadeEasy_Draw.py
+     ┃    ┣━━ inkscapeMadeEasy_Plot.py
+     ┃    ┗━━ basicLatexPackages.tex
+     ┃
+     ┣━━ textext   &lt;-- textext folder (if you installed textText)
+     ┋
+
+ Note:  You might have other sub folders inside the extensions directory.
+        They don&#39;t interfere with inkscapeMadeEasy.
+</pre></div>
+</div>
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>LaTeX users</strong>: The file <cite>basicLatexPackages.tex</cite> contains a basic set o packages and macros to be used with <strong>InkscapeMadeEasy</strong>. You can add your own macros to this file. This way they will be accessible  to all plugins that employ inkscapeMadeEasy.</p>
 </div>
