@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,30 +12,28 @@
   
 
   
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -50,7 +49,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> inkscapeMadeEasy
+            <a href="../index.html" class="icon icon-home"> inkscapeMadeEasy
           
 
           
@@ -77,7 +76,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -118,7 +116,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -157,7 +154,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
           <li><a href="index.html">Module code</a> &raquo;</li>
         
@@ -205,17 +202,17 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
 
 <span class="kn">import</span> <span class="nn">inkex</span>
 
 
 <div class="viewcode-block" id="inkscapeMadeEasy"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy">[docs]</a><span class="k">class</span> <span class="nc">inkscapeMadeEasy</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inkscapeResolution_dpi</span> <span class="o">=</span> <span class="mf">96.0</span>  <span class="c1"># number of pixels per inch</span>
 
@@ -407,7 +404,7 @@
                 <span class="n">temp</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
-<div class="viewcode-block" id="inkscapeMadeEasy.importSVG"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.importSVG">[docs]</a>    <span class="k">def</span> <span class="nf">importSVG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fileIn</span><span class="p">,</span> <span class="n">createGroup</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.importSVG"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.importSVG">[docs]</a>    <span class="k">def</span> <span class="nf">importSVG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fileIn</span><span class="p">,</span> <span class="n">createGroup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">scaleFactor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Import SVG file into the current document</span>
 
 <span class="sd">        This function will all unify the defs node via :meth:`unifyDefs`</span>
@@ -415,6 +412,8 @@
 <span class="sd">        :param parent: parent element where all contents will be placed</span>
 <span class="sd">        :param fileIn: SVG file path</span>
 <span class="sd">        :param createGroup: create a group containing all imported elements. (Default: True)</span>
+<span class="sd">        :param position: set center position of the group. Used only if createGroup=True  (Default: None)</span>
+<span class="sd">        :param scaleFactor: set scaling factor of the group. Used only if createGroup=True  (Default: 1.0)</span>
 <span class="sd">        :type parent: inkscape element object</span>
 <span class="sd">        :type fileIn: string</span>
 <span class="sd">        :type createGroup: bool</span>
@@ -436,6 +435,14 @@
                 <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;namedview&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">):</span>
                     <span class="n">group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">unifyDefs</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCenter</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">position</span><span class="o">-</span><span class="n">center</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">scaleFactor</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">scaleElement</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">scaleX</span><span class="o">=</span><span class="n">scaleFactor</span><span class="p">,</span> <span class="n">scaleY</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getCenter</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+
             <span class="k">return</span> <span class="n">group</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">listElements</span><span class="o">=</span><span class="p">[]</span>
@@ -1182,6 +1189,39 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">moveElement</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.addAttribute"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.addAttribute">[docs]</a>    <span class="k">def</span> <span class="nf">addAttribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">attributeName</span><span class="p">,</span> <span class="n">attributeValue</span><span class="p">,</span><span class="n">forceWrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a new attribute to the element. If the attribute already exists, forceWrite=True overwrites it. Otherwise the attribute is left unchanged.</span>
+
+<span class="sd">        :param element: element object</span>
+<span class="sd">        :param attributeName: attribute name</span>
+<span class="sd">        :param attributeValue: attribute value</span>
+<span class="sd">        :param forceWrite: force write if the attibute already exists</span>
+<span class="sd">        :type element: inkscape element object</span>
+<span class="sd">        :type attributeName: string</span>
+<span class="sd">        :type attributeValue: string</span>
+<span class="sd">        :type forceWrite: bool</span>
+<span class="sd">        :returns:  nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        **Example**</span>
+<span class="sd">        &gt;&gt;&gt; rootLayer = self.document.getroot()                                   # retrieves the root layer of the file</span>
+<span class="sd">        &gt;&gt;&gt; line1 = inkDraw.line.relCoords(rootLayer, [[5,0],[0,6]],[0,0])        # creates a line in groupA, using relative coordinates</span>
+<span class="sd">        &gt;&gt;&gt; list = self.getPoints(line1)                                          # list = [[0.0, 0.0], [5.0, 0.0], [5.0, 6.0]]</span>
+
+<span class="sd">         &gt;&gt;&gt; self.addAttribute(line1, attributeName=&#39;myInfo&#39;, attributeValue=&#39;my Data = %f&#39; %3.5, forceWrite=True) # add new attribute</span>
+<span class="sd">         &gt;&gt;&gt; self.addAttribute(line1, attributeName=&#39;myInfo&#39;, attributeValue=&#39;my Data = %f&#39; %4.5, forceWrite=False) # does nothing. attribute already exists</span>
+<span class="sd">         &gt;&gt;&gt; self.addAttribute(line1, attributeName=&#39;myInfo&#39;, attributeValue=&#39;my Data = %f&#39; %5.5, forceWrite=True) # overwrite attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">forceWrite</span><span class="p">:</span>
+            <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">attributeName</span><span class="p">]</span> <span class="o">=</span> <span class="n">attributeValue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attributeName</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">element</span></div>
+
+    <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.findMarker"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.findMarker">[docs]</a>    <span class="k">def</span> <span class="nf">findMarker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">markerName</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Search for markerName definition in the document.</span>
 
@@ -1496,19 +1536,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2016, fsmMLK
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1519,6 +1551,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

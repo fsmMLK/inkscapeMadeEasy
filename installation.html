@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,30 +12,28 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/style.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="General Gist" href="minimalExample.html" />
@@ -52,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> inkscapeMadeEasy
+            <a href="index.html" class="icon icon-home"> inkscapeMadeEasy
           
 
           
@@ -79,7 +78,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -128,7 +126,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -167,7 +164,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Inkscape Version</li>
     
@@ -191,81 +188,70 @@
   <div class="section" id="inkscape-version">
 <h1>Inkscape Version<a class="headerlink" href="#inkscape-version" title="Permalink to this headline">¶</a></h1>
 <div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>The procedure bellow  refers to inkscapeMadeEasy <strong>version 1.0 or later</strong>  only. For older versions, please see the pdf manual inside the <a class="reference external" href="https://github.com/fsmMLK/inkscapeMadeEasy/tree/master/0.9x">legacy folder 0.9x</a>.</p>
+<p class="first admonition-title">Attention</p>
+<p class="last">The procedure bellow  refers to inkscapeMadeEasy <strong>version 1.0 or later</strong>  only. For older versions, please see the pdf manual inside the <a class="reference external" href="https://github.com/fsmMLK/inkscapeMadeEasy/tree/master/0.9x">legacy folder 0.9x</a>.</p>
 </div>
 <p>InkscapeMadeEasy was developed using Inkscape 1.0 in Linux (Kubuntu 18.04). It should work in different OSs too as long as all requirements are met.</p>
 </div>
 <div class="section" id="requirements">
 <h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic simple" start="0">
-<li><p>You will need <a class="reference external" href="https://inkscape.org/">Inkscape 1.0 or later</a> (duh!  =) )</p></li>
-<li><p>You will need Python 3 in your machine. InkscapeMadeEasy will not work properly with python 2. The following python modules are required: math, os, re, sys, copy, numpy, lxml, tempfile. Make sure your python installation has these modules.</p></li>
-<li><p>If you want LaTeX support, install a latex distribution for your OS. You will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</p></li>
-<li><p>You will need <a class="reference external" href="https://textext.github.io/textext/">TexText</a> version <strong>1.0</strong></p></li>
+<li>You will need <a class="reference external" href="https://inkscape.org/">Inkscape 1.0 or later</a> (duh!  =) )</li>
+<li>You will need Python 3 in your machine. InkscapeMadeEasy will not work properly with python 2. The following python modules are required: math, os, re, sys, copy, numpy, lxml, tempfile. Make sure your python installation has these modules.</li>
+<li>If you want LaTeX support, install a latex distribution for your OS. You will need in your system the following LaTeX packages: amsmath, amsthm, amsbsy, amsfonts, amssymb, siunitx, steinmetz.</li>
+<li>You will need <a class="reference external" href="https://textext.github.io/textext/">TexText</a> version <strong>1.0</strong></li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Starting from InkscapeMadeEasy 1.0, you don’t need pstoedit, ghostscript and pdf2svg anymore. Thanks TexText team! =)</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Starting from InkscapeMadeEasy 1.0, you don’t need pstoedit, ghostscript and pdf2svg anymore. Thanks TexText team! =)</p>
 </div>
 </div>
 <div class="section" id="installation-procedure-v1-0-only">
 <h1>Installation procedure (v1.0 only)<a class="headerlink" href="#installation-procedure-v1-0-only" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic">
-<li><p>Install python 3 in your machine if you don’t have it yet. You can download it from <a class="reference external" href="https://www.python.org/">here</a> or use your package manager. See the instructions for <a class="reference external" href="https://docs.python.org/3/using/unix.html">Linux</a>,  <a class="reference external" href="https://docs.python.org/3/using/windows.html">Windows</a> or  <a class="reference external" href="https://docs.python.org/3/using/mac.html">Mac</a> if you need help.</p>
+<li><p class="first">Install python 3 in your machine if you don’t have it yet. You can download it from <a class="reference external" href="https://www.python.org/">here</a> or use your package manager. See the instructions for <a class="reference external" href="https://docs.python.org/3/using/unix.html">Linux</a>,  <a class="reference external" href="https://docs.python.org/3/using/windows.html">Windows</a> or  <a class="reference external" href="https://docs.python.org/3/using/mac.html">Mac</a> if you need help.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Windows users:</strong> make sure you check <strong>Add Python 3.x to PATH</strong> on the bottom of the installer screen.</p>
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Windows users:</strong> make sure you check <strong>Add Python 3.x to PATH</strong> on the bottom of the installer screen.</p>
 </div>
 <p>Install the following python modules: math, os, re, sys, copy, numpy, lxml, tempfile.</p>
 </li>
-<li><p>Install <a class="reference external" href="https://inkscape.org/">Inkscape 1.0</a>.</p>
+<li><p class="first">Install <a class="reference external" href="https://inkscape.org/">Inkscape 1.0</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="first admonition-title">Note</p>
 <p><strong>Windows users:</strong> Make sure that you checked the <strong>Python</strong> option in Program Files as well as the <strong>Extensions</strong> options in Inkscape Data during the installation of Inkscape (by default this is the case).</p>
-<a class="reference internal image-reference" href="_images/inkscape-install-options-windows.png"><img alt="_images/inkscape-install-options-windows.png" src="_images/inkscape-install-options-windows.png" style="width: 400px;" /></a>
+<a class="last reference internal image-reference" href="_images/inkscape-install-options-windows.png"><img alt="_images/inkscape-install-options-windows.png" src="_images/inkscape-install-options-windows.png" style="width: 400px;" /></a>
 </div>
 </li>
-<li><p><strong>if you want LaTeX support:</strong> Install a LaTeX distribution . See <a class="reference internal" href="#latex-installation">LaTeX installation</a> on further instructions for Linux, Mac and Windows users.</p></li>
-<li><p><strong>if you don’t want LaTeX support:</strong> follow the instructions of section <a class="reference internal" href="#disablelatexsupport"><span class="std std-ref">Disabling LaTeX support</span></a> to disable it.</p></li>
-<li><p>Install <a class="reference external" href="https://textext.github.io/textext/">TexText</a> version <strong>1.0</strong>. Follow the instructions on the link.</p></li>
-<li><p>inkscapeMadeEasy installation</p></li>
+<li><p class="first"><strong>if you want LaTeX support:</strong> Install a LaTeX distribution . See <a class="reference internal" href="#latex-installation">LaTeX installation</a> on further instructions for Linux, Mac and Windows users.</p>
+</li>
+<li><p class="first"><strong>if you don’t want LaTeX support:</strong> follow the instructions of section <a class="reference internal" href="#disablelatexsupport"><span class="std std-ref">Disabling LaTeX support</span></a> to disable it.</p>
+</li>
+<li><p class="first">Install <a class="reference external" href="https://textext.github.io/textext/">TexText</a> version <strong>1.0</strong>. Follow the instructions on the link.</p>
+</li>
+<li><p class="first">inkscapeMadeEasy installation</p>
+</li>
 </ol>
 <blockquote>
 <div><ol class="loweralpha simple">
-<li><p>Go to Inkscape’s extension directory with a file browser. Your inkscape extension directory can be accessed by opening Inkscape and selecting <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">&gt;</span> <span class="pre">Preferences</span> <span class="pre">&gt;</span> <span class="pre">System</span></code>. Look for the item <strong>User Extensions</strong>  field. There is a button on the right of the field  that will open a file explorer window in that specific folder.</p></li>
-<li><p>Create a subfolder in the extension directory with the name <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy</span></code>.</p></li>
+<li>Go to Inkscape’s extension directory with a file browser. Your inkscape extension directory can be accessed by opening Inkscape and selecting <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">&gt;</span> <span class="pre">Preferences</span> <span class="pre">&gt;</span> <span class="pre">System</span></code>. Look for the item <strong>User Extensions</strong>  field. There is a button on the right of the field  that will open a file explorer window in that specific folder.</li>
+<li>Create a subfolder in the extension directory with the name <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy</span></code>.</li>
 </ol>
 <blockquote>
 <div><div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Be careful with upper and lower case letters. You must write as presented above.</p>
+<p class="first admonition-title">Warning</p>
+<p class="last">Be careful with upper and lower case letters. You must write as presented above.</p>
 </div>
 </div></blockquote>
 <ol class="loweralpha simple" start="3">
-<li><p>Download <a class="reference external" href="https://github.com/fsmMLK/inkscapeMadeEasy">inkscapeMadeEasy</a> files and place them inside the directory you just created.</p></li>
+<li>Download <a class="reference external" href="https://github.com/fsmMLK/inkscapeMadeEasy">inkscapeMadeEasy</a> files and place them inside the directory you just created.</li>
 </ol>
 <blockquote>
 <div><p>You don’t have to copy all files from Github. The files you will need are inside the <code class="docutils literal notranslate"><span class="pre">latest</span></code> folder. In the end you must have the following files and directories in your Inkscape extension directory.</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inkscape
- ┣━━extensions
- ┋   ┣━━ inkscapeMadeEasy   &lt;-- inkscapeMadeEasy folder
-     ┃    ┣━━ inkscapeMadeEasy_Base.py
-     ┃    ┣━━ inkscapeMadeEasy_Draw.py
-     ┃    ┣━━ inkscapeMadeEasy_Plot.py
-     ┃    ┗━━ basicLatexPackages.tex
-     ┃
-     ┣━━ textext   &lt;-- textext folder (if you installed textText)
-     ┋
-
- Note:  You might have other sub folders inside the extensions directory.
-        They don&#39;t interfere with inkscapeMadeEasy.
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>LaTeX users</strong>: The file <cite>basicLatexPackages.tex</cite> contains a basic set o packages and macros to be used with <strong>InkscapeMadeEasy</strong>. You can add your own macros to this file. This way they will be accessible  to all plugins that employ inkscapeMadeEasy.</p>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>LaTeX users</strong>: The file <cite>basicLatexPackages.tex</cite> contains a basic set o packages and macros to be used with <strong>InkscapeMadeEasy</strong>. You can add your own macros to this file. This way they will be accessible  to all plugins that employ inkscapeMadeEasy.</p>
 </div>
 </div></blockquote>
 </div></blockquote>
@@ -279,28 +265,31 @@
 <div class="section" id="windows-users">
 <h3>Windows users<a class="headerlink" href="#windows-users" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p><strong>Install Miktex:</strong>
-Download and install <a class="reference external" href="https://miktex.org/">Miktex</a>.</p></li>
-<li><p><strong>testing pdflatex (for LaTeX experienced users):</strong></p>
+<li><p class="first"><strong>Install Miktex:</strong>
+Download and install <a class="reference external" href="https://miktex.org/">Miktex</a>.</p>
+</li>
+<li><p class="first"><strong>testing pdflatex (for LaTeX experienced users):</strong></p>
 <p>You must make sure the <a class="reference internal" href="#minimal-latex-example">Minimal LaTex example</a> compiles correctly using pdflatex from the command prompt.</p>
 <p>Check whether you can call pdflatex from any folder, in other words, check if pdflatex is in the PATH environment variable.</p>
 </li>
 </ol>
 <ol class="arabic" start="2">
-<li><p><strong>testing pdflatex (for LaTeX beginners)</strong></p>
+<li><p class="first"><strong>testing pdflatex (for LaTeX beginners)</strong></p>
 <ol class="loweralpha">
-<li><p>Open notepad and create a text file with the contents of the <a class="reference internal" href="#minimal-latex-example">Minimal LaTex example</a> and save it somewhere with the name <code class="docutils literal notranslate"><span class="pre">example.tex</span></code>.</p></li>
-<li><p>In File Explorer, go to the folder where you saved the file and click the address bar to select it (or press Alt+D).</p>
+<li><p class="first">Open notepad and create a text file with the contents of the <a class="reference internal" href="#minimal-latex-example">Minimal LaTex example</a> and save it somewhere with the name <code class="docutils literal notranslate"><span class="pre">example.tex</span></code>.</p>
+</li>
+<li><p class="first">In File Explorer, go to the folder where you saved the file and click the address bar to select it (or press Alt+D).</p>
 <p>Type “cmd” into the address bar and hit Enter to open the Command Prompt with the path of the current folder already set.</p>
 </li>
-<li><p>type:  <code class="docutils literal notranslate"><span class="pre">pdflatex</span> <span class="pre">example.tex</span></code> in the command line and hit ENTER.</p>
+<li><p class="first">type: &nbsp;<code class="docutils literal notranslate"><span class="pre">pdflatex</span> <span class="pre">example.tex</span></code> in the command line and hit ENTER.</p>
 <p>Lots of text should appear on your console window.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Miktex might require your authorization to install additional packages. Depending on how you installed Miktex, it can install automatically without asking or ask you to confirm. Confirm it!</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Miktex might require your authorization to install additional packages. Depending on how you installed Miktex, it can install automatically without asking or ask you to confirm. Confirm it!</p>
 </div>
 </li>
-<li><p>Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the    short message and equation.</p></li>
+<li><p class="first">Check whether pdflatex created a new pdf file with the same name. Open the pdf and see if you can read the    short message and equation.</p>
+</li>
 </ol>
 </li>
 </ol>
@@ -327,8 +316,8 @@ E=mc^2
 <div class="section" id="disabling-latex-support">
 <span id="disablelatexsupport"></span><h1>Disabling LaTeX support<a class="headerlink" href="#disabling-latex-support" title="Permalink to this headline">¶</a></h1>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>By default, LaTeX support is ENABLED.</strong></p>
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>By default, LaTeX support is ENABLED.</strong></p>
 </div>
 <p>LaTeX support via TexText extension requires LaTeX typesetting system in your computer (it’s free and awesome! =] ). This might be a problem to install for non-Linux systems.</p>
 <p>Since many people don’t want to use LaTeX and/or don’t have it installed, LaTeX support is optional.</p>
@@ -363,19 +352,11 @@ it by setting a flag in <code class="docutils literal notranslate"><span class="
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2016, fsmMLK
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -386,6 +367,7 @@ it by setting a flag in <code class="docutils literal notranslate"><span class="
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

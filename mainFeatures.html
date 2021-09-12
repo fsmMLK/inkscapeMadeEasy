@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,30 +12,28 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/style.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Inkscape Version" href="installation.html" />
@@ -52,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> inkscapeMadeEasy
+            <a href="index.html" class="icon icon-home"> inkscapeMadeEasy
           
 
           
@@ -79,7 +78,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -98,7 +96,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Inkscape Version</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html#installation-procedure">Installation procedure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#installation-procedure-v1-0-only">Installation procedure (v1.0 only)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html#disabling-latex-support">Disabling LaTeX support</a></li>
 </ul>
 <p class="caption"><span class="caption-text">General gist and minimal example</span></p>
@@ -114,13 +112,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Changelog</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Changelog.html">Changelog</a></li>
 </ul>
 
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -159,7 +156,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>Optional LaTeX support via textext extension</li>
     
@@ -184,8 +181,8 @@
 <h1>Optional LaTeX support via textext extension<a class="headerlink" href="#optional-latex-support-via-textext-extension" title="Permalink to this headline">¶</a></h1>
 <p>Many of the functions implemented in inkscapeMadeEasy can use LaTeX to generate text if the support is enabled. To this end, I decided to employ the excellent extension <a class="reference external" href="https://github.com/textext/textext">TexText</a> by <a class="reference external" href="https://textext.github.io/textext/authors.html">awesome people</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>LaTeX support is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="installation.html#disablelatexsupport"><span class="std std-ref">Disabling LaTeX support</span></a> on how to disable it.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">LaTeX support is an optional feature, <strong>enabled by default</strong>. Please refer to <a class="reference internal" href="installation.html#disablelatexsupport"><span class="std std-ref">Disabling LaTeX support</span></a> on how to disable it.</p>
 </div>
 </div>
 <div class="section" id="scientific-plotting-system">
@@ -196,14 +193,14 @@
 <h1>Control over text styles, line markers and other drawing features<a class="headerlink" href="#control-over-text-styles-line-markers-and-other-drawing-features" title="Permalink to this headline">¶</a></h1>
 <p><strong>inkscapeMadeEasy_Draw</strong> module provides powerful tools to:</p>
 <ul class="simple">
-<li><p>manipulate colours, including pre-defined named colours, grayscales, RGB conversion and the colour picker widget of .inx</p></li>
-<li><p>create custom markers, including a few pre-defined often used types. They can be assigned to custom colours, stroke and filling independently</p></li>
-<li><p>create line styles, with or without custom markers and custom line dash pattern</p></li>
-<li><p>create text styles</p></li>
-<li><p>create LaTeX contents (thanks to <strong>TexText</strong>)</p></li>
-<li><p>direct control over text size and colour of LaTeX contents</p></li>
-<li><p>draw straight polylines and bezier curves using absolute or relative coordinates</p></li>
-<li><p>draw arcs, rectangles, ellipses and circles using different methods, based on their geometrical characteristics.</p></li>
+<li>manipulate colours, including pre-defined named colours, grayscales, RGB conversion and the colour picker widget of .inx</li>
+<li>create custom markers, including a few pre-defined often used types. They can be assigned to custom colours, stroke and filling independently</li>
+<li>create line styles, with or without custom markers and custom line dash pattern</li>
+<li>create text styles</li>
+<li>create LaTeX contents (thanks to <strong>TexText</strong>)</li>
+<li>direct control over text size and colour of LaTeX contents</li>
+<li>draw straight polylines and bezier curves using absolute or relative coordinates</li>
+<li>draw arcs, rectangles, ellipses and circles using different methods, based on their geometrical characteristics.</li>
 </ul>
 </div>
 <div class="section" id="useful-backstage-functions">
@@ -211,20 +208,20 @@
 <p><strong>inkscapeMadeEasy_Base</strong> module inherits inkex.py module, extending it by providing useful core functions:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Dump objects to a text file. Rationale: As of today (2020) Inkscape does not return the stdout() during python code run. This method partially overcomes this issue by sending the object to a text file.</p></li>
-<li><p>unique ID number generator (adapted from inkex.py, but using consecutive numbering)</p></li>
-<li><p>list defined elements (e.g. markers) in the current document</p></li>
-<li><p>create/remove groups</p></li>
-<li><p>remove elements</p></li>
-<li><p>extract the transformation matrix of an object, even when multiple transformations are stacked</p></li>
-<li><p>rotate, scale and move objects</p></li>
-<li><p>find markers</p></li>
-<li><p>import SVG files</p></li>
-<li><p>export selected elements to new SVG file</p></li>
-<li><p>manipulate def nodes</p></li>
-<li><p>get the list of coordinates of the points of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them</p></li>
-<li><p>get the bounding box of an object or group</p></li>
-<li><p>get the centre of the bounding box of an object or group</p></li>
+<li>Dump objects to a text file. Rationale: As of today (2020) Inkscape does not return the stdout() during python code run. This method partially overcomes this issue by sending the object to a text file.</li>
+<li>unique ID number generator (adapted from inkex.py, but using consecutive numbering)</li>
+<li>list defined elements (e.g. markers) in the current document</li>
+<li>create/remove groups</li>
+<li>remove elements</li>
+<li>extract the transformation matrix of an object, even when multiple transformations are stacked</li>
+<li>rotate, scale and move objects</li>
+<li>find markers</li>
+<li>import SVG files</li>
+<li>export selected elements to new SVG file</li>
+<li>manipulate def nodes</li>
+<li>get the list of coordinates of the points of an object or group. If the object is a group the method searches points recursively. Any eventual transformations are properly applied to the points before listing them</li>
+<li>get the bounding box of an object or group</li>
+<li>get the centre of the bounding box of an object or group</li>
 </ul>
 </div></blockquote>
 </div>
@@ -249,19 +246,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2016, fsmMLK
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -272,6 +261,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {

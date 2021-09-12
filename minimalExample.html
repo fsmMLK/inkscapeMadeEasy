@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
@@ -11,30 +12,28 @@
   
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/style.css" type="text/css" />
-
-  
   
   
   
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="inkscapeMadeEasy_Base" href="moduleDefinitions.html" />
@@ -52,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> inkscapeMadeEasy
+            <a href="index.html" class="icon icon-home"> inkscapeMadeEasy
           
 
           
@@ -79,7 +78,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -125,7 +123,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -164,7 +161,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
       <li>General Gist</li>
     
@@ -189,9 +186,9 @@
 <h1>General Gist<a class="headerlink" href="#general-gist" title="Permalink to this headline">¶</a></h1>
 <p>The general gist of inkscapeMadeEasy is:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code> inherits <code class="docutils literal notranslate"><span class="pre">inkex.Effect</span></code>, therefore has access to all <code class="docutils literal notranslate"><span class="pre">inkex.Effect</span></code> member functions plus all methods defined in <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.py</span></code></p></li>
-<li><p>Your extension is a class that inherits <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code>. Therefore you will have access to all member functions of <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code> plus the methods you define in your extension.</p></li>
-<li><p>If you need anything from <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Draw</span></code> or <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Plot</span></code>, you can import them into your project.</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code> inherits <code class="docutils literal notranslate"><span class="pre">inkex.Effect</span></code>, therefore has access to all <code class="docutils literal notranslate"><span class="pre">inkex.Effect</span></code> member functions plus all methods defined in <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.py</span></code></li>
+<li>Your extension is a class that inherits <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code>. Therefore you will have access to all member functions of <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Base.inkscapeMadeEasy</span></code> plus the methods you define in your extension.</li>
+<li>If you need anything from <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Draw</span></code> or <code class="docutils literal notranslate"><span class="pre">inkscapeMadeEasy_Plot</span></code>, you can import them into your project.</li>
 </ol>
 <p>The basic structure of your plugin should be the following:</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -221,9 +218,9 @@
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
- <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
- <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="kn">as</span> <span class="nn">inkBase</span>
+ <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="kn">as</span> <span class="nn">inkDraw</span>
+ <span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="kn">as</span> <span class="nn">inkPlot</span>
 
  <span class="k">class</span> <span class="nc">MinimalExample</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
 
@@ -252,28 +249,14 @@
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The best way of learning how to use it is by looking at real life examples. Check my other <a class="reference external" href="https://github.com/fsmMLK">repositories</a>.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">The best way of learning how to use it is by looking at real life examples. Check my other <a class="reference external" href="https://github.com/fsmMLK">repositories</a>.</p>
 </div>
 </div>
 <div class="section" id="minimal-example">
 <span id="minimalexample"></span><h1>Minimal example<a class="headerlink" href="#minimal-example" title="Permalink to this headline">¶</a></h1>
 <p>The following is a minimal inkscape example using inkscapeMadeEasy.</p>
 <p>The structure of inkscape extensions directory should be as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inkscape
- ┣━━ extensions
- ┋    ┣━━ inkscapeMadeEasy   &lt;-- folder with inkscapeMadeEasy files
-      ┃    ┣━━ inkscapeMadeEasy_Base.py
-      ┃    ┣━━ inkscapeMadeEasy_Draw.py
-      ┃    ┣━━ inkscapeMadeEasy_Plot.py
-      ┃    ┗━━ basicLatexPackages.tex
-      ┃
-      ┣━━ minimalExample   &lt;-- folder with minimal example files
-      ┃    ┣━━ minimalExample.py
-      ┃    ┗━━ minimalExample.inx
-      ┋
-</pre></div>
-</div>
 <div class="section" id="minimalexample-inx">
 <h2>minimalExample.inx<a class="headerlink" href="#minimalexample-inx" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -372,10 +355,10 @@
 50
 51</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="kn">as</span> <span class="nn">inkBase</span>
 <span class="c1"># in this example I am going to use both inkscapeMadeEasy_Draw.py and inkscapeMadeEasy_Plot functions, so I have to load them.</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="kn">as</span> <span class="nn">inkDraw</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="kn">as</span> <span class="nn">inkPlot</span>
 
 
 <span class="c1"># your plugin must inherit inkBase.inkscapeMadeEasy</span>
@@ -386,8 +369,8 @@
         <span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="c1"># argument parser</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--drawCircle&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;drawCircle&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--drawPlot&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;drawPlot&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--drawCircle&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;drawCircle&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--drawPlot&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;drawPlot&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
     <span class="c1"># the effect function will be the main function of your plugin. This function will &#39;do the stuff&#39;</span>
     <span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -431,8 +414,8 @@
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Why would you want to do this? Debugging your code! Inkscape neither have a stdout for you to dump stuff and inspect nor allow break points. Running independently from inkscape allow you to run via PyCharm or other python IDEs. Use it now and thank me later. =)</p>
+<p class="first admonition-title">Tip</p>
+<p class="last">Why would you want to do this? Debugging your code! Inkscape neither have a stdout for you to dump stuff and inspect nor allow break points. Running independently from inkscape allow you to run via PyCharm or other python IDEs. Use it now and thank me later. =)</p>
 </div>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -449,7 +432,7 @@
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">minimalExample</span> <span class="k">as</span> <span class="nn">myExtension</span>
+<span class="kn">import</span> <span class="nn">minimalExample</span> <span class="kn">as</span> <span class="nn">myExtension</span>
 
 <span class="c1">#loads the extension</span>
 <span class="n">myExt</span> <span class="o">=</span> <span class="n">myExtension</span><span class="o">.</span><span class="n">MinimalExample</span><span class="p">()</span>
@@ -462,8 +445,8 @@
 </pre></div>
 </td></tr></table></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Remember to change the paths of the svg files. <code class="docutils literal notranslate"><span class="pre">existing_file.svg</span></code> is one existing file that will be modified by the example. <code class="docutils literal notranslate"><span class="pre">new_file.svg</span></code> will be created with the result of the example.</p>
+<p class="first admonition-title">Note</p>
+<p class="last">Remember to change the paths of the svg files. <code class="docutils literal notranslate"><span class="pre">existing_file.svg</span></code> is one existing file that will be modified by the example. <code class="docutils literal notranslate"><span class="pre">new_file.svg</span></code> will be created with the result of the example.</p>
 </div>
 </div>
 </div>
@@ -488,19 +471,11 @@
 
   <div role="contentinfo">
     <p>
-        
         &copy; Copyright 2016, fsmMLK
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -511,6 +486,7 @@
 
   </div>
   
+
 
   <script type="text/javascript">
       jQuery(function () {
