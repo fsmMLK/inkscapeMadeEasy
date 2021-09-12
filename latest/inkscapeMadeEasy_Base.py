@@ -228,7 +228,7 @@ class inkscapeMadeEasy(inkex.Effect):
                 temp.remove(parent)
 
     # ---------------------------------------------
-    def importSVG(self, parent, fileIn, createGroup=True):
+    def importSVG(self, parent, fileIn, createGroup=True,position=None,scaleFactor=1.0):
         """ Import SVG file into the current document
 
         This function will all unify the defs node via :meth:`unifyDefs`
@@ -236,6 +236,8 @@ class inkscapeMadeEasy(inkex.Effect):
         :param parent: parent element where all contents will be placed
         :param fileIn: SVG file path
         :param createGroup: create a group containing all imported elements. (Default: True)
+        :param position: set center position of the group. Used only if createGroup=True  (Default: None)
+        :param scaleFactor: set scaling factor of the group. Used only if createGroup=True  (Default: 1.0)
         :type parent: inkscape element object
         :type fileIn: string
         :type createGroup: bool
@@ -257,6 +259,14 @@ class inkscapeMadeEasy(inkex.Effect):
                 if elem.tag != inkex.addNS('namedview', 'sodipodi') and elem.tag != inkex.addNS('metadata', 'svg'):
                     group.append(elem)
             self.unifyDefs()
+
+            if position is not None:
+                center = self.getCenter(group)
+                self.moveElement(group, position-center)
+
+            if scaleFactor != 1.0:
+                self.scaleElement(group, scaleX=scaleFactor, scaleY=None, center=self.getCenter(group))
+
             return group
         else:
             listElements=[]
@@ -1001,6 +1011,39 @@ class inkscapeMadeEasy(inkex.Effect):
 
         if center is not None:
             self.moveElement(element, [center[0], center[1]])
+
+    # ---------------------------------------------
+    def addAttribute(self, element, attributeName, attributeValue,forceWrite=False):
+        """Add a new attribute to the element. If the attribute already exists, forceWrite=True overwrites it. Otherwise the attribute is left unchanged.
+
+        :param element: element object
+        :param attributeName: attribute name
+        :param attributeValue: attribute value
+        :param forceWrite: force write if the attibute already exists
+        :type element: inkscape element object
+        :type attributeName: string
+        :type attributeValue: string
+        :type forceWrite: bool
+        :returns:  nothing
+        :rtype: -
+
+        **Example**
+        >>> rootLayer = self.document.getroot()                                   # retrieves the root layer of the file
+        >>> line1 = inkDraw.line.relCoords(rootLayer, [[5,0],[0,6]],[0,0])        # creates a line in groupA, using relative coordinates
+        >>> list = self.getPoints(line1)                                          # list = [[0.0, 0.0], [5.0, 0.0], [5.0, 6.0]]
+
+         >>> self.addAttribute(line1, attributeName='myInfo', attributeValue='my Data = %f' %3.5, forceWrite=True) # add new attribute
+         >>> self.addAttribute(line1, attributeName='myInfo', attributeValue='my Data = %f' %4.5, forceWrite=False) # does nothing. attribute already exists
+         >>> self.addAttribute(line1, attributeName='myInfo', attributeValue='my Data = %f' %5.5, forceWrite=True) # overwrite attribute
+        """
+
+        if forceWrite:
+            element.attrib[attributeName] = attributeValue
+        else:
+            if attributeName in element.attrib:
+                return None
+
+        return element
 
     # ---------------------------------------------
     def findMarker(self, markerName):

@@ -1,6 +1,14 @@
 Changelog
 ==========
 
+2021-09sep-12
+-------------
+
+Updated latex preamble to comply with SIunitx v2/v3
+inkscapeMadeEasy_Base.py
+   - importSVG() now accepts two new arguments
+   - new function addAttribute()
+
 2021-04apr-28
 -------------
 
