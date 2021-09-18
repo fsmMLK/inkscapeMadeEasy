@@ -57,7 +57,7 @@ The following is a minimal inkscape example using inkscapeMadeEasy.
 
 The structure of inkscape extensions directory should be as follows:
 
-.. code-block::
+.. code-block:: none
     
    inkscape
     ┣━━ extensions

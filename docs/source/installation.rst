@@ -54,7 +54,7 @@ Installation procedure (v1.0 only)
 
    You don't have to copy all files from Github. The files you will need are inside the ``latest`` folder. In the end you must have the following files and directories in your Inkscape extension directory.
 
-    .. code-block::
+    .. code-block:: none
         
        inkscape
         ┣━━extensions
