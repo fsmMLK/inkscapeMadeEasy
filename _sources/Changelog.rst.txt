@@ -1,7 +1,7 @@
 Changelog
 ==========
 
-2022-02feb-'19'
+2022-02feb-19
 -------------
 
 inkscapeMadeEasy_Draw.py
