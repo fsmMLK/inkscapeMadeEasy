@@ -1029,7 +1029,7 @@
 <span class="sd">        :param markerStart: Marker at the start node. Default: ``None``</span>
 <span class="sd">        :param markerMid: Marker at the mid nodes. Default: ``None``</span>
 <span class="sd">        :param markerEnd: Marker at the end node. Default: ``None``</span>
-<span class="sd">        :param strokeDashArray: Dashed line pattern definition. Default: ``None``. See `this link &lt;https://www.geeksforgeeks.org/css-stroke-dasharray-property/&gt;`_ for further information</span>
+<span class="sd">        :param strokeDashArray: Dashed line pattern definition. Default: ``None``. See `this link &lt;https://www.geeksforgeeks.org/css-stroke-dasharray-property/&gt;`_ for further information. Also, check method createDashedLinePattern</span>
 
 <span class="sd">        :type lineWidth: float     </span>
 <span class="sd">        :type lineColor: string</span>
@@ -1055,10 +1055,11 @@
 <span class="sd">        &gt;&gt;&gt; myMarker=inkDraw.marker.createDotMarker(self,nameID=&#39;myMarker&#39;,RenameMode=1,scale=0.5,strokeColor=color.defined(&#39;red&#39;),fillColor=None)   # see marker class for further information on this function</span>
 <span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, markerEnd=myMarker,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color(&#39;red&#39;))</span>
 <span class="sd">        &gt;&gt;&gt; </span>
-<span class="sd">        &gt;&gt;&gt; # creates a line style with dashed line (5 units dash , 10 units space</span>
-<span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color,strokeDashArray=&#39;5,10&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # creates a line style with dashed line (5 units dash , 10 units gap)</span>
+<span class="sd">        &gt;&gt;&gt; dashedPattern = inkDraw.lineStyle.createDashedLinePattern(5,10)</span>
+<span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color.defined(&#39;black&#39;),strokeDashArray=dashedPattern)</span>
 <span class="sd">        &gt;&gt;&gt; # creates a line style with a more complex pattern (5 units dash , 10 units space, 2 units dash, 3 units space</span>
-<span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color,strokeDashArray=&#39;5,10,2,3&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color.defined(&#39;black&#39;),strokeDashArray=&#39;5,10,2,3&#39;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">fillColor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1098,6 +1099,27 @@
             <span class="n">lineStyle</span><span class="p">[</span><span class="s1">&#39;marker-end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;url(#&#39;</span> <span class="o">+</span> <span class="n">markerEnd</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
 
         <span class="k">return</span> <span class="n">lineStyle</span></div>
+
+    <span class="c1"># ---------------------------------------------</span>
+<div class="viewcode-block" id="lineStyle.createDashedLinePattern"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.lineStyle.createDashedLinePattern">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">createDashedLinePattern</span><span class="p">(</span><span class="n">dashLength</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span><span class="n">gapLength</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates strokeDashArray of a dashed line necessary for method set</span>
+
+<span class="sd">        :param dashLength: dash length. Default: 5.0</span>
+<span class="sd">        :param dashLength: gap length. Default: 10.0</span>
+<span class="sd">        :type dashLength: float</span>
+<span class="sd">        :type dashLength: float</span>
+
+<span class="sd">        :returns: strokeDashArray</span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; myPattern = inkDraw.lineStyle.createDashedLinePattern(5,12)</span>
+<span class="sd">        &gt;&gt;&gt; myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined(&#39;black&#39;),fillColor=inkDraw.color.defined(&#39;black&#39;),strokeDashArray=myPattern)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dashLength</span><span class="p">,</span><span class="n">gapLength</span><span class="p">)</span></div>
+
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="lineStyle.setSimpleBlack"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.lineStyle.setSimpleBlack">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -2007,63 +2029,7 @@
 <span class="sd">        &gt;&gt;&gt; inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[0,0], label=&#39;arc&#39;,  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># finds the center point using some linear algebra</span>
-        <span class="n">StartVector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pstart</span><span class="p">)</span>
-        <span class="n">EndVector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pend</span><span class="p">)</span>
-
-        <span class="n">DistVector</span> <span class="o">=</span> <span class="n">EndVector</span> <span class="o">-</span> <span class="n">StartVector</span>
-        <span class="n">Dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">DistVector</span><span class="p">)</span>  <span class="c1"># distance between start and end</span>
-        <span class="k">if</span> <span class="n">Dist</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">radius</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">flagRightOf</span> <span class="ow">and</span> <span class="n">largeArc</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">flagRightOf</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">largeArc</span><span class="p">):</span>
-            <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># perpendicular to DistVector</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># perpendicular to DistVector</span>
-
-        <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">RadiusDirection</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">RadiusDirection</span><span class="p">)</span>  <span class="c1"># normalize RadiusDirection</span>
-        <span class="n">CenterPoint</span> <span class="o">=</span> <span class="n">StartVector</span> <span class="o">+</span> <span class="n">DistVector</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">RadiusDirection</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">radius</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">Dist</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>
-
-        <span class="c1"># computes the starting angle and ending angle</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">StartVector</span> <span class="o">-</span> <span class="n">CenterPoint</span>
-        <span class="n">AngStart</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">EndVector</span> <span class="o">-</span> <span class="n">CenterPoint</span>
-        <span class="n">AngEnd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-        <span class="k">if</span> <span class="n">flagRightOf</span><span class="p">:</span>  <span class="c1"># inkscape does not follow svg path format to create arcs. It uses sodipodi which is weird  =S</span>
-            <span class="n">sodipodiAngleStart</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngEnd</span><span class="p">)</span>
-            <span class="n">sodipodiAngleEnd</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngStart</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">sodipodiAngleStart</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngStart</span><span class="p">)</span>
-            <span class="n">sodipodiAngleEnd</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngEnd</span><span class="p">)</span>
-
-        <span class="c1"># arc instructions</span>
-        <span class="k">if</span> <span class="n">largeArc</span><span class="p">:</span>
-            <span class="n">largeArcFlag</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">largeArcFlag</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">flagRightOf</span><span class="p">:</span>
-            <span class="n">sweepFlag</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">sweepFlag</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">arcString</span> <span class="o">=</span> <span class="s1">&#39; a </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1"> 0 </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">largeArcFlag</span><span class="p">,</span> <span class="n">sweepFlag</span><span class="p">,</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;slice&#39;</span><span class="p">:</span>
-            <span class="n">arcString</span> <span class="o">=</span> <span class="n">arcString</span> <span class="o">+</span> <span class="s1">&#39; L &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span>
-        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;chord&#39;</span><span class="p">:</span>
-            <span class="n">arcString</span> <span class="o">=</span> <span class="n">arcString</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span>
-
-        <span class="c1"># M = moveto,L = lineto,H = horizontal lineto,V = vertical lineto,C = curveto,S = smooth curveto,Q = quadratic Bezier curve,T = smooth quadratic Bezier curveto,A = elliptical Arc,Z = closepath</span>
-        <span class="n">Attribs</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;inkscape&#39;</span><span class="p">):</span> <span class="n">label</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Style</span><span class="p">(</span><span class="n">lineStyle</span><span class="p">)),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="s1">&#39;arc&#39;</span><span class="p">,</span>
-                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">radius</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">radius</span><span class="p">),</span>
-                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;cy&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="n">sodipodiAngleStart</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="n">sodipodiAngleEnd</span><span class="p">,</span>
-                   <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="s1">&#39;M &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">arcString</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;open&#39;</span><span class="p">:</span>
-            <span class="n">Attribs</span><span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;arc-type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;arc&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">Attribs</span><span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;arc-type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span><span class="n">flagRightOf</span><span class="p">,</span> <span class="n">arcType</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="arc.centerAngStartAngEnd"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.arc.centerAngStartAngEnd">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -2124,17 +2090,7 @@
 <span class="sd">        &gt;&gt;&gt;                                  offset=[30,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;,largeArc=True)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">Pstart</span> <span class="o">=</span> <span class="p">[</span><span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angStart</span><span class="p">)),</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angStart</span><span class="p">))]</span>
-        <span class="n">Pend</span> <span class="o">=</span> <span class="p">[</span><span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angEnd</span><span class="p">)),</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angEnd</span><span class="p">))]</span>
-
-        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">centerPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angEnd</span> <span class="o">-</span> <span class="n">angStart</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
-            <span class="n">flagRight</span> <span class="o">=</span> <span class="n">largeArc</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">flagRight</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">largeArc</span>
-
-        <span class="k">return</span> <span class="n">arc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span> <span class="n">flagRight</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ellipseArc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="arc.threePoints"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.arc.threePoints">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -2425,6 +2381,258 @@
         <span class="k">return</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">widthHeightCenter</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="ellipseArc"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.ellipseArc">[docs]</a><span class="k">class</span> <span class="nc">ellipseArc</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Class with methods for drawing arcs of ellipses.</span>
+
+<span class="sd">    .. note:: This class contains only static methods so that your plugin class don&#39;t have to inherit it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ellipseArc.startEndRadius"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.ellipseArc.startEndRadius">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">radiusY</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span> <span class="n">flagRightOf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw an arc of ellipse, from ``Pstart`` to ``Pend`` with a given radiusX and radiusY</span>
+
+<span class="sd">        .. image:: ../imagesDocs/ellipse_arc_startEndRadius.png</span>
+<span class="sd">          :width: 80px</span>
+
+<span class="sd">        :param parent: Parent object</span>
+<span class="sd">        :param Pstart: Start coordinate [x,y]</span>
+
+<span class="sd">            .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param Pend: End coordinate [x,y]</span>
+<span class="sd">        :param radiusX: Arc radius is X coordinate</span>
+<span class="sd">        :param radiusY: Arc radius is Y coordinate</span>
+<span class="sd">        :param offset: Extra offset coords [x,y]. Default [0,0]</span>
+<span class="sd">        :param label: Label of the line. Default &#39;arc&#39;</span>
+<span class="sd">        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+<span class="sd">        :param flagRightOf: Sets the side of the vector Pend-Pstart which the arc must be drawn. See image below</span>
+
+<span class="sd">          - True: Draws the arc to the right (Default)</span>
+<span class="sd">          - False: Draws the arc to the left</span>
+
+<span class="sd">        :param arcType: type of arc. Valid values: &#39;open&#39;, &#39;slice&#39;, &#39;chord&#39;. See image below. Default: &#39;open&#39;</span>
+
+<span class="sd">        :param largeArc: Sets the largest arc to be drawn. See image below</span>
+
+<span class="sd">          - True: Draws the largest arc</span>
+<span class="sd">          - False: Draws the smallest arc (Default)</span>
+
+<span class="sd">        :type parent: inkscape element object</span>
+<span class="sd">        :type Pstart: list</span>
+<span class="sd">        :type Pend: list</span>
+<span class="sd">        :type radiusX: float</span>
+<span class="sd">        :type radiusY: float</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+<span class="sd">        :type flagRightOf: bool</span>
+<span class="sd">        :type arcType: string</span>
+<span class="sd">        :type largeArc: bool</span>
+
+<span class="sd">        :returns: the new arc object</span>
+<span class="sd">        :rtype: line Object</span>
+
+<span class="sd">        **Arc options**</span>
+
+<span class="sd">        .. image:: ../imagesDocs/ellipse_arc_startEndRadius_flags.png</span>
+<span class="sd">          :width: 800px</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; P1=[10.0,0.0]</span>
+<span class="sd">        &gt;&gt;&gt; P2=[20.0,10.0]</span>
+<span class="sd">        &gt;&gt;&gt; Rx=15.0</span>
+<span class="sd">        &gt;&gt;  Ry=20.0</span>
+<span class="sd">        &gt;&gt;&gt; myLineStyle=inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; #draws an open arc</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[25,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; #draws a closed (slice) arc</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[25,20], label=&#39;arc2&#39;,  lineStyle=myLineStyle, arcType=&#39;slice&#39;)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; #draws an open arc to the right</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[0,0], label=&#39;arc&#39;,  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># normalize with radiusX and radiusY to a circle with R=1</span>
+        <span class="n">scaleX</span><span class="o">=</span><span class="n">radiusX</span>
+        <span class="n">scaleY</span><span class="o">=</span><span class="n">radiusY</span>
+        <span class="n">StartVector</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pstart</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">scaleX</span><span class="p">,</span><span class="n">scaleY</span><span class="p">]))</span>
+        <span class="n">EndVector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pend</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">scaleX</span><span class="p">,</span><span class="n">scaleY</span><span class="p">]))</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="c1"># finds the center point using some linear algebra. (normalized circunference)</span>
+        <span class="n">DistVector</span> <span class="o">=</span> <span class="n">EndVector</span> <span class="o">-</span> <span class="n">StartVector</span>
+        <span class="n">Dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">DistVector</span><span class="p">)</span>  <span class="c1"># distance between start and end</span>
+        <span class="k">if</span> <span class="n">Dist</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">radius</span><span class="p">:</span>
+            <span class="n">displayMsg</span><span class="p">(</span><span class="s1">&#39;Error, distance between start and end greater than 2*radius&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">flagRightOf</span> <span class="ow">and</span> <span class="n">largeArc</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">flagRightOf</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">largeArc</span><span class="p">):</span>
+            <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># perpendicular to DistVector</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">DistVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># perpendicular to DistVector</span>
+
+        <span class="n">RadiusDirection</span> <span class="o">=</span> <span class="n">RadiusDirection</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">RadiusDirection</span><span class="p">)</span>  <span class="c1"># normalize RadiusDirection</span>
+        <span class="n">CenterPoint</span> <span class="o">=</span> <span class="n">StartVector</span> <span class="o">+</span> <span class="n">DistVector</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">RadiusDirection</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">radius</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">Dist</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>
+
+        <span class="c1"># draw circle</span>
+        <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="n">centerPoint</span><span class="o">=</span><span class="n">CenterPoint</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="n">StartVector</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="n">EndVector</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="n">Pstart</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">absCoords</span><span class="p">(</span><span class="n">parent</span><span class="p">,[</span><span class="n">StartVector</span><span class="p">,</span><span class="n">CenterPoint</span><span class="p">,</span><span class="n">EndVector</span><span class="p">],</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="p">)</span>
+
+        <span class="c1"># computes the starting angle and ending angle (normalized circle)</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">StartVector</span> <span class="o">-</span> <span class="n">CenterPoint</span>
+        <span class="n">AngStart</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">EndVector</span> <span class="o">-</span> <span class="n">CenterPoint</span>
+        <span class="n">AngEnd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">flagRightOf</span><span class="p">:</span>  <span class="c1"># inkscape does not follow svg path format to create arcs. It uses sodipodi which is weird  =S</span>
+            <span class="n">sodipodiAngleStart</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngEnd</span><span class="p">)</span>
+            <span class="n">sodipodiAngleEnd</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngStart</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sodipodiAngleStart</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngStart</span><span class="p">)</span>
+            <span class="n">sodipodiAngleEnd</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">AngEnd</span><span class="p">)</span>
+
+        <span class="c1"># arc instructions</span>
+        <span class="k">if</span> <span class="n">largeArc</span><span class="p">:</span>
+            <span class="n">largeArcFlag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">largeArcFlag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">flagRightOf</span><span class="p">:</span>
+            <span class="n">sweepFlag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sweepFlag</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">arcString</span> <span class="o">=</span> <span class="s1">&#39; a </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1"> 0 </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%f</span><span class="s1">,</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">largeArcFlag</span><span class="p">,</span> <span class="n">sweepFlag</span><span class="p">,</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">EndVector</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;slice&#39;</span><span class="p">:</span>
+            <span class="n">arcString</span> <span class="o">=</span> <span class="n">arcString</span> <span class="o">+</span> <span class="s1">&#39; L &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">scaleX</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">scaleY</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span>
+        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;chord&#39;</span><span class="p">:</span>
+            <span class="n">arcString</span> <span class="o">=</span> <span class="n">arcString</span> <span class="o">+</span> <span class="s1">&#39; z&#39;</span>
+
+        <span class="c1"># M = moveto,L = lineto,H = horizontal lineto,V = vertical lineto,C = curveto,S = smooth curveto,Q = quadratic Bezier curve,T = smooth quadratic Bezier curveto,A = elliptical Arc,Z = closepath</span>
+        <span class="n">Attribs</span> <span class="o">=</span> <span class="p">{</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;inkscape&#39;</span><span class="p">):</span> <span class="n">label</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Style</span><span class="p">(</span><span class="n">lineStyle</span><span class="p">)),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="s1">&#39;arc&#39;</span><span class="p">,</span>
+                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusX</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">radiusY</span><span class="p">),</span>
+                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">scaleX</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;cy&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">CenterPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">scaleY</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                   <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="n">sodipodiAngleStart</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">):</span> <span class="n">sodipodiAngleEnd</span><span class="p">,</span>
+                   <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="s1">&#39;M &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">StartVector</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">arcString</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;open&#39;</span><span class="p">:</span>
+            <span class="n">Attribs</span><span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;arc-type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;arc&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Attribs</span><span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;arc-type&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">arcType</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Attribs</span><span class="p">)</span></div>
+
+    <span class="c1"># ---------------------------------------------</span>
+<div class="viewcode-block" id="ellipseArc.centerAngStartAngEnd"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.ellipseArc.centerAngStartAngEnd">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">angStart</span><span class="p">,</span> <span class="n">angEnd</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">(),</span>
+                             <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw an arc of ellipse given its center and start and end angles</span>
+
+<span class="sd">        .. image:: ../imagesDocs/ellipse_arc_centerAngStartAngEnd.png</span>
+<span class="sd">          :width: 200px</span>
+
+
+<span class="sd">        :param parent: parent object</span>
+<span class="sd">        :param centerPoint: center coordinate [x,y]</span>
+
+<span class="sd">            .. warning:: Keep in mind  that Inkscape&#39;s y axis is upside down!</span>
+
+<span class="sd">        :param radiusX: Arc radius is X coordinate</span>
+<span class="sd">        :param radiusY: Arc radius is Y coordinate</span>
+<span class="sd">        :param angStart: Start angle in degrees</span>
+<span class="sd">        :param angEnd: End angle in degrees</span>
+<span class="sd">        :param offset: Extra offset coords [x,y]</span>
+<span class="sd">        :param label: Label of the line. Default &#39;arc&#39;</span>
+<span class="sd">        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()</span>
+<span class="sd">        :param arcType: Type of arc. Valid values: &#39;open&#39;, &#39;slice&#39;, &#39;chord&#39;. See image below. Default: &#39;open&#39;</span>
+<span class="sd">        :param largeArc: Sets the largest arc to be drawn. See image below</span>
+
+<span class="sd">          - True: Draws the largest arc</span>
+<span class="sd">          - False: Draws the smallest arc (Default)</span>
+
+<span class="sd">        :type parent: inkscape element object</span>
+<span class="sd">        :type centerPoint: list</span>
+<span class="sd">        :type radiusX: float</span>
+<span class="sd">        :type radiusY: float</span>
+<span class="sd">        :type angStart: float</span>
+<span class="sd">        :type angEnd: float</span>
+<span class="sd">        :type offset: list</span>
+<span class="sd">        :type label: string</span>
+<span class="sd">        :type lineStyle: lineStyle object</span>
+<span class="sd">        :type arcType: string</span>
+<span class="sd">        :type largeArc: bool</span>
+
+<span class="sd">        :returns: the new arc object</span>
+<span class="sd">        :rtype: line Object</span>
+
+<span class="sd">        **Arc options**</span>
+
+<span class="sd">        .. image:: ../imagesDocs/ellipse_arc_centerAngStartAngEnd_flags.png</span>
+<span class="sd">          :width: 700px</span>
+
+<span class="sd">        **Example**</span>
+
+<span class="sd">        &gt;&gt;&gt; root_layer = self.document.getroot()     # retrieves the root layer of the document</span>
+<span class="sd">        &gt;&gt;&gt; myLineStyle = inkDraw.lineStyle.setSimpleBlack()</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; #draws the shortest arc</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.ellipseArc.centerAngStartAngEnd(parent=root_layer, centerPoint=[0,0], radiusX=15.0, radiusY=25.0, angStart=-10, angEnd=90,</span>
+<span class="sd">        &gt;&gt;&gt;                                         offset=[0,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;,largeArc=False)</span>
+<span class="sd">        &gt;&gt;&gt; #draws the longest arc</span>
+<span class="sd">        &gt;&gt;&gt; inkDraw.ellipseArc.centerAngStartAngEnd(parent=root_layer, centerPoint=[0,0], radiusX=15.0, radiusY=25.0,, angStart=-10, angEnd=90,</span>
+<span class="sd">        &gt;&gt;&gt;                                         offset=[30,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;,largeArc=True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># convert the angle in the ellipse (theta) to the normalized circle (alpha)</span>
+        <span class="c1">#</span>
+        <span class="c1">#    ellipse ( radii a and b)                         unitary circle</span>
+        <span class="c1">#    central angle : theta                            central angle alpha</span>
+        <span class="c1">#    point (x,y) on the ellipse</span>
+        <span class="c1">#</span>
+        <span class="c1">#               (x,y)</span>
+        <span class="c1">#   ^    _______*__                                    _____    ( cos(alpha), sin(alpha) )</span>
+        <span class="c1">#   |          /   -----------                              *---</span>
+        <span class="c1">#   b        /                ---                         /     --</span>
+        <span class="c1">#   |      /  theta               \                      / alpha   \</span>
+        <span class="c1">#   V    /                         |                    /          |</span>
+        <span class="c1">#         &lt;------------a----------&gt;                     &lt;--- r=1 --&gt;</span>
+        <span class="c1">#</span>
+        <span class="c1">#        tan(theta)=y/x   (1)                           b*sin(alpha)=y  -=&gt;   b                  y   (2)</span>
+        <span class="c1">#                                                       a*cos(alpha)=x       --- * tan(alpha) = ---</span>
+        <span class="c1">#                                                                             a                  x</span>
+        <span class="c1">#   from (1) and (2)</span>
+        <span class="c1">#     b/a * tan(alpha) = tan(theta)   ==&gt;    alpha = atan( a/b * tan(theta)  )</span>
+        <span class="c1">#</span>
+        <span class="c1"># to run, atan must be replaced by atan2(atan, +-1), depending on the signal of cos(theta) to get the correct quadrant</span>
+
+        <span class="n">alphaStart</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span> <span class="n">radiusX</span><span class="o">/</span><span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angStart</span><span class="p">))</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angStart</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)))</span>
+        <span class="n">alphaEnd</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span> <span class="n">radiusX</span><span class="o">/</span><span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angEnd</span><span class="p">))</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angEnd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)))</span>
+
+        <span class="n">Pstart</span> <span class="o">=</span> <span class="p">[</span><span class="n">radiusX</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alphaStart</span><span class="p">),</span> <span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alphaStart</span><span class="p">)]</span>
+        <span class="n">Pend</span> <span class="o">=</span> <span class="p">[</span><span class="n">radiusX</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alphaEnd</span><span class="p">),</span> <span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alphaEnd</span><span class="p">)]</span>
+
+        <span class="c1">#old</span>
+        <span class="c1">#Pstart = [radiusX * math.cos(math.radians(angStart)), radiusY * math.sin(math.radians(angStart))]</span>
+        <span class="c1">#Pend = [radiusX * math.cos(math.radians(angEnd)), radiusY * math.sin(math.radians(angEnd))]</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">centerPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angEnd</span> <span class="o">-</span> <span class="n">angStart</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+            <span class="n">flagRight</span> <span class="o">=</span> <span class="n">largeArc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">flagRight</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">largeArc</span>
+
+        <span class="k">return</span> <span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span> <span class="n">flagRight</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div></div>
+
+
 <div class="viewcode-block" id="ellipse"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.ellipse">[docs]</a><span class="k">class</span> <span class="nc">ellipse</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Class with methods for drawing ellipses.</span>
 
@@ -2432,7 +2640,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ellipse.centerRadius"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.ellipse.centerRadius">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">centerRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">,</span> <span class="n">radiusX</span><span class="p">,</span> <span class="n">radiusY</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ellipse&#39;</span><span class="p">,</span> <span class="n">lineStyle</span><span class="o">=</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()):</span>
         <span class="sd">&quot;&quot;&quot;Draw an ellipse given its center point and radii</span>
 
 <span class="sd">        :param parent: Parent object</span>

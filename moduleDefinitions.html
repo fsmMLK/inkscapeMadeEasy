@@ -2214,7 +2214,7 @@ Keep in mind that the selected color in the color picker widget will be consider
 <li><strong>markerStart</strong> (<em>string</em>) – Marker at the start node. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></li>
 <li><strong>markerMid</strong> (<em>string</em>) – Marker at the mid nodes. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></li>
 <li><strong>markerEnd</strong> (<em>string</em>) – Marker at the end node. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></li>
-<li><strong>strokeDashArray</strong> (<em>string</em>) – <p>Dashed line pattern definition. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>. See <a class="reference external" href="https://www.geeksforgeeks.org/css-stroke-dasharray-property/">this link</a> for further information</p>
+<li><strong>strokeDashArray</strong> (<em>string</em>) – <p>Dashed line pattern definition. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>. See <a class="reference external" href="https://www.geeksforgeeks.org/css-stroke-dasharray-property/">this link</a> for further information. Also, check method createDashedLinePattern</p>
 </li>
 </ul>
 </td>
@@ -2234,10 +2234,40 @@ Keep in mind that the selected color in the color picker widget will be consider
 <span class="gp">&gt;&gt;&gt; </span><span class="n">myMarker</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">marker</span><span class="o">.</span><span class="n">createDotMarker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nameID</span><span class="o">=</span><span class="s1">&#39;myMarker&#39;</span><span class="p">,</span><span class="n">RenameMode</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">strokeColor</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>   <span class="c1"># see marker class for further information on this function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">myLineStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">markerEnd</span><span class="o">=</span><span class="n">myMarker</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creates a line style with dashed line (5 units dash , 10 units space</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myDashedStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">strokeDashArray</span><span class="o">=</span><span class="s1">&#39;5,10&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># creates a line style with dashed line (5 units dash , 10 units gap)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dashedPattern</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">createDashedLinePattern</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myDashedStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">strokeDashArray</span><span class="o">=</span><span class="n">dashedPattern</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># creates a line style with a more complex pattern (5 units dash , 10 units space, 2 units dash, 3 units space</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">myDashedStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">strokeDashArray</span><span class="o">=</span><span class="s1">&#39;5,10,2,3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myDashedStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">strokeDashArray</span><span class="o">=</span><span class="s1">&#39;5,10,2,3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.lineStyle.createDashedLinePattern">
+<em class="property">static </em><code class="descname">createDashedLinePattern</code><span class="sig-paren">(</span><em>dashLength=5.0</em>, <em>gapLength=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#lineStyle.createDashedLinePattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.lineStyle.createDashedLinePattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates strokeDashArray of a dashed line necessary for method set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dashLength</strong> (<em>float</em>) – dash length. Default: 5.0</li>
+<li><strong>dashLength</strong> – gap length. Default: 10.0</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">strokeDashArray</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myPattern</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">createDashedLinePattern</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myDashedStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lineWidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">fillColor</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">defined</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span><span class="n">strokeDashArray</span><span class="o">=</span><span class="n">myPattern</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -3167,6 +3197,145 @@ when the bezier curve must be closed.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="inkscapeMadeEasy_Draw.ellipseArc">
+<em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">ellipseArc</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipseArc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipseArc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class with methods for drawing arcs of ellipses.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class contains only static methods so that your plugin class don’t have to inherit it.</p>
+</div>
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.ellipseArc.startEndRadius">
+<em class="property">static </em><code class="descname">startEndRadius</code><span class="sig-paren">(</span><em>parent, Pstart, Pend, radiusX=1.0, radiusY=2.0, offset=[0, 0], label='arc', lineStyle={'fill': 'none', 'fill-opacity': '1.0', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-opacity': '1.0', 'stroke-width': '1.0'}, flagRightOf=True, arcType='open', largeArc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipseArc.startEndRadius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipseArc.startEndRadius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an arc of ellipse, from <code class="docutils literal notranslate"><span class="pre">Pstart</span></code> to <code class="docutils literal notranslate"><span class="pre">Pend</span></code> with a given radiusX and radiusY</p>
+<a class="reference internal image-reference" href="_images/ellipse_arc_startEndRadius.png"><img alt="_images/ellipse_arc_startEndRadius.png" src="_images/ellipse_arc_startEndRadius.png" style="width: 80px;" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>inkscape element object</em>) – Parent object</li>
+<li><strong>Pstart</strong> (<em>list</em>) – <p>Start coordinate [x,y]</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+</li>
+<li><strong>Pend</strong> (<em>list</em>) – End coordinate [x,y]</li>
+<li><strong>radiusX</strong> (<em>float</em>) – Arc radius is X coordinate</li>
+<li><strong>radiusY</strong> (<em>float</em>) – Arc radius is Y coordinate</li>
+<li><strong>offset</strong> (<em>list</em>) – Extra offset coords [x,y]. Default [0,0]</li>
+<li><strong>label</strong> (<em>string</em>) – Label of the line. Default ‘arc’</li>
+<li><strong>lineStyle</strong> (<em>lineStyle object</em>) – Line style to be used. See <a class="reference internal" href="#inkscapeMadeEasy_Draw.lineStyle" title="inkscapeMadeEasy_Draw.lineStyle"><code class="xref py py-class docutils literal notranslate"><span class="pre">lineStyle</span></code></a> class. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+<li><strong>flagRightOf</strong> (<em>bool</em>) – <p>Sets the side of the vector Pend-Pstart which the arc must be drawn. See image below</p>
+<ul>
+<li>True: Draws the arc to the right (Default)</li>
+<li>False: Draws the arc to the left</li>
+</ul>
+</li>
+<li><strong>arcType</strong> (<em>string</em>) – type of arc. Valid values: ‘open’, ‘slice’, ‘chord’. See image below. Default: ‘open’</li>
+<li><strong>largeArc</strong> (<em>bool</em>) – <p>Sets the largest arc to be drawn. See image below</p>
+<ul>
+<li>True: Draws the largest arc</li>
+<li>False: Draws the smallest arc (Default)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new arc object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">line Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Arc options</strong></p>
+<a class="reference internal image-reference" href="_images/ellipse_arc_startEndRadius_flags.png"><img alt="_images/ellipse_arc_startEndRadius_flags.png" src="_images/ellipse_arc_startEndRadius_flags.png" style="width: 800px;" /></a>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P1</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P2</span><span class="o">=</span><span class="p">[</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Rx</span><span class="o">=</span><span class="mf">15.0</span>
+<span class="go">&gt;&gt;  Ry=20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myLineStyle</span><span class="o">=</span><span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws an open arc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Rx</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Ry</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws a closed (slice) arc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Rx</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Ry</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc2&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;slice&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws an open arc to the right</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">Pstart</span><span class="o">=</span><span class="n">P1</span><span class="p">,</span> <span class="n">Pend</span><span class="o">=</span><span class="n">P2</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Rx</span><span class="p">,</span> <span class="n">radiusX</span><span class="o">=</span><span class="n">Ry</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">flagRightOf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">largeArc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="inkscapeMadeEasy_Draw.ellipseArc.centerAngStartAngEnd">
+<em class="property">static </em><code class="descname">centerAngStartAngEnd</code><span class="sig-paren">(</span><em>parent, centerPoint, radiusX, radiusY, angStart, angEnd, offset=[0, 0], label='arc', lineStyle={'fill': 'none', 'fill-opacity': '1.0', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-opacity': '1.0', 'stroke-width': '1.0'}, arcType='open', largeArc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipseArc.centerAngStartAngEnd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipseArc.centerAngStartAngEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an arc of ellipse given its center and start and end angles</p>
+<a class="reference internal image-reference" href="_images/ellipse_arc_centerAngStartAngEnd.png"><img alt="_images/ellipse_arc_centerAngStartAngEnd.png" src="_images/ellipse_arc_centerAngStartAngEnd.png" style="width: 200px;" /></a>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>inkscape element object</em>) – parent object</li>
+<li><strong>centerPoint</strong> (<em>list</em>) – <p>center coordinate [x,y]</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Keep in mind  that Inkscape’s y axis is upside down!</p>
+</div>
+</li>
+<li><strong>radiusX</strong> (<em>float</em>) – Arc radius is X coordinate</li>
+<li><strong>radiusY</strong> (<em>float</em>) – Arc radius is Y coordinate</li>
+<li><strong>angStart</strong> (<em>float</em>) – Start angle in degrees</li>
+<li><strong>angEnd</strong> (<em>float</em>) – End angle in degrees</li>
+<li><strong>offset</strong> (<em>list</em>) – Extra offset coords [x,y]</li>
+<li><strong>label</strong> (<em>string</em>) – Label of the line. Default ‘arc’</li>
+<li><strong>lineStyle</strong> (<em>lineStyle object</em>) – Line style to be used. See <a class="reference internal" href="#inkscapeMadeEasy_Draw.lineStyle" title="inkscapeMadeEasy_Draw.lineStyle"><code class="xref py py-class docutils literal notranslate"><span class="pre">lineStyle</span></code></a> class. Default: lineStyle=lineStyle.setSimpleBlack()</li>
+<li><strong>arcType</strong> (<em>string</em>) – Type of arc. Valid values: ‘open’, ‘slice’, ‘chord’. See image below. Default: ‘open’</li>
+<li><strong>largeArc</strong> (<em>bool</em>) – <p>Sets the largest arc to be drawn. See image below</p>
+<ul>
+<li>True: Draws the largest arc</li>
+<li>False: Draws the smallest arc (Default)</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new arc object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">line Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Arc options</strong></p>
+<a class="reference internal image-reference" href="_images/ellipse_arc_centerAngStartAngEnd_flags.png"><img alt="_images/ellipse_arc_centerAngStartAngEnd_flags.png" src="_images/ellipse_arc_centerAngStartAngEnd_flags.png" style="width: 700px;" /></a>
+<p><strong>Example</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>     <span class="c1"># retrieves the root layer of the document</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myLineStyle</span> <span class="o">=</span> <span class="n">inkDraw</span><span class="o">.</span><span class="n">lineStyle</span><span class="o">.</span><span class="n">setSimpleBlack</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws the shortest arc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">ellipseArc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radiusX</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">radiusY</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                        <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#draws the longest arc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inkDraw</span><span class="o">.</span><span class="n">ellipseArc</span><span class="o">.</span><span class="n">centerAngStartAngEnd</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">root_layer</span><span class="p">,</span> <span class="n">centerPoint</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">radiusX</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">radiusY</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,,</span> <span class="n">angStart</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">angEnd</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                        <span class="n">offset</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;arc1&#39;</span><span class="p">,</span>  <span class="n">lineStyle</span><span class="o">=</span><span class="n">myLineStyle</span><span class="p">,</span> <span class="n">arcType</span><span class="o">=</span><span class="s1">&#39;open&#39;</span><span class="p">,</span><span class="n">largeArc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="inkscapeMadeEasy_Draw.ellipse">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Draw.</code><code class="descname">ellipse</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -3177,7 +3346,7 @@ when the bezier curve must be closed.</p>
 </div>
 <dl class="staticmethod">
 <dt id="inkscapeMadeEasy_Draw.ellipse.centerRadius">
-<em class="property">static </em><code class="descname">centerRadius</code><span class="sig-paren">(</span><em>parent, centerPoint, radiusX, radiusY, offset=[0, 0], label='circle', lineStyle={'fill': 'none', 'fill-opacity': '1.0', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-opacity': '1.0', 'stroke-width': '1.0'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipse.centerRadius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipse.centerRadius" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">centerRadius</code><span class="sig-paren">(</span><em>parent, centerPoint, radiusX, radiusY, offset=[0, 0], label='ellipse', lineStyle={'fill': 'none', 'fill-opacity': '1.0', 'stroke': '#000000', 'stroke-dasharray': 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-opacity': '1.0', 'stroke-width': '1.0'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Draw.html#ellipse.centerRadius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Draw.ellipse.centerRadius" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw an ellipse given its center point and radii</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

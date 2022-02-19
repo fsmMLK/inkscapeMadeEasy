@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+2022-02feb-'19'
+-------------
+
+inkscapeMadeEasy_Draw.py
+   - new class ellipseArc with functions to draw arcs of ellipses
+   - new method lineStyle.createDashedLinePattern
+
 2021-09sep-12
 -------------
 
