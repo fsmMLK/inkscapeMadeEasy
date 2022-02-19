@@ -853,7 +853,7 @@ class lineStyle():
         :param markerStart: Marker at the start node. Default: ``None``
         :param markerMid: Marker at the mid nodes. Default: ``None``
         :param markerEnd: Marker at the end node. Default: ``None``
-        :param strokeDashArray: Dashed line pattern definition. Default: ``None``. See `this link <https://www.geeksforgeeks.org/css-stroke-dasharray-property/>`_ for further information
+        :param strokeDashArray: Dashed line pattern definition. Default: ``None``. See `this link <https://www.geeksforgeeks.org/css-stroke-dasharray-property/>`_ for further information. Also, check method createDashedLinePattern
 
         :type lineWidth: float     
         :type lineColor: string
@@ -879,10 +879,11 @@ class lineStyle():
         >>> myMarker=inkDraw.marker.createDotMarker(self,nameID='myMarker',RenameMode=1,scale=0.5,strokeColor=color.defined('red'),fillColor=None)   # see marker class for further information on this function
         >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, markerEnd=myMarker,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color('red'))
         >>> 
-        >>> # creates a line style with dashed line (5 units dash , 10 units space
-        >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color,strokeDashArray='5,10')
+        >>> # creates a line style with dashed line (5 units dash , 10 units gap)
+        >>> dashedPattern = inkDraw.lineStyle.createDashedLinePattern(5,10)
+        >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color.defined('black'),strokeDashArray=dashedPattern)
         >>> # creates a line style with a more complex pattern (5 units dash , 10 units space, 2 units dash, 3 units space
-        >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color,strokeDashArray='5,10,2,3')
+        >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color.defined('black'),strokeDashArray='5,10,2,3')
         """
 
         if fillColor is None:
@@ -922,6 +923,27 @@ class lineStyle():
             lineStyle['marker-end'] = 'url(#' + markerEnd + ')'
 
         return lineStyle
+
+    # ---------------------------------------------
+    @staticmethod
+    def createDashedLinePattern(dashLength=5.0,gapLength=10.0):
+        """Creates strokeDashArray of a dashed line necessary for method set
+
+        :param dashLength: dash length. Default: 5.0
+        :param dashLength: gap length. Default: 10.0
+        :type dashLength: float
+        :type dashLength: float
+
+        :returns: strokeDashArray
+        :rtype: string
+
+        **Example**
+
+        >>> myPattern = inkDraw.lineStyle.createDashedLinePattern(5,12)
+        >>> myDashedStyle = inkDraw.lineStyle.set(lineWidth=1.0,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color.defined('black'),strokeDashArray=myPattern)
+        """
+        return '%f,%f' % (dashLength,gapLength)
+
 
     # ---------------------------------------------
     @staticmethod
@@ -1831,63 +1853,7 @@ class arc():
         >>> inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[0,0], label='arc',  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)
         """
 
-        # finds the center point using some linear algebra
-        StartVector = np.array(Pstart)
-        EndVector = np.array(Pend)
-
-        DistVector = EndVector - StartVector
-        Dist = np.linalg.norm(DistVector)  # distance between start and end
-        if Dist > 2.0 * radius:
-            return None
-
-        if (flagRightOf and largeArc) or (not flagRightOf and not largeArc):
-            RadiusDirection = np.array([-DistVector[1], DistVector[0]])  # perpendicular to DistVector
-        else:
-            RadiusDirection = np.array([DistVector[1], -DistVector[0]])  # perpendicular to DistVector
-
-        RadiusDirection = RadiusDirection / np.linalg.norm(RadiusDirection)  # normalize RadiusDirection
-        CenterPoint = StartVector + DistVector / 2.0 + RadiusDirection * math.sqrt(radius ** 2.0 - (Dist / 2.0) ** 2.0)
-
-        # computes the starting angle and ending angle
-        temp = StartVector - CenterPoint
-        AngStart = math.atan2(temp[1], temp[0])
-        temp = EndVector - CenterPoint
-        AngEnd = math.atan2(temp[1], temp[0])
-
-        if flagRightOf:  # inkscape does not follow svg path format to create arcs. It uses sodipodi which is weird  =S
-            sodipodiAngleStart = str(AngEnd)
-            sodipodiAngleEnd = str(AngStart)
-        else:
-            sodipodiAngleStart = str(AngStart)
-            sodipodiAngleEnd = str(AngEnd)
-
-        # arc instructions
-        if largeArc:
-            largeArcFlag = 1
-        else:
-            largeArcFlag = 0
-        if flagRightOf:
-            sweepFlag = 0
-        else:
-            sweepFlag = 1
-        arcString = ' a %f,%f 0 %d %d %f,%f' % (radius, radius, largeArcFlag, sweepFlag, EndVector[0] - StartVector[0], EndVector[1] - StartVector[1])
-        if arcType.lower() == 'slice':
-            arcString = arcString + ' L ' + str(CenterPoint[0] + offset[0]) + ' ' + str(CenterPoint[1] + offset[1]) + ' z'
-        if arcType.lower() == 'chord':
-            arcString = arcString + ' z'
-
-        # M = moveto,L = lineto,H = horizontal lineto,V = vertical lineto,C = curveto,S = smooth curveto,Q = quadratic Bezier curve,T = smooth quadratic Bezier curveto,A = elliptical Arc,Z = closepath
-        Attribs = {inkex.addNS('label', 'inkscape'): label, 'style': str(inkex.Style(lineStyle)), inkex.addNS('type', 'sodipodi'): 'arc',
-                   inkex.addNS('rx', 'sodipodi'): str(radius), inkex.addNS('ry', 'sodipodi'): str(radius),
-                   inkex.addNS('cx', 'sodipodi'): str(CenterPoint[0] + offset[0]), inkex.addNS('cy', 'sodipodi'): str(CenterPoint[1] + offset[1]),
-                   inkex.addNS('start', 'sodipodi'): sodipodiAngleStart, inkex.addNS('end', 'sodipodi'): sodipodiAngleEnd,
-                   'd': 'M ' + str(offset[0] + StartVector[0]) + ' ' + str(offset[1] + StartVector[1]) + arcString}
-        if arcType.lower() == 'open':
-            Attribs[inkex.addNS('arc-type', 'sodipodi')] = 'arc'
-        else:
-            Attribs[inkex.addNS('arc-type', 'sodipodi')] = arcType.lower()
-
-        return etree.SubElement(parent, inkex.addNS('path', 'svg'), Attribs)
+        return ellipseArc.startEndRadius(parent, Pstart, Pend, radius, radius, offset, label, lineStyle,flagRightOf, arcType)
 
     # ---------------------------------------------
     @staticmethod
@@ -1948,17 +1914,7 @@ class arc():
         >>>                                  offset=[30,0], label='arc1',  lineStyle=myLineStyle, arcType='open',largeArc=True)
         """
 
-        Pstart = [radius * math.cos(math.radians(angStart)), radius * math.sin(math.radians(angStart))]
-        Pend = [radius * math.cos(math.radians(angEnd)), radius * math.sin(math.radians(angEnd))]
-
-        pos = [centerPoint[0] + offset[0], centerPoint[1] + offset[1]]
-
-        if abs(angEnd - angStart) <= 180:
-            flagRight = largeArc
-        else:
-            flagRight = not largeArc
-
-        return arc.startEndRadius(parent, Pstart, Pend, radius, pos, label, lineStyle, flagRight, arcType, largeArc)
+        return ellipseArc.centerAngStartAngEnd(parent, centerPoint, radius, radius, angStart, angEnd, offset, label, lineStyle, arcType, largeArc)
 
     # ---------------------------------------------
     @staticmethod
@@ -2249,6 +2205,258 @@ class rectangle():
         return rectangle.widthHeightCenter(parent, [x, y], width, height, radiusX, radiusY, offset, label, lineStyle)
 
 
+class ellipseArc():
+    """ Class with methods for drawing arcs of ellipses.
+
+    .. note:: This class contains only static methods so that your plugin class don't have to inherit it.
+    """
+
+    @staticmethod
+    def startEndRadius(parent, Pstart, Pend, radiusX=1.0, radiusY=2.0, offset=[0, 0], label='arc', lineStyle=lineStyle.setSimpleBlack(), flagRightOf=True,
+                       arcType='open', largeArc=False):
+        """Draw an arc of ellipse, from ``Pstart`` to ``Pend`` with a given radiusX and radiusY
+
+        .. image:: ../imagesDocs/ellipse_arc_startEndRadius.png
+          :width: 80px
+
+        :param parent: Parent object
+        :param Pstart: Start coordinate [x,y]
+
+            .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param Pend: End coordinate [x,y]
+        :param radiusX: Arc radius is X coordinate
+        :param radiusY: Arc radius is Y coordinate
+        :param offset: Extra offset coords [x,y]. Default [0,0]
+        :param label: Label of the line. Default 'arc'
+        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()
+        :param flagRightOf: Sets the side of the vector Pend-Pstart which the arc must be drawn. See image below
+
+          - True: Draws the arc to the right (Default)
+          - False: Draws the arc to the left
+
+        :param arcType: type of arc. Valid values: 'open', 'slice', 'chord'. See image below. Default: 'open'
+
+        :param largeArc: Sets the largest arc to be drawn. See image below
+
+          - True: Draws the largest arc
+          - False: Draws the smallest arc (Default)
+
+        :type parent: inkscape element object
+        :type Pstart: list
+        :type Pend: list
+        :type radiusX: float
+        :type radiusY: float
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+        :type flagRightOf: bool
+        :type arcType: string
+        :type largeArc: bool
+
+        :returns: the new arc object
+        :rtype: line Object
+
+        **Arc options**
+
+        .. image:: ../imagesDocs/ellipse_arc_startEndRadius_flags.png
+          :width: 800px
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>>
+        >>> P1=[10.0,0.0]
+        >>> P2=[20.0,10.0]
+        >>> Rx=15.0
+        >>  Ry=20.0
+        >>> myLineStyle=inkDraw.lineStyle.setSimpleBlack()
+        >>>
+        >>> #draws an open arc
+        >>> inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[25,0], label='arc1',  lineStyle=myLineStyle, arcType='open')
+        >>>
+        >>> #draws a closed (slice) arc
+        >>> inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[25,20], label='arc2',  lineStyle=myLineStyle, arcType='slice')
+        >>>
+        >>> #draws an open arc to the right
+        >>> inkDraw.ellipseArc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radiusX=Rx, radiusX=Ry, offset=[0,0], label='arc',  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)
+        """
+
+        # normalize with radiusX and radiusY to a circle with R=1
+        scaleX=radiusX
+        scaleY=radiusY
+        StartVector =np.divide(np.array(Pstart),np.array([scaleX,scaleY]))
+        EndVector = np.divide(np.array(Pend),np.array([scaleX,scaleY]))
+        radius = 1.0
+
+        # finds the center point using some linear algebra. (normalized circunference)
+        DistVector = EndVector - StartVector
+        Dist = np.linalg.norm(DistVector)  # distance between start and end
+        if Dist > 2.0 * radius:
+            displayMsg('Error, distance between start and end greater than 2*radius')
+            return None
+
+        if (flagRightOf and largeArc) or (not flagRightOf and not largeArc):
+            RadiusDirection = np.array([-DistVector[1], DistVector[0]])  # perpendicular to DistVector
+        else:
+            RadiusDirection = np.array([DistVector[1], -DistVector[0]])  # perpendicular to DistVector
+
+        RadiusDirection = RadiusDirection / np.linalg.norm(RadiusDirection)  # normalize RadiusDirection
+        CenterPoint = StartVector + DistVector / 2.0 + RadiusDirection * math.sqrt(radius ** 2.0 - (Dist / 2.0) ** 2.0)
+
+        # draw circle
+        if False:
+            circle.centerRadius(parent,centerPoint=CenterPoint,radius=1.0,offset=[0,0],lineStyle=lineStyle)
+            circle.centerRadius(parent, centerPoint=StartVector, radius=0.1, offset=[0, 0], lineStyle=lineStyle)
+            circle.centerRadius(parent, centerPoint=EndVector, radius=0.1, offset=[0, 0], lineStyle=lineStyle)
+            circle.centerRadius(parent, centerPoint=Pstart, radius=0.1, offset=[0, 0], lineStyle=lineStyle)
+            circle.centerRadius(parent, centerPoint=Pend, radius=0.1, offset=[0, 0], lineStyle=lineStyle)
+            line.absCoords(parent,[StartVector,CenterPoint,EndVector], lineStyle=lineStyle)
+
+        # computes the starting angle and ending angle (normalized circle)
+        temp = StartVector - CenterPoint
+        AngStart = math.atan2(temp[1], temp[0])
+        temp = EndVector - CenterPoint
+        AngEnd = math.atan2(temp[1], temp[0])
+
+        if flagRightOf:  # inkscape does not follow svg path format to create arcs. It uses sodipodi which is weird  =S
+            sodipodiAngleStart = str(AngEnd)
+            sodipodiAngleEnd = str(AngStart)
+        else:
+            sodipodiAngleStart = str(AngStart)
+            sodipodiAngleEnd = str(AngEnd)
+
+        # arc instructions
+        if largeArc:
+            largeArcFlag = 1
+        else:
+            largeArcFlag = 0
+        if flagRightOf:
+            sweepFlag = 0
+        else:
+            sweepFlag = 1
+        arcString = ' a %f,%f 0 %d %d %f,%f' % (radiusX, radiusY, largeArcFlag, sweepFlag, EndVector[0] - StartVector[0], EndVector[1] - StartVector[1])
+        if arcType.lower() == 'slice':
+            arcString = arcString + ' L ' + str(CenterPoint[0]*scaleX + offset[0]) + ' ' + str(CenterPoint[1]*scaleY + offset[1]) + ' z'
+        if arcType.lower() == 'chord':
+            arcString = arcString + ' z'
+
+        # M = moveto,L = lineto,H = horizontal lineto,V = vertical lineto,C = curveto,S = smooth curveto,Q = quadratic Bezier curve,T = smooth quadratic Bezier curveto,A = elliptical Arc,Z = closepath
+        Attribs = {inkex.addNS('label', 'inkscape'): label, 'style': str(inkex.Style(lineStyle)), inkex.addNS('type', 'sodipodi'): 'arc',
+                   inkex.addNS('rx', 'sodipodi'): str(radiusX), inkex.addNS('ry', 'sodipodi'): str(radiusY),
+                   inkex.addNS('cx', 'sodipodi'): str(CenterPoint[0]*scaleX + offset[0]), inkex.addNS('cy', 'sodipodi'): str(CenterPoint[1]*scaleY + offset[1]),
+                   inkex.addNS('start', 'sodipodi'): sodipodiAngleStart, inkex.addNS('end', 'sodipodi'): sodipodiAngleEnd,
+                   'd': 'M ' + str(offset[0] + StartVector[0]) + ' ' + str(offset[1] + StartVector[1]) + arcString}
+        if arcType.lower() == 'open':
+            Attribs[inkex.addNS('arc-type', 'sodipodi')] = 'arc'
+        else:
+            Attribs[inkex.addNS('arc-type', 'sodipodi')] = arcType.lower()
+
+        return etree.SubElement(parent, inkex.addNS('path', 'svg'), Attribs)
+
+    # ---------------------------------------------
+    @staticmethod
+    def centerAngStartAngEnd(parent, centerPoint, radiusX, radiusY, angStart, angEnd, offset=[0, 0], label='arc', lineStyle=lineStyle.setSimpleBlack(),
+                             arcType='open', largeArc=False):
+        """Draw an arc of ellipse given its center and start and end angles
+
+        .. image:: ../imagesDocs/ellipse_arc_centerAngStartAngEnd.png
+          :width: 200px
+
+
+        :param parent: parent object
+        :param centerPoint: center coordinate [x,y]
+
+            .. warning:: Keep in mind  that Inkscape's y axis is upside down!
+
+        :param radiusX: Arc radius is X coordinate
+        :param radiusY: Arc radius is Y coordinate
+        :param angStart: Start angle in degrees
+        :param angEnd: End angle in degrees
+        :param offset: Extra offset coords [x,y]
+        :param label: Label of the line. Default 'arc'
+        :param lineStyle: Line style to be used. See :class:`lineStyle` class. Default: lineStyle=lineStyle.setSimpleBlack()
+        :param arcType: Type of arc. Valid values: 'open', 'slice', 'chord'. See image below. Default: 'open'
+        :param largeArc: Sets the largest arc to be drawn. See image below
+
+          - True: Draws the largest arc
+          - False: Draws the smallest arc (Default)
+
+        :type parent: inkscape element object
+        :type centerPoint: list
+        :type radiusX: float
+        :type radiusY: float
+        :type angStart: float
+        :type angEnd: float
+        :type offset: list
+        :type label: string
+        :type lineStyle: lineStyle object
+        :type arcType: string
+        :type largeArc: bool
+
+        :returns: the new arc object
+        :rtype: line Object
+
+        **Arc options**
+
+        .. image:: ../imagesDocs/ellipse_arc_centerAngStartAngEnd_flags.png
+          :width: 700px
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>> myLineStyle = inkDraw.lineStyle.setSimpleBlack()
+        >>>
+        >>> #draws the shortest arc
+        >>> inkDraw.ellipseArc.centerAngStartAngEnd(parent=root_layer, centerPoint=[0,0], radiusX=15.0, radiusY=25.0, angStart=-10, angEnd=90,
+        >>>                                         offset=[0,0], label='arc1',  lineStyle=myLineStyle, arcType='open',largeArc=False)
+        >>> #draws the longest arc
+        >>> inkDraw.ellipseArc.centerAngStartAngEnd(parent=root_layer, centerPoint=[0,0], radiusX=15.0, radiusY=25.0,, angStart=-10, angEnd=90,
+        >>>                                         offset=[30,0], label='arc1',  lineStyle=myLineStyle, arcType='open',largeArc=True)
+        """
+
+        # convert the angle in the ellipse (theta) to the normalized circle (alpha)
+        #
+        #    ellipse ( radii a and b)                         unitary circle
+        #    central angle : theta                            central angle alpha
+        #    point (x,y) on the ellipse
+        #
+        #               (x,y)
+        #   ^    _______*__                                    _____    ( cos(alpha), sin(alpha) )
+        #   |          /   -----------                              *---
+        #   b        /                ---                         /     --
+        #   |      /  theta               \                      / alpha   \
+        #   V    /                         |                    /          |
+        #         <------------a---------->                     <--- r=1 -->
+        #
+        #        tan(theta)=y/x   (1)                           b*sin(alpha)=y  -=>   b                  y   (2)
+        #                                                       a*cos(alpha)=x       --- * tan(alpha) = ---
+        #                                                                             a                  x
+        #   from (1) and (2)
+        #     b/a * tan(alpha) = tan(theta)   ==>    alpha = atan( a/b * tan(theta)  )
+        #
+        # to run, atan must be replaced by atan2(atan, +-1), depending on the signal of cos(theta) to get the correct quadrant
+
+        alphaStart= math.atan2( radiusX/radiusY * math.tan(math.radians(angStart)) , np.sign(np.cos(angStart*np.pi/180)))
+        alphaEnd= math.atan2( radiusX/radiusY * math.tan(math.radians(angEnd)) , np.sign(np.cos(angEnd*np.pi/180)))
+
+        Pstart = [radiusX * math.cos(alphaStart), radiusY * math.sin(alphaStart)]
+        Pend = [radiusX * math.cos(alphaEnd), radiusY * math.sin(alphaEnd)]
+
+        #old
+        #Pstart = [radiusX * math.cos(math.radians(angStart)), radiusY * math.sin(math.radians(angStart))]
+        #Pend = [radiusX * math.cos(math.radians(angEnd)), radiusY * math.sin(math.radians(angEnd))]
+
+        pos = [centerPoint[0] + offset[0], centerPoint[1] + offset[1]]
+
+        if abs(angEnd - angStart) <= 180:
+            flagRight = largeArc
+        else:
+            flagRight = not largeArc
+
+        return ellipseArc.startEndRadius(parent, Pstart, Pend, radiusX, radiusY, pos, label, lineStyle, flagRight, arcType, largeArc)
+
+
 class ellipse():
     """ Class with methods for drawing ellipses.
 
@@ -2256,7 +2464,7 @@ class ellipse():
     """
 
     @staticmethod
-    def centerRadius(parent, centerPoint, radiusX, radiusY, offset=[0, 0], label='circle', lineStyle=lineStyle.setSimpleBlack()):
+    def centerRadius(parent, centerPoint, radiusX, radiusY, offset=[0, 0], label='ellipse', lineStyle=lineStyle.setSimpleBlack()):
         """Draw an ellipse given its center point and radii
 
         :param parent: Parent object
