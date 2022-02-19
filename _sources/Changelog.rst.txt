@@ -8,6 +8,12 @@ inkscapeMadeEasy_Draw.py
    - new class ellipseArc with functions to draw arcs of ellipses
    - new method lineStyle.createDashedLinePattern
 
+inkscapeMadeEasy_Base.py
+   - new input argument added to importSVG() method
+   - new input argument added to unifyDefs() method
+   - fixed a bug in getTransformMatrix() when translation operation has only one argument
+   - fixed a bug in getPoints() when the element is 'use'
+
 2021-09sep-12
 -------------
 

@@ -404,19 +404,19 @@
                 <span class="n">temp</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
-<div class="viewcode-block" id="inkscapeMadeEasy.importSVG"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.importSVG">[docs]</a>    <span class="k">def</span> <span class="nf">importSVG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fileIn</span><span class="p">,</span> <span class="n">createGroup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">scaleFactor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.importSVG"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.importSVG">[docs]</a>    <span class="k">def</span> <span class="nf">importSVG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">fileIn</span><span class="p">,</span> <span class="n">createGroup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">scaleFactor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">unifyDefs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Import SVG file into the current document</span>
-
-<span class="sd">        This function will all unify the defs node via :meth:`unifyDefs`</span>
 
 <span class="sd">        :param parent: parent element where all contents will be placed</span>
 <span class="sd">        :param fileIn: SVG file path</span>
 <span class="sd">        :param createGroup: create a group containing all imported elements. (Default: True)</span>
 <span class="sd">        :param position: set center position of the group. Used only if createGroup=True  (Default: None)</span>
 <span class="sd">        :param scaleFactor: set scaling factor of the group. Used only if createGroup=True  (Default: 1.0)</span>
+<span class="sd">        :param unifyDefs: unify the defs node via :meth:`unifyDefs`. (Default: False)</span>
 <span class="sd">        :type parent: inkscape element object</span>
 <span class="sd">        :type fileIn: string</span>
 <span class="sd">        :type createGroup: bool</span>
+<span class="sd">        :type unifyDefs: bool</span>
 <span class="sd">        :returns:  imported element objects. If createGroup==True, returns the group. Otherwise returns a list with all imported elements</span>
 <span class="sd">        :rtype: inkscape element object or list of objects</span>
 
@@ -434,7 +434,9 @@
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">documentIn</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;namedview&#39;</span><span class="p">,</span> <span class="s1">&#39;sodipodi&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;metadata&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">):</span>
                     <span class="n">group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">unifyDefs</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">unifyDefs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unifyDefs</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCenter</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
@@ -451,7 +453,10 @@
                     <span class="n">parent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">):</span>
                         <span class="n">listElements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">unifyDefs</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">unifyDefs</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">unifyDefs</span><span class="p">()</span>
+
             <span class="k">return</span> <span class="n">listElements</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
@@ -550,9 +555,11 @@
         <span class="k">return</span> <span class="n">defs</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
-<div class="viewcode-block" id="inkscapeMadeEasy.unifyDefs"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs">[docs]</a>    <span class="k">def</span> <span class="nf">unifyDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="inkscapeMadeEasy.unifyDefs"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs">[docs]</a>    <span class="k">def</span> <span class="nf">unifyDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ungroupChild</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Unify all &lt;defs&gt; nodes in a single &lt;defs&gt; node.</span>
 
+<span class="sd">        :param ungroupChild: if any entry is a group, removes the group. (Default: False)</span>
+<span class="sd">        :type ungroupChild: bool</span>
 <span class="sd">        :returns: None</span>
 <span class="sd">        :rtype: -</span>
 
@@ -565,8 +572,9 @@
             <span class="k">if</span> <span class="n">d</span> <span class="o">!=</span> <span class="n">mainDef</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
                     <span class="n">mainDef</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">ungroup</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">ungroupChild</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">ungroup</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
                 <span class="n">d</span><span class="o">.</span><span class="n">getparent</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
@@ -968,7 +976,10 @@
             <span class="k">if</span> <span class="s1">&#39;translate&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;translate\((.*?\S)\)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">operation</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># retrieves x and y values</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="mf">0.0</span>
                 <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
                 <span class="n">transfMatrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">transfMatrix</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
 
@@ -1241,7 +1252,7 @@
 <div class="viewcode-block" id="inkscapeMadeEasy.getPoints"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints">[docs]</a>    <span class="k">def</span> <span class="nf">getPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a list of points of the element.</span>
 
-<span class="sd">        This function works on paths, texts or groups. In the case of a group, the function will include recursively all its components.</span>
+<span class="sd">        This function works on paths, texts, groups, and uses. In the case of a group, the function will include recursively all its components.</span>
 
 <span class="sd">        :param element: element object</span>
 <span class="sd">        :type element: inkscape element object</span>
@@ -1265,6 +1276,7 @@
         <span class="c1"># check if element is valid. &#39;path&#39;, &#39;text&#39; and &#39;g&#39; are valid</span>
         <span class="n">accepted_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)])</span>
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accepted_strings</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;getPoints: Element type [ </span><span class="si">%s</span><span class="s1"> ] ignored...&#39;</span> <span class="o">%</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">listCoords</span>
 
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">]:</span>  <span class="c1"># if object is path</span>
@@ -1349,18 +1361,27 @@
 
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)]:</span>  <span class="c1"># if object is a use</span>
             <span class="n">listCoordsTemp</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">=</span><span class="mi">0</span>
+
+            <span class="k">if</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y</span><span class="o">=</span><span class="mi">0</span>
+
             <span class="n">link</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="s1">&#39;xlink:href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-            <span class="n">elemLink</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">elemLink</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">obj</span> <span class="o">!=</span> <span class="n">elemLink</span><span class="p">:</span>
-                    <span class="n">listPoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPoints</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-                    <span class="n">listCoordsTemp</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">listPoints</span><span class="p">)</span>
+            <span class="n">elemLink</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">svg</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">elemLink</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">elemLink</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">obj</span> <span class="o">!=</span> <span class="n">elemLink</span><span class="p">:</span>
+                        <span class="n">listPoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPoints</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                        <span class="n">listCoordsTemp</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">listPoints</span><span class="p">)</span>
 
             <span class="c1">#apply translation</span>
             <span class="n">listCoords</span><span class="o">=</span><span class="p">[[</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">,</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">listCoordsTemp</span><span class="p">]</span>
-
 
         <span class="c1"># apply transformation</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">listCoords</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
