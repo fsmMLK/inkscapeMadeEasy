@@ -28,7 +28,7 @@ The basic structure of your plugin should be the following:
 
         def effect(self):
             ...
-            The method 'effect()' is is the only method called directly by inkscape.
+            The method 'effect()' is the only method called directly by inkscape.
             Consider this function to be the main function of your plugin.
             ...
 
@@ -96,7 +96,9 @@ You can even run the plugin without inkscape! Create a .py file in the ``minimal
 
     python3 path/to/minimalExample/testingMinimalExample.py
     
-.. tip:: Why would you want to do this? Debugging your code! Inkscape neither have a stdout for you to dump stuff and inspect nor allow break points. Running independently from inkscape allow you to run via PyCharm or other python IDEs. Use it now and thank me later. =)
+.. tip:: Why would you want to do this? Debugging your code! Inkscape neither has a stdout for you to dump stuff and
+inspect nor has a debug tool to run step by step or add break points. Running independently from inkscape allow you
+to run via PyCharm or other python IDEs. Use it now and thank me later. =)
 
 
 .. literalinclude:: ../../examples/testingMinimalExample.py

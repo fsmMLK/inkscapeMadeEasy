@@ -228,19 +228,19 @@ class inkscapeMadeEasy(inkex.Effect):
                 temp.remove(parent)
 
     # ---------------------------------------------
-    def importSVG(self, parent, fileIn, createGroup=True,position=None,scaleFactor=1.0):
+    def importSVG(self, parent, fileIn, createGroup=True,position=None,scaleFactor=1.0,unifyDefs=True):
         """ Import SVG file into the current document
-
-        This function will all unify the defs node via :meth:`unifyDefs`
 
         :param parent: parent element where all contents will be placed
         :param fileIn: SVG file path
         :param createGroup: create a group containing all imported elements. (Default: True)
         :param position: set center position of the group. Used only if createGroup=True  (Default: None)
         :param scaleFactor: set scaling factor of the group. Used only if createGroup=True  (Default: 1.0)
+        :param unifyDefs: unify the defs node via :meth:`unifyDefs`. (Default: False)
         :type parent: inkscape element object
         :type fileIn: string
         :type createGroup: bool
+        :type unifyDefs: bool
         :returns:  imported element objects. If createGroup==True, returns the group. Otherwise returns a list with all imported elements
         :rtype: inkscape element object or list of objects
 
@@ -258,7 +258,9 @@ class inkscapeMadeEasy(inkex.Effect):
             for elem in documentIn:
                 if elem.tag != inkex.addNS('namedview', 'sodipodi') and elem.tag != inkex.addNS('metadata', 'svg'):
                     group.append(elem)
-            self.unifyDefs()
+
+            if unifyDefs:
+                self.unifyDefs()
 
             if position is not None:
                 center = self.getCenter(group)
@@ -275,7 +277,10 @@ class inkscapeMadeEasy(inkex.Effect):
                     parent.append(elem)
                     if elem.tag != inkex.addNS('defs', 'svg'):
                         listElements.append(elem)
-            self.unifyDefs()
+
+            if unifyDefs:
+                self.unifyDefs()
+
             return listElements
 
     # ---------------------------------------------
@@ -374,9 +379,11 @@ class inkscapeMadeEasy(inkex.Effect):
         return defs
 
     # ---------------------------------------------
-    def unifyDefs(self):
+    def unifyDefs(self,ungroupChild=False):
         """Unify all <defs> nodes in a single <defs> node.
 
+        :param ungroupChild: if any entry is a group, removes the group. (Default: False)
+        :type ungroupChild: bool
         :returns: None
         :rtype: -
 
@@ -389,8 +396,9 @@ class inkscapeMadeEasy(inkex.Effect):
             if d != mainDef:
                 for child in d:
                     mainDef.append(child)
-                    if child.tag == inkex.addNS('g', 'svg') or child.tag == 'g':
-                        self.ungroup(child)
+                    if ungroupChild:
+                        if child.tag == inkex.addNS('g', 'svg') or child.tag == 'g':
+                            self.ungroup(child)
                 d.getparent().remove(d)
 
     # ---------------------------------------------
@@ -792,7 +800,10 @@ class inkscapeMadeEasy(inkex.Effect):
             if 'translate' in operation:
                 data = re.compile(r"translate\((.*?\S)\)").match(operation.lstrip()).group(1).split()  # retrieves x and y values
                 x = float(data[0])
-                y = float(data[1])
+                if len(data) == 2:
+                    y = float(data[1])
+                else:
+                    y = 0.0
                 mat = np.array([[1, 0, x], [0, 1, y], [0, 0, 1]])
                 transfMatrix = np.dot(transfMatrix, mat)
 
@@ -1065,7 +1076,7 @@ class inkscapeMadeEasy(inkex.Effect):
     def getPoints(self, element):
         """Returns a list of points of the element.
 
-        This function works on paths, texts or groups. In the case of a group, the function will include recursively all its components.
+        This function works on paths, texts, groups, and uses. In the case of a group, the function will include recursively all its components.
 
         :param element: element object
         :type element: inkscape element object
@@ -1089,6 +1100,7 @@ class inkscapeMadeEasy(inkex.Effect):
         # check if element is valid. 'path', 'text' and 'g' are valid
         accepted_strings = set([inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', inkex.addNS('g', 'svg'), 'path', 'use', inkex.addNS('use', 'svg')])
         if element.tag not in accepted_strings:
+            print('getPoints: Element type [ %s ] ignored...' % element.tag)
             return listCoords
 
         if element.tag in [inkex.addNS('path', 'svg'), 'path']:  # if object is path
@@ -1173,18 +1185,27 @@ class inkscapeMadeEasy(inkex.Effect):
 
         if element.tag in ['use', inkex.addNS('use', 'svg')]:  # if object is a use
             listCoordsTemp = []
-            x = float(element.attrib['x'])
-            y = float(element.attrib['y'])
+
+            if 'x' in element.attrib:
+                x = float(element.attrib['x'])
+            else:
+                x=0
+
+            if 'y' in element.attrib:
+                y = float(element.attrib['y'])
+            else:
+                y=0
+
             link = self.getElemAttrib(element, 'xlink:href').replace('#','')
-            elemLink = self.getElementById(link)
-            for obj in elemLink.iter():
-                if obj != elemLink:
-                    listPoints = self.getPoints(obj)
-                    listCoordsTemp.extend(listPoints)
+            elemLink = self.svg.getElementById(link)
+            if elemLink is not None:
+                for obj in elemLink.iter():
+                    if obj != elemLink:
+                        listPoints = self.getPoints(obj)
+                        listCoordsTemp.extend(listPoints)
 
             #apply translation
             listCoords=[[coord[0]+x,coord[1]+y] for coord in listCoordsTemp]
-
 
         # apply transformation
         if len(listCoords)>0:

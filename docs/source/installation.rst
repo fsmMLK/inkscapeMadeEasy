@@ -77,7 +77,9 @@ LaTeX installation
 Linux users
 ~~~~~~~~~~~
 
-You might find useful installing the packages ``texlive-science``, ``texlive-pictures`` and ``texlive-latex-base`` (Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages. Other unix flavour should have similar packages. After installation, see if you can compile this `Minimal LaTex example`_
+You might find useful installing the packages ``texlive-science``, ``texlive-pictures`` and ``texlive-latex-base``
+(Debian based distros) from your package manager. They should provide most (all?) needed LaTeX packages. Other Linux
+distros should have similar packages. After installation, see if you can compile this `Minimal LaTex example`_
 
 
 Windows users
