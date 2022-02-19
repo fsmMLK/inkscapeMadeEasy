@@ -36,6 +36,8 @@ GitHub (more to come soon). They provide many examples of how to use inkscapeMad
 
   - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 
+  - **wavedromScape**          <https://github.com/fsmMLK/wavedromScape>
+
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
   - **SlopeField**              <https://github.com/fsmMLK/inkscapeSlopeField>

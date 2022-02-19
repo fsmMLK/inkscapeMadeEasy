@@ -63,6 +63,8 @@ For end-user extensions that employ InskcapeMadeEasy, please refer to my other r
 
   - **circuitSymbols**          <https://github.com/fsmMLK/inkscapeCircuitSymbols>
 
+  - **wavedromScape**          <https://github.com/fsmMLK/wavedromScape>
+
   - **dimensions**              <https://github.com/fsmMLK/inkscapeDimensions>
 
   - **SlopeField**              <https://github.com/fsmMLK/inkscapeSlopeField>
