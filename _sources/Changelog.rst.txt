@@ -1,6 +1,15 @@
 Changelog
 ==========
 
+2022-08aug-19
+-------------
+
+inkscapeMadeEasy_Base.py
+   - new method createEmptySVG()
+   - new method cleanDefs()
+   - the method getPoints() also accepts 'rectangle' elements
+   - added option [=v2] to siunix import in the latext preamble file.
+
 2022-02feb-19
 -------------
 

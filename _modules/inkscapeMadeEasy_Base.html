@@ -202,17 +202,17 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
 <span class="kn">import</span> <span class="nn">inkex</span>
 
 
 <div class="viewcode-block" id="inkscapeMadeEasy"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy">[docs]</a><span class="k">class</span> <span class="nc">inkscapeMadeEasy</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">inkex</span><span class="o">.</span><span class="n">Effect</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inkscapeResolution_dpi</span> <span class="o">=</span> <span class="mf">96.0</span>  <span class="c1"># number of pixels per inch</span>
 
@@ -324,6 +324,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="inkscapeMadeEasy.createEmptySVG"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.createEmptySVG">[docs]</a>    <span class="k">def</span> <span class="nf">createEmptySVG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates an empty svg file.</span>
+
+<span class="sd">        .. note:: The empty file does not replace the current opened document</span>
+
+<span class="sd">        :param fileName: valid filename and path</span>
+<span class="sd">        :type .. note:: This function was c: string</span>
+
+<span class="sd">        :returns: nothing</span>
+<span class="sd">        :rtype: -</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blankSVG</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span></div>
+
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.getBasicLatexPackagesFile"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getBasicLatexPackagesFile">[docs]</a>    <span class="k">def</span> <span class="nf">getBasicLatexPackagesFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the full path  of the ``basicLatexPackages.tex`` file with commonly used Latex packages</span>
@@ -370,7 +385,7 @@
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.removeElement"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">[docs]</a>    <span class="k">def</span> <span class="nf">removeElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove one element (can be a gropu) of the document.</span>
+        <span class="sd">&quot;&quot;&quot;Remove one element (can be a group) of the document.</span>
 
 <span class="sd">        If the parent of the removed element is a group and has no other children, then the parent group is also removed.</span>
 
@@ -536,6 +551,15 @@
 
         <span class="k">return</span> <span class="n">new_id</span></div>
 
+
+        <span class="c1"># add an unique id to the elements</span>
+        <span class="c1">#for tag in svg.iter():</span>
+        <span class="c1">#    if &#39;id&#39; not in tag.attrib:</span>
+        <span class="c1">#        newID=self.svg.get_unique_id( prefix=&#39;imported_&#39;, size=None)</span>
+        <span class="c1">#        tag.attrib[&#39;id&#39;]=newID</span>
+
+
+
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.getDefinitions"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefinitions">[docs]</a>    <span class="k">def</span> <span class="nf">getDefinitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return the &lt;defs&gt; element of the svg file.</span>
@@ -553,6 +577,70 @@
             <span class="n">defs</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">getroot</span><span class="p">(),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">defs</span></div>
+
+<div class="viewcode-block" id="inkscapeMadeEasy.cleanDefs"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.cleanDefs">[docs]</a>    <span class="k">def</span> <span class="nf">cleanDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">removeUnused</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unifyDuplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">checkEquality</span><span class="p">(</span><span class="n">elemA</span><span class="p">,</span><span class="n">elemB</span><span class="p">):</span>
+            <span class="c1"># check equality between two elements. do it recursively</span>
+            <span class="c1"># https://stackoverflow.com/questions/7905380/testing-equivalence-of-xml-etree-elementtree</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">elemA</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elemB</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="n">elemA</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="n">elemB</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">elemA</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">valA</span><span class="o">=</span><span class="n">elemA</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">elemB</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">valB</span><span class="o">=</span><span class="n">elemB</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">valA</span> <span class="o">!=</span> <span class="n">valB</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="n">elemA_Id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">elemA</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
+            <span class="n">elemB_Id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">elemB</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
+
+            <span class="n">elemA_attrib</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">elemA</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+            <span class="n">elemB_attrib</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">elemB</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+
+            <span class="c1"># remove ID from attrib</span>
+            <span class="k">del</span> <span class="n">elemA_attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">elemB_attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+
+            <span class="c1"># remove trailinq zeros of any numbers in the attributes</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">elemA_attrib</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">elemA_attrib</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.0+\b&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">elemB_attrib</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">elemB_attrib</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.0+\b&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+            <span class="c1">#print(elemA_attrib)</span>
+            <span class="c1">#print(elemB_attrib)</span>
+
+            <span class="k">if</span> <span class="n">elemA_attrib</span> <span class="o">!=</span> <span class="n">elemB_attrib</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">checkEquality</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">elemA</span><span class="p">,</span> <span class="n">elemB</span><span class="p">))</span>
+
+
+        <span class="k">for</span> <span class="n">eRef</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDefinitions</span><span class="p">()</span><span class="o">.</span><span class="n">iterchildren</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;marker&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)):</span>
+            <span class="n">idRef</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">eRef</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDefinitions</span><span class="p">()</span><span class="o">.</span><span class="n">iterchildren</span><span class="p">(</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;marker&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)):</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemAttrib</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">idRef</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">:</span>
+                    <span class="n">isEqual</span> <span class="o">=</span> <span class="n">checkEquality</span><span class="p">(</span><span class="n">eRef</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">isEqual</span><span class="p">:</span>
+                        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] and [</span><span class="si">%s</span><span class="s1">] are equal!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idRef</span> <span class="p">,</span> <span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getElemFromXpath</span><span class="p">(</span><span class="s1">&#39;/svg:svg&#39;</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">():</span>
+                            <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;defs&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)]):</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">:</span>
+                                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                            <span class="n">elem</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;url(#</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;url(#</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">idRef</span> <span class="p">)</span>
+                                <span class="k">except</span><span class="p">:</span>
+                                    <span class="k">pass</span></div>
+
+
+
+
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.unifyDefs"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs">[docs]</a>    <span class="k">def</span> <span class="nf">unifyDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ungroupChild</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -593,7 +681,7 @@
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="inkscapeMadeEasy.getDefsById"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsById">[docs]</a>    <span class="k">def</span> <span class="nf">getDefsById</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return a list of elements in &lt;defs&gt; of a given (part of) the id</span>
+        <span class="sd">&quot;&quot;&quot; Return a list of elements in &lt;defs&gt; of a given (part of) id</span>
 
 <span class="sd">        :param id: (part of the id of the element)</span>
 <span class="sd">        :type tag: string</span>
@@ -1252,7 +1340,7 @@
 <div class="viewcode-block" id="inkscapeMadeEasy.getPoints"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints">[docs]</a>    <span class="k">def</span> <span class="nf">getPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a list of points of the element.</span>
 
-<span class="sd">        This function works on paths, texts, groups, and uses. In the case of a group, the function will include recursively all its components.</span>
+<span class="sd">        This function works on paths, texts, groups, uses, rects. In the case of a group, the function will include recursively all its components.</span>
 
 <span class="sd">        :param element: element object</span>
 <span class="sd">        :type element: inkscape element object</span>
@@ -1274,11 +1362,12 @@
         <span class="n">listCoords</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># check if element is valid. &#39;path&#39;, &#39;text&#39; and &#39;g&#39; are valid</span>
-        <span class="n">accepted_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)])</span>
+        <span class="n">accepted_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)])</span>
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accepted_strings</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;getPoints: Element type [ </span><span class="si">%s</span><span class="s1"> ] ignored...&#39;</span> <span class="o">%</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">listCoords</span>
 
+        <span class="c1">#print(element.tag, element.attrib)</span>
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">),</span> <span class="s1">&#39;path&#39;</span><span class="p">]:</span>  <span class="c1"># if object is path</span>
 
             <span class="c1"># adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S</span>
@@ -1347,11 +1436,24 @@
                 <span class="n">Xcurrent</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">Ycurrent</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
+
+        <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;rect&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)]:</span>  <span class="c1"># if object is a  rect</span>
+
+            <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span> <span class="ow">and</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="n">x0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">])</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">])</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">],[</span><span class="n">x0</span><span class="o">+</span><span class="n">w</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="n">h</span><span class="p">],[</span><span class="n">x0</span><span class="o">+</span><span class="n">w</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="n">h</span><span class="p">],[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="n">h</span><span class="p">]]</span>
+                <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)]:</span>  <span class="c1"># if object is a text</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
-            <span class="n">coords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
-            <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span> <span class="ow">and</span> <span class="s1">&#39;y&#39;</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+                <span class="n">listCoords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">inkex</span><span class="o">.</span><span class="n">addNS</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">)]:</span>  <span class="c1"># if object is a group</span>
             <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">iterchildren</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>

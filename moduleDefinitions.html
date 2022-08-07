@@ -188,18 +188,18 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>in all examples, assume inkscapeMadeEasy modules are imported with the following aliases</p>
-<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="kn">as</span> <span class="nn">inkBase</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="kn">as</span> <span class="nn">inkDraw</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="kn">as</span> <span class="nn">inkPlot</span>
+<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <span class="target" id="module-inkscapeMadeEasy_Base"></span><dl class="class">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy">
 <em class="property">class </em><code class="descclassname">inkscapeMadeEasy_Base.</code><code class="descname">inkscapeMadeEasy</code><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">inkex.deprecated.Effect</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">inkex.deprecated.deprecatedeffect.Effect</span></code></p>
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.bool">
 <code class="descname">bool</code><span class="sig-paren">(</span><em>valueStr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.bool" title="Permalink to this definition">¶</a></dt>
@@ -236,6 +236,31 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<em>string</em>) – message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.createEmptySVG">
+<code class="descname">createEmptySVG</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.createEmptySVG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.createEmptySVG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an empty svg file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The empty file does not replace the current opened document</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fileName</strong> – valid filename and path</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nothing</td>
 </tr>
@@ -316,7 +341,7 @@
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement">
 <code class="descname">removeElement</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.removeElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.removeElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove one element (can be a gropu) of the document.</p>
+<dd><p>Remove one element (can be a group) of the document.</p>
 <p>If the parent of the removed element is a group and has no other children, then the parent group is also removed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -476,6 +501,11 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.cleanDefs">
+<code class="descname">cleanDefs</code><span class="sig-paren">(</span><em>removeUnused=False</em>, <em>unifyDuplicates=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.cleanDefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.cleanDefs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs">
 <code class="descname">unifyDefs</code><span class="sig-paren">(</span><em>ungroupChild=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.unifyDefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.unifyDefs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unify all &lt;defs&gt; nodes in a single &lt;defs&gt; node.</p>
@@ -521,7 +551,7 @@
 <dl class="method">
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsById">
 <code class="descname">getDefsById</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getDefsById"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getDefsById" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of elements in &lt;defs&gt; of a given (part of) the id</p>
+<dd><p>Return a list of elements in &lt;defs&gt; of a given (part of) id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1286,7 +1316,7 @@ The label does not have to be unique</li>
 <dt id="inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints">
 <code class="descname">getPoints</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inkscapeMadeEasy_Base.html#inkscapeMadeEasy.getPoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#inkscapeMadeEasy_Base.inkscapeMadeEasy.getPoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of points of the element.</p>
-<p>This function works on paths, texts, groups, and uses. In the case of a group, the function will include recursively all its components.</p>
+<p>This function works on paths, texts, groups, uses, rects. In the case of a group, the function will include recursively all its components.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1466,11 +1496,11 @@ that is, it will compute the resulting coordinates of each object</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>in all examples, assume inkscapeMadeEasy modules are imported with the following aliases</p>
-<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="kn">as</span> <span class="nn">inkBase</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="kn">as</span> <span class="nn">inkDraw</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="kn">as</span> <span class="nn">inkPlot</span>
+<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -1800,7 +1830,7 @@ one representing the color in format <code class="docutils literal notranslate">
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">myExtension</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="bp">self</span><span class="o">.</span><span class="n">OptionParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--myColorPicker&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;myColorPickerVar&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;#000000FF&#39;</span><span class="p">)</span>  <span class="c1"># parses the input parameter</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -1889,7 +1919,7 @@ Keep in mind that the selected color in the color picker widget will be consider
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">myExtension</span><span class="p">(</span><span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">inkBase</span><span class="o">.</span><span class="n">inkscapeMadeEasy</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="bp">self</span><span class="o">.</span><span class="n">OptionParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--myColorPicker&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;myColorPickerVar&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>       <span class="c1"># parses the input parameters</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="bp">self</span><span class="o">.</span><span class="n">OptionParser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--myColorOption&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;myColorOptionVar&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>   <span class="c1"># parses the input parameter</span>
@@ -3401,11 +3431,11 @@ when the bezier curve must be closed.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>in all examples, assume inkscapeMadeEasy modules are imported with the following aliases</p>
-<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="kn">as</span> <span class="nn">inkBase</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="kn">as</span> <span class="nn">inkDraw</span>
-<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="kn">as</span> <span class="nn">inkPlot</span>
+<div class="last highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Base</span> <span class="k">as</span> <span class="nn">inkBase</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Draw</span> <span class="k">as</span> <span class="nn">inkDraw</span>
+<span class="kn">import</span> <span class="nn">inkscapeMadeEasy.inkscapeMadeEasy_Plot</span> <span class="k">as</span> <span class="nn">inkPlot</span>
 </pre></div>
 </td></tr></table></div>
 </div>
