@@ -148,6 +148,21 @@ class inkscapeMadeEasy(inkex.Effect):
         """
         sys.stderr.write(msg + '\n')
 
+    def createEmptySVG(self,fileName):
+        """Creates an empty svg file.
+
+        .. note:: The empty file does not replace the current opened document
+
+        :param fileName: valid filename and path
+        :type .. note:: This function was c: string
+
+        :returns: nothing
+        :rtype: -
+
+        """
+        with open(fileName,'wb') as f:
+            f.write(self.blankSVG.encode('ascii'))
+
     # ---------------------------------------------
     def getBasicLatexPackagesFile(self):
         """Return the full path  of the ``basicLatexPackages.tex`` file with commonly used Latex packages
@@ -194,7 +209,7 @@ class inkscapeMadeEasy(inkex.Effect):
 
     # ---------------------------------------------
     def removeElement(self, element):
-        """Remove one element (can be a gropu) of the document.
+        """Remove one element (can be a group) of the document.
 
         If the parent of the removed element is a group and has no other children, then the parent group is also removed.
 
@@ -360,6 +375,15 @@ class inkscapeMadeEasy(inkex.Effect):
 
         return new_id
 
+
+        # add an unique id to the elements
+        #for tag in svg.iter():
+        #    if 'id' not in tag.attrib:
+        #        newID=self.svg.get_unique_id( prefix='imported_', size=None)
+        #        tag.attrib['id']=newID
+
+
+
     # ---------------------------------------------
     def getDefinitions(self):
         """ Return the <defs> element of the svg file.
@@ -377,6 +401,70 @@ class inkscapeMadeEasy(inkex.Effect):
             defs = etree.SubElement(self.document.getroot(), inkex.addNS('defs', 'svg'))
 
         return defs
+
+    def cleanDefs(self, removeUnused=False, unifyDuplicates=False):
+
+        def checkEquality(elemA,elemB):
+            # check equality between two elements. do it recursively
+            # https://stackoverflow.com/questions/7905380/testing-equivalence-of-xml-etree-elementtree
+            if len(elemA) != len(elemB):
+                return False
+
+            if elemA.text != elemB.text:
+                if elemA.text is not None:
+                    valA=elemA.text.rstrip()
+                if elemB.text is not None:
+                    valB=elemB.text.rstrip()
+                if valA != valB:
+                    return False
+
+            elemA_Id = self.getElemAttrib(elemA, 'id')
+            elemB_Id = self.getElemAttrib(elemB, 'id')
+
+            elemA_attrib = deepcopy(elemA.attrib)
+            elemB_attrib = deepcopy(elemB.attrib)
+
+            # remove ID from attrib
+            del elemA_attrib['id']
+            del elemB_attrib['id']
+
+            # remove trailinq zeros of any numbers in the attributes
+            for key, value in elemA_attrib.items():
+                elemA_attrib[key] = re.sub(r"\.0+\b", '', value)
+            for key, value in elemB_attrib.items():
+                elemB_attrib[key] = re.sub(r"\.0+\b", '', value)
+
+            #print(elemA_attrib)
+            #print(elemB_attrib)
+
+            if elemA_attrib != elemB_attrib:
+                return False
+
+            return all(checkEquality(c1, c2) for c1, c2 in zip(elemA, elemB))
+
+
+        for eRef in self.getDefinitions().iterchildren(inkex.addNS('marker', 'svg')):
+            idRef = self.getElemAttrib(eRef, 'id')
+            for e in self.getDefinitions().iterchildren(inkex.addNS('marker', 'svg')):
+                id = self.getElemAttrib(e, 'id')
+                if idRef != id:
+                    isEqual = checkEquality(eRef,e)
+
+                    if isEqual:
+                        print ('[%s] and [%s] are equal!' % (idRef , id) )
+                        root = self.getElemFromXpath('/svg:svg')
+                        for elem in root.iter():
+                            if elem.tag not in set(['defs', inkex.addNS('defs', 'svg')]):
+                                try:
+                                    if elem.attrib['id'] != id:
+                                        for key, value in elem.items():
+                                            elem.attrib[key] = elem.attrib[key].replace('url(#%s)' % id, 'url(#%s)' % idRef )
+                                except:
+                                    pass
+
+
+
+
 
     # ---------------------------------------------
     def unifyDefs(self,ungroupChild=False):
@@ -417,7 +505,7 @@ class inkscapeMadeEasy(inkex.Effect):
 
     # ---------------------------------------------
     def getDefsById(self,id):
-        """ Return a list of elements in <defs> of a given (part of) the id
+        """ Return a list of elements in <defs> of a given (part of) id
 
         :param id: (part of the id of the element)
         :type tag: string
@@ -1076,7 +1164,7 @@ class inkscapeMadeEasy(inkex.Effect):
     def getPoints(self, element):
         """Returns a list of points of the element.
 
-        This function works on paths, texts, groups, and uses. In the case of a group, the function will include recursively all its components.
+        This function works on paths, texts, groups, uses, rects. In the case of a group, the function will include recursively all its components.
 
         :param element: element object
         :type element: inkscape element object
@@ -1098,11 +1186,12 @@ class inkscapeMadeEasy(inkex.Effect):
         listCoords = []
 
         # check if element is valid. 'path', 'text' and 'g' are valid
-        accepted_strings = set([inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', inkex.addNS('g', 'svg'), 'path', 'use', inkex.addNS('use', 'svg')])
+        accepted_strings = set(['path', inkex.addNS('path', 'svg'), inkex.addNS('text', 'svg'), 'g', inkex.addNS('g', 'svg'), 'use', inkex.addNS('use', 'svg'),'rect', inkex.addNS('rect', 'svg')])
         if element.tag not in accepted_strings:
             print('getPoints: Element type [ %s ] ignored...' % element.tag)
             return listCoords
 
+        #print(element.tag, element.attrib)
         if element.tag in [inkex.addNS('path', 'svg'), 'path']:  # if object is path
 
             # adds special character between letters and splits. the first regular expression excludes e and E bc they are used to represent scientific notation  =S
@@ -1171,11 +1260,24 @@ class inkscapeMadeEasy(inkex.Effect):
                 Xcurrent = X[-1]
                 Ycurrent = Y[-1]
 
+
+        if element.tag in ['rect', inkex.addNS('rect', 'svg')]:  # if object is a  rect
+
+            if 'x' in element.attrib and 'y' in element.attrib:
+                x0 = float(element.attrib['x'])
+                y0 = float(element.attrib['y'])
+                h = float(element.attrib['height'])
+                w = float(element.attrib['width'])
+                coords = [[x0, y0],[x0+w, y0+h],[x0+w, y0+h],[x0, y0+h]]
+                listCoords.extend(coords)
+
         if element.tag in ['text', inkex.addNS('text', 'svg')]:  # if object is a text
-            x = float(element.attrib['x'])
-            y = float(element.attrib['y'])
-            coords = [[x, y]]
-            listCoords.extend(coords)
+
+            if 'x' in element.attrib and 'y' in element.attrib:
+                x = float(element.attrib['x'])
+                y = float(element.attrib['y'])
+                coords = [[x, y]]
+                listCoords.extend(coords)
 
         if element.tag in ['g', inkex.addNS('g', 'svg')]:  # if object is a group
             for obj in element.iterchildren("*"):
