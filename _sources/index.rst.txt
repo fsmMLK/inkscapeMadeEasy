@@ -120,3 +120,9 @@ Enough mumbo-jumbo. Let's start! =D
    :maxdepth: 2
 
    ./Changelog.rst
+
+.. toctree::
+   :caption: Index
+   :hidden:
+
+   genindex
