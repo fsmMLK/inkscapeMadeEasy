@@ -114,7 +114,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Index</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../genindex.html">classes and methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Classes and methods</a></li>
 </ul>
 
             
@@ -2033,7 +2033,7 @@
 <span class="sd">        &gt;&gt;&gt; inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[0,0], label=&#39;arc&#39;,  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span><span class="n">flagRightOf</span><span class="p">,</span> <span class="n">arcType</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">ellipseArc</span><span class="o">.</span><span class="n">startEndRadius</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">Pstart</span><span class="p">,</span> <span class="n">Pend</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">lineStyle</span><span class="p">,</span><span class="n">flagRightOf</span><span class="p">,</span> <span class="n">arcType</span><span class="p">,</span> <span class="n">largeArc</span><span class="p">)</span></div>
 
     <span class="c1"># ---------------------------------------------</span>
 <div class="viewcode-block" id="arc.centerAngStartAngEnd"><a class="viewcode-back" href="../moduleDefinitions.html#inkscapeMadeEasy_Draw.arc.centerAngStartAngEnd">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -2595,37 +2595,28 @@
 <span class="sd">        &gt;&gt;&gt;                                         offset=[30,0], label=&#39;arc1&#39;,  lineStyle=myLineStyle, arcType=&#39;open&#39;,largeArc=True)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># convert the angle in the ellipse (theta) to the normalized circle (alpha)</span>
-        <span class="c1">#</span>
-        <span class="c1">#    ellipse ( radii a and b)                         unitary circle</span>
-        <span class="c1">#    central angle : theta                            central angle alpha</span>
-        <span class="c1">#    point (x,y) on the ellipse</span>
-        <span class="c1">#</span>
-        <span class="c1">#               (x,y)</span>
-        <span class="c1">#   ^    _______*__                                    _____    ( cos(alpha), sin(alpha) )</span>
-        <span class="c1">#   |          /   -----------                              *---</span>
-        <span class="c1">#   b        /                ---                         /     --</span>
-        <span class="c1">#   |      /  theta               \                      / alpha   \</span>
-        <span class="c1">#   V    /                         |                    /          |</span>
-        <span class="c1">#         &lt;------------a----------&gt;                     &lt;--- r=1 --&gt;</span>
-        <span class="c1">#</span>
-        <span class="c1">#        tan(theta)=y/x   (1)                           b*sin(alpha)=y  -=&gt;   b                  y   (2)</span>
-        <span class="c1">#                                                       a*cos(alpha)=x       --- * tan(alpha) = ---</span>
-        <span class="c1">#                                                                             a                  x</span>
-        <span class="c1">#   from (1) and (2)</span>
-        <span class="c1">#     b/a * tan(alpha) = tan(theta)   ==&gt;    alpha = atan( a/b * tan(theta)  )</span>
-        <span class="c1">#</span>
-        <span class="c1"># to run, atan must be replaced by atan2(atan, +-1), depending on the signal of cos(theta) to get the correct quadrant</span>
+        <span class="k">def</span> <span class="nf">getEllipsePoint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">theta_deg</span><span class="p">):</span>
+            <span class="c1"># returns the point on the ellipse at a specified central angle</span>
+            <span class="c1"># for this, this function solves the system</span>
+            <span class="c1">#</span>
+            <span class="c1">#  x^2/a^2  + y^2/b^2 = 1</span>
+            <span class="c1">#  y= x*tan(theta)</span>
+            <span class="c1">#</span>
 
-        <span class="n">alphaStart</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span> <span class="n">radiusX</span><span class="o">/</span><span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angStart</span><span class="p">))</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angStart</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)))</span>
-        <span class="n">alphaEnd</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span> <span class="n">radiusX</span><span class="o">/</span><span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angEnd</span><span class="p">))</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angEnd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)))</span>
+            <span class="c1"># a: semi-axis along X axis</span>
+            <span class="c1"># b: semi-axis along Y axis</span>
 
-        <span class="n">Pstart</span> <span class="o">=</span> <span class="p">[</span><span class="n">radiusX</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alphaStart</span><span class="p">),</span> <span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alphaStart</span><span class="p">)]</span>
-        <span class="n">Pend</span> <span class="o">=</span> <span class="p">[</span><span class="n">radiusX</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alphaEnd</span><span class="p">),</span> <span class="n">radiusY</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alphaEnd</span><span class="p">)]</span>
+            <span class="n">tanTh</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">theta_deg</span><span class="p">))</span>
+            <span class="n">xsq</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tanTh</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">theta_deg</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># angle in 1st or 4th quadrants</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xsq</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>   <span class="c1"># angle in 2nd or 3rd quadrants</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xsq</span><span class="p">)</span>
 
-        <span class="c1">#old</span>
-        <span class="c1">#Pstart = [radiusX * math.cos(math.radians(angStart)), radiusY * math.sin(math.radians(angStart))]</span>
-        <span class="c1">#Pend = [radiusX * math.cos(math.radians(angEnd)), radiusY * math.sin(math.radians(angEnd))]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">tanTh</span><span class="p">]</span>
+
+        <span class="n">Pstart</span> <span class="o">=</span> <span class="n">getEllipsePoint</span><span class="p">(</span><span class="n">radiusX</span><span class="p">,</span><span class="n">radiusY</span><span class="p">,</span><span class="n">angStart</span><span class="p">)</span>
+        <span class="n">Pend</span> <span class="o">=</span> <span class="n">getEllipsePoint</span><span class="p">(</span><span class="n">radiusX</span><span class="p">,</span><span class="n">radiusY</span><span class="p">,</span><span class="n">angEnd</span><span class="p">)</span>
 
         <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">centerPoint</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">centerPoint</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 

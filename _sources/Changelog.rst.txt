@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+2022-10oct-01
+-------------
+
+inkscapeMadeEasy_Base.py
+   - fixed a bug in arc.startEndRadius
+   - improved method ellipseArc.centerAngStartAngEnd
+
 2022-08aug-19
 -------------
 
