@@ -1,2 +1,2 @@
-classes and methods
+Classes and methods
 ===================

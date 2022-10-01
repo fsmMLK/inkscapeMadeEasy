@@ -1853,7 +1853,7 @@ class arc():
         >>> inkDraw.arc.startEndRadius(parent=root_layer, Pstart=P1, Pend=P2, radius=R, offset=[0,0], label='arc',  lineStyle=myLineStyle, flagRightOf=True, largeArc=True)
         """
 
-        return ellipseArc.startEndRadius(parent, Pstart, Pend, radius, radius, offset, label, lineStyle,flagRightOf, arcType)
+        return ellipseArc.startEndRadius(parent, Pstart, Pend, radius, radius, offset, label, lineStyle,flagRightOf, arcType, largeArc)
 
     # ---------------------------------------------
     @staticmethod
@@ -2415,37 +2415,28 @@ class ellipseArc():
         >>>                                         offset=[30,0], label='arc1',  lineStyle=myLineStyle, arcType='open',largeArc=True)
         """
 
-        # convert the angle in the ellipse (theta) to the normalized circle (alpha)
-        #
-        #    ellipse ( radii a and b)                         unitary circle
-        #    central angle : theta                            central angle alpha
-        #    point (x,y) on the ellipse
-        #
-        #               (x,y)
-        #   ^    _______*__                                    _____    ( cos(alpha), sin(alpha) )
-        #   |          /   -----------                              *---
-        #   b        /                ---                         /     --
-        #   |      /  theta               \                      / alpha   \
-        #   V    /                         |                    /          |
-        #         <------------a---------->                     <--- r=1 -->
-        #
-        #        tan(theta)=y/x   (1)                           b*sin(alpha)=y  -=>   b                  y   (2)
-        #                                                       a*cos(alpha)=x       --- * tan(alpha) = ---
-        #                                                                             a                  x
-        #   from (1) and (2)
-        #     b/a * tan(alpha) = tan(theta)   ==>    alpha = atan( a/b * tan(theta)  )
-        #
-        # to run, atan must be replaced by atan2(atan, +-1), depending on the signal of cos(theta) to get the correct quadrant
+        def getEllipsePoint(a,b,theta_deg):
+            # returns the point on the ellipse at a specified central angle
+            # for this, this function solves the system
+            #
+            #  x^2/a^2  + y^2/b^2 = 1
+            #  y= x*tan(theta)
+            #
 
-        alphaStart= math.atan2( radiusX/radiusY * math.tan(math.radians(angStart)) , np.sign(np.cos(angStart*np.pi/180)))
-        alphaEnd= math.atan2( radiusX/radiusY * math.tan(math.radians(angEnd)) , np.sign(np.cos(angEnd*np.pi/180)))
+            # a: semi-axis along X axis
+            # b: semi-axis along Y axis
 
-        Pstart = [radiusX * math.cos(alphaStart), radiusY * math.sin(alphaStart)]
-        Pend = [radiusX * math.cos(alphaEnd), radiusY * math.sin(alphaEnd)]
+            tanTh = math.tan(math.radians(theta_deg))
+            xsq = (a ** 2 * b ** 2) / (b ** 2 + a ** 2 * tanTh ** 2)
+            if math.cos(math.radians(theta_deg)) >= 0:  # angle in 1st or 4th quadrants
+                x = math.sqrt(xsq)
+            else:   # angle in 2nd or 3rd quadrants
+                x = - math.sqrt(xsq)
 
-        #old
-        #Pstart = [radiusX * math.cos(math.radians(angStart)), radiusY * math.sin(math.radians(angStart))]
-        #Pend = [radiusX * math.cos(math.radians(angEnd)), radiusY * math.sin(math.radians(angEnd))]
+            return [x, x * tanTh]
+
+        Pstart = getEllipsePoint(radiusX,radiusY,angStart)
+        Pend = getEllipsePoint(radiusX,radiusY,angEnd)
 
         pos = [centerPoint[0] + offset[0], centerPoint[1] + offset[1]]
 
