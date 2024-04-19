@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+2024-04apr-18
+-------------
+
+inkscapeMadeEasy_Base.py
+   - fixed a bug in the output of getSegmentParameters
+
 2022-10oct-01
 -------------
 

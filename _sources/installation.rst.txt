@@ -119,7 +119,7 @@ You should be able to compile the following example on your system. Compiling th
        \documentclass[11pt]{article}
        \usepackage[utf8]{inputenc}
        \usepackage{amsmath,amsthm,amsbsy,amsfonts,amssymb}
-       \usepackage[per=slash]{siunitx}
+       \usepackage[per-mode=symbol]{siunitx}
        \usepackage{steinmetz}
        \begin{document}
        Minimal example. Woo-hoo!
