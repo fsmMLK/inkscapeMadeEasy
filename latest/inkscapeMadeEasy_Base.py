@@ -62,9 +62,9 @@ class inkscapeMadeEasy(inkex.Effect):
        xmlns="http://www.w3.org/2000/svg"
        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-       width="210mm"
+       width="400mm"
        height="297mm"
-       viewBox="0 0 793.70081 1122.5197"
+       viewBox="0 0 1511.8111 1122.5197"
        version="1.1"
        id="svg878"
        inkscape:version="1.0.1 (1.0.1+r73)"
@@ -1467,7 +1467,7 @@ class inkscapeMadeEasy(inkex.Effect):
 
         data = self.getSegmentFromPoints(listPoints, normalDirection)
 
-        return listPoints + data
+        return [listPoints[0], listPoints[1]] + data
 
 
 
