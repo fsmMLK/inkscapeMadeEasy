@@ -866,7 +866,7 @@ class lineStyle():
         :type strokeDashArray: string
 
         :returns: line definition following the provided specifications
-        :rtype: string
+        :rtype: dict
 
         **Line node types**
 
@@ -877,7 +877,7 @@ class lineStyle():
 
         >>> # creates a line style using a dot marker at its end node
         >>> myMarker=inkDraw.marker.createDotMarker(self,nameID='myMarker',RenameMode=1,scale=0.5,strokeColor=color.defined('red'),fillColor=None)   # see marker class for further information on this function
-        >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, markerEnd=myMarker,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color('red'))
+        >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, markerEnd=myMarker,lineColor=inkDraw.color.defined('black'),fillColor=inkDraw.color.defined('red'))
         >>> 
         >>> # creates a line style with dashed line (5 units dash , 10 units gap)
         >>> dashedPattern = inkDraw.lineStyle.createDashedLinePattern(5,10)
@@ -956,7 +956,7 @@ class lineStyle():
         :type lineWidth: float     
 
         :returns: line definition following the provided specifications
-        :rtype: string
+        :rtype: dict
 
         **Example**
 
@@ -964,6 +964,103 @@ class lineStyle():
 
         """
         return lineStyle.set(lineWidth)
+
+    @staticmethod
+    def getStyle(ExtensionBaseObj,element):
+        """
+        This function retrieves the style of a given element.
+
+        :param ExtensionBaseObj: Most of the times you have to pass 'self' when calling from inside your plugin class. See example below
+        :param element: The element whose style is to be retrieved.
+
+        :type ExtensionBaseObj: inkscapeMadeEasy object
+        :type element: inkscape element object
+
+        :returns: line definition following the provided specifications
+        :rtype: dict
+
+        The returned dictionary contains the following keys:
+        - 'stroke': The color of the stroke.
+        - 'stroke-width': The width of the stroke.
+        - 'stroke-dasharray': The dash array of the stroke.
+        - 'fill': The fill color of the element.
+        - 'fill-opacity': The opacity of the fill color.
+        - 'stroke-opacity': The opacity of the stroke color.
+        - 'stroke-linecap': The linecap of the stroke.
+        - 'stroke-linejoin': The linejoin of the stroke.
+        - 'marker-start': The marker at the start of the stroke.
+        - 'marker-mid': The marker at the mid of the stroke.
+        - 'marker-end': The marker at the end of the stroke.
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, lineColor=inkDraw.color.defined('red'))
+        >>>
+        >>> # creates a polyline passing through points (0,0) (0,1) (1,1) (1,2) (2,2), and using absolute coordinates
+        >>> coords=[ [0,0], [0,1], [1,1], [1,2], [2,2] ]
+        >>> myLine = inkDraw.line.absCoords(root_layer, coordsList=coords, offset=[0, 0], label='fooBarLine', lineStyle=myLineStyle)
+        >>> lineStyle = inkDraw.lineStyle.getStyle(self, myLine)
+        """
+
+        elemStyle = ExtensionBaseObj.getElemAttrib(element,'style')
+        styleElements = elemStyle.split(';')
+
+        lineStyle = {}
+        for a in styleElements:
+            if a.split(':')[0] == 'stroke':
+                lineStyle['stroke'] = a.split(':')[1]
+            if a.split(':')[0] == 'stroke-width':
+                lineStyle['stroke-width'] = a.split(':')[1]
+            if a.split(':')[0] == 'stroke-dasharray':
+                lineStyle['stroke-dasharray'] = a.split(':')[1]
+            if a.split(':')[0] == 'fill':
+                lineStyle['fill'] = a.split(':')[1]
+            if a.split(':')[0] == 'fill-opacity':
+                lineStyle['fill-opacity'] = a.split(':')[1]
+            if a.split(':')[0] == 'stroke-opacity':
+                lineStyle['stroke-opacity'] = a.split(':')[1]
+            if a.split(':')[0] == 'stroke-linecap':
+                lineStyle['stroke-linecap'] = a.split(':')[1]
+            if a.split(':')[0] == 'stroke-linejoin':
+                lineStyle['stroke-linejoin'] = a.split(':')[1]
+            if a.split(':')[0] == 'marker-start':
+                lineStyle['marker-start'] = a.split(':')[1]
+            if a.split(':')[0] == 'marker-mid':
+                lineStyle['marker-mid'] = a.split(':')[1]
+            if a.split(':')[0] == 'marker-end':
+                lineStyle['marker-end'] = a.split(':')[1]
+
+        return lineStyle
+
+    @staticmethod
+    def setStyle(ExtensionBaseObj,element,lineStyle):
+        """
+        This function sets the style of a given element.
+
+        :param ExtensionBaseObj: Most of the times you have to pass 'self' when calling from inside your plugin class. See example below
+        :param element: The element whose style is to be set.
+
+        :type ExtensionBaseObj: inkscapeMadeEasy object
+        :type element: inkscape element object
+
+        :param lineStyle: The style to be applied to the element.
+        :type lineStyle: line style object
+
+        **Example**
+
+        >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
+        >>> R1=inkDraw.rectangle.corners(root_layer, [110,10],[120,0], lineStyle=lineStyle.setSimpleBlack())
+        >>> # craete a new linestyle
+        >>> newLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, lineColor=inkDraw.color.defined('red'))
+        >>> lineStyle = inkDraw.lineStyle.setStyle(self, R1, newLineStyle)
+        """
+        lineStyleStr=''
+        for key, value in lineStyle.items():
+            lineStyleStr += key + ':' + value + ';'
+
+        ExtensionBaseObj.addAttribute(element, 'style', lineStyleStr, forceWrite=True)
+
 
 
 class textStyle():
@@ -1006,7 +1103,7 @@ class textStyle():
         :type wordSpacing: string
 
         :returns: text style definition following the provided specifications
-        :rtype: string
+        :rtype: dict
 
         **Example**
 
@@ -1055,7 +1152,7 @@ class textStyle():
         :type justification: string
 
         :returns: text style definition following the provided specifications
-        :rtype: string
+        :rtype: dict
 
         **Example**
 
@@ -1081,7 +1178,7 @@ class textStyle():
         :type textColor: string
 
         :returns: text style definition following the provided specifications
-        :rtype: string
+        :rtype: dict
 
         **Example**
 
@@ -1697,7 +1794,7 @@ class line():
           :width: 250px
 
         >>> root_layer = self.document.getroot()     # retrieves the root layer of the document
-        >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, lineColor=color.defined('red'))
+        >>> myLineStyle = inkDraw.lineStyle.set(lineWidth=1.0, lineColor=inkDraw.color.defined('red'))
         >>> 
         >>> # creates a polyline passing through points (0,0) (0,1) (1,1) (1,2) (2,2), and using absolute coordinates
         >>> coords=[ [0,0], [0,1], [1,1], [1,2], [2,2] ]
