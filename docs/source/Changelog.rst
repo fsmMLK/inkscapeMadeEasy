@@ -1,6 +1,15 @@
 Changelog
 ==========
 
+
+2024-10oct-23
+-------------
+
+inkscapeMadeEasy_Draw.py
+   - added methods to copy and paste line styles
+   - fixed a bug in the create markers, introduced after changes in inkex.py
+
+
 2024-04apr-18
 -------------
 
