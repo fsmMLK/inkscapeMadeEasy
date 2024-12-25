@@ -571,7 +571,7 @@ class marker():
             while new_id in ExtensionBaseObj.svg.get_ids():
                 numberID += 1
                 new_id = nameID + '_n%05d' % numberID
-            ExtensionBaseObj.svg.get_ids().add(nameID)
+            #ExtensionBaseObj.svg.get_ids().add(nameID)
             nameID = new_id
 
         if RenameMode == 1 and ExtensionBaseObj.findMarker(nameID):
@@ -612,7 +612,7 @@ class marker():
         etree.SubElement(newMarker, 'path', marker_lineline_attribs)
 
         #ExtensionBaseObj.svg.ids.add(nameID)
-        #ExtensionBaseObj.svg.ids[nameID] = newMarker
+        ExtensionBaseObj.svg.ids[nameID] = newMarker
         
         return nameID
 
